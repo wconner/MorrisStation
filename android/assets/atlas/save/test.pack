@@ -1,0 +1,40 @@
+
+test.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+face
+  rotate: false
+  xy: 1, 313
+  size: 430, 609
+  orig: 430, 609
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 1, 103
+  size: 208, 208
+  orig: 208, 208
+  offset: 0, 0
+  index: -1
+cloud_one
+  rotate: false
+  xy: 1, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+cloud_two
+  rotate: false
+  xy: 211, 211
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+dude
+  rotate: false
+  xy: 433, 906
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

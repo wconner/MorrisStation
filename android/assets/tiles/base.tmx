@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="hyptosis_tile-art-batch-1" tilewidth="16" tileheight="16">
+  <image source="hyptosis_tile-art-batch-1.png" width="960" height="960"/>
+ </tileset>
+ <tileset firstgid="3601" name="LttP-" tilewidth="16" tileheight="16">
+  <image source="LttP/LttP-.png" width="1550" height="930"/>
+ </tileset>
+ <tileset firstgid="9169" name="LttP-" tilewidth="16" tileheight="16">
+  <image source="LttP/LttP-.png" width="1550" height="930"/>
+ </tileset>
+ <tileset firstgid="14737" name="pokemon" tilewidth="16" tileheight="16">
+  <image source="pokemon/pokemon.png" width="2240" height="2400"/>
+ </tileset>
+ <tileset firstgid="35737" name="Custom-Edited---Pokemon-Series---Sinnoh-Tiles-Indoor" tilewidth="16" tileheight="16">
+  <image source="pokemon/Custom-Edited---Pokemon-Series---Sinnoh-Tiles-Indoor.png" width="321" height="325"/>
+ </tileset>
+ <layer name="Layer 1" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENwCAMBEAYI+uEOosxdQqERBsiwMUVV//rLbk+KVUAIIR8N6d7nOzXM2ZyrtKs7NczZnJ29Ptzp1397Ge/yPuNPyii8QdFtPp+AADwxQt26wMj
+  </data>
+ </layer>
+ <layer name="TreeLayer" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztx8kNgDAUxNA5B2iCpQlIUiaBJlg6ZMr4SH6SD05Z6lzvBpeC/e6aO9wZ8MciTW52S4n3l7vd496Av1Zpc9mVGu8BAAAAAAAAAP/0AQLucz0=
+  </data>
+ </layer>
+ <layer name="TreeLayer2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztx8cNgFAMBFGfCU0QmgB/yiQ0QeiQvfhGAUaaJ420a/YPlZvVqlGt5/lh1d7Urg7P80NXzHo1qLHk+eHUvtStnpLnh2kxm5WrsuT5AAAAAAAAAIBvL31AbXA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 4" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2HlQ1GUcx/HHKxXwCMQu8+Iwy38qBdJdzMr6IwU8EhW0PziWyz0QtaaE5VrADi1uFdQ/Kq88qn8rrsoEOv9IDpHLu6YE5EZ70/5m9seyu8I04tb4zLxmnx/f2ef5zO7zfHcGIe6P/9LITBAiC9nIQS7ykJ9wb3M9rhdiJmZhNuZgLtzgDg946kc2k9LXND/C3kdxDMfxKU7gJE7hND7D5/hCP/j9d3ssShTCC97wwXNYjCVQQAlfLMXzidbXWaqmjmV4AS9huTQfGyrEODyA8ZgQOvR8xexZglKU4Rt8i+9wBt/jLMpRYSNfOTkqUIkf8BN+luZ7yPMBPkQmsoaRb2WSEH7wRwBWYTXWYC1ewzoEYn2S9XUCNdSxARsRjE3SfEYY5xwzMQuzw4aer4o9q1GDWpxHHS6gHg1oRBOabeRrIkczLuISruCqND9MniM4imM4Pox8YclChEOFCEQiCtGIwRaooYE22fo6Gi116BCLOGyT5gvDOefwgjd8woee7wZ7tqAVbbiJdnSgE13oRg960WclYw85etGHWxA6IUbpjPMi8hSjBKUoG0a+nSlCxCMBeiQiCclIQSoMSEM6MlIsr5NGlnRkYJduYG2FinMOP/gjQDWw7qs0zZcpB9YmpgrhAEc4YRImYwqm4kE4wwXT4JpqOZ9LLHW4YnrswNo58lShGjWoVVleo39UmuXLZr8c5CIP+diLfdiPAhTiAA7ikJV8d2vMMfB7Bje4wwOemIcnMB9P4iksMAx877P0toVYBC94w0dtrJ2JoHfiLMpRgUpcDRHiGq7jd/wRYjmXeb9/UdbzX8Yr8IM/ArAKq7FGbVrja+ZFKEYJSlEm1ddG0juxDoFYjw3YRm/ejh14A29a6dXm/f5HWc//Bb+iGjWoxXnU4YIs36v0thVYCT/4I0BjrNWTpQGNaEIzLmIUvW80xmAsxlnpheb9PkjW8zfjdYRDhQhEIgrRGtMavzE/hypUowa1Uj0mit4JNTTQQof3yPM+dmOPjT5t3u8vy3r+NVxHC1rRhptoR4csXwi9LRRhCIcKEVpjrZMsXehGD3rRh0fofY/iMcyw0QfN+/1WWc/fjh2IRwL0SEQSkrWmNf5k/hduoAWtaJPqKdH0ThiQhnRk4CMyfYxPcNhGPvN+f1vW80djDBzgCCdMwmRMkfXet5i/jZ2IRwL0Un1qDL0TznDBNLjiaXrfMzBs5O5LfbBANyjeP/W6IM476tGARjShOchYv8TrZVxBPmvsxT7ZWuPpwxMwEQ5whJPUm/eTpQCFOICDOIQvyfQVnFmziNdizJf18wXSvL8eFcx5Rwy2QA0NtMHGeiyvWxEHD97niXmytTKZZyEbOchFnlSP22T9u+sfhUF3rrezbwc60YVu9KA32Fi/xettCAt7OSn4zhU2Nthse/+hjCT2TUYKUmFAGtKRgV14B+9ayJdHtnxb+UZgTOczeAgPW/gs3Pkd91AO/ru9jFNkO23H+e54/u7xsIfzZ2vcP3//bih8R/b/HP+34cDdcFSY7rG9PecgV2G6x/b2PJe74aY03WN7ez6Bk0rTPba358Xc3SW+pntsb8/2Pv4G3C1+Aw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 5" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0rdOw1AYhuGfMlEWYKAulB3ijKmORF0MG5BQNmClXkQoE2UBBtpEuQDgFqgbMNNGYIXXUiSHxCu2hf5XeqScePl0dEQ0TdM0TdM0TfO6UFbEQDjr9xL3utnVg97cvpphf/cUNsKuUaRz+7YDtk9zms04v69iIte4wS3ucB/zb5vdd96+dFwkgzGMYwKTcf+2FfbMlhe84g3vsLi/QQz5fI92cwmReSxgEUt4YNcjnlz2dfE9BCPh0cCkSAlKUYZyTHGH05hxuctzdl3g0qN9WfYsYwWrWMMHuz7xFS++yz6+92Mg6c2+elOkAY1oQjNaTOd7/l360R5b9nGAQxyZv99Y/l3+ZbWWSJ1V/H9nij0IwUA45f0bs9th267LPre8fmPa/60yIlKFalREgnfewCa2sB7Ac1tUpB0daI0G73yCU5zhOIDnH2L3sKs=
+  </data>
+ </layer>
+ <objectgroup name="Obstacles" width="40" height="40">
+  <object name="Truck" x="426" y="368" width="85" height="29"/>
+  <object name="Big House" x="394" y="270" width="109" height="65"/>
+  <object name="House" x="75" y="126" width="162" height="63"/>
+  <object name="Houe" x="21" y="273" width="63" height="60"/>
+  <object name="House" x="143" y="277" width="63" height="56"/>
+  <object name="House" x="226" y="275" width="59" height="58"/>
+  <object name="Houe" x="547" y="273" width="58" height="59"/>
+  <object name="Lil" x="540" y="367" width="33" height="27"/>
+  <object name="School" x="435" y="94" width="153" height="71"/>
+  <object name="School" x="435" y="95" width="152" height="69"/>
+  <object name="TreeLineBtm" x="0" y="559" width="642" height="80"/>
+  <object name="TreeLine" x="1" y="0" width="632" height="84"/>
+  <object name="Stump" x="333" y="425" width="21" height="21">
+   <ellipse/>
+  </object>
+  <object x="271" y="476" width="20" height="19">
+   <ellipse/>
+  </object>
+  <object x="224" y="443" width="20" height="20">
+   <ellipse/>
+  </object>
+  <object x="223" y="485" width="22" height="22">
+   <ellipse/>
+  </object>
+  <object x="36" y="500" width="26" height="26">
+   <ellipse/>
+  </object>
+  <object x="1" y="489" width="15" height="22">
+   <ellipse/>
+  </object>
+  <object x="1" y="427" width="12" height="19">
+   <ellipse/>
+  </object>
+  <object x="160" y="463" width="17" height="17">
+   <ellipse/>
+  </object>
+  <object x="81" y="376" width="12" height="23"/>
+  <object x="129" y="377" width="13" height="21"/>
+  <object x="260" y="372" width="8" height="9">
+   <ellipse/>
+  </object>
+  <object x="388" y="373" width="10" height="7">
+   <ellipse/>
+  </object>
+  <object x="353" y="327" width="13" height="5"/>
+ </objectgroup>
+</map>
