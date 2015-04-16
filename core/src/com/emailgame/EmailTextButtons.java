@@ -1,16 +1,16 @@
-package com.emailgame;
+package com.mygdx.game;
 
 /**
  * Created by Tom on 3/29/15.
  */
 public class EmailTextButtons{
 
-    private int x,
+    private float x,
                 y;
 
     private String name;
 
-    public EmailTextButtons(String name, int x, int y){
+    public EmailTextButtons(String name, float x, float y){
         this.x = x;
         this.y = y;
         this.name = name;
@@ -20,19 +20,19 @@ public class EmailTextButtons{
         return this.name;
     }
 
-    public int getXCoord(){
+    public float getXCoord(){
         return this.x;
     }
 
-    public int getYCoord(){
+    public float getYCoord(){
         return this.y;
     }
 
-    public void setXCoord(int x){
+    public void setXCoord(float x){
         this.x = x;
     }
 
-    public void setYCoord(int y){
+    public void setYCoord(float y){
         this.y = y;
     }
 
