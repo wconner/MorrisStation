@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,26 +15,33 @@ import java.util.Random;
  */
 public class Target {
 
-    private static final float SPEED = 350;
+    //speed of the target
+    private static float SPEED;
 //    private static List<AnimatedSprite> targets = new ArrayList<AnimatedSprite>();
     public Texture texture;
     public TargetAnimated targetAnimated;
-    public float respawnTime = 0f;
+    private float respawnTime = 0f;
+
+    //storing values
+    private String name;
+    private int score;
 
 
     /**
      * Default Constructor
      */
     public Target() {
-
     }
 
     /**
      * Constructor
      * @param texture
      */
-    public Target(Texture texture) {
+    public Target(Texture texture, float speed, int score, String name) {
         this.texture = texture;
+        this.SPEED = speed;
+        this.score = score;
+        this.name = name;
         randomGen();
     }
 
@@ -69,7 +74,7 @@ public class Target {
      */
     private int createRandomYPosition() {
         Random random = new Random();
-        int randomNum = random.nextInt((MyGdxGame.VIEWPORT_HEIGHT - targetAnimated.getHeight()) + 70);
+        int randomNum = random.nextInt((MyGdxGame.VIEWPORT_HEIGHT - 200)) + 100;
         return randomNum + targetAnimated.getHeight()/2;
     }
 
@@ -80,6 +85,7 @@ public class Target {
         if(!targetAnimated.isHit())
             targetAnimated.draw(batch);
     }
+
 
     /**
      * updates the motion of the target sprite
@@ -105,7 +111,7 @@ public class Target {
     private boolean shouldChangeDirection() {
         Random random = new Random();
         //change number up to lower frequency or vise versa.
-        return random.nextInt(48) == 0;
+        return random.nextInt(100) == 0;
     }
 
     /**
@@ -120,7 +126,8 @@ public class Target {
      */
     public void hit() {
         targetAnimated.setDestroy(true);
-        respawnTime = 2f;
+//        respawnTime = 8f;
+        respawnTime = 6f;
     }
 
     /**
@@ -128,5 +135,19 @@ public class Target {
      */
     public TargetAnimated getTargetAnimated() {
         return targetAnimated;
+    }
+
+    /**
+     * get the name of the target
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * check if hit
+     */
+    public boolean checkDestroy() {
+        return targetAnimated.isHit();
     }
 }
