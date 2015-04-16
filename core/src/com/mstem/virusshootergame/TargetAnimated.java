@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+
 /**
  * Created by catherinehuang on 4/14/15.
  */
@@ -46,7 +47,7 @@ public class TargetAnimated {
     }
 
     /**
-     * Draw method for AnimatedSprite
+     * Draw method for targetAnimated
      * @param spriteBatch
      */
     public void draw(SpriteBatch spriteBatch) {
@@ -86,22 +87,6 @@ public class TargetAnimated {
     }
 
     /**
-     * Move the sprite to the right
-     */
-    public void moveRight(float speed)
-    {
-        velocity = new Vector2(speed, 0);
-    }
-
-    /**
-     * Move the sprite to the left
-     */
-    public void moveLeft(float speed)
-    {
-        velocity = new Vector2(-speed, 0);
-    }
-
-    /**
      * Get the mid-position of the sprite at x
      * @return
      */
@@ -134,14 +119,14 @@ public class TargetAnimated {
     }
 
     /**
-     * Check the movement of the sprite, so it doesn't move so far
+     * Check the movement of the sprite, and set boundaries
      */
     public void move() {
         int xMovement = (int)(velocity.x * Gdx.graphics.getDeltaTime());
         int yMovement = (int) (velocity.y * Gdx.graphics.getDeltaTime());
         sprite.setPosition(sprite.getX()+xMovement, sprite.getY() + yMovement);
 
-        //sets boundaries on the x-axis
+        //set boundaries on the x-axis
         if(sprite.getX() < 0) {
             sprite.setX(0);
         }
