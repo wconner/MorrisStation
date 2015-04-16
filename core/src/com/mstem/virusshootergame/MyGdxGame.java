@@ -340,7 +340,6 @@ public class MyGdxGame extends Game {
             Texture targetTexture = new Texture(Gdx.files.internal("android/assets/data/" + targetVirus[i]));
             String tempName = targetVirus[i].replace(".png", "");
             target = new Target(targetTexture, random.nextInt(150)+80, 50, tempName);
-            System.out.println(tempName);
             virusTargets.add(target);
         }
     }
