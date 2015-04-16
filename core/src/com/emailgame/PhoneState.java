@@ -1,4 +1,4 @@
-package com.emailgame;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -25,6 +25,10 @@ import java.util.ArrayList;
 public class PhoneState extends DefaultScreen{
 
     public static final FileLocation fileLocation = FileLocation.ABSOLUTE;
+
+
+    private float screenHeight;
+    private float screenWidth;
 
     private SpriteBatch sb;
     private BitmapFont font;
@@ -61,6 +65,9 @@ public class PhoneState extends DefaultScreen{
     public PhoneState(Stage stage, Game game){
         super(stage, game);
 
+        screenWidth = Gdx.graphics.getWidth();
+        screenHeight = Gdx.graphics.getHeight();
+
         sb = new SpriteBatch();
         font = new BitmapFont();
         ep = new EmailParser();
@@ -95,20 +102,20 @@ public class PhoneState extends DefaultScreen{
 
         //email table for displaying inbox and email details
         emailTable = new Table(skin);
-        emailTable.setPosition(150, 430);
+        emailTable.setPosition(screenWidth * 0.3f, screenHeight *0.7f);
         emailTable.setOrigin(Align.topLeft, Align.topLeft);
         emailTable.align(Align.topLeft);
 
         panelLabel = new Label("Inbox", skin);
         panelLabel.setColor(Color.BLACK);
-        panelLabel.setPosition(200, 450);
+        panelLabel.setPosition(screenWidth * 0.3f, screenHeight* 0.7f);
 
         shapeRenderer = new ShapeRenderer();
 
 
         //TODO: I do not like how I am hard coding these positions
-        emailItems = new EmailTextButtons[]{new EmailTextButtons("Inbox (I)", 15, 440), new EmailTextButtons("Trash (O)", 15, 390), new EmailTextButtons("Sent (K)", 15, 340), new EmailTextButtons("Spam (J)", 15, 290), new EmailTextButtons("Tutorial (T)", 15, 240)};
-        emailOptions = new EmailTextButtons[]{new EmailTextButtons("Delete (Z)", 200, 25), new EmailTextButtons("Reply (X)", 300, 25), new EmailTextButtons("Mark as Spam (C)", 400, 25), new EmailTextButtons("Forward (V)", 550, 25)};
+        emailItems = new EmailTextButtons[]{new EmailTextButtons("Inbox (I)", screenWidth * 0.1f, screenHeight * 0.7f), new EmailTextButtons("Trash (O)", screenWidth * 0.1f, screenHeight * 0.6f), new EmailTextButtons("Sent (K)", screenWidth * 0.1f, screenHeight * 0.5f), new EmailTextButtons("Spam (J)", screenWidth * 0.1f, screenHeight * 0.4f)};
+        emailOptions = new EmailTextButtons[]{new EmailTextButtons("Delete (Z)", screenWidth * 0.3f, screenHeight * 0.28f), new EmailTextButtons("Reply (X)", screenWidth * 0.4f, screenHeight * 0.28f), new EmailTextButtons("Mark as Spam (C)", screenWidth * 0.48f, screenHeight * 0.28f), new EmailTextButtons("Forward (V)", screenWidth * 0.6f, screenHeight * 0.28f)};
 
     }
 
@@ -241,7 +248,7 @@ public class PhoneState extends DefaultScreen{
     @Override
     public void render(float delta){
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(.75f, .75f, .75f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         handleInput();
@@ -306,7 +313,7 @@ public class PhoneState extends DefaultScreen{
 
 
         //setting the filter level
-        font.draw(sb, "Filter Level: " + spamFilter.returnFilterLevel(), 10, 20);
+        font.draw(sb, "Filter Level: " + spamFilter.returnFilterLevel(), screenWidth * 0.07f, screenHeight * 0.28f);
 
         //ends drawing
         sb.end();
@@ -316,15 +323,15 @@ public class PhoneState extends DefaultScreen{
         //black
         shapeRenderer.setColor(0, 0, 0, 4);
         //email panel
-        shapeRenderer.rect(140, 125, 450, 325);
+        shapeRenderer.rect(screenWidth * 0.28f, screenHeight * 0.3f, 450, 325);
         //email items
-        shapeRenderer.rect(10, 150, 80, 300);
+        shapeRenderer.rect(screenWidth * 0.09f, screenHeight * 0.33f, 80, 300);
         //email options
-        shapeRenderer.rect(180, 5, 455, 25);
+        shapeRenderer.rect(screenWidth * 0.28f, screenHeight * 0.25f, 450, 25);
         //red
         shapeRenderer.setColor(Color.RED);
         //filter level
-        shapeRenderer.rect(5, 5, 150, 25);
+        shapeRenderer.rect(screenWidth * 0.07f, screenHeight * 0.25f, 150, 25);
         shapeRenderer.end();
     }
 
