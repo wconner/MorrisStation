@@ -18,8 +18,10 @@ import java.util.List;
 public class ShotManager {
 
     public static final int SHOT_SPEED = 800;
-    private static final int SHOT_Y_OFFSET = 50;
+    private static final int SHOT_Y_OFFSET = 35;
     private static final float MINIMUM_TIME_BETWEEN_SHOTS = 1f;
+
+    int shotRemain = 30;
 
     private final Texture shotTexture;
     private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>();
@@ -45,6 +47,7 @@ public class ShotManager {
             newShotAnimated.setPosition(gunCenterXLocation, SHOT_Y_OFFSET);
             newShotAnimated.setVelocity(new Vector2(0, SHOT_SPEED));
             shots.add(newShotAnimated);
+            shotRemain--;
             timeSinceLastShot = 0f;
         }
     }
@@ -54,6 +57,9 @@ public class ShotManager {
      * @return
      */
     private boolean canFireShot() {
+        if(shotRemain <= 0) {
+            return false;
+        }
         return timeSinceLastShot > MINIMUM_TIME_BETWEEN_SHOTS;
     }
 
