@@ -30,23 +30,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 //import com.siondream.core.Env;
 
-/**
- * @author David Saltares Márquez david.saltares at gmail.com
- * @brief Populates box2D world with static bodies using data from a map object
- *
- * It uses a JSON formatted materials file to assign properties to the static
- * bodies it creates. To assign a material to a shape add a "material" custom
- * property to the shape in question using your editor of choice (Tiled, Gleed,
- * Tide...). Such file uses the following structure:
- @code
- [
- { "name" : "ice", "density" : 1.0, "restitution" : 0.0, "friction" : 0.1 },
- { "name" : "elastic", "density" : 1.0, "restitution" : 0.8, "friction" : 0.8 }
- ]
- @endcode
-  * In case no material property is found, it'll get a default one.
- *
- */
+
 public class MapBodyManager {
     private Logger logger;
     private World world;
