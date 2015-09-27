@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+//import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -56,20 +56,20 @@ public class DialogWindow {
     public Window makeWindow(){
 
         window = new Window("Player 1", skin);
-        window.align(Align.center);
+        //window.align(Align.center);
         window.row().fill().expandX();
 
         window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
         label = new Label("Welcome to Morris Town", skin);
         label.setWrap(true);
-        window.add(label).align(Align.center).padLeft(5).padRight(5).padBottom(20).expandX();
+        //window.add(label).align(Align.center).padLeft(5).padRight(5).padBottom(20).expandX();
 
         window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
         contentLabel = new Label("Morristown is a narrative game to help learn how to be safe online"
                 + "Players will experience scenarios which challenge them to create strong passwords"
                 + ", learn about concepts like viruses and phishing and more.", skin);
         contentLabel.setWrap(true);
-        window.add(contentLabel).align(Align.center).padLeft(5).padRight(5).expandX();
+        //window.add(contentLabel).align(Align.center).padLeft(5).padRight(5).expandX();
 
 
         window.pack();
@@ -126,7 +126,7 @@ public class DialogWindow {
         slider.setValue(0);
 
         final Label label = new Label("", skin);
-        label.setAlignment(Align.right);
+        //label.setAlignment(Align.right);
         label.setText(Float.toString((int)(slider.getValue() * 100) / 100f));
 
         slider.addListener(new ChangeListener() {
@@ -150,7 +150,7 @@ public class DialogWindow {
 
     private Label label(String text){
         final Label label = new Label("", skin);
-        label.setAlignment(Align.left);
+        //label.setAlignment(Align.left);
         label.setText(text);
 
         Table table = new Table();

@@ -15,7 +15,7 @@ public class MainClass extends Game {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         //Assets.load();
-        setScreen(new PhoneState(new Stage(), this));
+        //setScreen(new PhoneState(new Stage(), this));
 
     }
 

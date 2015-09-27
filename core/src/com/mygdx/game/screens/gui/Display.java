@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+//import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -137,7 +137,7 @@ public class Display {
 
         TextButton resetButton = new TextButton("Reset", skin);
         resetButton.getColor().a = 0.66f;
-        window.getButtonTable().add(resetButton).height(20);
+        //window.getButtonTable().add(resetButton).height(20);
 
         window.add(root).expand().fill();
         window.setPosition(0, Gdx.graphics.getHeight());
@@ -195,7 +195,7 @@ public class Display {
         slider.setValue(0);
 
         final Label label = new Label("", skin);
-        label.setAlignment(Align.right);
+        //label.setAlignment(Align.right);
         label.setText(Float.toString((int)(slider.getValue() * 100) / 100f));
 
         slider.addListener(new ChangeListener() {
@@ -219,7 +219,7 @@ public class Display {
 
     private Label label(String text){
         final Label label = new Label("", skin);
-        label.setAlignment(Align.left);
+        //label.setAlignment(Align.left);
         label.setText(text);
 
         Table table = new Table();

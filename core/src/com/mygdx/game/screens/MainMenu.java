@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 //import com.mygdx.game.ResourceLoader;
 import com.emailgame.EmailScreen;
-import com.emailgame.PhoneState;
+//import com.emailgame.PhoneState;
 import com.mstem.virusshootergame.Screen.ShooterScreen;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
@@ -39,13 +39,13 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new PhoneState(new Stage(), game));
+            //game.setScreen(new PhoneState(new Stage(), game));
         }
     };
     private final InputListener shooterListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new ShooterScreen(new Stage(), game));
+            //game.setScreen(new ShooterScreen(new Stage(), game));
         }
     };
     private final InputListener exitListener = new TouchUpListener() {

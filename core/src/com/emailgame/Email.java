@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+//import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import java.util.ArrayList;
 
@@ -75,9 +75,9 @@ public class Email extends Table
         subjectLabel.setWrap(true);
         messageLabel.setWrap(true);
         //alignment
-        senderLabel.setAlignment(Align.topLeft);
-        subjectLabel.setAlignment(Align.topLeft);
-        messageLabel.setAlignment(Align.topLeft);
+        //senderLabel.setAlignment(Align.topLeft);
+        //subjectLabel.setAlignment(Align.topLeft);
+        //messageLabel.setAlignment(Align.topLeft);
         //font size
         senderLabel.setFontScale(Constants.EMAIL_TEXT_SIZE);
         subjectLabel.setFontScale(Constants.EMAIL_TEXT_SIZE);
