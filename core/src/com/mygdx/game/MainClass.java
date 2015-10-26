@@ -14,7 +14,6 @@ public class MainClass extends Game {
 
 		//Assets.load();
 		setScreen(new MainMenu(this));
-
 	}
 
 	public void render() {

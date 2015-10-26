@@ -69,7 +69,7 @@ public class WorldRenderer implements Disposable {
         * tiledRenderer is for maps
         * TODO move tiledMapRenderer to new class
         * */
-        batch = new SpriteBatch();
+        batch = new SpriteBatch(); //Constructs a new SpriteBatch with a size of 1000, one buffer, and the default shader.
         shaper = new ShapeRenderer();
         tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
 
@@ -125,10 +125,10 @@ public class WorldRenderer implements Disposable {
             int[] fgLayers = {2,3,4,5};
             tileRenderer.render(bgLayers);
 
-            batch.begin();
+            batch.begin(); //Sets up the Batch for drawing. This will disable depth buffer writing. It enables blending and texturing.
             worldController.player.render(batch);
             worldController.npc.render(batch);
-            batch.end();
+            batch.end(); //Finishes off rendering.
 
 
             tileRenderer.render(fgLayers);
@@ -222,11 +222,11 @@ public class WorldRenderer implements Disposable {
     * */
     private void renderGround(){
 
-        batch.begin();
+        batch.begin(); //Sets up the Batch for drawing. This will disable depth buffer writing. It enables blending and texturing.
         for (Sprite ground : worldController.groundGroup){
             ground.draw(batch);
         }
-        batch.end();
+        batch.end(); //Finishes off rendering.
     }
 
     /*
@@ -262,7 +262,7 @@ public class WorldRenderer implements Disposable {
     @Override
     public void dispose () {
 
-        batch.dispose();
+        batch.dispose(); //Releases all resources of this object.
     }
 
 
