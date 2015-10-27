@@ -65,7 +65,7 @@ public abstract class AbstractDynamicObject {
                 (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
 
         body = GameInstance.getInstance().world.createBody(bodyDef);
-        body.setLinearDamping(5f);
+        body.setLinearDamping(10f);
 
 
         CircleShape shape = new CircleShape();
@@ -77,7 +77,7 @@ public abstract class AbstractDynamicObject {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0;
-        fixtureDef.friction = 0;
+        fixtureDef.friction = 0.5f;
         fixtureDef.restitution = 0;
 
         body.createFixture(fixtureDef);
