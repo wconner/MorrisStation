@@ -154,11 +154,11 @@ public class WorldController implements InputProcessor {
     }
 
 
-     /*
-    * Create model and needed resources
-    * This is the earliest attemp at game stuff
-    * Uncomment code in other classes to see what it does
-    * */
+    /*
+   * Create model and needed resources
+   * This is the earliest attemp at game stuff
+   * Uncomment code in other classes to see what it does
+   * */
     private void initTestObjects(){
 
         //array to hold actors
@@ -227,7 +227,7 @@ public class WorldController implements InputProcessor {
 
         // Set first sprite as selected one
         selectedSprite = 0;
-     }
+    }
 
 
 
@@ -375,6 +375,7 @@ public class WorldController implements InputProcessor {
 
 
         // Camera Controls (move)
+
         float camMoveSpeed = 5 * deltaTime;
         float camMoveSpeedAccelerationFactor = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) camMoveSpeed *=
@@ -410,29 +411,12 @@ public class WorldController implements InputProcessor {
     * */
     public void moveCamera (float x, float y) {
         x += cameraHelper.getPosition().x;
-        y += cameraHelper.getPosition().y
-    public boolean keyUp (int keycode) {
-        // Reset game world
-        if (keycode == Keys.R) {
-            //init();
-            Gdx.app.debug(TAG, "Game world resetted");
-        }
-
-        //change text
-        if (keycode == Keys.B){
-            display.setText(player.randomText());
-
-        }
-
-
-        // Select next sprite
-        else if (keycode == Keys.SPACE) {
-            selectedSprite = (selectedSprite + 1) % spriteGroup.l;
+        y += cameraHelper.getPosition().y;
 
 
 
-            cameraHelper.setPosition(x, y);
-        }
+        cameraHelper.setPosition(x, y);
+    }
 
 
     /*
@@ -453,7 +437,24 @@ public class WorldController implements InputProcessor {
         return false;
     }
 
-    @Overrideength;
+    @Override
+    public boolean keyUp (int keycode) {
+        // Reset game world
+        if (keycode == Keys.R) {
+            //init();
+            Gdx.app.debug(TAG, "Game world resetted");
+        }
+
+        //change text
+        if (keycode == Keys.B){
+            display.setText(player.randomText());
+
+        }
+
+
+        // Select next sprite
+        else if (keycode == Keys.SPACE) {
+            selectedSprite = (selectedSprite + 1) % spriteGroup.length;
 
             // Update camera's target to follow the currently
             // selected sprite
@@ -462,14 +463,14 @@ public class WorldController implements InputProcessor {
             }
 
             Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
-            }
-            // Toggle camera follow
-            else if (keycode == Keys.ENTER) {
-                //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
+        }
+        // Toggle camera follow
+        else if (keycode == Keys.ENTER) {
+            //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
             cameraHelper.setTargetAbstract(player);
-                Gdx.app.debug(TAG, "Camera follow enabled: " +
-                        cameraHelper.hasTargetAbstract());
-            }
+            Gdx.app.debug(TAG, "Camera follow enabled: " +
+                    cameraHelper.hasTargetAbstract());
+        }
 
         return false;
     }
