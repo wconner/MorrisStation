@@ -26,7 +26,7 @@ public abstract class AbstractDynamicObject {
     * */
     public Body body;
     Vector2 currentVector;
-    float inputForce = 20;
+    float inputForce = 35;
 
     /*
     * Fields for a basic 2d object on a flat plane
@@ -112,8 +112,8 @@ public abstract class AbstractDynamicObject {
     }
 
 
-    public void setAbleToMove(){
-        ableToMove = false;
+    public void setAbleToMove(boolean option){
+        ableToMove = option;
     }
     /*
     * Moves an object based on physical bounds of the game world

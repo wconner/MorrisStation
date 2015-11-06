@@ -107,7 +107,7 @@ public class Display {
     * */
     public Window makeWindow(){
 
-        window = new Window("Playe 1", skin);
+        window = new Window("Player 1", skin);
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(6);
@@ -139,8 +139,32 @@ public class Display {
         resetButton.getColor().a = 0.66f;
         //window.getButtonTable().add(resetButton).height(20);
 
+
         window.add(root).expand().fill();
         window.setPosition(0, Gdx.graphics.getHeight());
+        window.pack();
+
+        return window;
+    }
+
+    public Window makeWindow(String name, int x, int y){
+
+        window = new Window(name, skin);
+
+        root = new Table(skin);
+        root.pad(2, 4, 4, 4).defaults().space(15);
+        root.columnDefaults(0).top().right();
+        root.columnDefaults(1).left();
+
+        label = label("test box");
+
+        TextButton okButton = new TextButton("OK", skin);
+        okButton.getColor().a = 0.66f;
+        window.add(okButton).height(20);
+
+        root.setScaleX(1.5f);
+        window.add(root).expand().fill();
+        window.setPosition(x, y);
         window.pack();
 
         return window;
@@ -165,8 +189,8 @@ public class Display {
     * stage.act() calls the act method on all widgets of the stage
     * */
     public void update(){
-        //stage.act();
-        //stage.draw();
+       // stage.act();
+       // stage.draw();
     }
 
 
@@ -212,8 +236,8 @@ public class Display {
         table.add(label).width(35).space(12);
         table.add(slider);
 
-        root.add(name);
-        root.add(table).fill().row();
+        //root.add(name);
+        //root.add(table).fill().row();
         return slider;
     }
 
@@ -223,7 +247,7 @@ public class Display {
         label.setText(text);
 
         Table table = new Table();
-        table.add(label).width(35).space(12);
+        table.add(label).width(35).space(20);
         //table.add(slider);
 
         //root.add(text);

@@ -52,14 +52,17 @@ public class WorldController implements InputProcessor {
     * Is placed in controller so input has access
     * */
     public Display display;
+   // public Display dialog;
     public DialogWindow dialogWindow;
 
     /*
     * Actor initialization
     * Dude is only active sprite 3/4/2015
     * */
+    public Array<AbstractDynamicObject> actors;
     public Player player;
     public NPC npc;
+    public NPC npc2;
 
     public Sprite[] spriteGroup;
     public int selectedSprite;
@@ -99,7 +102,7 @@ public class WorldController implements InputProcessor {
         * */
         bodyManager = new MapBodyManager(GameInstance.getInstance().world,16, null, Application.LOG_DEBUG);
 
-
+        actors = new Array<AbstractDynamicObject>();
         cameraHelper = new CameraHelper();
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
 
@@ -124,9 +127,12 @@ public class WorldController implements InputProcessor {
 
     public void initUI(Stage stage){
         display = new Display();
+       //dialog = new Display();
         dialogWindow = new DialogWindow();
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
+       // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
+
     }
 
     /*
@@ -146,11 +152,18 @@ public class WorldController implements InputProcessor {
     * */
     private void initActors(){
         player = new Player(0);
-        npc = new NPC(1);
+        npc = new NPC(1,17,20);
+        npc2 = new NPC(2);
+        npc2.setRegion(Assets.instance.npc.body);
+        npc2.getBody().setTransform(npc2.position.x + npc2.getWidth(), npc2.position.y + npc2.getHeight(), 0);
         npc.setRegion(Assets.instance.npc.body);
         npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
         player.setRegion(Assets.instance.dudeAsset.body);
         player.getBody().setTransform(player.position.x + player.getWidth(), player.position.y + player.getHeight(), 0);
+
+        actors.add(player);
+        actors.add(npc);
+        actors.add(npc2);
     }
 
 
@@ -249,9 +262,9 @@ public class WorldController implements InputProcessor {
 
 
         // Create an array to be filled with the bodies
-// (better don't create a new one every time though)
+        // (better don't create a new one every time though)
         Array<Body> bodies = new Array<Body>();
-// Now fill the array with all bodies
+        // Now fill the array with all bodies
         GameInstance.getInstance().world.getBodies(bodies);
 
         for (Body b : bodies) {
@@ -282,12 +295,13 @@ public class WorldController implements InputProcessor {
         //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
         cameraHelper.update(deltaTime);
         //Gdx.app.debug(TAG, dude.getVelocity().toString());
-        display.setText(player.getVelocity().toString());
         display.update();
-        dialogWindow.update();
-        player.update(deltaTime);
-        npc.update(deltaTime);
-        npc.update(deltaTime);
+        //dialog.update();
+        dialogWindow.update(stage);
+        //array added here to facilitate more actors
+        for(AbstractDynamicObject dudes : actors){
+            dudes.update(deltaTime);
+        }
         GameInstance.getInstance().world.step(1/45f, 2, 6);
     }
 
@@ -358,9 +372,9 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        float inputForce = 20;
+        //float inputForce = 20; //unused
 
-        float sprMoveSpeed = 10 * deltaTime;
+        //float sprMoveSpeed = 10 * deltaTime;  //unused
         if(Gdx.input.isKeyPressed(Keys.W)) player.moveCharacter(1);
         if(Gdx.input.isKeyPressed(Keys.A)) player.moveCharacter(2);
         if(Gdx.input.isKeyPressed(Keys.S)) player.moveCharacter(0);
@@ -447,7 +461,7 @@ public class WorldController implements InputProcessor {
 
         //change text
         if (keycode == Keys.B){
-            display.setText(player.randomText());
+            dialogWindow.setText(player.randomText());
 
         }
 

@@ -95,7 +95,7 @@ public class Assets implements Disposable, AssetErrorListener {
         * Now that the assets are loaded we can just load the inner classes
         * so they are available later on
         * */
-        dudeAsset = new DudeAsset(atlas);
+        //dudeAsset = new DudeAsset(atlas);
         npc = new NPC(atlas);
         ground = new Ground();
         groundTwo = new GroundTwo(atlas);
@@ -180,6 +180,9 @@ public class Assets implements Disposable, AssetErrorListener {
         public NPC(TextureAtlas atlas) {
 
             body = atlas.findRegion("lisa");
+        }
+        public NPC(TextureAtlas atlas, String name) {
+            body = atlas.findRegion(name);
         }
 
     }

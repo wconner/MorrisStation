@@ -44,10 +44,19 @@ public class Player extends AbstractDynamicObject {
     }
 
     /*
+     * create dude with specific spawn point
+     */
+    public Player(int id, int x, int y) {
+        super(id);
+        super.getBody().setUserData(this);
+        this.position.set(x, y);
+    }
+
+    /*
     * Set dude current text
     * */
     public String randomText(){
-        index += 1;
+        index = (index + 1) % dialog.length;
         return dialog[index];
     }
 

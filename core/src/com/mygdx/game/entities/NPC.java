@@ -34,6 +34,14 @@ public class NPC extends AbstractDynamicObject {
         super.getBody().setUserData(this);
         this.position.set(20, 15);
     }
+    /*
+     * create NPC with specific location
+     */
+    public NPC(int id, int x, int y) {
+        super(id);
+        super.getBody().setUserData(this);
+        this.position.set(x, y);
+    }
 
     public void setRegion (TextureRegion region) {
 

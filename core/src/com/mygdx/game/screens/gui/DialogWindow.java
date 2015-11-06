@@ -55,12 +55,12 @@ public class DialogWindow {
     * */
     public Window makeWindow(){
 
-        window = new Window("Player 1", skin);
+        window = new Window("I'm not here", skin);
         //window.align(Align.center);
         window.row().fill().expandX();
 
-        window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
-        label = new Label("Welcome to Morris Town", skin);
+        //window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
+        label = new Label("Welcome to MY Town", skin);
         label.setWrap(true);
         //window.add(label).align(Align.center).padLeft(5).padRight(5).padBottom(20).expandX();
 
@@ -69,7 +69,8 @@ public class DialogWindow {
                 + "Players will experience scenarios which challenge them to create strong passwords"
                 + ", learn about concepts like viruses and phishing and more.", skin);
         contentLabel.setWrap(true);
-        //window.add(contentLabel).align(Align.center).padLeft(5).padRight(5).expandX();
+        contentLabel.setScale(1.5f);
+        window.add(contentLabel).padLeft(5).padRight(5).expandX();
 
 
         window.pack();
@@ -90,15 +91,15 @@ public class DialogWindow {
     * TODO introduce multiple labels with variable input streams
     * */
     public void setText(String text){
-        label.setText(text);
+        contentLabel.setText(text);
     }
 
     /*
     * stage.act() calls the act method on all widgets of the stage
     * */
-    public void update(){
-        //stage.act();
-        //stage.draw();
+    public void update(Stage stage){
+         stage.act();
+         stage.draw();
     }
 
 
