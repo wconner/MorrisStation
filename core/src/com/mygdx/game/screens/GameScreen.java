@@ -7,35 +7,43 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.Assets;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.WorldRenderer;
+import com.badlogic.gdx.Game;
+import com.testoverlay.OverlayScreen;
+import com.mygdx.game.MainClass;
+
+
+
 
 public class GameScreen extends DefaultScreen implements InputProcessor {
 
     private WorldController worldController;
     private WorldRenderer worldRenderer;
+    private MainClass game;
+
 
     //not implemented
     private boolean paused;
 
-    public GameScreen(Stage stage, Game game) {
+    public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
         Assets.instance.loadAssets(new AssetManager());
-
+        this.game = game;
         // Initialize controller and renderer
         worldController = new WorldController(stage);
         worldRenderer = new WorldRenderer(worldController);
-
         // Game world is active on start
         paused = false;
     }
 
     /*
-    * Clear the screen, laste method draws the new updated world
+    * Clear the screen, last method draws the new updated world
     * */
     @Override
-    public void render (float delta) {
+    public void render(float delta) {
 
         // Update game world by the time that has passed
         // since last rendered frame.
+        handleDebugInput();
         if (!paused) {
             // Update game
             worldController.update(Gdx.graphics.getDeltaTime());
@@ -49,6 +57,13 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         worldRenderer.render();
     }
 
+    public WorldController getWorldController() {
+        return worldController;
+    }
+
+    public Game getGame() {
+        return game;
+    }
 
     @Override
     public void resize (int width, int height) {
@@ -81,6 +96,26 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
         worldRenderer.dispose();
         Assets.instance.dispose();
+
+    }
+
+    private void handleDebugInput() {
+
+        /*
+        test pause - only pauses for 1 second or so for some reason
+         */
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            pause();
+            //hide();
+            worldController.getDialog().hide();
+            game.setScreen(new OverlayScreen(stage,game, this));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.P)) {
+            if(paused == true)
+                resume();
+            else
+                pause();
+        }
     }
 
     @Override

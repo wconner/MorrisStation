@@ -185,6 +185,8 @@ public class Display {
         label.setText(text);
     }
 
+
+
     /*
     * stage.act() calls the act method on all widgets of the stage
     * */

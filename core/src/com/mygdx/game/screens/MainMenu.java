@@ -15,10 +15,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 //import com.mygdx.game.ResourceLoader;
 import com.emailgame.EmailScreen;
-//import com.emailgame.PhoneState;
 import com.mstem.virusshootergame.Screen.ShooterScreen;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
+//test
+import com.testoverlay.OverlayScreen;
+
 
 
 /**
@@ -29,7 +31,6 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     private static final String TAG = MainMenu.class.getName();
 
-
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -39,7 +40,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            //game.setScreen(new PhoneState(new Stage(), game));
+            game.setScreen(new OverlayScreen(new Stage(), game));
         }
     };
     private final InputListener shooterListener = new TouchUpListener() {
@@ -72,17 +73,18 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         //background.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         //this.ruinsOfRevengeText = resources.getRegion("RuinsOfRevenge");
 
+
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
 
         //Image rorLogo = new Image(ruinsOfRevengeText);
         TextButton play = new TextButton("Morris Town", skin);
-        TextButton email = new TextButton("Email Game", skin);
-        TextButton shooter = new TextButton("Shooter", skin);
+        TextButton email = new TextButton("Test", skin);
+        //TextButton shooter = new TextButton("Shooter", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
         email.addListener(emailListener);
-        shooter.addListener(shooterListener);
+        //shooter.addListener(shooterListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
@@ -92,11 +94,15 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         table.row();
         table.add(email).size(320, 64).space(8);
         table.row();
-        table.add(shooter).size(320,64).space(8);
-        table.row();
+       // table.add(shooter).size(320,64).space(8);
+        //table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         stage.addActor(table);
+    }
+
+    public MainClass getGame() {
+        return game;
     }
 
 

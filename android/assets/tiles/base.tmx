@@ -53,7 +53,7 @@
   <object name="School" x="435" y="95" width="152" height="69"/>
   <object name="TreeLineBtm" x="0" y="559" width="642" height="80"/>
   <object name="TreeLine" x="1" y="0" width="632" height="84"/>
-  <object name="Stump" x="333" y="425" width="21" height="21">
+  <object name="Stump" x="336" y="426" width="21" height="21">
    <ellipse/>
   </object>
   <object x="271" y="476" width="20" height="19">

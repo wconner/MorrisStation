@@ -38,6 +38,7 @@ public class Assets implements Disposable, AssetErrorListener {
     * */
     public DudeAsset dudeAsset;
     public NPC npc;
+    public NPC npc2;
     public MainMap mainMap;
 
     public Ground ground;
@@ -95,8 +96,8 @@ public class Assets implements Disposable, AssetErrorListener {
         * Now that the assets are loaded we can just load the inner classes
         * so they are available later on
         * */
-        //dudeAsset = new DudeAsset(atlas);
-        npc = new NPC(atlas);
+        npc = new NPC(atlas,"dude");
+        npc2 = new NPC(atlas,"lisa");
         ground = new Ground();
         groundTwo = new GroundTwo(atlas);
         decoration = new LevelDecoration(atlas);

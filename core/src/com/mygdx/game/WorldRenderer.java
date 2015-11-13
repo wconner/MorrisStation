@@ -160,7 +160,7 @@ public class WorldRenderer implements Disposable {
         /*
         * Render the debug grid
         * */
-        //renderGrid((int) Constants.GAME_WORLD);
+        renderGrid((int) Constants.GAME_WORLD);
         renderWorldBounds();
 
         debugRenderer.render(GameInstance.getInstance().world, viewportCamera.combined);

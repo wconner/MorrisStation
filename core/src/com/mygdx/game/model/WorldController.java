@@ -20,6 +20,7 @@ import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.MapBodyManager;
 
 
+
 /**
  * Created by Ian on 12/21/2014.
  *
@@ -78,11 +79,17 @@ public class WorldController implements InputProcessor {
     * Default constructor
     * */
     public WorldController (Stage stage) {
+
         init(stage);
+
     }
 
 
     private Stage stage;
+
+    private Stage phoneStage;
+
+    public Stage getPhoneStage() { return phoneStage; }
 
     public Stage getStage(){
         return stage;
@@ -117,6 +124,17 @@ public class WorldController implements InputProcessor {
         createCollisionListener();
     }
 
+   /* multiple stage test --not working
+
+    private void initPhone(Stage stage) {
+        phoneStage = stage;
+        Gdx.input.setInputProcessor(this);
+        bodyManager = new MapBodyManager(GameInstance.getInstance().world,8, null, Application.LOG_DEBUG);
+        cameraHelper = new CameraHelper();
+
+        cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
+    }*/
+
     /*
     * Initiate Tiled Map
     * */
@@ -134,6 +152,13 @@ public class WorldController implements InputProcessor {
        // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
 
     }
+    public DialogWindow getDialog() {
+        return dialogWindow;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
 
     /*
     * Initiate level loader
@@ -148,13 +173,13 @@ public class WorldController implements InputProcessor {
 
 
     /*
-    * Create actors, for now specifically the dude actor
+    * Create actors
     * */
     private void initActors(){
         player = new Player(0);
         npc = new NPC(1,17,20);
         npc2 = new NPC(2);
-        npc2.setRegion(Assets.instance.npc.body);
+        npc2.setRegion(Assets.instance.npc2.body);
         npc2.getBody().setTransform(npc2.position.x + npc2.getWidth(), npc2.position.y + npc2.getHeight(), 0);
         npc.setRegion(Assets.instance.npc.body);
         npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
@@ -295,8 +320,8 @@ public class WorldController implements InputProcessor {
         //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
         cameraHelper.update(deltaTime);
         //Gdx.app.debug(TAG, dude.getVelocity().toString());
+        display.setText(cameraHelper.getPosition().toString());
         display.update();
-        //dialog.update();
         dialogWindow.update(stage);
         //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
@@ -386,7 +411,13 @@ public class WorldController implements InputProcessor {
         }
 
 
+     /*
+    * Test method for changing screens
 
+        if(Gdx.input.isKeyPressed(Keys.N)) {
+            initPhone(new Stage());
+        }
+*/
 
         // Camera Controls (move)
 
@@ -455,7 +486,7 @@ public class WorldController implements InputProcessor {
     public boolean keyUp (int keycode) {
         // Reset game world
         if (keycode == Keys.R) {
-            //init();
+            init(stage);
             Gdx.app.debug(TAG, "Game world resetted");
         }
 
@@ -465,6 +496,10 @@ public class WorldController implements InputProcessor {
 
         }
 
+        if (keycode == Keys.V){
+            dialogWindow.hide();
+
+        }
 
         // Select next sprite
         else if (keycode == Keys.SPACE) {

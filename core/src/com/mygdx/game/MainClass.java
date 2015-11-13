@@ -7,6 +7,14 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.screens.MainMenu;
 
 public class MainClass extends Game {
+	private Game game;
+
+	public MainClass() {
+		game = this;
+	}
+	public MainClass(Game game) {
+		this.game = game;
+	}
 	@Override
 	public void create() {
 

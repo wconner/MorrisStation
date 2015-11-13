@@ -28,7 +28,7 @@ public class AnimationLoader implements ApplicationListener{
     public void create() {
 
         // this line doesnt work, need to figure out how to grab the file from assets folder
-        sheet = new Texture(Gdx.files.internal("biff.png"));
+        sheet = new Texture("C:\\Users\\Jshen94\\Documents\\GitHub\\new\\MorrisTown\\android\\assets\\biff.png");
         TextureRegion[][] tmp = TextureRegion.split(sheet,sheet.getWidth()/42, sheet.getHeight()/12);
         frames = new TextureRegion[3];
         int index = 0;

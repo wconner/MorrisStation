@@ -76,8 +76,8 @@ public class MyGdxGame extends Game {
 		sb = new SpriteBatch();
 
         //background texture
-		background = new Texture(Gdx.files.internal("android/assets/data/background_mosaic.jpg"));
-        gameoverTexture = new Texture(Gdx.files.internal("android/assets/data/GameOver.png"));
+		background = new Texture(Gdx.files.internal("android/assets/background_mosaic"));
+        gameoverTexture = new Texture(Gdx.files.internal("android/assets/background/stardust.png"));
 
         //font
         font = new BitmapFont();

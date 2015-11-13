@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 
 /**
  * Created by Ian on 1/21/2015.
@@ -29,7 +30,7 @@ public class DialogWindow {
     private Label label;
     private Label contentLabel;
 
-
+    private boolean hidden;
 
 
     Table root;
@@ -48,6 +49,7 @@ public class DialogWindow {
         atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
+        hidden = true;
     }
 
     /*
@@ -69,9 +71,8 @@ public class DialogWindow {
                 + "Players will experience scenarios which challenge them to create strong passwords"
                 + ", learn about concepts like viruses and phishing and more.", skin);
         contentLabel.setWrap(true);
-        contentLabel.setScale(1.5f);
-        window.add(contentLabel).padLeft(5).padRight(5).expandX();
-
+        contentLabel.setScale(5f);
+        window.add(contentLabel).padLeft(5).padRight(5).padBottom(20).expandX();
 
         window.pack();
 
@@ -79,9 +80,22 @@ public class DialogWindow {
         return window;
     }
 
+    /**
+     * flips the boolean for hidden
+     */
+    public void hide() {
+        if (hidden == false)
+            hidden = true;
+        else {
+            hidden = false;
+        }
+        window.setVisible(hidden);
+    }
+
     /*
     * Getter for window
     * */
+
     public Window getWindow(){
         return window;
     }
@@ -107,7 +121,7 @@ public class DialogWindow {
 
 
 
-
+/*
     private CheckBox checkbox (final String name, boolean defaultValue) {
         final CheckBox checkbox = new CheckBox(name, skin);
         checkbox.setChecked(true);
@@ -121,6 +135,7 @@ public class DialogWindow {
 
         return checkbox;
     }
+
 
     private Slider slider (final String name, float defaultValue) {
         final Slider slider = new Slider(0, 1, 0.01f, false, skin);
@@ -148,7 +163,7 @@ public class DialogWindow {
         root.add(table).fill().row();
         return slider;
     }
-
+*/
     private Label label(String text){
         final Label label = new Label("", skin);
         //label.setAlignment(Align.left);
