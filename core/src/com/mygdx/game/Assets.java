@@ -96,8 +96,8 @@ public class Assets implements Disposable, AssetErrorListener {
         * Now that the assets are loaded we can just load the inner classes
         * so they are available later on
         * */
-        npc = new NPC(atlas,"dude");
-        npc2 = new NPC(atlas,"lisa");
+        npc = new NPC(atlas,"lisa");
+        npc2 = new NPC(atlas,"dude");
         ground = new Ground();
         groundTwo = new GroundTwo(atlas);
         decoration = new LevelDecoration(atlas);

@@ -108,9 +108,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             pause();
             //hide();
             worldController.getDialog().hide();
-            game.setScreen(new OverlayScreen(stage,game, this));
+            game.setScreen(new OverlayScreen(stage,game,this));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.P)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if(paused == true)
                 resume();
             else
@@ -124,11 +124,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) {
-
-
-        return false;
-    }
+    public boolean keyUp(int keycode) { return false; }
 
     @Override
     public boolean keyTyped(char character) {

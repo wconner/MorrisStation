@@ -142,6 +142,7 @@ public class WorldController implements InputProcessor {
         mainMap = new MainTileMap();
     }
 
+    public void initInput() {  Gdx.input.setInputProcessor(this); }
 
     public void initUI(Stage stage){
         display = new Display();
@@ -521,7 +522,7 @@ public class WorldController implements InputProcessor {
                     cameraHelper.hasTargetAbstract());
         }
 
-        return false;
+        return true;
     }
 
 

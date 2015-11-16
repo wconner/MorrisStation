@@ -128,6 +128,8 @@ public class WorldRenderer implements Disposable {
             batch.begin();
             worldController.player.render(batch);
             worldController.npc.render(batch);
+            worldController.npc2.render(batch);
+
             batch.end();
 
 
