@@ -291,7 +291,7 @@ public class WorldController implements InputProcessor {
         else
             npc.setLinearV(0,0);
 
-        Gdx.app.log("NPC", npc.toString());
+        //Gdx.app.log("NPC", npc.toString());
         //Gdx.app.log("Player", player.toString());
 
 
