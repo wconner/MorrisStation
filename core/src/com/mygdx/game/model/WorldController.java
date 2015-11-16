@@ -101,7 +101,7 @@ public class WorldController implements InputProcessor {
     private void init(Stage stage) {
 
         this.stage = stage;
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(stage);
         //world = new World(new Vector2(0,0),true);
         /*
         * Body manager to be used for static collisions
@@ -271,8 +271,6 @@ public class WorldController implements InputProcessor {
 
 
 
-
-
     /*
     * This method is called constantly and updates the model and view
     *
@@ -328,7 +326,18 @@ public class WorldController implements InputProcessor {
         for(AbstractDynamicObject dudes : actors){
             dudes.update(deltaTime);
         }
+        if(npc.getPosition().y < 22)
+            npc.setLinearV(0,1);
+        else
+            npc.setLinearV(0,0);
+
+        //Gdx.app.log("NPC", npc.toString());
+        //Gdx.app.log("Player", player.toString());
+
+
+
         GameInstance.getInstance().world.step(1/45f, 2, 6);
+
     }
 
 

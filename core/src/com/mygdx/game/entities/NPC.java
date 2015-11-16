@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.util.Constants;
 //import com.mygdx.util.Constants/;
@@ -14,11 +15,6 @@ import com.mygdx.game.util.Constants;
 public class NPC extends AbstractDynamicObject {
 
     private static final String TAG = NPC.class.getName();
-    /*
-    * Dude is the little guy sprite being built
-    * This is the player character class and has a long way to go
-    * */
-
 
     /*
     * To hold a texture
@@ -30,7 +26,7 @@ public class NPC extends AbstractDynamicObject {
     * set dude spawn point and make dude
     * */
     public NPC(int id) {
-        super(id);
+        super(id, true);
         super.getBody().setUserData(this);
         this.position.set(20, 15);
     }
