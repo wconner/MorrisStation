@@ -10,6 +10,12 @@ import com.mygdx.game.WorldRenderer;
 import com.badlogic.gdx.Game;
 import com.testoverlay.OverlayScreen;
 import com.mygdx.game.MainClass;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+
+
 
 
 
@@ -72,7 +78,15 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void show() {
+        stage.getRoot().getColor().a = 0;
+        stage.getRoot().addAction(fadeIn(0.5f));
+    }
 
+    public AlphaAction fadeIn(float duration) {
+        AlphaAction fadeIn = new AlphaAction();
+        fadeIn.setAlpha(1f);
+        fadeIn.setDuration(duration);
+        return fadeIn;
     }
 
     @Override
@@ -111,7 +125,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             game.setScreen(new OverlayScreen(stage,game,this));
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            if(paused == true)
+            if(paused)
                 resume();
             else
                 pause();

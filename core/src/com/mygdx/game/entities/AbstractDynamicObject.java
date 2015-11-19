@@ -8,13 +8,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GameInstance;
 
 /**
  * Created by Ian on 1/21/2015.
  */
 
-public abstract class AbstractDynamicObject {
+public abstract class AbstractDynamicObject{
 
     private static final String TAG = AbstractDynamicObject.class.getName();
 
@@ -59,7 +60,7 @@ public abstract class AbstractDynamicObject {
         facing = "d";
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
         /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PIXELS_TO_METERS,
                 (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
@@ -100,11 +101,72 @@ public abstract class AbstractDynamicObject {
 
     }
 
+
+    public AbstractDynamicObject(int id, boolean isNPC) {
+
+        this.id = id;
+        facing = "d";
+
+
+
+        BodyDef bodyDef = new BodyDef();
+        if(isNPC)
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+        else
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+        /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+                        PIXELS_TO_METERS,
+                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
+
+        body = GameInstance.getInstance().world.createBody(bodyDef);
+        body.setLinearDamping(10f);
+
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.5f);
+
+        //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
+        //        /2 / PIXELS_TO_METERS);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 0;
+        fixtureDef.friction = .5f;
+        fixtureDef.restitution = 0;
+
+        body.createFixture(fixtureDef);
+        shape.dispose();
+
+        position = new Vector2();
+        dimension = new Vector2(1, 1);
+        origin = new Vector2();
+        scale = new Vector2(1, 1);
+        rotation = 0;
+
+        //from actor creation shit
+        velocity = new Vector2();
+        terminalVelocity = new Vector2(1, 1);
+        friction = new Vector2();
+        acceleration = new Vector2();
+        bounds = new Rectangle();
+
+        currentVector = body.getLinearVelocity();
+
+    }
+
     public void facing(int facing) {
         switch (facing) {
             case 1:
         }
 
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setLinearV(float vx,float vy){
+        getBody().setLinearVelocity(vx,vy);
     }
 
     public Body getBody() {
@@ -121,6 +183,8 @@ public abstract class AbstractDynamicObject {
     public void update(float deltaTime) {
 
         currentVector = body.getLinearVelocity();
+
+        position = this.body.getPosition();
 
         //updateMotionX(deltaTime);
         //updateMotionY(deltaTime);
@@ -152,7 +216,37 @@ public abstract class AbstractDynamicObject {
             this.body.applyForceToCenter(inputForce, 0, true);
             this.body.setTransform(this.body.getPosition(), angle);
         }
+        position = currentPosition;
+    }
+    private int state = 0; //data field for behavior
+    public void behavior(int id) {
 
+        if(id == 1) { //npc #1 - lisa
+            if(state == 0) {
+                setLinearV(0,1);
+            }
+            if(this.position.y > 21) {
+                setLinearV(0, -1);
+                state = 1;
+            }
+            else if(this.position.y < 14) {
+                setLinearV(0, 1);
+                state = 1;
+            }
+        }
+        if(id == 2) { //npc #2 - other dude
+            if(state == 0) {
+                setLinearV(1, 0);
+            }
+            if (this.position.x > 25) {
+                setLinearV(-1, 0);
+                state = 1;
+            }
+            else if(this.position.x < 18) {
+                setLinearV(1, 0);
+                state = 1;
+            }
+        }
     }
 
 

@@ -30,7 +30,7 @@ public class NPC extends AbstractDynamicObject {
     * set dude spawn point and make dude
     * */
     public NPC(int id) {
-        super(id);
+        super(id, true);
         super.getBody().setUserData(this);
         this.position.set(20, 15);
     }
@@ -38,7 +38,7 @@ public class NPC extends AbstractDynamicObject {
      * create NPC with specific location
      */
     public NPC(int id, int x, int y) {
-        super(id);
+        super(id, true);
         super.getBody().setUserData(this);
         this.position.set(x, y);
     }

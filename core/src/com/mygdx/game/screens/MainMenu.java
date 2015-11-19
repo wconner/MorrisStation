@@ -10,6 +10,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -34,6 +38,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            fadeOut(1f);
             game.setScreen(new GameScreen(new Stage(), game));
         }
     };
@@ -61,6 +66,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     private final Skin skin;
     private final Table table;
+    //private Stage stage;
     //private final TextureRegion background;
     //private final TextureRegion ruinsOfRevengeText;
 
@@ -133,7 +139,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     @Override
     public void resize(int width, int height) {
         //stage.setViewport(width, height, true);
-        table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
     }
 
     @Override
@@ -143,7 +149,16 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     @Override
     public void hide() {
-
+        stage.getRoot().getColor().a = 1f;
+        stage.getRoot().addAction(fadeOut(1f));
+    }
+    public SequenceAction fadeOut(float duration) {
+        AlphaAction fadeOut = new AlphaAction();
+        fadeOut.setAlpha(0f);
+        fadeOut.setDuration(duration);
+        DelayAction delay = new DelayAction(1.5f);
+        SequenceAction fadeOutDelay = new SequenceAction(delay, fadeOut);
+        return fadeOutDelay;
     }
 
     @Override

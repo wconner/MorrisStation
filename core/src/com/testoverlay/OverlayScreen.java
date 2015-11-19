@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+//import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -152,7 +157,30 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void show(){
+        stage.getRoot().getColor().a = 0;
+        stage.getRoot().addAction(fadeIn(0.5f));
+    }
+/*
+    public MoveByAction slideUp() {
+        MoveByAction mAction = new MoveByAction(0,500);
+        return mAction;
+    }*/
 
+
+    public AlphaAction fadeIn(float duration) {
+        AlphaAction fadeIn = new AlphaAction();
+        fadeIn.setAlpha(1f);
+        fadeIn.setDuration(duration);
+
+        return fadeIn;
+    }
+    public SequenceAction fadeOut(float duration) {
+        AlphaAction fadeOut = new AlphaAction();
+        fadeOut.setAlpha(0f);
+        fadeOut.setDuration(duration);
+        DelayAction delay = new DelayAction(1.5f);
+        SequenceAction fadeOutDelay = new SequenceAction(delay, fadeOut);
+        return fadeOutDelay;
     }
 
     @Override
