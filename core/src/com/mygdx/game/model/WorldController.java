@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -70,9 +71,8 @@ public class WorldController implements InputProcessor {
     public int selectedSprite;
 
     private boolean visible;
-
     /*
-    * Environment intitialization
+    * Environment initialization
     * Not being used
     * */
     public Sprite[] groundGroup;
@@ -90,9 +90,6 @@ public class WorldController implements InputProcessor {
 
     private Stage stage;
 
-    private Stage phoneStage;
-
-    public Stage getPhoneStage() { return phoneStage; }
 
     public Stage getStage(){
         return stage;
@@ -105,6 +102,7 @@ public class WorldController implements InputProcessor {
 
         this.stage = stage;
         Gdx.input.setInputProcessor(this);
+
         //world = new World(new Vector2(0,0),true);
         /*
         * Body manager to be used for static collisions
@@ -126,17 +124,6 @@ public class WorldController implements InputProcessor {
         bodyManager.createPhysics(Assets.instance.mainMap.map, "Obstacles");
         createCollisionListener();
     }
-
-   /* multiple stage test --not working
-
-    private void initPhone(Stage stage) {
-        phoneStage = stage;
-        Gdx.input.setInputProcessor(this);
-        bodyManager = new MapBodyManager(GameInstance.getInstance().world,8, null, Application.LOG_DEBUG);
-        cameraHelper = new CameraHelper();
-
-        cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
-    }*/
 
     /*
     * Initiate Tiled Map
@@ -271,7 +258,6 @@ public class WorldController implements InputProcessor {
         // Set first sprite as selected one
         selectedSprite = 0;
     }
-
 
 
 
@@ -576,7 +562,7 @@ public class WorldController implements InputProcessor {
     public boolean mouseMoved(int screenX, int screenY) {
 
         //Vector2 stageCoord = stageToScreenCoordinates(new Vector2(screenX, screenY));
-        if(stage.hit(screenX, screenY, true) !=  null)
+        if(stage.hit(screenX, screenY, true) != null)
             visible = true;
         else
             visible = false;

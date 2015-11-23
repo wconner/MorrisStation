@@ -152,8 +152,7 @@ public class Display {
 
 
         root.setScaleX(.4f);
-
-        window.add(root).expand().fill();
+        window.add(root);
         window.setPosition(0, Gdx.graphics.getHeight());
         window.pack();
 
@@ -167,7 +166,7 @@ public class Display {
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(15);
-        root.columnDefaults(0).top().right();
+        root.columnDefaults(0).top();
         root.columnDefaults(1).left();
 
         label = label(name);
