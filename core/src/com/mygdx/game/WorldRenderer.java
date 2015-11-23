@@ -56,7 +56,7 @@ public class WorldRenderer implements Disposable {
     /*
     * Initiate all needed rendering utilities
     * */
-    private void init () {
+    private void init (){
 
         //set stage from controller
         stage = worldController.getStage();
@@ -64,9 +64,9 @@ public class WorldRenderer implements Disposable {
 
         /*
         * For rendering
-        * Batch redners sprites
+        * Batch renders sprites
         * shaper renders the grid
-        * tiledRenderer is for maps
+        * tileRenderer is for maps
         * TODO move tiledMapRenderer to new class
         * */
         batch = new SpriteBatch();
@@ -90,7 +90,7 @@ public class WorldRenderer implements Disposable {
     * render() is basically a helper method of renderWorld
     * renderDisplay() is on tip to ensure it is drawn "on top"
     * */
-    public void render () {
+    public void render (){
         //renderGround();
         //renderSpriteGroup();
         renderWorld(batch);
@@ -103,7 +103,7 @@ public class WorldRenderer implements Disposable {
     * This is the big baby, all the rendering processing goes through
     * here first, mucho importante
     * */
-    private void renderWorld (SpriteBatch batch) {
+    private void renderWorld (SpriteBatch batch){
 
         /*
         * I'm still not totally sure how applyTo() operates
@@ -126,6 +126,7 @@ public class WorldRenderer implements Disposable {
             tileRenderer.render(bgLayers);
 
             batch.begin();
+
             worldController.player.render(batch);
             worldController.npc.render(batch);
             worldController.npc2.render(batch);
@@ -234,7 +235,7 @@ public class WorldRenderer implements Disposable {
     /*
     * Outdated method, could be used for drawing arrays of sprites
     * */
-    private void renderSpriteGroup() {
+    private void renderSpriteGroup(){
 
         //TODO the apply to method here 'sets up' viewportCamera, learn more
         worldController.cameraHelper.applyTo(viewportCamera);
@@ -255,13 +256,13 @@ public class WorldRenderer implements Disposable {
     }
 
 
-    public void resize (int width, int height) {
+    public void resize (int width, int height){
         viewportCamera.viewportHeight = (Constants.VIEWPORT_WIDTH / width) * height;
         viewportCamera.update();
     }
 
     @Override
-    public void dispose () {
+    public void dispose (){
 
         batch.dispose();
     }

@@ -69,6 +69,17 @@ public class Display {
         skin.addRegions(atlas);
 
     }
+    public Display(Stage stage) {
+        //init();
+        /*
+        * Atlas holds the skin texture data
+        * Skin sets a new skin
+        * */
+        this.stage = stage;
+        atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
+        skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
+        skin.addRegions(atlas);
+    }
 
     /*
     * Construct the stage and call necessary components
@@ -77,7 +88,8 @@ public class Display {
         /*
         * A display must be held by the stage
         * */
-        stage = new Stage(new ScreenViewport());
+
+        //stage = new Stage(new ScreenViewport());
 
         table = new Table();
         table.setFillParent(true);
@@ -98,8 +110,11 @@ public class Display {
         * The stage must hold all the ui widgets
         * TODO Stage widget management should be outside of the loadAssets() method for DRY
         * */
+
         stage.addActor(window);
     }
+
+
 
 
     /*
@@ -111,8 +126,8 @@ public class Display {
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(6);
-        root.columnDefaults(0).top().right();
-        root.columnDefaults(1).left();
+        //root.columnDefaults(0).top().right();
+        //root.columnDefaults(1).left();
         /*ambientColorR = slider("Ambient R", 1);
         ambientColorG = slider("Ambient G", 1);
         ambientColorB = slider("Ambient B", 1);
@@ -120,10 +135,10 @@ public class Display {
         lightColorR = slider("Light R", 1);
         lightColorG = slider("Light G", 0.7f);
         lightColorB = slider("Light B", 0.6f);
-        lightZ = slider("Light Z", 0.07f);*/
-        //attenuationX = slider("Something something", 0.4f);
-        /*attenuationY = slider("Attenuation*d", 3);
-        attenuationZ = slider("Attenuation*d*d", 5);*/
+        lightZ = slider("Light Z", 0.07f);
+        attenuationX = slider("Something something", 0.4f);
+        attenuationY = slider("Attenuation*d", 3);
+        attenuationZ = slider("Attenuation*d*d", 5); */
         //strength = slider("Something else", 1);
         label = label("Welcome to Morris Town");
         {
@@ -135,14 +150,12 @@ public class Display {
             root.add(table).colspan(2).row();
         }
 
-        TextButton resetButton = new TextButton("Reset", skin);
-        resetButton.getColor().a = 0.66f;
-        //window.getButtonTable().add(resetButton).height(20);
 
-
-        window.add(root).expand().fill();
+        root.setScaleX(.4f);
+        window.add(root);
         window.setPosition(0, Gdx.graphics.getHeight());
         window.pack();
+
 
         return window;
     }
@@ -153,17 +166,17 @@ public class Display {
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(15);
-        root.columnDefaults(0).top().right();
+        root.columnDefaults(0).top();
         root.columnDefaults(1).left();
 
-        label = label("test box");
+        label = label(name);
 
         TextButton okButton = new TextButton("OK", skin);
         okButton.getColor().a = 0.66f;
         window.add(okButton).height(20);
 
-        root.setScaleX(1.5f);
-        window.add(root).expand().fill();
+        root.setScaleX(.4f);
+        window.add(root);//.expand().fill();
         window.setPosition(x, y);
         window.pack();
 
@@ -191,8 +204,8 @@ public class Display {
     * stage.act() calls the act method on all widgets of the stage
     * */
     public void update(){
-       // stage.act();
-       // stage.draw();
+       stage.act();
+       stage.draw();
     }
 
 

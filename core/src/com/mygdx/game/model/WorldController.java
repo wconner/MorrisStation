@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -69,8 +71,9 @@ public class WorldController implements InputProcessor {
     public Sprite[] spriteGroup;
     public int selectedSprite;
 
+    private boolean visible;
     /*
-    * Environment intitialization
+    * Environment initialization
     * Not being used
     * */
     public Sprite[] groundGroup;
@@ -88,9 +91,6 @@ public class WorldController implements InputProcessor {
 
     private Stage stage;
 
-    private Stage phoneStage;
-
-    public Stage getPhoneStage() { return phoneStage; }
 
     public Stage getStage(){
         return stage;
@@ -103,6 +103,7 @@ public class WorldController implements InputProcessor {
 
         this.stage = stage;
         Gdx.input.setInputProcessor(this);
+
         //world = new World(new Vector2(0,0),true);
         /*
         * Body manager to be used for static collisions
@@ -125,17 +126,6 @@ public class WorldController implements InputProcessor {
         createCollisionListener();
     }
 
-   /* multiple stage test --not working
-
-    private void initPhone(Stage stage) {
-        phoneStage = stage;
-        Gdx.input.setInputProcessor(this);
-        bodyManager = new MapBodyManager(GameInstance.getInstance().world,8, null, Application.LOG_DEBUG);
-        cameraHelper = new CameraHelper();
-
-        cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
-    }*/
-
     /*
     * Initiate Tiled Map
     * */
@@ -146,7 +136,8 @@ public class WorldController implements InputProcessor {
     public void initInput() {  Gdx.input.setInputProcessor(this); }
 
     public void initUI(Stage stage){
-        display = new Display();
+        visible = false;
+        display = new Display(stage);
        //dialog = new Display();
         dialogWindow = new DialogWindow();
         stage.addActor(display.makeWindow());
@@ -178,7 +169,7 @@ public class WorldController implements InputProcessor {
     * */
     private void initActors(){
         player = new Player(0);
-        npc = new NPC(1,17,20);
+        npc = new NPC(1,20,15);
         npc2 = new NPC(2);
         npc2.setRegion(Assets.instance.npc2.body);
         npc2.getBody().setTransform(npc2.position.x + npc2.getWidth(), npc2.position.y + npc2.getHeight(), 0);
@@ -272,9 +263,6 @@ public class WorldController implements InputProcessor {
         selectedSprite = 0;
     }
 
-
-
-
     /*
     * This method is called constantly and updates the model and view
     *
@@ -332,17 +320,18 @@ public class WorldController implements InputProcessor {
         //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
         cameraHelper.update(deltaTime);
         //Gdx.app.debug(TAG, dude.getVelocity().toString());
+        stage.getActors().get(0).setVisible(visible);
+
         display.setText(cameraHelper.getPosition().toString());
-        display.update();
-        dialogWindow.update(stage);
+        //display.update();
+        //dialogWindow.update(stage);
         //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
+            dudes.behavior(dudes.getID());
             dudes.update(deltaTime);
         }
-        if(npc.getPosition().y < 22)
-            npc.setLinearV(0,1);
-        else
-            npc.setLinearV(0,0);
+        stage.act();
+        stage.draw();
 
         //Gdx.app.log("NPC", npc.toString());
         //Gdx.app.log("Player", player.toString());
@@ -511,16 +500,19 @@ public class WorldController implements InputProcessor {
         if (keycode == Keys.R) {
             init(stage);
             Gdx.app.debug(TAG, "Game world resetted");
+            return true;
         }
 
         //change text
         if (keycode == Keys.B){
             dialogWindow.setText(player.randomText());
+            return true;
 
         }
 
         if (keycode == Keys.V){
             dialogWindow.hide();
+            return true;
 
         }
 
@@ -568,9 +560,11 @@ public class WorldController implements InputProcessor {
             cameraHelper.setTargetAbstract(player);
             Gdx.app.debug(TAG, "Camera follow enabled: " +
                     cameraHelper.hasTargetAbstract());
+            return true;
+
         }
 
-        return true;
+        return false;
     }
 
 
@@ -602,7 +596,15 @@ public class WorldController implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        return false;
+
+        //Vector2 stageCoord = stageToScreenCoordinates(new Vector2(screenX, screenY));
+        if(stage.hit(screenX, screenY, true) != null)
+            visible = true;
+        else
+            visible = false;
+
+
+        return true;
     }
 
     @Override

@@ -101,10 +101,6 @@ public abstract class AbstractDynamicObject{
 
     }
 
-    public int getId(){
-        return id;
-    }
-
     public AbstractDynamicObject(int id, boolean isNPC) {
 
         this.id = id;
@@ -162,6 +158,11 @@ public abstract class AbstractDynamicObject{
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
+        if(isNPC)
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+        else
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+
         /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PIXELS_TO_METERS,
                 (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
@@ -179,6 +180,7 @@ public abstract class AbstractDynamicObject{
         FixtureDef fixtureDef = new FixtureDef();
         if (type.equals("sensor"))
             fixtureDef.isSensor = true;
+
         fixtureDef.shape = shape;
         fixtureDef.density = 0;
         fixtureDef.friction = .5f;
@@ -204,14 +206,17 @@ public abstract class AbstractDynamicObject{
 
     }
 
-
-
     public void facing(int facing) {
         switch (facing) {
             case 1:
         }
 
     }
+
+    public int getID() {
+        return id;
+    }
+
 
     public void setLinearV(float vx,float vy){
         getBody().setLinearVelocity(vx,vy);
@@ -265,6 +270,38 @@ public abstract class AbstractDynamicObject{
             this.body.setTransform(this.body.getPosition(), angle);
         }
         position = currentPosition;
+
+    }
+    private int state = 0; //data field for behavior
+    public void behavior(int id) {
+
+        if(id == 1) { //npc #1 - lisa
+            if(state == 0) {
+                setLinearV(0,1);
+            }
+            if(this.position.y > 21) {
+                setLinearV(0, -1);
+                state = 1;
+            }
+            else if(this.position.y < 14) {
+                setLinearV(0, 1);
+                state = 1;
+            }
+        }
+        if(id == 2) { //npc #2 - other dude
+            if(state == 0) {
+                setLinearV(1, 0);
+            }
+            if (this.position.x > 25) {
+                setLinearV(-1, 0);
+                state = 1;
+            }
+            else if(this.position.x < 18) {
+                setLinearV(1, 0);
+                state = 1;
+            }
+        }
+
     }
 
 

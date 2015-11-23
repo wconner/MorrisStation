@@ -29,9 +29,10 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
             gameScreen.resume();
             gameScreen.getWorldController().getDialog().hide();
             gameScreen.getWorldController().initInput();
+            //stage.getRoot().addAction(fadeOut(1f));
             game.setScreen(gameScreen);
             table.setVisible(false);
-            hide();
+
         }
     };
 
@@ -69,7 +70,6 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         exit.addListener(exitListener);
 
         table = new Table(skin);
-        //table.add(rorLogo).size(600, 200).space(32);
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
@@ -154,6 +154,14 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
     public void show(){
 
     }
+/*
+    public MoveByAction slideUp() {
+        MoveByAction mAction = new MoveByAction(0,500);
+        return mAction;
+    }*/
+
+
+
 
     @Override
     public void render(float delta){
