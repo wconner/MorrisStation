@@ -79,6 +79,7 @@ public class DialogWindow {
 
         return window;
     }
+    public boolean isHidden(){return hidden;}
 
     /**
      * flips the boolean for hidden

@@ -34,7 +34,7 @@ public class NPC extends AbstractDynamicObject {
      * create NPC with specific location
      */
     public NPC(int id, int x, int y) {
-        super(id);
+        super(id, true);
         super.getBody().setUserData(this);
         this.position.set(x, y);
     }

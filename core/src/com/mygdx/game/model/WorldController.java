@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.maps.MainTileMap;
@@ -62,8 +63,8 @@ public class WorldController implements InputProcessor {
     * */
     public Array<AbstractDynamicObject> actors;
     public Player player;
-    public NPC npc;
-    public NPC npc2;
+    public NPC npc, npc2;
+    public MSensor sensor1;
 
     public Sprite[] spriteGroup;
     public int selectedSprite;
@@ -101,7 +102,7 @@ public class WorldController implements InputProcessor {
     private void init(Stage stage) {
 
         this.stage = stage;
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(this);
         //world = new World(new Vector2(0,0),true);
         /*
         * Body manager to be used for static collisions
@@ -172,7 +173,6 @@ public class WorldController implements InputProcessor {
 
     * */
 
-
     /*
     * Create actors
     * */
@@ -184,12 +184,16 @@ public class WorldController implements InputProcessor {
         npc2.getBody().setTransform(npc2.position.x + npc2.getWidth(), npc2.position.y + npc2.getHeight(), 0);
         npc.setRegion(Assets.instance.npc.body);
         npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
+
+        sensor1 = new MSensor(10, 16, 19);
+
         player.setRegion(Assets.instance.dudeAsset.body);
         player.getBody().setTransform(player.position.x + player.getWidth(), player.position.y + player.getHeight(), 0);
 
         actors.add(player);
         actors.add(npc);
         actors.add(npc2);
+        actors.add(sensor1);
     }
 
 
@@ -280,6 +284,8 @@ public class WorldController implements InputProcessor {
     * called first to ensure user input is handled BEFORE logic is executed
     * ORDER IS IMPORTANT
     * */
+
+
     public void update (float deltaTime) {
 
         //updateTestObjects(deltaTime);
@@ -310,6 +316,13 @@ public class WorldController implements InputProcessor {
             for (Contact contact : GameInstance.instance.world.getContactList()) {
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
+                if (fixtureA.getBody() == player.getBody()){
+
+                }
+                else if (fixtureB.getBody() == player.getBody()){
+
+                }
+
                 //Gdx.app.log("contact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
             }
             //Gdx.app.log("contact", "end of contact list");
@@ -511,14 +524,40 @@ public class WorldController implements InputProcessor {
 
         }
 
-        // Select next sprite
+        // Now the action key @TODO Make this a switch statement.
         else if (keycode == Keys.SPACE) {
-            selectedSprite = (selectedSprite + 1) % spriteGroup.length;
+                for (Contact contact : GameInstance.instance.world.getContactList()) {
+                    Fixture fixtureA = contact.getFixtureA();
+                    Fixture fixtureB = contact.getFixtureB();
+                    if (fixtureA.getBody() == player.getBody()){
+                        if (fixtureB.getBody() == npc.getBody()){           /** Talking to NPC **/
+                            if(!dialogWindow.isHidden())
+                                dialogWindow.hide();
+                            dialogWindow.setText("I'm talking to npc!");
+                            dialogWindow.update(stage);
+                        }
+                        else if (fixtureB.getBody() == npc2.getBody()){      /** Talking to NPC2 **/
+                            if (!dialogWindow.isHidden())
+                                dialogWindow.hide();
+                            dialogWindow.setText("I'm talking to npc2!!");
+                            dialogWindow.update(stage);
+                        }
+                    }
+                    else if (fixtureB.getBody() == player.getBody()){
+                        if (fixtureA.getBody() == npc.getBody()){           /** Talking to NPC **/
+                            if(!dialogWindow.isHidden())
+                                dialogWindow.hide();
+                            dialogWindow.setText("I'm talking to npc!");
+                            dialogWindow.update(stage);
+                        }
+                        else if (fixtureA.getBody() == npc2.getBody()){      /** Talking to NPC2 **/
+                            if (!dialogWindow.isHidden())
+                                dialogWindow.hide();
+                            dialogWindow.setText("I'm talking to npc2!!");
+                            dialogWindow.update(stage);
+                        }
+                    }
 
-            // Update camera's target to follow the currently
-            // selected sprite
-            if (cameraHelper.hasTarget()) {
-                cameraHelper.setTarget(spriteGroup[selectedSprite]);
             }
 
             Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");

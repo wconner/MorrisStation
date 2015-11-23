@@ -101,6 +101,9 @@ public abstract class AbstractDynamicObject{
 
     }
 
+    public int getId(){
+        return id;
+    }
 
     public AbstractDynamicObject(int id, boolean isNPC) {
 
@@ -150,6 +153,58 @@ public abstract class AbstractDynamicObject{
         currentVector = body.getLinearVelocity();
 
     }
+
+    //TODO Make this more organized, make it so there is not 3 different constructors
+    public AbstractDynamicObject(int id, String type) {
+
+        this.id = id;
+        facing = "d";
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+                        PIXELS_TO_METERS,
+                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
+
+        body = GameInstance.getInstance().world.createBody(bodyDef);
+        body.setLinearDamping(10f);
+
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(.5f);
+
+        //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
+        //        /2 / PIXELS_TO_METERS);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        if (type.equals("sensor"))
+            fixtureDef.isSensor = true;
+        fixtureDef.shape = shape;
+        fixtureDef.density = 0;
+        fixtureDef.friction = .5f;
+        fixtureDef.restitution = 0;
+
+        body.createFixture(fixtureDef);
+        shape.dispose();
+
+        position = new Vector2();
+        dimension = new Vector2(1, 1);
+        origin = new Vector2();
+        scale = new Vector2(1, 1);
+        rotation = 0;
+
+        //from actor creation shit
+        velocity = new Vector2();
+        terminalVelocity = new Vector2(1, 1);
+        friction = new Vector2();
+        acceleration = new Vector2();
+        bounds = new Rectangle();
+
+        currentVector = body.getLinearVelocity();
+
+    }
+
+
 
     public void facing(int facing) {
         switch (facing) {
