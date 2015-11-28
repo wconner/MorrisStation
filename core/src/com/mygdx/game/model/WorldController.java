@@ -56,7 +56,7 @@ public class WorldController implements InputProcessor {
     * Is placed in controller so input has access
     * */
     public Display display;
-   // public Display dialog;
+    // public Display dialog;
     public DialogWindow dialogWindow;
 
     /*
@@ -66,7 +66,7 @@ public class WorldController implements InputProcessor {
     public Array<AbstractDynamicObject> actors;
     public Player player;
     public NPC npc, npc2;
-    public MSensor sensor1;
+    public MSensor blueHouseSensor;
 
     public Sprite[] spriteGroup;
     public int selectedSprite;
@@ -138,11 +138,11 @@ public class WorldController implements InputProcessor {
     public void initUI(Stage stage){
         visible = false;
         display = new Display(stage);
-       //dialog = new Display();
+        //dialog = new Display();
         dialogWindow = new DialogWindow();
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
-       // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
+        // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
 
     }
     public DialogWindow getDialog() {
@@ -176,7 +176,8 @@ public class WorldController implements InputProcessor {
         npc.setRegion(Assets.instance.npc.body);
         npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
 
-        sensor1 = new MSensor(10, 16, 19);
+        blueHouseSensor = new MSensor(10, 15.5f, 18.5f);
+        blueHouseSensor.getBody().setTransform(blueHouseSensor.position.x, blueHouseSensor.position.y, 0);
 
         player.setRegion(Assets.instance.dudeAsset.body);
         player.getBody().setTransform(player.position.x + player.getWidth(), player.position.y + player.getHeight(), 0);
@@ -184,7 +185,7 @@ public class WorldController implements InputProcessor {
         actors.add(player);
         actors.add(npc);
         actors.add(npc2);
-        actors.add(sensor1);
+        actors.add(blueHouseSensor);
     }
 
 
@@ -273,6 +274,8 @@ public class WorldController implements InputProcessor {
     * ORDER IS IMPORTANT
     * */
 
+    private Fixture fixtureA;
+    private Fixture fixtureB;
 
     public void update (float deltaTime) {
 
@@ -302,8 +305,8 @@ public class WorldController implements InputProcessor {
         if (numContacts > 0) {
             //Gdx.app.log("contact", "start of contact list");
             for (Contact contact : GameInstance.instance.world.getContactList()) {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
+                fixtureA = contact.getFixtureA();
+                fixtureB = contact.getFixtureB();
                 if (fixtureA.getBody() == player.getBody()){
 
                 }
@@ -365,8 +368,8 @@ public class WorldController implements InputProcessor {
 
             @Override
             public void beginContact(Contact contact) {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
+                fixtureA = contact.getFixtureA();
+                fixtureB = contact.getFixtureB();
                 Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
 
 
@@ -385,8 +388,8 @@ public class WorldController implements InputProcessor {
 
             @Override
             public void endContact(Contact contact) {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
+                fixtureA = contact.getFixtureA();
+                fixtureB = contact.getFixtureB();
                 Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
             }
 
@@ -516,44 +519,46 @@ public class WorldController implements InputProcessor {
 
         }
 
-        // Now the action key @TODO Make this a switch statement.
+        //@TODO Make this a hash?
+        /** This is now the action key */
         else if (keycode == Keys.SPACE) {
-                for (Contact contact : GameInstance.instance.world.getContactList()) {
-                    Fixture fixtureA = contact.getFixtureA();
-                    Fixture fixtureB = contact.getFixtureB();
-                    if (fixtureA.getBody() == player.getBody()){
-                        if (fixtureB.getBody() == npc.getBody()){           /** Talking to NPC **/
-                            if(!dialogWindow.isHidden())
-                                dialogWindow.hide();
-                            dialogWindow.setText("I'm talking to npc!");
-                            dialogWindow.update(stage);
-                        }
-                        else if (fixtureB.getBody() == npc2.getBody()){      /** Talking to NPC2 **/
-                            if (!dialogWindow.isHidden())
-                                dialogWindow.hide();
-                            dialogWindow.setText("I'm talking to npc2!!");
-                            dialogWindow.update(stage);
-                        }
-                    }
-                    else if (fixtureB.getBody() == player.getBody()){
-                        if (fixtureA.getBody() == npc.getBody()){           /** Talking to NPC **/
-                            if(!dialogWindow.isHidden())
-                                dialogWindow.hide();
-                            dialogWindow.setText("I'm talking to npc!");
-                            dialogWindow.update(stage);
-                        }
-                        else if (fixtureA.getBody() == npc2.getBody()){      /** Talking to NPC2 **/
-                            if (!dialogWindow.isHidden())
-                                dialogWindow.hide();
-                            dialogWindow.setText("I'm talking to npc2!!");
-                            dialogWindow.update(stage);
-                        }
-                    }
+            Contact contact;
+            boolean eventFound = false;
+            int i = 0;
 
+            dialogWindow.setText("What a pretty day in MorrisTown :)");     /** For hitting space with no contacts */
+
+            while (!eventFound && i < GameInstance.instance.world.getContactCount()) {      /** This is a while loop and not for so we stop looking for contacts */
+                contact = GameInstance.instance.world.getContactList().get(i);              /** After finding the first relevant contact (relevant makes eventFound = true) */
+                fixtureA = contact.getFixtureA();
+                fixtureB = contact.getFixtureB();
+
+                if (fixtureB.getBody() == player.getBody())
+                    swapFixtures();
+                if (fixtureA.getBody() == player.getBody()) {
+                    if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
+                        dialogWindow.hide();
+
+                    if (fixtureB.getBody() == npc.getBody()) {           /** Talking to NPC */
+                        dialogWindow.setText("I'm talking to npc!");
+                        eventFound = true;
+                    } else if (fixtureB.getBody() == npc2.getBody()) {      /** Talking to NPC2 */
+                        dialogWindow.setText("I'm talking to npc2!!");
+                        eventFound = true;
+                    } else if (fixtureB.getBody() == blueHouseSensor.getBody()) {  /** At blueHouseSensor */
+                        dialogWindow.setText("I'm entering the blue house ! !");
+                        eventFound = true;
+                    } else if (GameInstance.instance.world.getContactCount() == 1) { /** For hitting space with a non contact entity */
+                        dialogWindow.setText("Nothing to do there :(");
+                    }
+                }
+                i++;
             }
-
+            dialogWindow.update(stage);
             Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
         }
+
+
         // Toggle camera follow
         else if (keycode == Keys.ENTER) {
             //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
@@ -567,11 +572,14 @@ public class WorldController implements InputProcessor {
         return false;
     }
 
-
-
-
-
-
+    /**
+     * Simple method to switch FixtureA and FixtureB.
+     */
+    private void swapFixtures(){
+        Fixture temp = fixtureA;
+        fixtureA = fixtureB;
+        fixtureB = temp;
+    }
 
     @Override
     public boolean keyTyped(char character) {

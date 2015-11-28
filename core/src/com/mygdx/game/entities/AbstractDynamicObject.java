@@ -54,23 +54,33 @@ public abstract class AbstractDynamicObject{
     /*
     * Default constructor
     * */
-    public AbstractDynamicObject(int id) {
+    public AbstractDynamicObject(int id, String objType) {
 
         this.id = id;
         facing = "d";
-
         BodyDef bodyDef = new BodyDef();
+
+        if (objType.equals("player")) {         /** For player ADO */
             bodyDef.type = BodyDef.BodyType.DynamicBody;
         /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PIXELS_TO_METERS,
                 (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
+        }
+        else if (objType.equals("NPC")){        /** For NPC ADO */
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+        }
+        else if (objType.equals("sensor")){     /** For Sensor ADO */
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+        }
+        else{
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+        }
 
         body = GameInstance.getInstance().world.createBody(bodyDef);
         body.setLinearDamping(10f);
 
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(.5f);
+            CircleShape shape = new CircleShape();
+            shape.setRadius(.5f);
 
         //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
         //        /2 / PIXELS_TO_METERS);
@@ -81,110 +91,8 @@ public abstract class AbstractDynamicObject{
         fixtureDef.friction = 0.5f;
         fixtureDef.restitution = 0;
 
-        body.createFixture(fixtureDef);
-        shape.dispose();
-
-        position = new Vector2();
-        dimension = new Vector2(1, 1);
-        origin = new Vector2();
-        scale = new Vector2(1, 1);
-        rotation = 0;
-
-        //from actor creation shit
-        velocity = new Vector2();
-        terminalVelocity = new Vector2(1, 1);
-        friction = new Vector2();
-        acceleration = new Vector2();
-        bounds = new Rectangle();
-
-        currentVector = body.getLinearVelocity();
-
-    }
-
-    public AbstractDynamicObject(int id, boolean isNPC) {
-
-        this.id = id;
-        facing = "d";
-
-
-
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.KinematicBody;
-        /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
-                        PIXELS_TO_METERS,
-                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
-
-        body = GameInstance.getInstance().world.createBody(bodyDef);
-        body.setLinearDamping(10f);
-
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(.5f);
-
-        //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
-        //        /2 / PIXELS_TO_METERS);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = 0;
-        fixtureDef.friction = .5f;
-        fixtureDef.restitution = 0;
-
-        body.createFixture(fixtureDef);
-        shape.dispose();
-
-        position = new Vector2();
-        dimension = new Vector2(1, 1);
-        origin = new Vector2();
-        scale = new Vector2(1, 1);
-        rotation = 0;
-
-        //from actor creation shit
-        velocity = new Vector2();
-        terminalVelocity = new Vector2(1, 1);
-        friction = new Vector2();
-        acceleration = new Vector2();
-        bounds = new Rectangle();
-
-        currentVector = body.getLinearVelocity();
-
-    }
-
-    //TODO Make this more organized, make it so there is not 3 different constructors
-    public AbstractDynamicObject(int id, String type) {
-
-        this.id = id;
-        facing = "d";
-
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        if(isNPC)
-            bodyDef.type = BodyDef.BodyType.KinematicBody;
-        else
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-
-        /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
-                        PIXELS_TO_METERS,
-                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
-
-        body = GameInstance.getInstance().world.createBody(bodyDef);
-        body.setLinearDamping(10f);
-
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(.5f);
-
-        //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
-        //        /2 / PIXELS_TO_METERS);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        if (type.equals("sensor"))
+        if (objType.equals("sensor"))       /** Only for Sensor ADO */
             fixtureDef.isSensor = true;
-
-        fixtureDef.shape = shape;
-        fixtureDef.density = 0;
-        fixtureDef.friction = .5f;
-        fixtureDef.restitution = 0;
 
         body.createFixture(fixtureDef);
         shape.dispose();

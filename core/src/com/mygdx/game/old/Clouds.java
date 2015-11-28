@@ -21,7 +21,7 @@ public class Clouds extends AbstractDynamicObject {
     private class Cloud extends AbstractDynamicObject {
         private TextureRegion regCloud;
         public Cloud (int id) {
-            super(id);
+            super(id, "cloud");
         }
 
         public void setRegion (TextureRegion region) {
@@ -44,7 +44,7 @@ public class Clouds extends AbstractDynamicObject {
     }
 
     public Clouds (int id, float length) {
-        super(id);
+        super(id, "cloud");
         this.length = length;
         init();
     }

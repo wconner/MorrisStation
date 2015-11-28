@@ -18,7 +18,7 @@ public class Background extends AbstractDynamicObject {
     private int length;
 
     public Background(int id, int length) {
-        super(id);
+        super(id, "background");
         this.length = length;
         init();
     }
