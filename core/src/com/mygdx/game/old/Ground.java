@@ -17,7 +17,7 @@ public class Ground extends AbstractDynamicObject {
 
 
     public Ground (int id) {
-        super(id);
+        super(id, "ground");
         init();
     }
 

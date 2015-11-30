@@ -5,17 +5,23 @@ package com.mygdx.game.screens;
  */
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+//import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 //import com.mygdx.game.ResourceLoader;
-import com.emailgame.EmailScreen;
-import com.mstem.virusshootergame.Screen.ShooterScreen;
+//import com.emailgame.EmailScreen;
+//import com.mstem.virusshootergame.Screen.ShooterScreen;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
 //test
@@ -34,7 +40,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new GameScreen(new Stage(), game));
+            switchScreen(new GameScreen(new Stage(),game));
         }
     };
     private final InputListener emailListener = new TouchUpListener() {
@@ -61,6 +67,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     private final Skin skin;
     private final Table table;
+    //private Stage stage;
     //private final TextureRegion background;
     //private final TextureRegion ruinsOfRevengeText;
 
@@ -129,11 +136,31 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         stage.draw();
 
     }
+    public void switchScreen(final DefaultScreen newScreen){
+        stage.getRoot().getColor().a = 1f;
+        RunnableAction runnableAction = new RunnableAction();
+        runnableAction.setRunnable(new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(newScreen);
+            }
+        });
+        fadeOut(.5f);
+        runnableAction.run();
+        /*SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(fadeOut(0.5f));
+        sequenceAction.addAction(runnableAction);
+        stage.getRoot().addAction(sequenceAction);*/
+    }
+
+
+
+
 
     @Override
     public void resize(int width, int height) {
         //stage.setViewport(width, height, true);
-        table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
     }
 
     @Override
@@ -143,7 +170,15 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     @Override
     public void hide() {
+        stage.getRoot().getColor().a = 1f;
+        stage.getRoot().addAction(fadeOut(1f));
+    }
+    public AlphaAction fadeOut(float duration) {
+        AlphaAction fadeOut = new AlphaAction();
+        fadeOut.setAlpha(0f);
+        fadeOut.setDuration(duration);
 
+        return fadeOut;
     }
 
     @Override

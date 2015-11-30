@@ -38,7 +38,7 @@ public class Player extends AbstractDynamicObject {
     * set dude spawn point and make dude
     * */
     public Player(int id) {
-        super(id);
+        super(id, "player");
         super.getBody().setUserData(this);
         this.position.set(15, 15);
     }
@@ -46,8 +46,8 @@ public class Player extends AbstractDynamicObject {
     /*
      * create dude with specific spawn point
      */
-    public Player(int id, int x, int y) {
-        super(id);
+    public Player(int id, float x, float y) {
+        super(id, "player");
         super.getBody().setUserData(this);
         this.position.set(x, y);
     }
