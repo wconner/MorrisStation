@@ -1,6 +1,5 @@
 package com.testoverlay;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,15 +19,16 @@ import com.mygdx.game.MainClass;
  */
 public class OverlayScreen extends DefaultScreen implements InputProcessor {
     private static final String TAG = OverlayScreen.class.getName();
-    private GameScreen gameScreen;
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             //game.setScreen(new GameScreen(stage,game));
-            gameScreen.resume();
+            //gameScreen.resume();
             gameScreen.getWorldController().getDialog().hide();
-            gameScreen.getWorldController().initInput();
+            gameScreen.getPhoneDisplay().setVisible(true);
+            Gdx.input.setInputProcessor(stage);
+            //gameScreen.getWorldController().initInput();
             //stage.getRoot().addAction(fadeOut(1f));
             game.setScreen(gameScreen);
             table.setVisible(false);
@@ -50,6 +50,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         }
     };
 
+    private GameScreen gameScreen;
     private final MainClass game;
     private final Skin skin;
     private final Table table;
@@ -107,6 +108,10 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         //hide();
 
     }
+
+  /*  public void addGameScreen(GameScreen screen) {
+        gameScreen = screen;
+    }*/
 
     @Override
     public boolean keyDown(int keycode) {
