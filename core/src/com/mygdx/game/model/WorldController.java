@@ -330,7 +330,7 @@ public class WorldController implements InputProcessor {
         //dialogWindow.update(stage);
         //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
-            dudes.behavior(dudes.getID());
+            dudes.behavior(dudes.getID(), deltaTime);
             dudes.update(deltaTime);
         }
         stage.act();
@@ -529,7 +529,7 @@ public class WorldController implements InputProcessor {
             dialogWindow.setText("What a pretty day in MorrisTown :)");     /** For hitting space with no contacts */
 
             while (!eventFound && i < GameInstance.instance.world.getContactCount()) {      /** This is a while loop and not for so we stop looking for contacts */
-                contact = GameInstance.instance.world.getContactList().get(i);              /** After finding the first relevant contact (relevant makes eventFound = true) */
+                contact = GameInstance.instance.world.getContactList().get(i);              /** after finding the first relevant contact (relevant makes eventFound = true) */
                 fixtureA = contact.getFixtureA();
                 fixtureB = contact.getFixtureB();
 
