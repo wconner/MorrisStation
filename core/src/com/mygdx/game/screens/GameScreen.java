@@ -71,7 +71,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         window.setPosition((Gdx.graphics.getWidth()/2) - window.getWidth(), (Gdx.graphics.getHeight()/2) - window.getHeight());
         window.pad(20,20,100,20);
         window.pack();
-        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("C:/Users/Jshen94/Documents/GitHub/new/MorrisTown/android/assets/phonebackground.png"))));
+        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("android/assets/phonebackground.png"))));
         phoneDisplay.addActor(window);
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);

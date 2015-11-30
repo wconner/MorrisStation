@@ -9,7 +9,7 @@ public class DialogController {
 
     private ArrayList<Diode> nodes;
     public DialogController(){
-        nodes = new ArrayList<>();
+        nodes = new ArrayList<Diode>();
     }
 
     /**
@@ -76,7 +76,7 @@ public class DialogController {
         String q = "";
         int qNum=0;
         int qPointer=0;
-        ArrayList<String> ans = new ArrayList<>();
+        ArrayList<String> ans = new ArrayList<String>();
         boolean zone=true;
 
         int j=0;
@@ -188,7 +188,7 @@ public class DialogController {
         //private String[][] qa;//question then answers
 
         public Diode(int seen, String actor,String inter, String q, int qNum,ArrayList<String> ans) {
-            this.a=new ArrayList<>();
+            this.a=new ArrayList<String>();
             this.seen = seen;
             this.actor = actor;
             stat=inter;
@@ -203,6 +203,10 @@ public class DialogController {
 
         public String getActor() {
             return actor;
+        }
+
+        public String getStat(){
+            return stat;
         }
 
         public String getQ(){
