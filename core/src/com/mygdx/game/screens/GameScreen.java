@@ -6,22 +6,21 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Assets;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.testoverlay.OverlayScreen;
-
-
-
-
 
 
 public class GameScreen extends DefaultScreen implements InputProcessor {
@@ -66,11 +65,13 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         table.add(email).size(200, 48).space(8);
         table.row();
         table.add(exit).size(150, 32).space(8);
-        table.pad(4, 8, 8, 8).defaults().space(12);
+        table.pad(14, 14, 14, 14).defaults().space(16);
 
         window.add(table);
-        window.setPosition((Gdx.graphics.getWidth()/2) - window.getWidth(), (Gdx.graphics.getHeight()/2));
+        window.setPosition((Gdx.graphics.getWidth()/2) - window.getWidth(), (Gdx.graphics.getHeight()/2) - window.getHeight());
+        window.pad(20,20,100,20);
         window.pack();
+        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("C:/Users/Jshen94/Documents/GitHub/new/MorrisTown/android/assets/phonebackground.png"))));
         phoneDisplay.addActor(window);
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);
@@ -105,6 +106,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         return worldController;
     }
 
+    public Group getPhoneDisplay() {        return phoneDisplay;    }
     public Game getGame() {
         return game;
     }
@@ -157,7 +159,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            hide();
+            screenSwap();
         }
     };
 
@@ -174,6 +176,13 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             resume();
         else
             pause();
+    }
+    public void screenSwap() {
+        pause();
+        //hide();
+        worldController.getDialog().hide();
+        phoneDisplay.setVisible(false);
+        game.setScreen(new OverlayScreen(stage,game,this));
     }
 
     private void toggle() {
@@ -213,9 +222,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             phoneDisplay.setPosition(0,-(Gdx.graphics.getHeight()));
             AlphaAction fadeIn = new AlphaAction();
             fadeIn.setAlpha(1f);
-            fadeIn.setDuration(.7f);
+            fadeIn.setDuration(.5f);
             moveToAction.setY(0);
-            moveToAction.setDuration(.7f);
+            moveToAction.setDuration(.5f);
             parallelAction.addAction(moveToAction);
             parallelAction.addAction(fadeIn);
             phoneDisplay.addAction(parallelAction);
@@ -229,14 +238,8 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     private void handleDebugInput() {
 
-        /*
-        test pause - only pauses for 1 second or so for some reason
-         */
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            pause();
-            //hide();
-            worldController.getDialog().hide();
-            game.setScreen(new OverlayScreen(stage,game,this));
+            screenSwap();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if(pauseEnabled)
