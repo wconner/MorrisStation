@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 
+import javax.swing.*;
+
 /**
  * Created by Ian on 1/21/2015.
  */
@@ -29,6 +31,7 @@ public class DialogWindow {
     * */
     private Label label;
     private Label contentLabel;
+    private JSeparator separator;
 
     private boolean hidden;
 
@@ -50,6 +53,7 @@ public class DialogWindow {
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
+        separator = new JSeparator();
     }
 
     /*
@@ -64,6 +68,7 @@ public class DialogWindow {
         //window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
         label = new Label("Welcome to MY Town", skin);
         label.setWrap(true);
+       // new JSeparator();
         //window.add(label).align(Align.center).padLeft(5).padRight(5).padBottom(20).expandX();
 
         window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
@@ -73,6 +78,7 @@ public class DialogWindow {
         contentLabel.setWrap(true);
         contentLabel.setScale(5f);
         window.add(contentLabel).padLeft(5).padRight(5).padBottom(20).expandX();
+//Remember to add the content to the window.
 
         window.pack();
 
