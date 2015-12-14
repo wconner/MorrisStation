@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
@@ -22,17 +21,15 @@ public class WorldRenderer implements Disposable {
 
     public static final String TAG = WorldRenderer.class.getName();
 
-    private int drawSpritesAfterLayer = 1;
-
-    /*
+    /**
     * Renderer has access to the controller
-    * */
+    */
     private WorldController worldController;
 
-    /*
+    /**
     * These are the main building blocks of all rendering
     * Stage needs to be local, but points to Controller from MVC
-    * */
+    */
     private OrthographicCamera viewportCamera;
     private SpriteBatch batch;
     private TiledMapRenderer tileRenderer;
@@ -41,9 +38,9 @@ public class WorldRenderer implements Disposable {
 
     Box2DDebugRenderer debugRenderer;
 
-    /*
+    /**
     * Default constructor
-    * */
+    */
     public WorldRenderer(WorldController worldController){
         this.worldController = worldController;
         init();
@@ -53,29 +50,29 @@ public class WorldRenderer implements Disposable {
     }
 
 
-    /*
+    /**
     * Initiate all needed rendering utilities
-    * */
+    */
     private void init (){
 
         //set stage from controller
         stage = worldController.getStage();
         debugRenderer = new Box2DDebugRenderer();
 
-        /*
+        /**
         * For rendering
         * Batch renders sprites
         * shaper renders the grid
         * tileRenderer is for maps
         * TODO move tiledMapRenderer to new class
-        * */
+        */
         batch = new SpriteBatch();
         shaper = new ShapeRenderer();
         tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
 
-        /*
+        /**
         * Sets the main camera
-        * */
+        */
         viewportCamera = new OrthographicCamera();
         viewportCamera.setToOrtho(false,Constants.VIEWPORT_WIDTH,
                 Constants.VIEWPORT_HEIGHT);
@@ -86,38 +83,32 @@ public class WorldRenderer implements Disposable {
     }
 
 
-    /*
+    /**
     * render() is basically a helper method of renderWorld
     * renderDisplay() is on tip to ensure it is drawn "on top"
-    * */
+    */
     public void render (){
-        //renderGround();
-        //renderSpriteGroup();
         renderWorld(batch);
         renderDisplay();
-
     }
 
 
-    /*
+    /**
     * This is the big baby, all the rendering processing goes through
     * here first, mucho importante
-    * */
+    */
     private void renderWorld (SpriteBatch batch){
 
-        /*
+        /**
         * I'm still not totally sure how applyTo() operates
-        * */
+        */
         worldController.cameraHelper.applyTo(viewportCamera);
         batch.setProjectionMatrix(viewportCamera.combined);
 
-        /*
+        /**
         * ehhhhhhh
-        * */
+        */
         tileRenderer.setView(viewportCamera);
-        //tileRenderer.render();
-
-        int currentLayer = 0;
 
         for(MapLayer layer : Assets.instance.mainMap.map.getLayers()){
 
@@ -138,31 +129,9 @@ public class WorldRenderer implements Disposable {
 
         }
 
-          /*
-        for (MapLayer layer : map.getLayers()) {
-            if (layer.isVisible()) {
-                if (layer instanceof TiledMapTileLayer) {
-                    renderTileLayer((TiledMapTileLayer)layer);
-                    currentLayer++;
-                    if(currentLayer == drawSpritesAfterLayer){
-                        for(Sprite sprite : sprites)
-                            sprite.draw(this.getSpriteBatch());
-                    }
-                } else {
-                    for (MapObject object : layer.getObjects()) {
-                        renderObject(object);
-                    }
-                }
-            }
-        }*/
-
-
-
-
-
-        /*
+        /**
         * Render the debug grid
-        * */
+        */
         renderGrid((int) Constants.GAME_WORLD);
         renderWorldBounds();
 
@@ -171,12 +140,12 @@ public class WorldRenderer implements Disposable {
     }
 
 
-    /*
+    /**
     * Debug method
     * This will draw a grid representing the game world which extends from (0.0) to the
     * dimensions of the GAME_WORLD constants.
     * TODO Constrain camera to the size of the game world --> maybe by using clamp in applyTo()
-    * */
+    */
     private void renderGrid(int divisions){
 
         shaper.setProjectionMatrix(viewportCamera.combined);
@@ -200,12 +169,6 @@ public class WorldRenderer implements Disposable {
 
 
         shaper.end();
-
-        //shaper.begin(ShapeRenderer.ShapeType.Filled);
-        //shaper.setColor(0, 1, 0, 1);
-        //shaper.rect(x, y, width, height);
-        //shaper.circle(x, y, radius);
-        //shaper.end();
     }
 
 
@@ -219,37 +182,9 @@ public class WorldRenderer implements Disposable {
         shaper.end();
     }
 
-
-    /*
-    * Outdated method, can be used to draw procedurally generated stuff
-    * */
-    private void renderGround(){
-
-        batch.begin();
-        for (Sprite ground : worldController.groundGroup){
-            ground.draw(batch);
-        }
-        batch.end();
-    }
-
-    /*
-    * Outdated method, could be used for drawing arrays of sprites
-    * */
-    private void renderSpriteGroup(){
-
-        //TODO the apply to method here 'sets up' viewportCamera, learn more
-        worldController.cameraHelper.applyTo(viewportCamera);
-        batch.setProjectionMatrix(viewportCamera.combined);
-
-        //important
-        //batch.begin();
-
-        //batch.end();
-    }
-
-    /*
+    /**
     * Call the act() method for the stage
-    * */
+    */
     public void renderDisplay(){
         stage.act();
         stage.draw();
@@ -266,8 +201,4 @@ public class WorldRenderer implements Disposable {
 
         batch.dispose();
     }
-
-
-
-
 }

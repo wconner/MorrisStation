@@ -28,7 +28,6 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
-//import com.siondream.core.Env;
 
 
 public class MapBodyManager {
@@ -129,7 +128,6 @@ public class MapBodyManager {
             }
 
             fixtureDef.shape = shape;
-            //fixtureDef.filter.categoryBits = Env.game.getCategoryBitsManager().getCategoryBits("level");
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
