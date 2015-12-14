@@ -197,7 +197,7 @@ public class DialogController {
         //private String[][] qa;//question then answers
 
         public Diode(int scene, String actor,String inter, String q, int qNum,ArrayList<String> ans) {
-            this.a=new ArrayList<>();
+            this.a=new ArrayList<String>();
             this.scene = scene;
             this.actor = actor;
             stat=inter;
