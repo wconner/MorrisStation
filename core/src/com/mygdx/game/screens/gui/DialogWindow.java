@@ -17,6 +17,7 @@ import javax.swing.*;
 /**
  * Created by Ian on 1/21/2015.
  */
+@SuppressWarnings("ALL")
 public class DialogWindow {
 
     /**
@@ -60,7 +61,7 @@ public class DialogWindow {
         label = new Label("Welcome to MY Town", skin);
         label.setWrap(true);
 
-        window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
+        window.row().prefWidth(Gdx.graphics.getWidth() * 0.98f);
         contentLabel = new Label("Morristown is a narrative game to help learn how to be safe online"
                 + "Players will experience scenarios which challenge them to create strong passwords"
                 + ", learn about concepts like viruses and phishing and more.", skin);

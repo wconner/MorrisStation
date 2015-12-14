@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Danny on 11/15/2015.
  */
+@SuppressWarnings("NonJREEmulationClassesInClientCode")
 public class DialogController {
 
     private ArrayList<Diode> nodes;
@@ -162,7 +163,7 @@ public class DialogController {
         }
         return null;
     }
-    public ArrayList getAarray(int q){
+    public ArrayList getArray(int q){
         for (Diode dio:nodes){
             if(dio.getQnum()==q){
                 return dio.getAs();

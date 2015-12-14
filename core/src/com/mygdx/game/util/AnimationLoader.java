@@ -33,7 +33,7 @@ public class AnimationLoader implements ApplicationListener{
         frames = new TextureRegion[3];
         int index = 0;
         for (int i = 0; i < 1; i++){
-            for (int j = 0; j < 3; i++)
+            for (int j = 0; j < 3; j++)
                 frames[index++] = tmp[i][j];
         }
         animation = new Animation(0.025f, frames);
@@ -59,12 +59,12 @@ public class AnimationLoader implements ApplicationListener{
     }
     @Override
     public void pause() {
-        this.pause();
+
     }
 
     @Override
     public void resume() {
-        this.resume();
+
     }
 
     @Override
