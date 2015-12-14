@@ -162,6 +162,15 @@ public class DialogController {
         }
         return null;
     }
+    public ArrayList getAarray(int q){
+        for (Diode dio:nodes){
+            if(dio.getQnum()==q){
+                return dio.getAs();
+                }
+
+            }
+        return null;
+        }
 
     public int selectA(int q, int a){
         for(Diode dio: nodes){
