@@ -7,40 +7,36 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.screens.MainMenu;
 
 public class MainClass extends Game {
-	private Game game;
+    private Game game;
 
-	public MainClass() {
-		game = this;
-	}
-	public MainClass(Game game) {
-		this.game = game;
-	}
-	@Override
-	public void create() {
+    public MainClass() {
+        game = this;
+    }
+    public MainClass(Game game) {
+        this.game = game;
+    }
+    @Override
+    public void create() {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        setScreen(new MainMenu(this));
+    }
 
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+    public void render() {
+        super.render();
+    }
 
-		//Assets.load();
-		setScreen(new MainMenu(this));
+    public void dispose() {
 
-	}
+        super.dispose();
+        Gdx.app.exit();
+    }
 
-	public void render() {
-		super.render();
-	}
+    public void resize(int width, int height) {
+    }
 
-	public void dispose() {
+    public void pause() {
+    }
 
-		super.dispose();
-		Gdx.app.exit();
-	}
-
-	public void resize(int width, int height) {
-	}
-
-	public void pause() {
-	}
-
-	public void resume() {
-	}
+    public void resume() {
+    }
 }

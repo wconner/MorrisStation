@@ -18,8 +18,8 @@ public class DialogController {
      * @param lines Arraylist of all the info by line
      * @throws FileNotFoundException
      */
-    public void makeDiolog(ArrayList<String> lines)throws FileNotFoundException {
-        int seen = 0;
+    public void makeDialog(ArrayList<String> lines)throws FileNotFoundException {
+        int scene = 0;
         String actor = "";
         String stat = "";
         String q = "";
@@ -34,19 +34,19 @@ public class DialogController {
                 //anum=Integer.parseInt(line.substring(1,2));
             }
             else if(line.charAt(0)=='\n'){
-                nodes.add(new Diode(seen,actor,stat,q,qNum,ans));
+                nodes.add(new Diode(scene,actor,stat,q,qNum,ans));
             }
             else {
-                if (line.charAt(0) == '$') {//Looks for a sceen #
-                    System.out.println(line.substring(1) + "Seen");
-                    seen = Integer.parseInt(line.substring(1));
+                if (line.charAt(0) == '$') {//Looks for a scene#
+                    System.out.println(line.substring(1) + "Scene");
+                    scene = Integer.parseInt(line.substring(1));
                 }
                 else if (line.charAt(0) == '@') {//Looks for Actor
                     System.out.println(line.substring(1) + " Actor");
                     actor = line.substring(1);
                 }
                 else if (line.charAt(0) == '!') {//Looks for a Statment
-                    System.out.println(line.substring(1) + " Satement");
+                    System.out.println(line.substring(1) + " Statement");
                     stat = line.substring(1);
                 }
                 else if (line.charAt(0) == '?') {//Looks for a Question
@@ -60,13 +60,13 @@ public class DialogController {
     }
 
     /**
-     * Reads in one seen at a time and stores them into nodes
-     * To be run on seen change.
-     * @param seen int representing the disired seen
+     * Reads in one scene at a time and stores them into nodes
+     * To be run on scene change.
+     * @param scene int representing the desired scene
      * @throws IOException
      */
-    public void makeSeen(int seen) throws IOException {
-        FileReader reader = new FileReader("Diolog.txt");
+    public void makeScene(int scene) throws IOException {
+        FileReader reader = new FileReader("Dialog.txt");
         BufferedReader inputFile = new BufferedReader(reader);
 
         String line=inputFile.readLine();
@@ -81,15 +81,15 @@ public class DialogController {
 
         int j=0;
 
-        while(zone) {//finds the seen
-            if (!(seen == Integer.parseInt(line.substring(1, 2)) && line.substring(0, 1).equals("$")))
+        while(zone) {   /** finds the scene */
+            if (!(scene == Integer.parseInt(line.substring(1, 2)) && line.substring(0, 1).equals("$")))
                 line = inputFile.readLine();
             else
                 zone=false;
         }
-        while (line != null&&seen>=0) {//makes dionodes for the array
+        while (line != null&&scene>=0) { /** makes dionodes for the array */
             if (line.equals("")) {//creates a node
-                nodes.add(new Diode(seen, actor, stat, q, qNum,ans));
+                nodes.add(new Diode(scene, actor, stat, q, qNum,ans));
                 actor = stat = q = "";//clears Strings
                 System.out.println(nodes.get(j).toString());//TESTING
                 j++;//TESTING
@@ -98,8 +98,8 @@ public class DialogController {
             else if (line.charAt(0) == '*') {//creates an answer
                 ans.add(line.substring(1));
             }
-            else if (line.charAt(0) == '$'&&(seen+1)==Integer.parseInt(line.substring(1,2))) {//Looks for a sceen #
-                seen = -1;
+            else if (line.charAt(0) == '$'&&(scene+1)==Integer.parseInt(line.substring(1,2))) {//Looks for a sceen #
+                scene = -1;
             }
             else {
                 if (line.charAt(0) == '@') {//Looks for Actor
@@ -113,14 +113,14 @@ public class DialogController {
             }
             line=inputFile.readLine();
         }
-        seenToString();
+        sceneToString();
     }
 
     /**
-     * Creates a combined string of all noses in a seen.
+     * Creates a combined string of all noses in a scene.
      * @return String
      */
-    public String seenToString(){
+    public String sceneToString(){
         String out="";
         for(Diode dio : nodes)
             out+=dio.toString()+"\n";
@@ -179,7 +179,7 @@ public class DialogController {
      */
     private class Diode {
 
-        private int seen;
+        private int scene;
         private String actor;
         private String stat;
         private String q;
@@ -187,9 +187,9 @@ public class DialogController {
         private ArrayList<String> a;
         //private String[][] qa;//question then answers
 
-        public Diode(int seen, String actor,String inter, String q, int qNum,ArrayList<String> ans) {
-            this.a=new ArrayList<String>();
-            this.seen = seen;
+        public Diode(int scene, String actor,String inter, String q, int qNum,ArrayList<String> ans) {
+            this.a=new ArrayList<>();
+            this.scene = scene;
             this.actor = actor;
             stat=inter;
             this.q=q;
@@ -197,8 +197,8 @@ public class DialogController {
             this.a.addAll(ans);
         }
 
-        public int getSeen() {
-            return seen;
+        public int getScene() {
+            return scene;
         }
 
         public String getActor() {
@@ -233,7 +233,7 @@ public class DialogController {
                     ", Answer=" + qout +
                     '}';
             return "Diode{" +
-                    "seen=" + seen +
+                    "scene=" + scene +
                     ", actor='" + actor + '\'' +
                     ", stat='" + stat + '\'' +
                     "Q="+qaH+"}\n";

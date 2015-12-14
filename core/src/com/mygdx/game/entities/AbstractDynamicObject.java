@@ -22,26 +22,26 @@ public abstract class AbstractDynamicObject{
     public final int id;
     boolean ableToMove = true;
 
-    /*
+    /**
     * For physics
-    * */
+    */
     public Body body;
     Vector2 currentVector;
     float inputForce = 35;
 
-    /*
+    /**
     * Fields for a basic 2d object on a flat plane
-    * */
+    */
     public Vector2 position;
     public Vector2 dimension;
     public Vector2 origin;
     public Vector2 scale;
     public float rotation;
 
-    /*
+    /**
     * Fields for simulating a physical model on an object
     * info on page 168
-    * */
+    */
     public Vector2 velocity;
     public Vector2 terminalVelocity;
     public Vector2 friction;
@@ -51,9 +51,9 @@ public abstract class AbstractDynamicObject{
     public String facing;
 
 
-    /*
+    /**
     * Default constructor
-    * */
+    */
     public AbstractDynamicObject(int id, String objType) {
 
         this.id = id;
@@ -81,9 +81,6 @@ public abstract class AbstractDynamicObject{
 
         CircleShape shape = new CircleShape();
         shape.setRadius(.5f);
-
-        //shape.setAs(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
-        //        /2 / PIXELS_TO_METERS);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -138,20 +135,14 @@ public abstract class AbstractDynamicObject{
     public void setAbleToMove(boolean option){
         ableToMove = option;
     }
-    /*
+    /**
     * Moves an object based on physical bounds of the game world
-    * */
+    */
     public void update(float deltaTime) {
 
         currentVector = body.getLinearVelocity();
 
         position = this.body.getPosition();
-
-        //updateMotionX(deltaTime);
-        //updateMotionY(deltaTime);
-        // Move to new position
-        //position.x += velocity.x * deltaTime;
-        //position.y += velocity.y * deltaTime;
     }
 
     public void moveCharacter(int direction){
