@@ -1,0 +1,24 @@
+$1
+@Sally
+!Hey.
+?101How are you?
+*102Good
+*103Meh
+*104Not Great
+
+$1
+@Sally
+!Thats good to hear.
+?102why good?
+*105Test
+*106What?
+*107Blarg
+
+$2
+@Tom
+!Yo!
+?201What up?
+*202test
+*203Blarg
+*204moo
+*205not mutch
