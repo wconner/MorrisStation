@@ -17,6 +17,7 @@ import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.maps.MainTileMap;
+import com.mygdx.game.screens.DefaultScreen;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
@@ -59,10 +60,10 @@ public class WorldController implements InputProcessor {
     // public Display dialog;
     public DialogWindow dialogWindow;
 
-    /*
+    /**
     * Actor initialization
     * Dude is only active sprite 3/4/2015
-    * */
+    */
     public Array<AbstractDynamicObject> actors;
     public Player player;
     public NPC npc, npc2;
@@ -72,20 +73,19 @@ public class WorldController implements InputProcessor {
     public int selectedSprite;
 
     private boolean visible;
-    /*
+    /**
     * Environment initialization
     * Not being used
-    * */
+    */
     public Sprite[] groundGroup;
+    private DefaultScreen screenGame;
 
-
-    /*
+    /**
     * Default constructor
-    * */
-    public WorldController (Stage stage) {
-
+    */
+    public WorldController (Stage stage, DefaultScreen screenGame) {
+        this.screenGame = screenGame;
         init(stage);
-
     }
 
 
@@ -96,19 +96,14 @@ public class WorldController implements InputProcessor {
         return stage;
     }
 
-    /*
+    /**
     * Build class
-    * */
+    */
     private void init(Stage stage) {
 
         this.stage = stage;
         Gdx.input.setInputProcessor(this);
 
-        //world = new World(new Vector2(0,0),true);
-        /*
-        * Body manager to be used for static collisions
-        * second argument being 16 is because the game uses a unit/tile scale of 1/16f
-        * */
         bodyManager = new MapBodyManager(GameInstance.getInstance().world,16, null, Application.LOG_DEBUG);
 
         actors = new Array<AbstractDynamicObject>();
@@ -118,17 +113,17 @@ public class WorldController implements InputProcessor {
         //Game info is set in Constants class
         lives = Constants.LIVES_START;
 
-        /*Initiate everything*/
+        /**Initiate everything*/
         initActors();
         initUI(stage);
-        //stage.addActor(dialogWindow.makeWindow());
+
         bodyManager.createPhysics(Assets.instance.mainMap.map, "Obstacles");
         createCollisionListener();
     }
 
-    /*
+    /**
     * Initiate Tiled Map
-    * */
+    */
     public void initMap(){
         mainMap = new MainTileMap();
     }
@@ -142,8 +137,6 @@ public class WorldController implements InputProcessor {
         dialogWindow = new DialogWindow();
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
-        // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
-
     }
     public DialogWindow getDialog() {
         return dialogWindow;
@@ -153,20 +146,9 @@ public class WorldController implements InputProcessor {
         return display;
     }
 
-    /*
-    * Initiate level loader
-    * TODO change to load tiled maps
-
-    private void initLevel () {
-        score = 0;
-        level = new Level(Constants.LEVEL_01);
-    }
-
-    * */
-
-    /*
+    /**
     * Create actors
-    * */
+    */
     private void initActors(){
         player = new Player(0);
         npc = new NPC(1,20,15);
@@ -176,7 +158,7 @@ public class WorldController implements InputProcessor {
         npc.setRegion(Assets.instance.npc.body);
         npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
 
-        blueHouseSensor = new MSensor(10, 15.5f, 18.5f);
+        blueHouseSensor = new MSensor(10, 15.5f, 19f);
         blueHouseSensor.getBody().setTransform(blueHouseSensor.position.x, blueHouseSensor.position.y, 0);
 
         player.setRegion(Assets.instance.dudeAsset.body);
@@ -188,83 +170,7 @@ public class WorldController implements InputProcessor {
         actors.add(blueHouseSensor);
     }
 
-
-    /*
-   * Create model and needed resources
-   * This is the earliest attemp at game stuff
-   * Uncomment code in other classes to see what it does
-   * */
-    private void initTestObjects(){
-
-        //array to hold actors
-        spriteGroup = new Sprite[5];
-
-        //array to hold environment
-        groundGroup = new Sprite[20];
-
-        //add textures
-        ArrayMap<String, TextureRegion> regions = new ArrayMap<String, TextureRegion>();
-        regions.put("face", Assets.instance.dudeAsset.body);
-        regions.put("ground", Assets.instance.ground.ground);
-
-
-        /*
-        * Go through the ground objects
-        * */
-        for(int i = 0; i < groundGroup.length; i++){
-            Sprite spr = new Sprite(regions.get("ground"));
-
-            int x = 0;
-            int y = 0;
-
-            spr.setSize(1, 1);
-            spr.setScale(1, 1);
-
-            if(i < 5){
-                y = 0;
-            }
-
-            if(i < 9){
-                y = 1;
-            }
-
-            spr.setPosition(i, y);
-            groundGroup[i] = spr;
-
-        }
-
-
-        /*
-        * Go through sprites and make everything which is needed
-        * */
-        for (int i = 0; i < spriteGroup.length; i++) {
-            Sprite spr = new Sprite(regions.get("face"));
-
-            // Define sprite size to be 1m x 1m in game world
-            //TODO learn more about using m as unit of space in game world
-            spr.setSize(1, 1);
-
-            spr.setScale(1, 1);
-
-            // Set origin to sprite's center
-            spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
-
-            // Calculate random position for sprite
-            float randomX = MathUtils.random(-2.0f, 2.0f);
-            float randomY = MathUtils.random(-2.0f, 2.0f);
-            spr.setPosition(randomX, randomY);
-
-            // Put new sprite into array
-            spriteGroup[i] = spr;
-        }
-
-
-
-        // Set first sprite as selected one
-        selectedSprite = 0;
-    }
-
-    /*
+    /**
     * This method is called constantly and updates the model and view
     *
     * Important note about handleDebugInput()
@@ -272,7 +178,7 @@ public class WorldController implements InputProcessor {
     * input has been processed before rendering this class needs to be
     * called first to ensure user input is handled BEFORE logic is executed
     * ORDER IS IMPORTANT
-    * */
+    */
 
     private Fixture fixtureA;
     private Fixture fixtureB;
@@ -336,31 +242,7 @@ public class WorldController implements InputProcessor {
         stage.act();
         stage.draw();
 
-        //Gdx.app.log("NPC", npc.toString());
-        //Gdx.app.log("Player", player.toString());
-
-
-
         GameInstance.getInstance().world.step(1/45f, 2, 6);
-
-    }
-
-
-    /*
-    * Updates the local model from earlier code
-    * */
-    private void updateTestObjects(float deltaTime) {
-        // Get current rotation from selected sprite
-        //float rotation = spriteGroup[selectedSprite].getRotation();
-        // Rotate sprite by 90 degrees per second
-        //rotation += 90 * deltaTime;
-        // Wrap around at 360 degrees
-        // TODO ???
-        //rotation %= 360;
-        // Set new rotation value to selected sprite
-        //spriteGroup[selectedSprite].setRotation(rotation);
-
-
     }
 
     private void createCollisionListener() {
@@ -371,19 +253,6 @@ public class WorldController implements InputProcessor {
                 fixtureA = contact.getFixtureA();
                 fixtureB = contact.getFixtureB();
                 Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
-
-
-
-                if(fixtureA.getBody().getUserData() != null && fixtureB.getBody().getUserData() != null){
-
-                }
-
-
-                /*if(fixtureA.getBody().getUserData() != null && fixtureB.getBody().getUserData() != null){
-                    Gdx.app.debug("Contact Entities", fixtureA.getBody().getUserData().getClass().toString() +
-                        " and " + fixtureB.getBody().getUserData().getClass().toString());
-                }*/
-
             }
 
             @Override
@@ -412,9 +281,6 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        //float inputForce = 20; //unused
-
-        //float sprMoveSpeed = 10 * deltaTime;  //unused
         if(Gdx.input.isKeyPressed(Keys.W)) player.moveCharacter(1);
         if(Gdx.input.isKeyPressed(Keys.A)) player.moveCharacter(2);
         if(Gdx.input.isKeyPressed(Keys.S)) player.moveCharacter(0);
@@ -478,16 +344,6 @@ public class WorldController implements InputProcessor {
         cameraHelper.setPosition(x, y);
     }
 
-
-    /*
-    * Method to actually move a game object
-    * TODO fold this and other sprite methods to a new class
-    * */
-    private void moveSelectedSprite (float x, float y) {
-        spriteGroup[selectedSprite].translate(x, y);
-    }
-
-
     /*
     * Inputs
     * */
@@ -548,6 +404,8 @@ public class WorldController implements InputProcessor {
                     } else if (fixtureB.getBody() == blueHouseSensor.getBody()) {  /** At blueHouseSensor */
                         dialogWindow.setText("I'm entering the blue house ! !");
                         eventFound = true;
+                        //screenGame.dispose();
+
                     } else if (GameInstance.instance.world.getContactCount() == 1) { /** For hitting space with a non contact entity */
                         dialogWindow.setText("Nothing to do there :(");
                     }
@@ -604,14 +462,10 @@ public class WorldController implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-
-        //Vector2 stageCoord = stageToScreenCoordinates(new Vector2(screenX, screenY));
         if(stage.hit(screenX, screenY, true) != null)
             visible = true;
         else
             visible = false;
-
-
         return true;
     }
 

@@ -25,20 +25,17 @@ public abstract class DefaultScreen implements Screen {
 
     @Override
     public void pause() {
-//		dispose();
+
     }
 
     @Override
     public void resume() {
-
-//		Resources.getInstance().reInit();
     }
 
     @Override
     public void dispose() {
         stage.dispose();
         game.dispose();
-//		Resources.getInstance().dispose();
     }
 
     public void render(){

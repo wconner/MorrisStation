@@ -15,66 +15,60 @@ public class CameraHelper {
 
 
 
-    /*
+    /**
     * Two classes to choose a target in different ways
-    * */
+    */
     private AbstractDynamicObject targetAbstract;
     private Sprite target;
 
     private static final String TAG = CameraHelper.class.getName();
 
-    /*
+    /**
     * Limits of zooming
-    * */
+    */
     private static final float MAX_ZOOM_IN = 0.25f;
     private static final float MAX_ZOOM_OUT = 10.0f;
 
-    /*
+    /**
     * To position camera in d space
-    * */
+    */
     private Vector2 position;
     private float zoom;
 
-    /*
+    /**
     * Default constructor
-    * */
+    */
     public CameraHelper(){
         position = new Vector2();
         zoom = 1.0f;
     }
 
-    /*
+    /**
     * This is more for following a sprite
-    * */
+    */
     public void update (float deltaTime) {
         if (!hasTargetAbstract()) return;
-
-        //position.x = target.getX() + target.getOriginX();
-        //position.y = target.getY() + target.getOriginY();
-
-
-
 
         position.x = targetAbstract.getBody().getPosition().x;
         position.y = targetAbstract.getBody().getPosition().y;
     }
 
-    /*
+    /**
     * set (x,y) position manually
-    * */
+    */
     public void setPosition (float x, float y) {
 
         this.position.set(x, y);
     }
 
-    /*
+    /**
     * return a vector position
-    * */
+    */
     public Vector2 getPosition () { return position; }
 
-    /*
+    /**
     * Zoom helpers
-    * */
+    */
     public void addZoom (float amount) { setZoom(zoom + amount); }
     public void setZoom (float zoom) {
         this.zoom = MathUtils.clamp(zoom, MAX_ZOOM_IN, MAX_ZOOM_OUT);
@@ -82,9 +76,9 @@ public class CameraHelper {
     public float getZoom () { return zoom; }
 
 
-    /*
+    /**
     * Camera will select the sprite passed in
-    * */
+    */
     public void setTarget (Sprite target) { this.target = target; }
     public Sprite getTarget () { return target; }
     public boolean hasTarget () { return target != null; }
@@ -93,10 +87,10 @@ public class CameraHelper {
     }
 
 
-    /*
+    /**
     * Apply camera updates to world
     * TODO this method ties the viewport camera and the world camera together
-    * */
+    */
     public void applyTo (OrthographicCamera camera) {
 
         float halfWidth = Constants.VIEWPORT_WIDTH * 0.5f;
@@ -108,9 +102,6 @@ public class CameraHelper {
         camera.zoom = zoom;
         camera.update();
     }
-
-
-    //---------------------
 
     public void setTargetAbstract (AbstractDynamicObject target) {
         this.targetAbstract = target;
@@ -127,12 +118,4 @@ public class CameraHelper {
     public boolean hasTargetAbstract (AbstractDynamicObject target) {
         return hasTarget() && this.targetAbstract.equals(target);
     }
-
-
-
-    //---------------------
-
-
-
-
 }

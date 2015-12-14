@@ -17,12 +17,8 @@ public class MainClass extends Game {
 	}
 	@Override
 	public void create() {
-
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-
-		//Assets.load();
 		setScreen(new MainMenu(this));
-
 	}
 
 	public void render() {

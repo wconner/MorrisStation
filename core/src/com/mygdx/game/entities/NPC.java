@@ -1,13 +1,9 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.util.Constants;
-//import com.mygdx.util.Constants/;
+
 
 /**
  * Created by Ian on 2/26/2015.
@@ -16,21 +12,21 @@ public class NPC extends AbstractDynamicObject {
 
     private static final String TAG = NPC.class.getName();
 
-    /*
+    /**
     * To hold a texture
-    * */
+    */
     private TextureRegion npcTexture;
     int index = 0;
 
-    /*
+    /**
     * set dude spawn point and make dude
-    * */
+    */
     public NPC(int id) {
         super(id, "NPC");
         super.getBody().setUserData(this);
         this.position.set(20, 15);
     }
-    /*
+    /**
      * create NPC with specific location
      */
     public NPC(int id, float x, float y) {
@@ -52,10 +48,10 @@ public class NPC extends AbstractDynamicObject {
     }
 
 
-    /*
+    /**
     * note, the render has its own texture which is grabbed all the time
     * it comes from the spritebatch but it just checks the current texture all the time
-    * */
+    */
     @Override
     public void render (SpriteBatch batch) {
         TextureRegion reg = null;

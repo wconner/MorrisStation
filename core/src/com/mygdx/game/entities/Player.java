@@ -3,7 +3,7 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
-//import com.mygdx.util.Constants/;
+
 
 /**
  * Created by Ian on 2/26/2015.
@@ -11,22 +11,19 @@ import com.mygdx.game.util.Constants;
 public class Player extends AbstractDynamicObject {
 
     private static final String TAG = Player.class.getName();
-    /*
+    /**
     * Dude is the little guy sprite being built
     * This is the player character class and has a long way to go
-    * */
+    */
 
-
-
-
-    /*
+    /**
     * To hold a texture
-    * */
+    */
     private TextureRegion dudeTexture;
 
-    /*
+    /**
     * Basic dialog tree proof, will cycle text
-    * */
+    */
     String[] dialog = {"Careful Man",
         "The dude is not, in",
         "El Duderino",
@@ -34,16 +31,16 @@ public class Player extends AbstractDynamicObject {
         "They say my work is..."};
     int index = 0;
 
-    /*
+    /**
     * set dude spawn point and make dude
-    * */
+    */
     public Player(int id) {
         super(id, "player");
         super.getBody().setUserData(this);
         this.position.set(15, 15);
     }
 
-    /*
+    /**
      * create dude with specific spawn point
      */
     public Player(int id, float x, float y) {
@@ -52,9 +49,9 @@ public class Player extends AbstractDynamicObject {
         this.position.set(x, y);
     }
 
-    /*
+    /**
     * Set dude current text
-    * */
+    */
     public String randomText(){
         index = (index + 1) % dialog.length;
         return dialog[index];
@@ -78,10 +75,10 @@ public class Player extends AbstractDynamicObject {
     }
 
 
-    /*
+    /**
     * note, the render has its own texture which is grabbed all the time
     * it comes from the spritebatch but it just checks the current texture all the time
-    * */
+    */
     @Override
     public void render (SpriteBatch batch) {
         TextureRegion reg = null;

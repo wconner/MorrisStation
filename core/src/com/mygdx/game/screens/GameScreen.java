@@ -40,7 +40,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         Assets.instance.loadAssets(new AssetManager());
         this.game = game;
         // Initialize controller and renderer
-        worldController = new WorldController(stage);
+        worldController = new WorldController(stage, this);
         worldRenderer = new WorldRenderer(worldController);
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -68,20 +68,20 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         table.pad(14, 14, 14, 14).defaults().space(16);
 
         window.add(table);
-        window.setPosition((Gdx.graphics.getWidth()/2) - window.getWidth(), (Gdx.graphics.getHeight()/2) - window.getHeight());
-        window.pad(20,20,100,20);
+        window.setPosition((Gdx.graphics.getWidth() / 2) - window.getWidth(), (Gdx.graphics.getHeight() / 2) - window.getHeight());
+        window.pad(20, 20, 100, 20);
         window.pack();
-        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("C:/Users/Jshen94/Documents/GitHub/new/MorrisTown/android/assets/phonebackground.png"))));
-        phoneDisplay.addActor(window);
+        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("android/assets/phonebackground.png")))));
+                phoneDisplay.addActor(window);
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);
         paused = false;
         pauseEnabled = true;
     }
 
-    /*
+    /**
     * Clear the screen, last method draws the new updated world
-    * */
+    */
     @Override
     public void render(float delta) {
 

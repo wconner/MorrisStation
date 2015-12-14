@@ -4,30 +4,19 @@ package com.mygdx.game.screens;
  * Created by Ian on 4/2/2015.
  */
 
-
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-//import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-//import com.mygdx.game.ResourceLoader;
-//import com.emailgame.EmailScreen;
-//import com.mstem.virusshootergame.Screen.ShooterScreen;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
-//test
 import com.testoverlay.OverlayScreen;
-
-
 
 /**
  * @author matheusdev
@@ -63,27 +52,17 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     };
 
     private final MainClass game;
-    //private final ResourceLoader resources;
 
     private final Skin skin;
     private final Table table;
-    //private Stage stage;
-    //private final TextureRegion background;
-    //private final TextureRegion ruinsOfRevengeText;
 
     public MainMenu(final MainClass game) {
         super(new Stage(), game);
         Gdx.input.setInputProcessor(this);
-        //this.resources = resources;
         this.game = game;
-        //this.background = resources.getRegion("background");
-        //background.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-        //this.ruinsOfRevengeText = resources.getRegion("RuinsOfRevenge");
-
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
 
-        //Image rorLogo = new Image(ruinsOfRevengeText);
         TextButton play = new TextButton("Morris Town", skin);
         TextButton email = new TextButton("Test", skin);
         //TextButton shooter = new TextButton("Shooter", skin);
@@ -95,14 +74,11 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         exit.addListener(exitListener);
 
         table = new Table(skin);
-        //table.add(rorLogo).size(600, 200).space(32);
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
         table.add(email).size(320, 64).space(8);
         table.row();
-       // table.add(shooter).size(320,64).space(8);
-        //table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         stage.addActor(table);
@@ -112,29 +88,10 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         return game;
     }
 
-
-
-    /*@Override
-    public void draw(SpriteBatch batch) {
-        batch.begin();
-        //batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.end();
-        stage.draw();
-        table.drawDebug(new ShapeRenderer(10));
-
-    }*/
-
     @Override
     public void render(float delta) {
         delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
         stage.draw();
-
     }
     public void switchScreen(final DefaultScreen newScreen){
         stage.getRoot().getColor().a = 1f;
