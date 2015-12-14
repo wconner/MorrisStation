@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -66,7 +65,7 @@ public class MyGdxGame extends Game {
      * create
      */
 	@Override
-	public void create () {
+	public void create(){
 
         //Set up the camera with a dimension;
         camera = new OrthographicCamera();

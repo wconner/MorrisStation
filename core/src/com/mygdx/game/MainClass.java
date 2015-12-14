@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-
 import com.mygdx.game.screens.MainMenu;
 
 public class MainClass extends Game {
@@ -16,7 +15,7 @@ public class MainClass extends Game {
 		this.game = game;
 	}
 	@Override
-	public void create() {
+	public void create(){
 
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 

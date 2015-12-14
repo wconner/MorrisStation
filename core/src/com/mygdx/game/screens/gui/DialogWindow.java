@@ -34,13 +34,7 @@ public class DialogWindow {
 
 
     Table root;
-    Slider ambientColorR, ambientColorG, ambientColorB;
-    Slider lightColorR, lightColorG, lightColorB, lightZ;
-    Slider attenuationX, attenuationY, attenuationZ;
-    Slider ambientIntensity;
-    Slider strength;
-    Label text;
-    CheckBox useShadow, useNormals, yInvert;
+
 
     /*
     * Default constructor
@@ -66,7 +60,7 @@ public class DialogWindow {
         label.setWrap(true);
         //window.add(label).align(Align.center).padLeft(5).padRight(5).padBottom(20).expandX();
 
-        window.row().prefWidth(Gdx.graphics.getWidth() * 0.95f);
+        window.row().prefWidth(Gdx.graphics.getWidth() * .98f);
         contentLabel = new Label("Morristown is a narrative game to help learn how to be safe online"
                 + "Players will experience scenarios which challenge them to create strong passwords"
                 + ", learn about concepts like viruses and phishing and more.", skin);
@@ -118,53 +112,6 @@ public class DialogWindow {
     }
 
 
-
-
-
-
-/*
-    private CheckBox checkbox (final String name, boolean defaultValue) {
-        final CheckBox checkbox = new CheckBox(name, skin);
-        checkbox.setChecked(true);
-
-        checkbox.addListener(new ChangeListener() {
-            public void changed (ChangeEvent event, Actor actor) {
-                //prefs.putBoolean(name, checkbox.isChecked());
-                //prefs.flush();
-            }
-        });
-
-        return checkbox;
-    }
-
-
-    private Slider slider (final String name, float defaultValue) {
-        final Slider slider = new Slider(0, 1, 0.01f, false, skin);
-        slider.setValue(0);
-
-        final Label label = new Label("", skin);
-        //label.setAlignment(Align.right);
-        label.setText(Float.toString((int)(slider.getValue() * 100) / 100f));
-
-        slider.addListener(new ChangeListener() {
-            public void changed (ChangeEvent event, Actor actor) {
-                label.setText(Float.toString((int)(slider.getValue() * 100) / 100f));
-                if (!slider.isDragging()) {
-                    //prefs.putFloat(name, slider.getValue());
-                    //prefs.flush();
-                }
-            }
-        });
-
-        Table table = new Table();
-        table.add(label).width(35).space(12);
-        table.add(slider);
-
-        root.add(name);
-        root.add(table).fill().row();
-        return slider;
-    }
-*/
     private Label label(String text){
         final Label label = new Label("", skin);
         //label.setAlignment(Align.left);

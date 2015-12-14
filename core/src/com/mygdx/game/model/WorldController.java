@@ -17,9 +17,11 @@ import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.maps.MainTileMap;
+import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.DialogController;
 import com.mygdx.game.util.MapBodyManager;
 
 
@@ -58,7 +60,7 @@ public class WorldController implements InputProcessor {
     public Display display;
     // public Display dialog;
     public DialogWindow dialogWindow;
-
+    public DialogButtons dialogButtons;
     /*
     * Actor initialization
     * Dude is only active sprite 3/4/2015
@@ -135,13 +137,21 @@ public class WorldController implements InputProcessor {
 
     public void initInput() {  Gdx.input.setInputProcessor(this); }
 
+    private String[] test = {"option1", "option2", "option3", "option4"};
     public void initUI(Stage stage){
         visible = false;
         display = new Display(stage);
         //dialog = new Display();
         dialogWindow = new DialogWindow();
+
+
+
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
+
+        //test buttons
+        dialogButtons = new DialogButtons(new DialogController());
+        stage.addActor(dialogButtons.makeWindow(4,test ));
         // stage.addActor(dialog.makeWindow("Dialog", Gdx.graphics.getWidth()/2, 0));
 
     }
@@ -502,7 +512,7 @@ public class WorldController implements InputProcessor {
         // Reset game world
         if (keycode == Keys.R) {
             init(stage);
-            Gdx.app.debug(TAG, "Game world resetted");
+            Gdx.app.debug(TAG, "Game world reset");
             return true;
         }
 
@@ -515,6 +525,7 @@ public class WorldController implements InputProcessor {
 
         if (keycode == Keys.V){
             dialogWindow.hide();
+            dialogButtons.hide();
             return true;
 
         }
@@ -606,10 +617,7 @@ public class WorldController implements InputProcessor {
     public boolean mouseMoved(int screenX, int screenY) {
 
         //Vector2 stageCoord = stageToScreenCoordinates(new Vector2(screenX, screenY));
-        if(stage.hit(screenX, screenY, true) != null)
-            visible = true;
-        else
-            visible = false;
+        visible = stage.hit(screenX, screenY, true) != null;
 
 
         return true;

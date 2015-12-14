@@ -126,20 +126,7 @@ public class Display {
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(6);
-        //root.columnDefaults(0).top().right();
-        //root.columnDefaults(1).left();
-        /*ambientColorR = slider("Ambient R", 1);
-        ambientColorG = slider("Ambient G", 1);
-        ambientColorB = slider("Ambient B", 1);
-        ambientIntensity = slider("Ambient intensity", 0.35f);
-        lightColorR = slider("Light R", 1);
-        lightColorG = slider("Light G", 0.7f);
-        lightColorB = slider("Light B", 0.6f);
-        lightZ = slider("Light Z", 0.07f);
-        attenuationX = slider("Something something", 0.4f);
-        attenuationY = slider("Attenuation*d", 3);
-        attenuationZ = slider("Attenuation*d*d", 5); */
-        //strength = slider("Something else", 1);
+
         label = label("Welcome to Morris Town");
         {
             Table table = new Table();
