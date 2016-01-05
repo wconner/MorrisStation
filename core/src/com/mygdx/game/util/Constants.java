@@ -5,16 +5,15 @@ package com.mygdx.game.util;
  */
 public class Constants {
 
-    /*
+    /**
     * The constants class represents a holding place for
     * various pieces of config data we hold on to for various classes
     * in particular it holds the scale of the tiled game world
     * as well as directory information for various textures
-    * */
+    */
 
     //GAME_WORLD makes a square world
     public static float GAME_WORLD = 40f;
-
 
     public static final float UNIT_SCALE = 1 / 16f;
 
@@ -34,9 +33,4 @@ public class Constants {
 
     // Location of description file for texture atlas
     public static final String TEXTURE_ATLAS_OBJECTS = "android/assets/atlas/test.pack";
-
-    // Location of image file for level 01
-    public static final String LEVEL_01 = "android/assets/levels/level-01.png";
-
-    public static final int LIVES_START = 3;
 }

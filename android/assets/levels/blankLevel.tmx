@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="pokemon" tilewidth="16" tileheight="16" spacing="1" margin="1">
+  <tileoffset x="1" y="1"/>
+  <image source="../tiles/pokemon/pokemon.png" width="2240" height="2400"/>
+ </tileset>
+ <layer name="Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+ <layer name="Copy of Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+ <layer name="Copy of Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+ <layer name="Copy of Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+ <layer name="Copy of Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+ <layer name="Copy of Tile Layer 6" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNk9sNxDAIBFOAu7Nrh3ZyJ+UkNBns+0DEr8myxjGua35iPTH/CO5bOP/N2axzb+XFgRdlz8Ra4jxzyrkujEc9O8/IoRd1jj6sUidr7byytXj+Qa3R8Flrnc/hHnQR462vajJfzD+7S+pirv+qGuz+qcu4XT93/WQ6jEfPjWc9Yjy7w5Q5e78dz+qnp8Y2bv0276nfWNSz5GztKd4Ds73vE4+91fGqP/TLeNmMd+90t/fE47jr1R3/N38D4mTqeg==
+  </data>
+ </layer>
+</map>

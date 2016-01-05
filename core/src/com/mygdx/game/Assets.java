@@ -25,40 +25,34 @@ import com.mygdx.game.util.Constants;
 
 public class Assets implements Disposable, AssetErrorListener {
 
-    /*
+    /**
     * This class is very important, here we hold all the textures and stuff needed
     * for the game. By containing all assets in this one file we can save a huge amount
     * of processing power by restricting calls to bind images with GL
-    * */
+    */
     public static final String TAG = Assets.class.getName();
 
-    /*
+    /**
     * Each of these represent the assets of different game objects
     * Each is an inner class of this class
-    * */
+    */
     public DudeAsset dudeAsset;
     public NPC npc;
     public NPC npc2;
     public MainMap mainMap;
 
-    public Ground ground;
-    public LevelDecoration decoration;
-    public GroundTwo groundTwo;
-    public Background back;
-
-
-    /*
+    /**
     * Assets and asset manager
     * Assets is a singleton, all calls are made on the final of the instance directly
-    * */
+    */
     public static final Assets instance = new Assets();
     private AssetManager assetManager;
 
-    /*
+    /**
     * Assets is a singleton which means it cannot be instatiated anywhere else
     * there is only one instance and we access it whenever we want, thats why
     * the above fields are all public
-    * */
+    */
     private Assets() {
     }
 
@@ -69,9 +63,9 @@ public class Assets implements Disposable, AssetErrorListener {
         // set asset manager error handler
         assetManager.setErrorListener(this);
 
-        /*
+        /**
         * Load the texture atlas
-        * */
+        */
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS,
                 TextureAtlas.class);
 
@@ -82,26 +76,22 @@ public class Assets implements Disposable, AssetErrorListener {
             Gdx.app.debug(TAG, "asset: " + a);
 
 
-        /*
+        /**
         * The atlas was loaded into the asset manager, to use it we need to
         * "get" it from the AssetManager
-        * */
+        */
         TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 
         // enable texture filtering for pixel smoothing
         for (Texture t : atlas.getTextures())
             t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
-        /*
+        /**
         * Now that the assets are loaded we can just load the inner classes
         * so they are available later on
-        * */
+        */
         npc = new NPC(atlas,"lisa");
         npc2 = new NPC(atlas,"dude");
-        ground = new Ground();
-        groundTwo = new GroundTwo(atlas);
-        decoration = new LevelDecoration(atlas);
-        back = new Background();
         mainMap = new MainMap("android/assets/tiles/base.tmx");
         dudeAsset = new DudeAsset(atlas);
 
@@ -110,36 +100,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public MainMap getMap(){
         return mainMap;
     }
+    public void setMap(){ mainMap = new MainMap("android/assets/levels/blankLevel.tmx");}
 
-    /*
-    * Outdated class
-    * Originally was used for building PixMap objects on the fly
-    * This is a procedural method
-    * */
-    private Pixmap createProceduralPixmap (int width, int height) {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-
-        // Fill square with red color at 50% opacity
-        pixmap.setColor(1, 0, 0, 0.5f);
-        pixmap.fill();
-
-
-        // Draw a yellow-colored X shape on square
-        pixmap.setColor(1, 1, 0, 1);
-        pixmap.drawLine(0, 0, width, height);
-        pixmap.drawLine(width, 0, 0, height);
-
-        // Draw a cyan-colored border around square
-        pixmap.setColor(0, 1, 1, 1);
-        pixmap.drawRectangle(0, 0, width, height);
-
-
-        return pixmap;
-    }
-
-    /*
+    /**
     * Dump the textures
-    * */
+    */
     @Override
     public void dispose() {
         assetManager.dispose();
@@ -152,10 +117,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
 
-    /*
+    /**
     * Each of the following is an Inner Class which represents all textures
     * a given abstract game object will need
-    * */
+    */
     public class DudeAsset {
         public final AtlasRegion body;
 
@@ -179,58 +144,6 @@ public class Assets implements Disposable, AssetErrorListener {
 
     }
 
-    public class Ground{
-
-        public final TextureRegion ground;
-
-        public Ground(){
-
-            int width = 32;
-            int height = 32;
-            Pixmap pixmap = createProceduralPixmap(width, height);
-            Texture texture = new Texture(pixmap);
-
-            ground = new TextureRegion(texture);
-        }
-
-
-    }
-
-    public class GroundTwo{
-
-        public final AtlasRegion edge;
-        public final AtlasRegion middle;
-
-        public GroundTwo(TextureAtlas atlas) {
-            edge = atlas.findRegion("ground_side");
-            middle = atlas.findRegion("ground_center");
-        }
-
-    }
-
-    public class LevelDecoration {
-
-        public final AtlasRegion background;
-        public final AtlasRegion cloudOne;
-        public final AtlasRegion cloudTwo;
-
-        public LevelDecoration(TextureAtlas atlas){
-            background = atlas.findRegion("background");
-            cloudOne = atlas.findRegion("cloud_one");
-            cloudTwo = atlas.findRegion("cloud_two");
-        }
-    }
-
-    public class Background {
-
-        public final Texture back;
-
-        public Background(){
-            back = new Texture(Gdx.files.internal("android/assets/background/back.png"));
-        }
-    }
-
-
     public class MainMap {
 
         public MapProperties prop;
@@ -240,13 +153,10 @@ public class Assets implements Disposable, AssetErrorListener {
             map = new TmxMapLoader().load(mapInput);
             prop = map.getProperties();
 
-            /*
+            /**
             * Use the actual map width to set GAME_WORLD on map load
-            * */
+            */
             Constants.GAME_WORLD = prop.get("width", Integer.class);
         }
     }
-
-
-
 }

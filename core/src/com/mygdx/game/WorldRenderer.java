@@ -99,6 +99,8 @@ public class WorldRenderer implements Disposable {
     */
     private void renderWorld (SpriteBatch batch){
 
+        this.
+
         /**
         * I'm still not totally sure how applyTo() operates
         */

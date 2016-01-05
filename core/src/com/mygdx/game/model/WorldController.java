@@ -36,26 +36,22 @@ public class WorldController implements InputProcessor {
 
     private static final String TAG = WorldController.class.getName();
 
-
-    public int score;
     public Level level;
-    public int lives;
-
 
     //not bein used
     public MainTileMap mainMap;
     //public World world;
     public MapBodyManager bodyManager;
 
-    /*
+    /**
     * Creates the camera helper, a utililty class for camera manipulation
-    * */
+    */
     public CameraHelper cameraHelper;
 
-    /*
+    /**
     * The class for displaying the UI
     * Is placed in controller so input has access
-    * */
+    */
     public Display display;
     // public Display dialog;
     public DialogWindow dialogWindow;
@@ -109,9 +105,6 @@ public class WorldController implements InputProcessor {
         actors = new Array<AbstractDynamicObject>();
         cameraHelper = new CameraHelper();
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
-
-        //Game info is set in Constants class
-        lives = Constants.LIVES_START;
 
         /**Initiate everything*/
         initActors();
@@ -207,24 +200,6 @@ public class WorldController implements InputProcessor {
             }
         }
 
-        int numContacts = GameInstance.instance.world.getContactCount();
-        if (numContacts > 0) {
-            //Gdx.app.log("contact", "start of contact list");
-            for (Contact contact : GameInstance.instance.world.getContactList()) {
-                fixtureA = contact.getFixtureA();
-                fixtureB = contact.getFixtureB();
-                if (fixtureA.getBody() == player.getBody()){
-
-                }
-                else if (fixtureB.getBody() == player.getBody()){
-
-                }
-
-                //Gdx.app.log("contact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
-            }
-            //Gdx.app.log("contact", "end of contact list");
-        }
-
         handleDebugInput(deltaTime);
         //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
         cameraHelper.update(deltaTime);
@@ -274,10 +249,10 @@ public class WorldController implements InputProcessor {
     }
 
 
-    /*
+    /**
     * Enables all kinds of awesome things that we can control when
     * used in conjunction with the CameraHelper class
-    * */
+    */
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
@@ -317,7 +292,6 @@ public class WorldController implements InputProcessor {
         if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE))
             cameraHelper.setPosition(0, 0);
 
-
         // Camera Controls (zoom)
         float camZoomSpeed = 1 * deltaTime;
         float camZoomSpeedAccelerationFactor = 5;
@@ -330,24 +304,19 @@ public class WorldController implements InputProcessor {
         if (Gdx.input.isKeyPressed(Keys.SLASH)) cameraHelper.setZoom(1);
     }
 
-
-
-    /*
+    /**
     * Uses CameraHelper to control the camera position
-    * */
+    */
     public void moveCamera (float x, float y) {
         x += cameraHelper.getPosition().x;
         y += cameraHelper.getPosition().y;
 
-
-
         cameraHelper.setPosition(x, y);
     }
 
-    /*
+    /**
     * Inputs
-    * */
-
+    */
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -404,7 +373,7 @@ public class WorldController implements InputProcessor {
                     } else if (fixtureB.getBody() == blueHouseSensor.getBody()) {  /** At blueHouseSensor */
                         dialogWindow.setText("I'm entering the blue house ! !");
                         eventFound = true;
-                        //screenGame.dispose();
+                        Assets.instance.setMap();
 
                     } else if (GameInstance.instance.world.getContactCount() == 1) { /** For hitting space with a non contact entity */
                         dialogWindow.setText("Nothing to do there :(");
