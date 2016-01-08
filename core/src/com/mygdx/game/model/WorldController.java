@@ -18,11 +18,15 @@ import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.maps.MainTileMap;
 import com.mygdx.game.screens.DefaultScreen;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.DialogController;
 import com.mygdx.game.util.MapBodyManager;
 
+import java.io.IOException;
 
 
 /**
@@ -55,6 +59,8 @@ public class WorldController implements InputProcessor {
     public Display display;
     // public Display dialog;
     public DialogWindow dialogWindow;
+    private DialogController DC;
+    private DialogButtons DB;
 
     /**
     * Actor initialization
@@ -74,12 +80,12 @@ public class WorldController implements InputProcessor {
     * Not being used
     */
     public Sprite[] groundGroup;
-    private DefaultScreen screenGame;
+    private GameScreen screenGame;
 
     /**
     * Default constructor
     */
-    public WorldController (Stage stage, DefaultScreen screenGame) {
+    public WorldController (Stage stage, GameScreen screenGame) {
         this.screenGame = screenGame;
         init(stage);
     }
@@ -128,6 +134,13 @@ public class WorldController implements InputProcessor {
         display = new Display(stage);
         //dialog = new Display();
         dialogWindow = new DialogWindow();
+        DC = new DialogController();
+        DB = new DialogButtons(stage);
+        try {
+            DC.makeScene(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
     }
@@ -363,10 +376,11 @@ public class WorldController implements InputProcessor {
                 if (fixtureA.getBody() == player.getBody()) {
                     if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
                         dialogWindow.hide();
-
                     if (fixtureB.getBody() == npc.getBody()) {           /** Talking to NPC */
                         dialogWindow.setText("I'm talking to npc!");
                         eventFound = true;
+                        screenGame.pauseSwap();
+                        stage.addActor(DB.makeWindow(DC.getArray(101)));
                     } else if (fixtureB.getBody() == npc2.getBody()) {      /** Talking to NPC2 */
                         dialogWindow.setText("I'm talking to npc2!!");
                         eventFound = true;
@@ -382,6 +396,7 @@ public class WorldController implements InputProcessor {
                 i++;
             }
             dialogWindow.update(stage);
+            DB.update(stage);
             Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
         }
 

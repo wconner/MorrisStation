@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.util.DialogController;
+
+import java.util.ArrayList;
+
 /**
  * Created by Jshen94 on 12/7/2015.
  */
@@ -19,6 +22,7 @@ public class DialogButtons implements InputProcessor{
     private Skin skin;
     private TextureAtlas atlas;
     private DialogController dialogController;
+    private Stage stage;
 
     /*
     * Text labels
@@ -37,12 +41,12 @@ public class DialogButtons implements InputProcessor{
     /*
     * Default constructor
     * */
-    public DialogButtons(DialogController dialog) {
+    public DialogButtons(Stage stage) {
         atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
-        dialogController = dialog;
+        this.stage = stage;
         option1 = new Button(skin);
         option2 = new Button(skin);
         option3 = new Button(skin);
@@ -54,8 +58,10 @@ public class DialogButtons implements InputProcessor{
     * Build a basic window
     * dialog is temp param
     * */
-    public Window makeWindow(int num, String[] dialog) {
+    public Window makeWindow(ArrayList<String> dialog) {
+        int num = dialog.size();
 
+        Gdx.input.setInputProcessor(stage);
         window = new Window("Dialog Options", skin);
 
         //window.row().prefWidth(Gdx.graphics.getWidth() * 0.5f);
@@ -63,20 +69,20 @@ public class DialogButtons implements InputProcessor{
         root = new Table(skin);
         switch(num) {
             case 4:
-                option4.add(dialog[3]);
+                option4.add(dialog.get(3));
                 option4.addListener(option4.getClickListener());
                 root.add(option4);
             case 3:
-                option3.add(dialog[2]);
+                option3.add(dialog.get(2));
                 option3.addListener(option3.getClickListener());
                 root.row();
                 root.add(option3);
             case 2:
-                option2.add(dialog[1]);
+                option2.add(dialog.get(1));
                 option2.addListener(option2.getClickListener());
                 root.row();
                 root.add(option2);
-            case 1: option1.add(dialog[0]);
+            case 1: option1.add(dialog.get(0));
                 option1.addListener(option1.getClickListener());
                 root.row();
                 root.add(option1);
@@ -90,6 +96,7 @@ public class DialogButtons implements InputProcessor{
         window.pack();
         window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() *.34f),90, Gdx.graphics.getWidth()/3, 140);
         window.left();
+        window.setVisible(true);
         return window;
     }
 

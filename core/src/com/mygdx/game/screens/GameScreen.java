@@ -171,7 +171,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     };
 
 
-    private void pauseSwap() {
+    public void pauseSwap() {
         if(paused)
             resume();
         else

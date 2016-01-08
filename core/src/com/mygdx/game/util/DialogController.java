@@ -1,4 +1,6 @@
 package com.mygdx.game.util;
+import com.badlogic.gdx.Gdx;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -67,7 +69,7 @@ public class DialogController {
      * @throws IOException
      */
     public void makeScene(int scene) throws IOException {
-        FileReader reader = new FileReader("Dialog.txt");
+        FileReader reader = new FileReader("android/assets/data/Dialog.txt");
         BufferedReader inputFile = new BufferedReader(reader);
 
         String line=inputFile.readLine();
