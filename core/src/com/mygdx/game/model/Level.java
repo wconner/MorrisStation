@@ -7,6 +7,14 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
+/**
+ * Things that need to be done in order to change lvl
+ * Set the "MainMap" in Assets to the new level
+ * In WorldRenderer call: tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
+ * Somehow dispose of the Box2d's from the first level
+ *      This may require creating a whole new WorldController
+ */
+
 
 public class Level {
 

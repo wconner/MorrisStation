@@ -16,22 +16,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class Display {
 
-    /*
+    /**
     * For building a window and assigning it a skin
-    * */
+    */
     private Window window;
     private Skin skin;
     private TextureAtlas atlas;
 
-    /*
+    /**
     * For holding the UI
-    * */
+    */
     private Stage stage;
     private Table table;
 
-    /*
+    /**
     * Text labels
-    * */
+    */
     private Label label;
     private Label headerLabel;
 
@@ -47,17 +47,9 @@ public class Display {
     Label text;
     CheckBox useShadow, useNormals, yInvert;
 
-
-
-
-
-
-
-
-
-    /*
+    /**
     * Default constructor
-    * */
+    */
     public Display(){
         //init();
         /*
@@ -81,13 +73,13 @@ public class Display {
         skin.addRegions(atlas);
     }
 
-    /*
+    /**
     * Construct the stage and call necessary components
-    * */
+    */
     public void init(){
-        /*
+        /**
         * A display must be held by the stage
-        * */
+        */
 
         //stage = new Stage(new ScreenViewport());
 
@@ -96,20 +88,20 @@ public class Display {
 
 
 
-        /*
+        /**
         * Label is created and given a skin
         * The window is created and its position set
-        * */
+        */
         label = new Label("", skin);
         window = makeWindow();
         window.addActor(table);
 
 
 
-        /*
+        /**
         * The stage must hold all the ui widgets
         * TODO Stage widget management should be outside of the loadAssets() method for DRY
-        * */
+        */
 
         stage.addActor(window);
     }
@@ -117,29 +109,15 @@ public class Display {
 
 
 
-    /*
+    /**
     * Build a basic window
-    * */
+    */
     public Window makeWindow(){
 
         window = new Window("Player 1", skin);
 
         root = new Table(skin);
         root.pad(2, 4, 4, 4).defaults().space(6);
-        //root.columnDefaults(0).top().right();
-        //root.columnDefaults(1).left();
-        /*ambientColorR = slider("Ambient R", 1);
-        ambientColorG = slider("Ambient G", 1);
-        ambientColorB = slider("Ambient B", 1);
-        ambientIntensity = slider("Ambient intensity", 0.35f);
-        lightColorR = slider("Light R", 1);
-        lightColorG = slider("Light G", 0.7f);
-        lightColorB = slider("Light B", 0.6f);
-        lightZ = slider("Light Z", 0.07f);
-        attenuationX = slider("Something something", 0.4f);
-        attenuationY = slider("Attenuation*d", 3);
-        attenuationZ = slider("Attenuation*d*d", 5); */
-        //strength = slider("Something else", 1);
         label = label("Welcome to Morris Town");
         {
             Table table = new Table();
@@ -183,26 +161,26 @@ public class Display {
         return window;
     }
 
-    /*
+    /**
     * Getter for window
-    * */
+    */
     public Window getWindow(){
         return window;
     }
 
-    /*
+    /**
     * Set the text of the only label on the page
     * TODO introduce multiple labels with variable input streams
-    * */
+    */
     public void setText(String text){
         label.setText(text);
     }
 
 
 
-    /*
+    /**
     * stage.act() calls the act method on all widgets of the stage
-    * */
+    */
     public void update(){
        stage.act();
        stage.draw();
@@ -255,7 +233,20 @@ public class Display {
         //root.add(table).fill().row();
         return slider;
     }
-
+        //root.columnDefaults(0).top().right();
+        //root.columnDefaults(1).left();
+        /*ambientColorR = slider("Ambient R", 1);
+        ambientColorG = slider("Ambient G", 1);
+        ambientColorB = slider("Ambient B", 1);
+        ambientIntensity = slider("Ambient intensity", 0.35f);
+        lightColorR = slider("Light R", 1);
+        lightColorG = slider("Light G", 0.7f);
+        lightColorB = slider("Light B", 0.6f);
+        lightZ = slider("Light Z", 0.07f);
+        attenuationX = slider("Something something", 0.4f);
+        attenuationY = slider("Attenuation*d", 3);
+        attenuationZ = slider("Attenuation*d*d", 5); */
+        //strength = slider("Something else", 1);
     private Label label(String text){
         final Label label = new Label("", skin);
         //label.setAlignment(Align.left);

@@ -16,20 +16,7 @@ public class MSensor extends AbstractDynamicObject {
 
 
     public void render (SpriteBatch batch) {
-        TextureRegion reg = null;
-
-        batch.draw(reg.getTexture(),
-                super.getBody().getPosition().x - .5f, super.getBody().getPosition().y - .5f,
-                origin.x, origin.y,
-                dimension.x, dimension.y,
-                scale.x, scale.y,
-                rotation,
-                reg.getRegionX(), reg.getRegionY(),
-                reg.getRegionWidth(), reg.getRegionHeight(),
-                false, false);
-
         // Reset color to white
         batch.setColor(1, 1, 1, 1);
-
     }
 }

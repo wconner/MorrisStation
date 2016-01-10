@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
+import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.util.Constants;
 
@@ -98,9 +99,6 @@ public class WorldRenderer implements Disposable {
     * here first, mucho importante
     */
     private void renderWorld (SpriteBatch batch){
-
-        this.
-
         /**
         * I'm still not totally sure how applyTo() operates
         */
@@ -110,6 +108,7 @@ public class WorldRenderer implements Disposable {
         /**
         * ehhhhhhh
         */
+        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
         tileRenderer.setView(viewportCamera);
 
         for(MapLayer layer : Assets.instance.mainMap.map.getLayers()){
@@ -120,12 +119,12 @@ public class WorldRenderer implements Disposable {
 
             batch.begin();
 
-            worldController.player.render(batch);
-            worldController.npc.render(batch);
-            worldController.npc2.render(batch);
+
+
+            for(AbstractDynamicObject dudes : worldController.actors)
+                dudes.render(batch);
 
             batch.end();
-
 
             tileRenderer.render(fgLayers);
 

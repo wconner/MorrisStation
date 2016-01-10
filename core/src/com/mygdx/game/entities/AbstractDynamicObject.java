@@ -132,6 +132,7 @@ public abstract class AbstractDynamicObject{
     }
 
 
+
     public void setAbleToMove(boolean option){
         ableToMove = option;
     }

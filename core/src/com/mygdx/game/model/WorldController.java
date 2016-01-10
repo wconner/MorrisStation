@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -387,7 +388,7 @@ public class WorldController implements InputProcessor {
                     } else if (fixtureB.getBody() == blueHouseSensor.getBody()) {  /** At blueHouseSensor */
                         dialogWindow.setText("I'm entering the blue house ! !");
                         eventFound = true;
-                        Assets.instance.setMap();
+                        changeLevels("blueHouse");
 
                     } else if (GameInstance.instance.world.getContactCount() == 1) { /** For hitting space with a non contact entity */
                         dialogWindow.setText("Nothing to do there :(");
@@ -414,6 +415,19 @@ public class WorldController implements InputProcessor {
         return false;
     }
 
+    /**
+     * First attempt at changing levels
+     */
+    private void changeLevels(String levelToChangeTo){
+        AbstractDynamicObject a;
+        Assets.instance.dispose();
+        Assets.instance.setMap();
+        npc = null;
+        while (actors.size != 0) {
+            actors.pop();
+        }
+        System.gc();
+    }
     /**
      * Simple method to switch FixtureA and FixtureB.
      */
