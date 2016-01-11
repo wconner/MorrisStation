@@ -2,23 +2,17 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.NPC;
-import com.mygdx.game.maps.MainTileMap;
-import com.mygdx.game.screens.DefaultScreen;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
@@ -44,7 +38,6 @@ public class WorldController implements InputProcessor {
     public Level level;
 
     //not bein used
-    public MainTileMap mainMap;
     //public World world;
     public MapBodyManager bodyManager;
 
@@ -80,7 +73,6 @@ public class WorldController implements InputProcessor {
     * Environment initialization
     * Not being used
     */
-    public Sprite[] groundGroup;
     private GameScreen screenGame;
 
     /**
@@ -119,13 +111,6 @@ public class WorldController implements InputProcessor {
 
         bodyManager.createPhysics(Assets.instance.mainMap.map, "Obstacles");
         createCollisionListener();
-    }
-
-    /**
-    * Initiate Tiled Map
-    */
-    public void initMap(){
-        mainMap = new MainTileMap();
     }
 
     public void initInput() {  Gdx.input.setInputProcessor(this); }
@@ -341,18 +326,18 @@ public class WorldController implements InputProcessor {
         // Reset game world
         if (keycode == Keys.R) {
             init(stage);
-            Gdx.app.debug(TAG, "Game world resetted");
+            Gdx.app.debug(TAG, "Game world reset");
             return true;
         }
 
         //change text
-        if (keycode == Keys.B){
+        else if (keycode == Keys.B){
             dialogWindow.setText(player.randomText());
             return true;
 
         }
 
-        if (keycode == Keys.V){
+        else if (keycode == Keys.V){
             dialogWindow.hide();
             return true;
 
@@ -411,7 +396,6 @@ public class WorldController implements InputProcessor {
             return true;
 
         }
-
         return false;
     }
 
@@ -419,14 +403,16 @@ public class WorldController implements InputProcessor {
      * First attempt at changing levels
      */
     private void changeLevels(String levelToChangeTo){
-        AbstractDynamicObject a;
-        Assets.instance.dispose();
-        Assets.instance.setMap();
+//        Assets.instance.dispose();      /** This line may not be needed */
+        Assets.instance.setMap();       /** Sets the new map for the new level */
+        bodyManager.destroyPhysics();   /** Destroys all physics for structures */
+        player = null;                  /** Should find a better way to write these 3 lines, not sure if they're even needed */
         npc = null;
-        while (actors.size != 0) {
-            actors.pop();
+        npc2 = null;
+        while (actors.size != 0) {      /** Destroys the physics for the actors */
+            actors.pop().remove();
         }
-        System.gc();
+        screenGame.setLevel();
     }
     /**
      * Simple method to switch FixtureA and FixtureB.

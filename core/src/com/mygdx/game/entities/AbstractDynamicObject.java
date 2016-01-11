@@ -4,10 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GameInstance;
 
@@ -47,6 +44,10 @@ public abstract class AbstractDynamicObject{
     public Vector2 friction;
     public Vector2 acceleration;
     public Rectangle bounds;
+    public CircleShape shape;
+    public FixtureDef fixtureDef;
+    public BodyDef bodyDef;
+    public Fixture fixture;
 
     public String facing;
 
@@ -58,7 +59,7 @@ public abstract class AbstractDynamicObject{
 
         this.id = id;
         facing = "d";
-        BodyDef bodyDef = new BodyDef();
+        bodyDef = new BodyDef();
 
         if (objType.equals("player")) {         /** For player ADO */
             bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -79,10 +80,10 @@ public abstract class AbstractDynamicObject{
         body = GameInstance.getInstance().world.createBody(bodyDef);
         body.setLinearDamping(10f);
 
-        CircleShape shape = new CircleShape();
+        shape = new CircleShape();
         shape.setRadius(.5f);
 
-        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0;
         fixtureDef.friction = 0.5f;
@@ -91,7 +92,7 @@ public abstract class AbstractDynamicObject{
         if (objType.equals("sensor"))       /** Only for Sensor ADO */
             fixtureDef.isSensor = true;
 
-        body.createFixture(fixtureDef);
+        fixture = body.createFixture(fixtureDef);
         shape.dispose();
 
         position = new Vector2();
@@ -226,6 +227,12 @@ public abstract class AbstractDynamicObject{
         this.position.y = y;
     }
 
+    /**
+     * Removes this object from the game.
+     */
+    public void remove(){
+        body.destroyFixture(fixture);
+    }
 
     public void rotateBody(float angle){
         this.body.setTransform(body.getPosition(), angle);

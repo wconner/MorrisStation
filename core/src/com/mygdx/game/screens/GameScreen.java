@@ -101,6 +101,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         worldRenderer.render();
     }
 
+    public void setLevel(){
+        worldController = new WorldController(stage, this);
+    }
 
     public WorldController getWorldController() {
         return worldController;

@@ -1,4 +1,4 @@
-package com.mygdx.game.model;
+package com.mygdx.game.levels;
 
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.Assets;
