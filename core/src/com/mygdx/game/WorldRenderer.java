@@ -50,6 +50,10 @@ public class WorldRenderer implements Disposable {
     public OrthographicCamera getViewportCamera(){return viewportCamera;
     }
 
+    public void setLevel(WorldController worldController){
+        this.worldController = worldController;
+        init();
+    }
 
     /**
     * Initiate all needed rendering utilities
@@ -69,7 +73,7 @@ public class WorldRenderer implements Disposable {
         */
         batch = new SpriteBatch();
         shaper = new ShapeRenderer();
-        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
+        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.getMap(), Constants.UNIT_SCALE);
 
         /**
         * Sets the main camera
@@ -108,18 +112,16 @@ public class WorldRenderer implements Disposable {
         /**
         * ehhhhhhh
         */
-        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.mainMap.map, Constants.UNIT_SCALE);
+        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.getMap(), Constants.UNIT_SCALE);
         tileRenderer.setView(viewportCamera);
 
-        for(MapLayer layer : Assets.instance.mainMap.map.getLayers()){
+        for(MapLayer layer : Assets.instance.getMap().getLayers()){
 
             int[] bgLayers = {0,1};
             int[] fgLayers = {2,3,4,5};
             tileRenderer.render(bgLayers);
 
             batch.begin();
-
-
 
             for(AbstractDynamicObject dudes : worldController.actors)
                 dudes.render(batch);

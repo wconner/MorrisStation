@@ -7,6 +7,7 @@ import com.mygdx.game.util.Constants;
 
 /**
  * Created by Ian on 2/26/2015.
+ * NPC's ID should be: 0 < ID < 100
  */
 public class NPC extends AbstractDynamicObject {
 
@@ -36,7 +37,6 @@ public class NPC extends AbstractDynamicObject {
     }
 
     public void setRegion (TextureRegion region) {
-
         npcTexture = region;
     }
 

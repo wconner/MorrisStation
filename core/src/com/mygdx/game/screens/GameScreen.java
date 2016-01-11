@@ -18,9 +18,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Assets;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
+import com.mygdx.game.levels.BridgeLevel;
+import com.mygdx.game.levels.FirstLevel;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.testoverlay.OverlayScreen;
+
+import java.util.ArrayList;
 
 
 public class GameScreen extends DefaultScreen implements InputProcessor {
@@ -29,6 +34,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     private WorldRenderer worldRenderer;
     private MainClass game;
     private Group phoneDisplay;
+    private ArrayList<Level> levels;
 
 
     private boolean paused;
@@ -39,9 +45,12 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         super(stage, game);
         Assets.instance.loadAssets(new AssetManager());
         this.game = game;
+        initLevels();
         // Initialize controller and renderer
-        worldController = new WorldController(stage, this);
+        worldController = new WorldController(stage, this, levels.get(0));
         worldRenderer = new WorldRenderer(worldController);
+        setLevel(0);
+
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // Game world is active on start
@@ -79,6 +88,12 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         pauseEnabled = true;
     }
 
+    private void initLevels(){
+        levels = new ArrayList<>();
+        levels.add(new FirstLevel());
+        levels.add(new BridgeLevel());
+    }
+
     /**
     * Clear the screen, last method draws the new updated world
     */
@@ -101,15 +116,17 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         worldRenderer.render();
     }
 
-    public void setLevel(){
-        worldController = new WorldController(stage, this);
+    public void setLevel(int level){
+        Assets.instance.setMap(levels.get(level).getMap());
+        worldController = new WorldController(stage, this, levels.get(level));
+        worldRenderer.setLevel(worldController);
     }
 
     public WorldController getWorldController() {
         return worldController;
     }
 
-    public Group getPhoneDisplay() {        return phoneDisplay;    }
+    public Group getPhoneDisplay() { return phoneDisplay; }
     public Game getGame() {
         return game;
     }
@@ -130,7 +147,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void hide() {
-
     }
 
 

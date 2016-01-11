@@ -1,7 +1,6 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.physics.box2d.*;
@@ -9,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
-import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.Player;
-import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
@@ -22,7 +19,6 @@ import com.mygdx.game.util.DialogController;
 import com.mygdx.game.util.MapBodyManager;
 
 import java.io.IOException;
-
 
 /**
  * Created by Ian on 12/21/2014.
@@ -36,9 +32,6 @@ public class WorldController implements InputProcessor {
     private static final String TAG = WorldController.class.getName();
 
     public Level level;
-
-    //not bein used
-    //public World world;
     public MapBodyManager bodyManager;
 
     /**
@@ -62,10 +55,7 @@ public class WorldController implements InputProcessor {
     */
     public Array<AbstractDynamicObject> actors;
     public Player player;
-    public NPC npc, npc2;
-    public MSensor blueHouseSensor;
 
-    public Sprite[] spriteGroup;
     public int selectedSprite;
 
     private boolean visible;
@@ -78,14 +68,13 @@ public class WorldController implements InputProcessor {
     /**
     * Default constructor
     */
-    public WorldController (Stage stage, GameScreen screenGame) {
+    public WorldController (Stage stage, GameScreen screenGame, Level level) {
         this.screenGame = screenGame;
+        this.level = level;
         init(stage);
     }
 
-
     private Stage stage;
-
 
     public Stage getStage(){
         return stage;
@@ -101,7 +90,7 @@ public class WorldController implements InputProcessor {
 
         bodyManager = new MapBodyManager(GameInstance.getInstance().world,16, null, Application.LOG_DEBUG);
 
-        actors = new Array<AbstractDynamicObject>();
+        actors = level.getActors();
         cameraHelper = new CameraHelper();
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
 
@@ -109,7 +98,7 @@ public class WorldController implements InputProcessor {
         initActors();
         initUI(stage);
 
-        bodyManager.createPhysics(Assets.instance.mainMap.map, "Obstacles");
+        bodyManager.createPhysics(Assets.instance.getMap(), "Obstacles");
         createCollisionListener();
     }
 
@@ -142,24 +131,20 @@ public class WorldController implements InputProcessor {
     * Create actors
     */
     private void initActors(){
-        player = new Player(0);
-        npc = new NPC(1,20,15);
-        npc2 = new NPC(2);
-        npc2.setRegion(Assets.instance.npc2.body);
-        npc2.getBody().setTransform(npc2.position.x + npc2.getWidth(), npc2.position.y + npc2.getHeight(), 0);
-        npc.setRegion(Assets.instance.npc.body);
-        npc.getBody().setTransform(npc.position.x + npc.getWidth(), npc.position.y + npc.getHeight(), 0);
+        for (AbstractDynamicObject a : actors){
+            if (a.getID() == 0) {                                       /** If it is player */
+                a.setRegion(Assets.instance.dudeAsset.body);
+                a.getBody().setTransform(a.position.x + a.getWidth(), a.position.y + a.getHeight(), 0);
+            }
+            else if (a.getID() < 100) {                                 /** If its an NPC */
+                a.setRegion(Assets.instance.npc.body);
+                a.getBody().setTransform(a.position.x + a.getWidth(), a.position.y + a.getHeight(), 0);
+            }
+            else                                                        /** For sensors */
+                a.getBody().setTransform(a.position.x, a.position.y, 0);
+        }
 
-        blueHouseSensor = new MSensor(10, 15.5f, 19f);
-        blueHouseSensor.getBody().setTransform(blueHouseSensor.position.x, blueHouseSensor.position.y, 0);
-
-        player.setRegion(Assets.instance.dudeAsset.body);
-        player.getBody().setTransform(player.position.x + player.getWidth(), player.position.y + player.getHeight(), 0);
-
-        actors.add(player);
-        actors.add(npc);
-        actors.add(npc2);
-        actors.add(blueHouseSensor);
+        player = ((Player) actors.get(0));
     }
 
     /**
@@ -178,7 +163,6 @@ public class WorldController implements InputProcessor {
     public void update (float deltaTime) {
 
         //updateTestObjects(deltaTime);
-
 
         // Create an array to be filled with the bodies
         // (better don't create a new one every time though)
@@ -362,15 +346,15 @@ public class WorldController implements InputProcessor {
                 if (fixtureA.getBody() == player.getBody()) {
                     if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
                         dialogWindow.hide();
-                    if (fixtureB.getBody() == npc.getBody()) {           /** Talking to NPC */
+                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
                         dialogWindow.setText("I'm talking to npc!");
                         eventFound = true;
                         screenGame.pauseSwap();
                         stage.addActor(DB.makeWindow(DC.getArray(101)));
-                    } else if (fixtureB.getBody() == npc2.getBody()) {      /** Talking to NPC2 */
+                    } else if (fixtureB.getBody() == actors.get(2).getBody()) {      /** Talking to NPC2 */
                         dialogWindow.setText("I'm talking to npc2!!");
                         eventFound = true;
-                    } else if (fixtureB.getBody() == blueHouseSensor.getBody()) {  /** At blueHouseSensor */
+                    } else if (fixtureB.getBody() == actors.get(3).getBody()) {  /** At blueHouseSensor */
                         dialogWindow.setText("I'm entering the blue house ! !");
                         eventFound = true;
                         changeLevels("blueHouse");
@@ -404,15 +388,12 @@ public class WorldController implements InputProcessor {
      */
     private void changeLevels(String levelToChangeTo){
 //        Assets.instance.dispose();      /** This line may not be needed */
-        Assets.instance.setMap();       /** Sets the new map for the new level */
+//        Assets.instance.setMap();       /** Sets the new map for the new level */
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
-        player = null;                  /** Should find a better way to write these 3 lines, not sure if they're even needed */
-        npc = null;
-        npc2 = null;
         while (actors.size != 0) {      /** Destroys the physics for the actors */
             actors.pop().remove();
         }
-        screenGame.setLevel();
+        screenGame.setLevel(1);
     }
     /**
      * Simple method to switch FixtureA and FixtureB.

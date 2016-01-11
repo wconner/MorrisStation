@@ -8,18 +8,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.mygdx.game.entities.NPC;
 import com.mygdx.game.util.Constants;
 
 
@@ -39,7 +36,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public DudeAsset dudeAsset;
     public NPC npc;
     public NPC npc2;
-    public MainMap mainMap;
+    public TiledMap map;
 
     /**
     * Assets and asset manager
@@ -92,15 +89,14 @@ public class Assets implements Disposable, AssetErrorListener {
         */
         npc = new NPC(atlas,"lisa");
         npc2 = new NPC(atlas,"dude");
-        mainMap = new MainMap("android/assets/tiles/base.tmx");
         dudeAsset = new DudeAsset(atlas);
 
     }
 
-    public MainMap getMap(){
-        return mainMap;
+    public TiledMap getMap(){
+        return map;
     }
-    public void setMap(){ mainMap = new MainMap("android/assets/levels/blankLevel.tmx");}
+    public void setMap(TiledMap map){ this.map = map;}
 
     /**
     * Dump the textures
@@ -114,8 +110,6 @@ public class Assets implements Disposable, AssetErrorListener {
     public void error(AssetDescriptor asset, Throwable throwable) {
 
     }
-
-
 
     /**
     * Each of the following is an Inner Class which represents all textures
@@ -144,19 +138,19 @@ public class Assets implements Disposable, AssetErrorListener {
 
     }
 
-    public class MainMap {
-
-        public MapProperties prop;
-        public final TiledMap map;
-
-        public MainMap(String mapInput){
-            map = new TmxMapLoader().load(mapInput);
-            prop = map.getProperties();
-
-            /**
-            * Use the actual map width to set GAME_WORLD on map load
-            */
-            Constants.GAME_WORLD = prop.get("width", Integer.class);
-        }
-    }
+//    public class MainMap {
+//
+//        public MapProperties prop;
+//        public final TiledMap map;
+//
+//        public MainMap(String mapInput){
+//            map = new TmxMapLoader().load(mapInput);
+//            prop = map.getProperties();
+//
+//            /**
+//            * Use the actual map width to set GAME_WORLD on map load
+//            */
+//            Constants.GAME_WORLD = prop.get("width", Integer.class);
+//        }
+//    }
 }

@@ -13,8 +13,6 @@ import com.mygdx.game.util.Constants;
  */
 public class CameraHelper {
 
-
-
     /**
     * Two classes to choose a target in different ways
     */
