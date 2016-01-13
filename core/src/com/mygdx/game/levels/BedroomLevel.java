@@ -7,17 +7,17 @@ import com.mygdx.game.entities.Player;
 /**
  * Created by bill on 12/5/15.
  */
-public class BridgeLevel extends Level {
+public class BedroomLevel extends Level {
 
-        public BridgeLevel() {
+        public BedroomLevel() {
             super();
-            map = new TmxMapLoader().load("android/assets/levels/bridgeLevel.tmx"); // Type Tiled map
+            map = new TmxMapLoader().load("android/assets/levels/FutureBedRoom.tmx"); // Type Tiled map
             Assets.instance.setMap(map);
             addActors();
         }
 
     @Override
     void addActors() {
-        actors.add(new Player(0, 10, 10));
+        actors.add(new Player(0, 5, 5));
     }
 }

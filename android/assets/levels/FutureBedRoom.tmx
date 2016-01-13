@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Futuristic_A5" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="Futuristic_A4" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A4.png" width="512" height="480"/>
+ </tileset>
+ <tileset firstgid="1473" name="Futuristic_TileB" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileB.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2497" name="!$doors3" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Characters/!$doors3.png" width="288" height="256"/>
+ </tileset>
+ <layer name="Ground" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzjZWBg4ANiXirRskAsR0WaWu4aqe7zZGVg8AJibyzYCwsbnUZm+wBxJiv13JcDNKuTlXrh10MD92VS2X2dg9h9OVR2H8i/K4F4FRCvpgK9BogBdG0wAg==
+  </data>
+ </layer>
+ <layer name="Ground Detail" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxFwczIw8HASL04IaAP16GDRh0t8FIwCcgAAzMYBJQ==
+  </data>
+ </layer>
+ <layer name="Object" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzVz8kJwkAUgOG5GPGgbbiAdqGJgnYRFVy6cAG9ujTgAnp1OWsLbhVoBWq8+Q9ERBQCmbn44OPBTPiZpANCZGBq2BZsFFHSsMtooImWht3+g/eNMMZEw54iHBQiAj9jG5/kJGmlPHodvu0a3+dRzmKII+He52kVPHozvp3/6JmcWcgi597XaNV9/m+FRtV4b52zCQmxRY+39THA0Oc75exo7bGgscQKa4XemdZFNmkccMRJoefQeuBK44Y7HIXea564mlgB
+  </data>
+ </layer>
+ <layer name="Object Detail" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxmcZGNgOAXEp4H4DBvl5r0EmvEKiF8D8RsqmDcKRgEyAACJXwcF
+  </data>
+ </layer>
+ <layer name="High" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <objectgroup name="Obstacles" width="20" height="15">
+  <object name="Lamp" x="17" y="147"/>
+  <object name="Dresser" x="240" y="96" width="64" height="64"/>
+  <object name="Chair" x="152" y="112" width="16" height="24"/>
+  <object name="Bed" x="0" y="192" width="64" height="40"/>
+  <object name="Table" x="128" y="96" width="64" height="32"/>
+  <object name="Floor Lamp 1" x="111" y="110"/>
+  <object name="Floor Lamp 2" x="207" y="111"/>
+  <object name="Window" x="0" y="80" width="320" height="16"/>
+ </objectgroup>
+</map>

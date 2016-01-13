@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Assets;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
-import com.mygdx.game.levels.BridgeLevel;
+import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.FirstLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
@@ -91,7 +91,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     private void initLevels(){
         levels = new ArrayList<>();
         levels.add(new FirstLevel());
-        levels.add(new BridgeLevel());
+        levels.add(new BedroomLevel());
     }
 
     /**

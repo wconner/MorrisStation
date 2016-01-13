@@ -115,6 +115,13 @@ public class WorldRenderer implements Disposable {
         tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.getMap(), Constants.UNIT_SCALE);
         tileRenderer.setView(viewportCamera);
 
+        /**
+         * As of right now (1/15/16), each 'level' or map should have 5 layers + the obstacle layer
+         * 2 Background layers (Ground and Ground Detail)
+         * 3 Foreground layers (Object, Object Detail, and High)
+         * Obstacle layer must be named 'Obstacles'
+         * If you don't need all 5 layers, just make the layers empty.
+         */
         for(MapLayer layer : Assets.instance.getMap().getLayers()){
 
             int[] bgLayers = {0,1};
