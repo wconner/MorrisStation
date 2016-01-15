@@ -57,12 +57,7 @@ public class WorldController implements InputProcessor {
     public Player player;
 
     public int selectedSprite;
-
     private boolean visible;
-    /**
-    * Environment initialization
-    * Not being used
-    */
     private GameScreen screenGame;
 
     /**
@@ -92,7 +87,7 @@ public class WorldController implements InputProcessor {
 
         actors = level.getActors();
         cameraHelper = new CameraHelper();
-        cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD/2);
+        cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD / 2);
 
         /**Initiate everything*/
         initActors();
@@ -346,22 +341,35 @@ public class WorldController implements InputProcessor {
                 if (fixtureA.getBody() == player.getBody()) {
                     if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
                         dialogWindow.hide();
-                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
-                        dialogWindow.setText("I'm talking to npc!");
-                        eventFound = true;
-                        screenGame.pauseSwap();
-                        stage.addActor(DB.makeWindow(DC.getArray(101)));
-                    } else if (fixtureB.getBody() == actors.get(2).getBody()) {      /** Talking to NPC2 */
-                        dialogWindow.setText("I'm talking to npc2!!");
-                        eventFound = true;
-                    } else if (fixtureB.getBody() == actors.get(3).getBody()) {  /** At blueHouseSensor */
-                        dialogWindow.setText("I'm entering the blue house ! !");
-                        eventFound = true;
-                        changeLevels("blueHouse");
 
-                    } else if (GameInstance.instance.world.getContactCount() == 1) { /** For hitting space with a non contact entity */
-                        dialogWindow.setText("Nothing to do there :(");
-                    }
+                    for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
+                        if (fixtureB.getBody() == a.getBody()) {
+                            dialogWindow.setText("I'm talking to an actor.");
+                            eventFound = true;
+                        }
+                        if (!eventFound) {
+                            if (fixtureB.isSensor()){
+                                dialogWindow.setText("I'm at a sensor.");
+                                eventFound = true;
+                                commandWord(level.sensorEvent(((String) fixtureB.getBody().getUserData())));
+                            }
+                            else /** For hitting space with a non contact entity */
+                                dialogWindow.setText("Nothing to do there :(");
+                        }
+
+//                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
+//                        dialogWindow.setText("I'm talking to npc!");
+//                        eventFound = true;
+//                        screenGame.pauseSwap();
+//                        stage.addActor(DB.makeWindow(DC.getArray(101)));
+//                    } else if (fixtureB.getBody() == actors.get(2).getBody()) {      /** Talking to NPC2 */
+//                        dialogWindow.setText("I'm talking to npc2!!");
+//                        eventFound = true;
+//                    } else if (fixtureB.getBody() == actors.get(3).getBody()) {  /** At blueHouseSensor */
+//                        dialogWindow.setText("I'm entering the blue house ! !");
+//                        eventFound = true;
+//                        changeLevels("blueHouse");
+//                }
                 }
                 i++;
             }
@@ -383,17 +391,23 @@ public class WorldController implements InputProcessor {
         return false;
     }
 
+    //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
+    private void commandWord(String c){
+        if (c.startsWith("cl"))
+            changeLevels(Integer.parseInt(c.substring(2)));
+    }
+
     /**
      * First attempt at changing levels
      */
-    private void changeLevels(String levelToChangeTo){
+    private void changeLevels(int levelToChangeTo){
 //        Assets.instance.dispose();      /** This line may not be needed */
 //        Assets.instance.setMap();       /** Sets the new map for the new level */
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
         while (actors.size != 0) {      /** Destroys the physics for the actors */
             actors.pop().remove();
         }
-        screenGame.setLevel(1);
+        screenGame.setLevel(levelToChangeTo);
     }
     /**
      * Simple method to switch FixtureA and FixtureB.

@@ -1,6 +1,7 @@
 package com.mygdx.game.levels;
 
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.Assets;
 import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.NPC;
@@ -24,5 +25,10 @@ public class FirstLevel extends Level {
         actors.add(new NPC(1,20,15));
         actors.add(new NPC(2));
         actors.add(new MSensor(100, 15.5f, 19f));
+    }
+
+    @Override
+    public String sensorEvent(String fixture) {
+        return "";
     }
 }

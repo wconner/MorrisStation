@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Futuristic_A1" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A1.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="769" name="Futuristic_A2" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A2.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="1537" name="Futuristic_A3" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A3.png" width="512" height="256"/>
+ </tileset>
+ <tileset firstgid="2049" name="Futuristic_A4" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A4.png" width="512" height="480"/>
+ </tileset>
+ <tileset firstgid="3009" name="Futuristic_A5" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="3521" name="!$doors3" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Characters/!$doors3.png" width="288" height="256"/>
+ </tileset>
+ <tileset firstgid="3809" name="!doors2" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Characters/!doors2.png" width="432" height="432"/>
+ </tileset>
+ <tileset firstgid="4538" name="Futuristic_TileC" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileC.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5562" name="Futuristic_TileB" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileB.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6586" name="Futuristic_TileE" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileE.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7610" name="!$teleporter" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Characters/!$teleporter.png" width="192" height="256"/>
+ </tileset>
+ <tileset firstgid="7802" name="!$teslacoils" tilewidth="16" tileheight="16">
+  <image source="../tiles/futuristic/Characters/!$teslacoils.png" width="96" height="256"/>
+ </tileset>
+ <layer name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1mE1ym0AQhalC+amCayTiBuICcXKFKNnm5wqWfBErWWDfAO3iZINuACdKd4mpPD91D4NjFq9gRgPz0f3oGdQVWXYaNYi6RIVrUsen3EeP/SiLJTDu8izbi25E1/ly7TnPjzE8TFz7HDH7kZ/j1BV+/EIbY6d6yP+NW0I6x+8IX0eM+Jv2beXaTZlltWhtaOP0qyr4vRqF5+G+nww+VIxvR3zhvizk3ZSXz8RsNYzZG3y9w3civoPBV9OcFlcV4auJz/If5hbfYeZ7yB/nqI5w8XN4xw3xsf+QJ5z3Dt82f5w/zhOzWl7Da2uDj/3HfF2Ebxfhq4ltygMVjfX8x3x9hO/g8HHMrNym8rH/MKeW/4bC9h/XjBhf7B1O9Z93RE7Lf1N82E7hQ/91hZ1f7sf1l2uwx8esqfFD/3Fuh+LyXcb1jf1n1WOLOdQh1pT/vFx6fOw/K49erllT9Y/n7+ic9wqW/5AP5+E5OW6bCF/wH+aS9wonhy/4j9cIiwn7WMjK69s+92sK7vUGg+8AfOwtfmeYeW0wV3QPPWLueJ0dDFnrL89fl35ckcOKJ/dx3TsRax/h2+aX87CPPMX2B/gc/M6i36x32tv/LXXk+b29nsWn/tP69FN0m0+3X66y7NUqfXxoW4zenpnPU/VL5nkrbGvRn8h3FdeNWKw434Px+5TCXB8hfp+N7yrrGzd1Dtyjej7wFOa6hvjdQM6s79bQvivTdF/a9TH1ufSofroStvej/2JrfeBry7MCQ2sI+ebEzfLfV2H7NvovxcM6/xEYYprrO5blv6lrmA85jyBtP8f/Kei/lPEeX+hrgW9OvfLa6L+U8TG+lvjUP7re6n5M/fOUNvovZTzycW6ZXf2j663ux9Q/T2mj/1LGW3xHh0/98GWVNe9Eb0QvRHPbwX+p4y2+1uGTmtRIfpqr8zyNxGJ2O/gvdTwyMBfzST1qxDuN3L+RGDSSp9nt4L/U8XfAhvL4vss1H0SV6PVq+XZb2utZa/DxOvm/Sq1/nkJdYT7rv+mlFDhwneD14z7CtzQvew3FfX8BQZPQPA==
+  </data>
+ </layer>
+ <layer name="Ground Detail" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlrtOwzAUhr02mblMfQsur0DLBBSYuIykZaQtI5clkJXCisQC7YrEmooXoBISK5dXgDLyR7XF0SFNY5xAQDnSp9qKffz5NHYrxN+Lk4IQLXAqabF+EpwVvu93jbljlhDjYAJMWsn3bwz9ppBjGsyAWSv5/oOB3z3mVpBjGayAVSv5vmn9dpCjDhqgaSXfN/VLO3I/s8j9zCL3M4us+S0UhVgES6BSzJ7fGpzWwQbYzKCfA6cqqIHtDPrV4dQATbCbQT8euZ9ZZN3P9P9p2mHi94q5b6AvP8PoE1T0R8yh895/oAZB1OzP9pY9fNxvhUec3H/it4fvdl9yEMEh8JGzy0jb7zzmu3dB/HoE7hvlHfipHHH9fE2/sBp2Y3p7pO3GrH/c+t1i3BzylUBZEzVnXroHe6S5SqxdJuN1/II74UhyrIEDqvbgfgnc7uxBLodQZW01XsfPlW6OBnQ/HvFzyTP1nO/d0/S7xPgr0NZEzelIt+A7VrnCaJPxcc+Hql+XrKF7x/hkbtKh3r8eWYOeVX6uqZNP9pW2H1+vx9yi7hda9zT8XOLn21/vQ+XG68ud06off6d1zwk/M6PoaJ7fsJoo1LsfhaqhTv10zm+PrTVs/bDfO07ceMS6T5LnCF7AB5pWWpU=
+  </data>
+ </layer>
+ <layer name="Object" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl0tP1EAAx0c9bipsl+0mmiyodx6aaKKJD7ghaKI3TXzeFDTR76CCoN/CBwJ+A6U+4QKWgN58XFAuPm4KifrbrJOts9NuZ9vscug/+YVMp/vvb4eZBoRIkyaNaX5nhfgDwhZiE2yGLXbzetQU6WiHDtgBO2FXHb1J9ag5SMchOAxHoBf6NL03uHYTbsGIZj5qj2nO0HEWzsF5uAAXNb33uHYfHsBDzXzUnrh5VhTiOTyh+ynMgAuv4DXMwpxdPd+ozOI2B+955gf4CJ9gBdZgHVbt6vlGZR63haJ+bltOiO25xrnosoTbcoDfftwONNkvLKdwO72B/dJU5wRn72QDz59pruF2PSG//jYhjsIADMIxON4Wr3OA/T6Y0J6/hMtlGIJhuAJXY/oN4TackN8oLrdhDMbhDtyN6TeG23hCfhO4PIJJmIJpeBzTbxK3qfSdliZNU/ImL4QHtlMmB1sLQrRAK2QL0XrcDH87a4ib77j9gN1OmT3QiVMXdENPIfz5Km6mcu9iAo6t+GSdSqcb0OnJOYv/L+AFvLQijEP81HtlXN/37Matxyk/v/R95U818v4lepbhLbyzao91XTLqveqzTOL9c1+h5zN8gVWr9jjMT703jp/MT3p+wRqsW7XHJl1R/OY5Kwt5c2//ufCfj3o6dH4Oe7AAX3H7lq+Mgz6r+ri+vVvvuyXMby8u+0rvPmhxKmMZuf88jaPnc5N+pmtXy0+mE6cup/q6fL7fx1PWLMm1Mz0fcm28zP+/S/+6maxd0H6p168Udc0WAzw3UtT1a1b+ApjkBug=
+  </data>
+ </layer>
+ <layer name="Object Detail" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl01uhDAMRrMu7WZmO4eZq8OyP4vkGJ32DmWkQXJfPwMlVieV+CQLJSjOsxOHkNKuv1TfpTR096b4rivTZMPN+kqrjdH6ysZnuVlemNuLIQfwTX4y5itgyMJsHIPot/5q8+blxj6nWArYsmFkTmv4VE6YH8s1x2HfRfMVx8hr3/VgI38Un53Txp7BWbqfe76AKwtfpYLvKq4dmchl+dSakrG2fr2aYy0oPpUntmv4yODVw9z6es8evFtzp9aQ62efPLsLuNienjV8du2W9r+qW8ZIxlrZedTZTwbuT55FzGMUn/puMC/83pGbsdm6ieJTtaI4FAvPJms1fNyHrOO5/ckzmTFE1bHHx/3l3WmW8hdRx8rmvvtrrFbkU3Gr/e/lKGrf/Ua8L7f2X6LquyVG9c/RIh/vKK2I69tS7ibxTtCaeP5E6/mQ0sshZtzr2H4Tvrz+NXofx102jFXjPsb2p/Dl9a/RwzGl7hgz7nFsPwlfXv9/0/l0bwJfLbPt2rVrm74AK9zG9A==
+  </data>
+ </layer>
+ <layer name="High" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJACEMRcHc7b8gt4NY0SIYVraCHGbg4/VhIgAAuM0R8YzvrXUxf23rrIu8+lbDvu2+8Wx236268qzb/2XjNgAAgPICtuEaYQ==
+  </data>
+ </layer>
+ <objectgroup name="Obstacles" width="40" height="40" visible="0">
+  <object name="wall0" x="0" y="592" width="464" height="14"/>
+  <object name="wall1" x="0" y="512" width="272" height="16"/>
+  <object name="wall2" x="0" y="528" width="16" height="64"/>
+  <object name="wall3" x="304" y="512" width="160" height="16"/>
+  <object name="wall4" x="464" y="592" width="16" height="32"/>
+  <object name="wall5" x="464" y="624" width="176" height="16"/>
+  <object name="wall6" x="464" y="400" width="16" height="128"/>
+  <object name="wall7" x="624" y="400" width="16" height="224"/>
+  <object name="wall8" x="512" y="432" width="112" height="16"/>
+  <object name="Fridge" x="480" y="448" width="32" height="32"/>
+  <object name="wall9" x="256" y="352" width="16" height="176"/>
+  <object name="wall10" x="304" y="352" width="16" height="176"/>
+  <object name="wall11" x="80" y="352" width="192" height="16"/>
+  <object name="wall12" x="304" y="352" width="192" height="16"/>
+  <object name="Left Cabinets" x="96" y="80" width="96" height="64"/>
+  <object name="Main Computer" x="192" y="144" width="192" height="32"/>
+  <object name="Tesla Coil" x="160" y="144" width="32" height="64"/>
+  <object name="Right Cabinets" x="384" y="80" width="96" height="64"/>
+  <object name="Bottom Right Computer" x="406" y="335">
+   <polygon points="-2,-1 28,0 28,-31 57,-31 57,1 86,0 85,-55 -3,-54"/>
+  </object>
+  <object name="Bottom Right Computer" x="96" y="256" width="32" height="96"/>
+  <object name="Big Chair" x="287" y="197"/>
+  <object name="Kitchen Table" x="544" y="512" width="32" height="64"/>
+  <object name="Left Kitchen Chair" x="527" y="551"/>
+  <object name="Right Kitchen Chair" x="591" y="554"/>
+  <object name="wall 13" x="80" y="16" width="16" height="352"/>
+  <object name="wall 14" x="480" y="16" width="16" height="352"/>
+ </objectgroup>
+</map>

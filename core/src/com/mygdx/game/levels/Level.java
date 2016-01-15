@@ -1,6 +1,7 @@
 package com.mygdx.game.levels;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Assets;
 import com.mygdx.game.entities.AbstractDynamicObject;
@@ -34,4 +35,5 @@ public abstract class Level {
         return map;
     }
     abstract void addActors();
+    public abstract String sensorEvent(String sensor);
 }

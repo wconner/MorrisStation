@@ -14,14 +14,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.ChainShape;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -36,6 +29,7 @@ public class MapBodyManager {
     private float units;
     private Array<Body> bodies = new Array<Body>();
     private ObjectMap<String, FixtureDef> materials = new ObjectMap<String, FixtureDef>();
+    private MapObjects objects;
 
     /**
      * @param world box2D world to work with.
@@ -82,20 +76,23 @@ public class MapBodyManager {
             return;
         }
 
-        MapObjects objects = layer.getObjects();
+        objects = layer.getObjects();
         Iterator<MapObject> objectIt = objects.iterator();
 
         while(objectIt.hasNext()) {
-            Gdx.app.debug("MapBodyManager", "Adding Object");
+            Gdx.app.debug("MapBodyManager", "Adding Object ");
             MapObject object = objectIt.next();
+            Gdx.app.debug("MapBodyManager", "Object name: " + object.getName());
 
             if (object instanceof TextureMapObject){
                 continue;
             }
 
+
             Shape shape;
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
+
 
             if (object instanceof RectangleMapObject) {
                 RectangleMapObject rectangle = (RectangleMapObject)object;
@@ -127,6 +124,10 @@ public class MapBodyManager {
                 fixtureDef = materials.get("default");
             }
 
+            if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+                fixtureDef.isSensor = true;
+
+
             fixtureDef.shape = shape;
 
             Body body = world.createBody(bodyDef);
@@ -134,9 +135,16 @@ public class MapBodyManager {
 
             bodies.add(body);
 
+            if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+                body.setUserData(object.getProperties().get("name"));
+
             fixtureDef.shape = null;
             shape.dispose();
         }
+    }
+
+    public void getSensor(Fixture fixture){
+        return;
     }
 
     /**

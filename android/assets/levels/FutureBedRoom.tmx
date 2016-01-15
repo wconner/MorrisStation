@@ -14,17 +14,17 @@
  </tileset>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjZWBg4ANiXirRskAsR0WaWu4aqe7zZGVg8AJibyzYCwsbnUZm+wBxJiv13JcDNKuTlXrh10MD92VS2X2dg9h9OVR2H8i/K4F4FRCvpgK9BogBdG0wAg==
+   eJzjZWBg4ANiXirRskAsR0WaWu4aqe7zZGVg8AJibyzYCwsbnUZm+wBxJiv13JcDNKuTlXrh10MD92VS2X2dI8h9IPNWAvEqIF5NBXoNEAMAiO0wIg==
   </data>
  </layer>
  <layer name="Ground Detail" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxFwczIw8HASL04IaAP16GDRh0t8FIwCcgAAzMYBJQ==
+   eJxjYBgFIxFwczIw8HASL04IaAP16GDRh0t8FJAHfnMyHPgFxD+B+AcQU2reS6AZL4D4ORA/o4J514FmXAPiq0B8hQrmHQWacQSIDwPxISAGAIrIG50=
   </data>
  </layer>
  <layer name="Object" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJzVz8kJwkAUgOG5GPGgbbiAdqGJgnYRFVy6cAG9ujTgAnp1OWsLbhVoBWq8+Q9ERBQCmbn44OPBTPiZpANCZGBq2BZsFFHSsMtooImWht3+g/eNMMZEw54iHBQiAj9jG5/kJGmlPHodvu0a3+dRzmKII+He52kVPHozvp3/6JmcWcgi597XaNV9/m+FRtV4b52zCQmxRY+39THA0Oc75exo7bGgscQKa4XemdZFNmkccMRJoefQeuBK44Y7HIXea564mlgB
+   eJzVz9kKgUEYxvGhjCOKm7AUd8H3UdzFh7LchaU4tdyApTi13IjlRiyH/mqEqK+m98TUr6femZ7eyYWUysMRSBceKqgKZA1tdNAVyN4f7DfFDHOBXCASVioKm+PpT4+ToSvr09fn7UB/zxPMkkghbe5LdJV9+pa8Xf3oc5i5KKBo7pt0tSz/W6ejoV8peeLGkN1GGGNisWcAwbdc07HBFjuLvpjZ65l7Og444iSw35mOC664Cex3B4v/UYk=
   </data>
  </layer>
  <layer name="Object Detail" width="20" height="15">
@@ -46,5 +46,11 @@
   <object name="Floor Lamp 1" x="111" y="110"/>
   <object name="Floor Lamp 2" x="207" y="111"/>
   <object name="Window" x="0" y="80" width="320" height="16"/>
+  <object name="Door" x="260" y="180" width="52" height="52">
+   <properties>
+    <property name="name" value="door"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

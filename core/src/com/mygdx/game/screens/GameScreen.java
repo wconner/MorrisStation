@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Assets;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
+import com.mygdx.game.levels.BaseLevel;
 import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.FirstLevel;
 import com.mygdx.game.levels.Level;
@@ -46,10 +47,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         Assets.instance.loadAssets(new AssetManager());
         this.game = game;
         initLevels();
-        // Initialize controller and renderer
-        worldController = new WorldController(stage, this, levels.get(0));
-        worldRenderer = new WorldRenderer(worldController);
-        setLevel(0);
+        setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -92,6 +90,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         levels = new ArrayList<>();
         levels.add(new FirstLevel());
         levels.add(new BedroomLevel());
+        levels.add(new BaseLevel());
     }
 
     /**
@@ -116,10 +115,15 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         worldRenderer.render();
     }
 
-    public void setLevel(int level){
+    public void setLevel(int level) {
         Assets.instance.setMap(levels.get(level).getMap());
         worldController = new WorldController(stage, this, levels.get(level));
-        worldRenderer.setLevel(worldController);
+        if (worldRenderer == null){
+            worldRenderer = new WorldRenderer(worldController);
+            worldRenderer.setLevel(worldController);
+        }
+        else
+            worldRenderer.setLevel(worldController);
     }
 
     public WorldController getWorldController() {
