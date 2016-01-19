@@ -44,10 +44,10 @@ public class WorldController implements InputProcessor {
     * Is placed in controller so input has access
     */
     public Display display;
-    // public Display dialog;
     public DialogWindow dialogWindow;
     private DialogController DC;
     private DialogButtons DB;
+    private Stage stage;
 
     /**
     * Actor initialization
@@ -55,32 +55,27 @@ public class WorldController implements InputProcessor {
     */
     public Array<AbstractDynamicObject> actors;
     public Player player;
+    /** For collisions */
+    private Fixture fixtureA;
+    private Fixture fixtureB;
 
-    public int selectedSprite;
     private boolean visible;
-    private GameScreen screenGame;
+    private GameScreen gameScreen;
 
     /**
     * Default constructor
     */
-    public WorldController (Stage stage, GameScreen screenGame, Level level) {
-        this.screenGame = screenGame;
+    public WorldController (Stage stage, GameScreen gameScreen, Level level) {
+        this.stage = stage;
+        this.gameScreen = gameScreen;
         this.level = level;
         init(stage);
-    }
-
-    private Stage stage;
-
-    public Stage getStage(){
-        return stage;
     }
 
     /**
     * Build class
     */
     private void init(Stage stage) {
-
-        this.stage = stage;
         Gdx.input.setInputProcessor(this);
 
         bodyManager = new MapBodyManager(GameInstance.getInstance().world,16, null, Application.LOG_DEBUG);
@@ -114,28 +109,17 @@ public class WorldController implements InputProcessor {
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
     }
-    public DialogWindow getDialog() {
-        return dialogWindow;
-    }
-
-    public Display getDisplay() {
-        return display;
-    }
 
     /**
     * Create actors
     */
     private void initActors(){
         for (AbstractDynamicObject a : actors){
-            if (a.getID() == 0) {                                       /** If it is player */
-                a.setRegion(Assets.instance.dudeAsset.body);
+            if (a.getID() == 0)                                             /** If it is player */
                 a.getBody().setTransform(a.position.x + a.getWidth(), a.position.y + a.getHeight(), 0);
-            }
-            else if (a.getID() < 100) {                                 /** If its an NPC */
-                a.setRegion(Assets.instance.npc.body);
+            else if (a.getID() < 100)                                       /** If its an NPC */
                 a.getBody().setTransform(a.position.x + a.getWidth(), a.position.y + a.getHeight(), 0);
-            }
-            else                                                        /** For sensors */
+            else                                                            /** For sensors */
                 a.getBody().setTransform(a.position.x, a.position.y, 0);
         }
 
@@ -151,10 +135,6 @@ public class WorldController implements InputProcessor {
     * called first to ensure user input is handled BEFORE logic is executed
     * ORDER IS IMPORTANT
     */
-
-    private Fixture fixtureA;
-    private Fixture fixtureB;
-
     public void update (float deltaTime) {
 
         //updateTestObjects(deltaTime);
@@ -218,14 +198,11 @@ public class WorldController implements InputProcessor {
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
             }
-
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
             }
-
         });
     }
-
 
     /**
     * Enables all kinds of awesome things that we can control when
@@ -243,7 +220,6 @@ public class WorldController implements InputProcessor {
             float angle = 1 * 90 * MathUtils.degRad;
             player.getBody().setTransform(player.getBody().getPosition(), angle);
         }
-
 
      /*
     * Test method for changing screens
@@ -293,7 +269,7 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Inputs
+    * InputProcessor Inputs
     */
     @Override
     public boolean keyDown(int keycode) {
@@ -346,6 +322,9 @@ public class WorldController implements InputProcessor {
                         if (fixtureB.getBody() == a.getBody()) {
                             dialogWindow.setText("I'm talking to an actor.");
                             eventFound = true;
+
+                            gameScreen.pauseSwap();
+                            stage.addActor(DB.makeWindow(DC.getArray(101)));
                         }
                         if (!eventFound) {
                             if (fixtureB.isSensor()){
@@ -360,7 +339,7 @@ public class WorldController implements InputProcessor {
 //                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
 //                        dialogWindow.setText("I'm talking to npc!");
 //                        eventFound = true;
-//                        screenGame.pauseSwap();
+//                        gameScreen.pauseSwap();
 //                        stage.addActor(DB.makeWindow(DC.getArray(101)));
 //                    } else if (fixtureB.getBody() == actors.get(2).getBody()) {      /** Talking to NPC2 */
 //                        dialogWindow.setText("I'm talking to npc2!!");
@@ -375,7 +354,6 @@ public class WorldController implements InputProcessor {
             }
             dialogWindow.update(stage);
             DB.update(stage);
-            Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
         }
 
 
@@ -401,13 +379,11 @@ public class WorldController implements InputProcessor {
      * First attempt at changing levels
      */
     private void changeLevels(int levelToChangeTo){
-//        Assets.instance.dispose();      /** This line may not be needed */
-//        Assets.instance.setMap();       /** Sets the new map for the new level */
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
         while (actors.size != 0) {      /** Destroys the physics for the actors */
             actors.pop().remove();
         }
-        screenGame.setLevel(levelToChangeTo);
+        gameScreen.setLevel(levelToChangeTo);
     }
     /**
      * Simple method to switch FixtureA and FixtureB.
@@ -416,6 +392,16 @@ public class WorldController implements InputProcessor {
         Fixture temp = fixtureA;
         fixtureA = fixtureB;
         fixtureB = temp;
+    }
+
+    public DialogWindow getDialog() {
+        return dialogWindow;
+    }
+    public Display getDisplay() {
+        return display;
+    }
+    public Stage getStage(){
+        return stage;
     }
 
     @Override
@@ -447,7 +433,6 @@ public class WorldController implements InputProcessor {
             visible = false;
         return true;
     }
-
     @Override
     public boolean scrolled(int amount) {
         return false;

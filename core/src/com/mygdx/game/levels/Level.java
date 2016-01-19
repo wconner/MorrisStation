@@ -30,10 +30,13 @@ public abstract class Level {
     public Level() {
         actors = new Array<>();
     }
+
+    abstract void addActors();
+    public abstract String sensorEvent(String sensor);
+
     public Array<AbstractDynamicObject> getActors(){ return actors;}
     public TiledMap getMap() {
         return map;
     }
-    abstract void addActors();
-    public abstract String sensorEvent(String sensor);
+
 }

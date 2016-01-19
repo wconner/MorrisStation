@@ -11,11 +11,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.mygdx.game.util.Constants;
 
@@ -37,6 +34,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public NPC npc;
     public NPC npc2;
     public TiledMap map;
+    public TextureAtlas atlas, atlas2;
 
     /**
     * Assets and asset manager
@@ -63,7 +61,7 @@ public class Assets implements Disposable, AssetErrorListener {
         /**
         * Load the texture atlas
         */
-        assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS,
+        assetManager.load("android/assets/sprites/cTest.pack",
                 TextureAtlas.class);
 
         assetManager.finishLoading();
@@ -77,7 +75,8 @@ public class Assets implements Disposable, AssetErrorListener {
         * The atlas was loaded into the asset manager, to use it we need to
         * "get" it from the AssetManager
         */
-        TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+        atlas = assetManager.get("android/assets/sprites/cTest.pack");
+
 
         // enable texture filtering for pixel smoothing
         for (Texture t : atlas.getTextures())
@@ -93,6 +92,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     }
 
+    public TextureAtlas getAtlas() { return atlas;}
     public TiledMap getMap(){
         return map;
     }
@@ -120,7 +120,8 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public DudeAsset(TextureAtlas atlas) {
 
-            body = atlas.findRegion("dude");
+            body = atlas.findRegion("Spacece");
+            //marioJump = new TextureRegion(screen.getAtlas().findRegion("little_mario"), 80, 0, 16, 16);
         }
 
     }
@@ -130,27 +131,11 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public NPC(TextureAtlas atlas) {
 
-            body = atlas.findRegion("lisa");
+            body = atlas.findRegion("Spacece");
         }
         public NPC(TextureAtlas atlas, String name) {
             body = atlas.findRegion(name);
         }
 
     }
-
-//    public class MainMap {
-//
-//        public MapProperties prop;
-//        public final TiledMap map;
-//
-//        public MainMap(String mapInput){
-//            map = new TmxMapLoader().load(mapInput);
-//            prop = map.getProperties();
-//
-//            /**
-//            * Use the actual map width to set GAME_WORLD on map load
-//            */
-//            Constants.GAME_WORLD = prop.get("width", Integer.class);
-//        }
-//    }
 }

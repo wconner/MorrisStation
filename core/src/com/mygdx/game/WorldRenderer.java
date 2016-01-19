@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -36,8 +35,7 @@ public class WorldRenderer implements Disposable {
     private TiledMapRenderer tileRenderer;
     private ShapeRenderer shaper;
     private Stage stage;
-
-    Box2DDebugRenderer debugRenderer;
+    private Box2DDebugRenderer debugRenderer;
 
     /**
     * Default constructor
@@ -45,9 +43,6 @@ public class WorldRenderer implements Disposable {
     public WorldRenderer(WorldController worldController){
         this.worldController = worldController;
         init();
-    }
-
-    public OrthographicCamera getViewportCamera(){return viewportCamera;
     }
 
     public void setLevel(WorldController worldController){
@@ -122,7 +117,6 @@ public class WorldRenderer implements Disposable {
          * Obstacle layer must be named 'Obstacles'
          * If you don't need all 5 layers, just make the layers empty.
          */
-        for(MapLayer layer : Assets.instance.getMap().getLayers()){
 
             int[] bgLayers = {0,1};
             int[] fgLayers = {2,3,4,5};
@@ -137,8 +131,6 @@ public class WorldRenderer implements Disposable {
 
             tileRenderer.render(fgLayers);
 
-        }
-
         /**
         * Render the debug grid
         */
@@ -146,9 +138,7 @@ public class WorldRenderer implements Disposable {
         renderWorldBounds();
 
         debugRenderer.render(GameInstance.getInstance().world, viewportCamera.combined);
-
     }
-
 
     /**
     * Debug method
@@ -176,12 +166,8 @@ public class WorldRenderer implements Disposable {
             shaper.line(0, i, Constants.GAME_WORLD, i);
             i += deltaX;
         }
-
-
         shaper.end();
     }
-
-
 
     private void renderWorldBounds(){
 
@@ -192,6 +178,9 @@ public class WorldRenderer implements Disposable {
         shaper.end();
     }
 
+    public OrthographicCamera getViewportCamera(){return viewportCamera;
+    }
+
     /**
     * Call the act() method for the stage
     */
@@ -200,7 +189,6 @@ public class WorldRenderer implements Disposable {
         stage.draw();
     }
 
-
     public void resize (int width, int height){
         viewportCamera.viewportHeight = (Constants.VIEWPORT_WIDTH / width) * height;
         viewportCamera.update();
@@ -208,7 +196,6 @@ public class WorldRenderer implements Disposable {
 
     @Override
     public void dispose (){
-
         batch.dispose();
     }
 }

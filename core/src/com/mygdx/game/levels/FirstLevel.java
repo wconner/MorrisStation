@@ -1,7 +1,6 @@
 package com.mygdx.game.levels;
 
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.Assets;
 import com.mygdx.game.entities.MSensor;
 import com.mygdx.game.entities.NPC;

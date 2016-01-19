@@ -61,7 +61,7 @@
    eJzt0cEJACEMRcHc7b8gt4NY0SIYVraCHGbg4/VhIgAAuM0R8YzvrXUxf23rrIu8+lbDvu2+8Wx236268qzb/2XjNgAAgPICtuEaYQ==
   </data>
  </layer>
- <objectgroup name="Obstacles" width="40" height="40" visible="0">
+ <objectgroup name="Obstacles" width="40" height="40">
   <object name="wall0" x="0" y="592" width="464" height="14"/>
   <object name="wall1" x="0" y="512" width="272" height="16"/>
   <object name="wall2" x="0" y="528" width="16" height="64"/>
