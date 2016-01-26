@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.game.Assets;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
 import com.mygdx.game.levels.BaseLevel;
@@ -44,10 +42,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
-        Assets.instance.loadAssets(new AssetManager());
         this.game = game;
         initLevels();
-        setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
+        setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -116,7 +113,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     public void setLevel(int level) {
-        Assets.instance.setMap(levels.get(level).getMap());
+//        Assets.instance.setMap(levels.get(level).getMap());
         worldController = new WorldController(stage, this, levels.get(level));
         if (worldRenderer == null){                             /** For first time you load a level when there is no worldcontroller */
             worldRenderer = new WorldRenderer(worldController);
@@ -162,14 +159,14 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     //android requires assets be reloaded on resume
     @Override
     public void resume () {
-        Assets.instance.loadAssets(new AssetManager());
+//        Assets.instance.loadAssets(new AssetManager());
         paused = false;
     }
     @Override
     public void dispose () {
 
         worldRenderer.dispose();
-        Assets.instance.dispose();
+//        Assets.instance.dispose();
 
     }
     private final InputListener playListener = new TouchUpListener() {
