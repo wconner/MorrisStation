@@ -1,5 +1,6 @@
 package com.mygdx.game.levels;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.entities.NPC;
@@ -12,11 +13,12 @@ public class BaseLevel extends Level {
 
     public BaseLevel(){
         super();
+        atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
         map = new TmxMapLoader().load("android/assets/levels/Base.tmx"); // Type Tiled map
         addActors();
     }
     @Override
-    void addActors() {
+    protected void addActors() {
         Player player;
         NPC npc;
 

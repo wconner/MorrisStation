@@ -35,7 +35,7 @@ public class WorldController implements InputProcessor {
     public MapBodyManager bodyManager;
 
     /**
-    * Creates the camera helper, a utililty class for camera manipulation
+    * Creates the camera helper, a utility class for camera manipulation
     */
     public CameraHelper cameraHelper;
 
@@ -137,36 +137,12 @@ public class WorldController implements InputProcessor {
     */
     public void update (float deltaTime) {
 
-        //updateTestObjects(deltaTime);
-
-        // Create an array to be filled with the bodies
-        // (better don't create a new one every time though)
-        Array<Body> bodies = new Array<Body>();
-        // Now fill the array with all bodies
-        GameInstance.getInstance().world.getBodies(bodies);
-
-        for (Body b : bodies) {
-            // Get the body's user data - in this example, our user
-            // data is an instance of the Entity class
-            //Entity e = (Entity) b.getUserData();
-
-            if (player != null) {
-                // Update the entities/sprites position and angle
-                player.setPosition(b.getPosition().x, b.getPosition().y);
-                // We need to convert our angle from radians to degrees
-                //dude.setRotation(MathUtils.radiansToDegrees * b.getAngle());
-            }
-        }
-
         handleDebugInput(deltaTime);
-        //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
-        cameraHelper.update(deltaTime);
-        //Gdx.app.debug(TAG, dude.getVelocity().toString());
-        stage.getActors().get(0).setVisible(visible);
 
+        cameraHelper.update(deltaTime);
+        
         display.setText(cameraHelper.getPosition().toString());
-        //display.update();
-        //dialogWindow.update(stage);
+
         //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
             dudes.behavior(dudes.getID(), deltaTime);

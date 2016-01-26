@@ -32,15 +32,6 @@ public class Player extends AbstractDynamicObject {
     int index = 0;
 
     /**
-    * set dude spawn point and make dude
-    */
-    public Player(int id) {
-        super(id, "player");
-        super.getBody().setUserData(this);
-        this.position.set(15, 15);
-    }
-
-    /**
      * create dude with specific spawn point
      */
     public Player(int id, float x, float y) {
@@ -82,7 +73,8 @@ public class Player extends AbstractDynamicObject {
 
         reg = dudeTexture;
         batch.draw(reg.getTexture(),
-                super.getBody().getPosition().x-.5f, super.getBody().getPosition().y-.5f,
+                super.getBody().getPosition().x - dimension.x / 2,
+                super.getBody().getPosition().y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
                 scale.x, scale.y,

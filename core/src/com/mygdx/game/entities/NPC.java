@@ -17,16 +17,7 @@ public class NPC extends AbstractDynamicObject {
     * To hold a texture
     */
     private TextureRegion npcTexture;
-    int index = 0;
 
-    /**
-    * set dude spawn point and make dude
-    */
-    public NPC(int id) {
-        super(id, "NPC");
-        super.getBody().setUserData(this);
-        this.position.set(20, 15);
-    }
     /**
      * create NPC with specific location
      */
@@ -58,7 +49,8 @@ public class NPC extends AbstractDynamicObject {
 
         reg = npcTexture;
         batch.draw(reg.getTexture(),
-                super.getBody().getPosition().x-.5f, super.getBody().getPosition().y-.5f,
+                super.getBody().getPosition().x - dimension.x / 2,
+                super.getBody().getPosition().y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
                 scale.x, scale.y,

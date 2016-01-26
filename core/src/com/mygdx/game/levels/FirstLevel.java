@@ -39,12 +39,6 @@ public class FirstLevel extends Level {
 
         sensor = new MSensor(100, 15.5f, 19f);
         actors.add(sensor);
-
-//        actors.add(player);
-//        actors.add(new Player(0));
-//        actors.add(new NPC(1,20,15));
-//        actors.add(new NPC(2));
-//        actors.add(new MSensor(100, 15.5f, 19f));
     }
 
     @Override
