@@ -68,7 +68,7 @@ public class WorldRenderer implements Disposable {
         */
         batch = new SpriteBatch();
         shaper = new ShapeRenderer();
-        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.getMap(), Constants.UNIT_SCALE);
+        tileRenderer = new OrthogonalTiledMapRenderer(worldController.level.getMap(), Constants.UNIT_SCALE);
 
         /**
         * Sets the main camera
@@ -107,7 +107,7 @@ public class WorldRenderer implements Disposable {
         /**
         * ehhhhhhh
         */
-        tileRenderer = new OrthogonalTiledMapRenderer(Assets.instance.getMap(), Constants.UNIT_SCALE);
+        tileRenderer = new OrthogonalTiledMapRenderer(worldController.getLevel().getMap(), Constants.UNIT_SCALE);
         tileRenderer.setView(viewportCamera);
 
         /**

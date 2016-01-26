@@ -88,7 +88,7 @@ public class WorldController implements InputProcessor {
         initActors();
         initUI(stage);
 
-        bodyManager.createPhysics(Assets.instance.getMap(), "Obstacles");
+        bodyManager.createPhysics(level.getMap(), "Obstacles");
         createCollisionListener();
     }
 
@@ -403,6 +403,7 @@ public class WorldController implements InputProcessor {
     public Stage getStage(){
         return stage;
     }
+    public Level getLevel(){ return level;}
 
     @Override
     public boolean keyTyped(char character) {

@@ -58,9 +58,6 @@ public class Player extends AbstractDynamicObject {
     }
 
 
-
-
-
     public void setRegion (TextureRegion region) {
 
         dudeTexture = region;
