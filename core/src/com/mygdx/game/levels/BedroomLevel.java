@@ -2,8 +2,10 @@ package com.mygdx.game.levels;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
+
 
 /**
  * Created by bill on 12/5/15.
@@ -23,6 +25,7 @@ public class BedroomLevel extends Level {
     void addActors() {
         Player player;
         NPC npc;
+
 
         player = new Player(0, 5, 5);
         player.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 11, 0, 32, 32));

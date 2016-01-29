@@ -13,7 +13,7 @@ import com.mygdx.game.GameInstance;
  * Created by Ian on 1/21/2015.
  */
 
-public abstract class AbstractDynamicObject{
+public abstract class AbstractDynamicObject {
 
     private static final String TAG = AbstractDynamicObject.class.getName();
 
@@ -21,15 +21,15 @@ public abstract class AbstractDynamicObject{
     boolean ableToMove = true;
 
     /**
-    * For physics
-    */
+     * For physics
+     */
     public Body body;
     Vector2 currentVector;
     float inputForce = 35;
 
     /**
-    * Fields for a basic 2d object on a flat plane
-    */
+     * Fields for a basic 2d object on a flat plane
+     */
     public Vector2 position;
     public Vector2 dimension;
     public Vector2 origin;
@@ -37,9 +37,9 @@ public abstract class AbstractDynamicObject{
     public float rotation;
 
     /**
-    * Fields for simulating a physical model on an object
-    * info on page 168
-    */
+     * Fields for simulating a physical model on an object
+     * info on page 168
+     */
     public Vector2 velocity;
     public Vector2 terminalVelocity;
     public Vector2 friction;
@@ -52,10 +52,14 @@ public abstract class AbstractDynamicObject{
 
     public String facing;
 
+    /**
+     * Animation variables
+     */
+    protected int animState;
 
     /**
-    * Default constructor
-    */
+     * Default constructor
+     */
     public AbstractDynamicObject(int id, String objType) {
 
         this.id = id;
@@ -67,14 +71,11 @@ public abstract class AbstractDynamicObject{
         /*bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PIXELS_TO_METERS,
                 (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);*/
-        }
-        else if (objType.equals("NPC")){        /** For NPC ADO */
+        } else if (objType.equals("NPC")) {        /** For NPC ADO */
             bodyDef.type = BodyDef.BodyType.KinematicBody;
-        }
-        else if (objType.equals("sensor")){     /** For Sensor ADO */
+        } else if (objType.equals("sensor")) {     /** For Sensor ADO */
             bodyDef.type = BodyDef.BodyType.StaticBody;
-        }
-        else{
+        } else {
             bodyDef.type = BodyDef.BodyType.StaticBody;
         }
 
@@ -125,8 +126,8 @@ public abstract class AbstractDynamicObject{
     }
 
 
-    public void setLinearV(float vx,float vy){
-        getBody().setLinearVelocity(vx,vy);
+    public void setLinearV(float vx, float vy) {
+        getBody().setLinearVelocity(vx, vy);
     }
 
     public Body getBody() {
@@ -134,13 +135,13 @@ public abstract class AbstractDynamicObject{
     }
 
 
-
-    public void setAbleToMove(boolean option){
+    public void setAbleToMove(boolean option) {
         ableToMove = option;
     }
+
     /**
-    * Moves an object based on physical bounds of the game world
-    */
+     * Moves an object based on physical bounds of the game world
+     */
     public void update(float deltaTime) {
 
         currentVector = body.getLinearVelocity();
@@ -148,40 +149,58 @@ public abstract class AbstractDynamicObject{
         position = this.body.getPosition();
     }
 
-    public void moveCharacter(int direction){
+    public void moveCharacter(int direction) {
 
         Vector2 currentPosition = this.body.getPosition();
 
-        if(!ableToMove) return;
+        if (!ableToMove) return;
 
-        if(direction == 0){
+        if (direction == 0) { //down
             float angle = 3 * 90 * MathUtils.degRad;
             this.body.applyForceToCenter(0, -inputForce, true);
             this.body.setTransform(this.body.getPosition(), angle);
-        } else if(direction == 1){
+            animState = 0;
+
+        } else if (direction == 1) { //up
             float angle = 1 * 90 * MathUtils.degRad;
             this.body.applyForceToCenter(0, inputForce, true);
             this.body.setTransform(this.body.getPosition(), angle);
-        } else if(direction == 2){
+            animState = 1;
+
+        } else if (direction == 2) { //left
             float angle = 2 * 90 * MathUtils.degRad;
             this.body.applyForceToCenter(-inputForce, 0, true);
             this.body.setTransform(this.body.getPosition(), angle);
-        } else if(direction == 3){
+            animState = 2;
+
+        } else if (direction == 3) { //right
             float angle = 0 * 90 * MathUtils.degRad;
             this.body.applyForceToCenter(inputForce, 0, true);
             this.body.setTransform(this.body.getPosition(), angle);
+            animState = 3;
+
         }
         position = currentPosition;
 
     }
+
+    public int getAnimState() {
+        return animState;
+    }
+
+    public void setAnimState(int state) {
+        animState = state;
+    }
+
     private int state = 1; //data field for behavior
     private int prevState = 1;
     private float sleep = 0;
+
     public void behavior(int id, float deltaTime) {
         sleep -= deltaTime;
 
         if (sleep <= 0) {
-            switch (id){
+            switch (id) {
                 case 1:     /** npc #1 - lisa. Has north and south motion. */
                     if (state == 1) {            /** Initial Start */
                         setLinearV(0, 1);
@@ -220,10 +239,11 @@ public abstract class AbstractDynamicObject{
     public abstract void render(SpriteBatch batch);
 
 
-    public Vector2 getPosition(){
+    public Vector2 getPosition() {
         return position;
     }
-    public void setPosition(float x, float y){
+
+    public void setPosition(float x, float y) {
         this.position.x = x;
         this.position.y = y;
     }
@@ -231,25 +251,35 @@ public abstract class AbstractDynamicObject{
     /**
      * Removes this object from the game.
      */
-    public void remove(){
+    public void remove() {
         body.destroyFixture(fixture);
     }
 
-    public void rotateBody(float angle){
+    public void rotateBody(float angle) {
         this.body.setTransform(body.getPosition(), angle);
     }
 
 
-    public Vector2 getVelocity(){
+    public Vector2 getVelocity() {
         return currentVector;
     }
 
-    public String toString(){
+    public String toString() {
         return "ID: " + id;
     }
 
-    /** These methods should be overridden by the subordinate classes */
-    public void setRegion (TextureRegion region){ return;}
-    public float getWidth(){return 0;}
-    public float getHeight(){return 0;}
+    /**
+     * These methods should be overridden by the subordinate classes
+     */
+    public void setRegion(TextureRegion region) {
+        return;
+    }
+
+    public float getWidth() {
+        return 0;
+    }
+
+    public float getHeight() {
+        return 0;
+    }
 }

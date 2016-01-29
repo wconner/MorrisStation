@@ -1,5 +1,4 @@
 package com.mygdx.game.util;
-import com.badlogic.gdx.Gdx;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -67,7 +67,7 @@ public class DialogButtons implements InputProcessor{
         //window.row().prefWidth(Gdx.graphics.getWidth() * 0.5f);
         //window.row().prefHeight(Gdx.graphics.getHeight() * 0.5f);
         root = new Table(skin);
-        switch(num) {
+        switch(num) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.add(dialog.get(3));
                 option4.addListener(option4.getClickListener());
@@ -108,7 +108,7 @@ public class DialogButtons implements InputProcessor{
      * flips the boolean for hidden
      */
     public void hide() {
-        if (hidden == false)
+        if (!hidden)
             hidden = true;
         else {
             hidden = false;

@@ -27,6 +27,7 @@ import java.io.IOException;
  * to the other modules as well as control input
  *
  */
+@SuppressWarnings("NonJREEmulationClassesInClientCode")
 public class WorldController implements InputProcessor {
 
     private static final String TAG = WorldController.class.getName();
@@ -211,14 +212,27 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        if(Gdx.input.isKeyPressed(Keys.W)) player.moveCharacter(1);
-        if(Gdx.input.isKeyPressed(Keys.A)) player.moveCharacter(2);
-        if(Gdx.input.isKeyPressed(Keys.S)) player.moveCharacter(0);
-        if(Gdx.input.isKeyPressed(Keys.D)) player.moveCharacter(3);
+        if(Gdx.input.isKeyPressed(Keys.W)) {
+            player.moveCharacter(1);
+            //player.setAnimState(2);
+        }
+        if(Gdx.input.isKeyPressed(Keys.A)) {
+            player.moveCharacter(2);
+            //player.setAnimState(0);
+        }
+        if(Gdx.input.isKeyPressed(Keys.S)) {
+            player.moveCharacter(0);
+            //player.setAnimState(1);
+        }
+        if(Gdx.input.isKeyPressed(Keys.D)) {
+            player.moveCharacter(3);
+            //player.setAnimState(3);
+        }
 
         if(Gdx.input.isKeyPressed(Keys.F)){
             float angle = 1 * 90 * MathUtils.degRad;
             player.getBody().setTransform(player.getBody().getPosition(), angle);
+            System.out.println("SPEED: " + player.body.getLinearVelocity().x + player.body.getLinearVelocity().y);
         }
 
      /*
