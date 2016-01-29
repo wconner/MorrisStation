@@ -22,6 +22,7 @@ import com.mygdx.game.levels.FirstLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
+import com.mygdx.game.util.JsonTest;
 import com.testoverlay.OverlayScreen;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
+        new JsonTest();     /** Testing remove this line later */
         this.game = game;
         initLevels();
         setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */

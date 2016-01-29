@@ -351,9 +351,6 @@ public class WorldController implements InputProcessor {
             changeLevels(Integer.parseInt(c.substring(2)));
     }
 
-    /**
-     * First attempt at changing levels
-     */
     private void changeLevels(int levelToChangeTo){
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
         while (actors.size != 0) {      /** Destroys the physics for the actors */

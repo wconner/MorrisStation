@@ -72,7 +72,7 @@ public class Player extends AbstractDynamicObject {
         TextureRegion reg = null;
 
         reg = dudeTexture;
-        batch.draw(reg.getTexture(),
+        batch.draw(dudeTexture.getTexture(),
                 super.getBody().getPosition().x - dimension.x / 2,
                 super.getBody().getPosition().y - dimension.y / 2,
                 origin.x, origin.y,
