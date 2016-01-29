@@ -13,7 +13,6 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.MainClass;
 
-
 /**
  * Created by Jshen94 on 11/9/2015.
  */
