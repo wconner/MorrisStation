@@ -91,32 +91,32 @@ public class Player extends AbstractDynamicObject {
         TextureRegion[] walkUp = new TextureRegion[COLS * ROWS];
 
 
-        TextureRegion[][] tmp = TextureRegion.split(dude, 32, 32);
+        TextureRegion[][] tmp = new TextureRegion(atlas.findRegion("Spacece")).split(32,32);
 
 
         int index = 0;
-        for (int i = 21; i < 21 + COLS; i++) {
+        for (int i = 9; i < 9 + COLS; i++) {
             walkDown[index++] = tmp[4][i];
         }
         walk_Down = new Animation(.2f, walkDown);
         walk_Down.setPlayMode(Animation.PlayMode.LOOP);
 
         index = 0;
-        for (int i = 21; i < 21 + COLS; i++) {
+        for (int i = 9; i < 9 + COLS; i++) {
             walkUp[index++] = tmp[7][i];
         }
         walk_Up = new Animation(.2f, walkUp);
         walk_Up.setPlayMode(Animation.PlayMode.LOOP);
 
         index = 0;
-        for (int i = 21; i < 21 + COLS; i++) {
+        for (int i = 9; i < 9 + COLS; i++) {
             walkLeft[index++] = tmp[5][i];
         }
         walk_Left = new Animation(.2f, walkLeft);
         walk_Left.setPlayMode(Animation.PlayMode.LOOP);
 
         index = 0;
-        for (int i = 21; i < 21 + COLS; i++) {
+        for (int i = 9; i < 9 + COLS; i++) {
             walkRight[index++] = tmp[6][i];
         }
         walk_Right = new Animation(.2f, walkRight);
@@ -124,10 +124,10 @@ public class Player extends AbstractDynamicObject {
 
 
 
-        stand_Down = new Animation(1f, tmp[4][22]);
-        stand_Up = new Animation(1f, tmp[7][22]);
-        stand_Left = new Animation(1f, tmp[5][22]);
-        stand_Right = new Animation(1f, tmp[6][22]);
+        stand_Down = new Animation(1f, tmp[4][10]);
+        stand_Up = new Animation(1f, tmp[7][10]);
+        stand_Left = new Animation(1f, tmp[5][10]);
+        stand_Right = new Animation(1f, tmp[6][10]);
 
 
         stateTime = 0f;
