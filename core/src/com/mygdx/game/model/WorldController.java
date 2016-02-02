@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
@@ -296,9 +297,8 @@ public class WorldController implements InputProcessor {
 
                     for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
                         if (fixtureB.getBody() == a.getBody()) {
-                            dialogWindow.setText("I'm talking to an actor.");
+                            ((NPC) a).generateDialog();
                             eventFound = true;
-
                             gameScreen.pauseSwap();
                             stage.addActor(DB.makeWindow(DC.getArray(101)));
                         }

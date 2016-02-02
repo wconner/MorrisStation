@@ -29,11 +29,11 @@ public class FirstLevel extends Level {
         player.setRegion(new TextureRegion(atlas.findRegion("dude")));
         actors.add(player);
 
-        npc = new NPC(1,20,15);
+        npc = new NPC(1,20,15,1, "lisa");
         npc.setRegion(new TextureRegion(atlas.findRegion("lisa")));
         actors.add(npc);
 
-        npc = new NPC(2,20,15);
+        npc = new NPC(2,20,15,1, "dude");
         npc.setRegion(new TextureRegion(atlas.findRegion("dude")));
         actors.add(npc);
 
