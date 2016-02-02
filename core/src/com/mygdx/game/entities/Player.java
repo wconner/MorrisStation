@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.JsonTest;
 
 
 /**
@@ -50,15 +51,6 @@ public class Player extends AbstractDynamicObject {
             "The Kanootsins",
             "They say my work is..."};
     int index = 0;
-
-    /**
-     * set dude spawn point and make dude
-     */
-    public Player(int id) {
-        super(id, "player");
-        super.getBody().setUserData(this);
-        this.position.set(15, 15);
-    }
 
     /**
      * create dude with specific spawn point

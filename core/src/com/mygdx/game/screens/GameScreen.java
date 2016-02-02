@@ -22,6 +22,7 @@ import com.mygdx.game.levels.FirstLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
+import com.mygdx.game.util.JsonTest;
 import com.testoverlay.OverlayScreen;
 
 import java.util.ArrayList;
@@ -42,9 +43,10 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
+        new JsonTest();     /** Testing remove this line later */
         this.game = game;
         initLevels();
-        setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
+        setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -159,15 +161,11 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     //android requires assets be reloaded on resume
     @Override
     public void resume () {
-//        Assets.instance.loadAssets(new AssetManager());
         paused = false;
     }
     @Override
     public void dispose () {
-
         worldRenderer.dispose();
-//        Assets.instance.dispose();
-
     }
     private final InputListener playListener = new TouchUpListener() {
         @Override

@@ -3,6 +3,7 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.JsonTest;
 
 
 /**
@@ -17,23 +18,24 @@ public class NPC extends AbstractDynamicObject {
     * To hold a texture
     */
     private TextureRegion npcTexture;
-    int index = 0;
+    private int levelID, dialogID;
+    private String name;
+    private static JsonTest jsonTest = new JsonTest();
 
-    /**
-    * set dude spawn point and make dude
-    */
-    public NPC(int id) {
-        super(id, "NPC");
-        super.getBody().setUserData(this);
-        this.position.set(20, 15);
-    }
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y) {
+    public NPC(int id, float x, float y, int levelID, String name) {
         super(id, "NPC");
         super.getBody().setUserData(this);
         this.position.set(x, y);
+        this.levelID = levelID;
+        this.name = name;
+        dialogID = 0;
+    }
+
+    public void generateDialog(){
+        jsonTest.generateDialogue(name,levelID,dialogID);
     }
 
     public void setRegion (TextureRegion region) {
@@ -58,7 +60,8 @@ public class NPC extends AbstractDynamicObject {
 
         reg = npcTexture;
         batch.draw(reg.getTexture(),
-                super.getBody().getPosition().x-.5f, super.getBody().getPosition().y-.5f,
+                super.getBody().getPosition().x - dimension.x / 2,
+                super.getBody().getPosition().y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
                 scale.x, scale.y,
