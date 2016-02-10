@@ -3,6 +3,8 @@ package com.mygdx.game.screens.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -32,6 +34,8 @@ public class DialogButtons implements InputProcessor{
     private Button option3;
     private Button option4;
 
+    private int choice;
+
     private boolean hidden;
 
     Table root;
@@ -60,7 +64,7 @@ public class DialogButtons implements InputProcessor{
     * */
     public Window makeWindow(ArrayList<String> dialog) {
         int num = dialog.size();
-
+        choice = 0; //initialized to 0, then set to 1-4 by the button listeners
         Gdx.input.setInputProcessor(stage);
         window = new Window("Dialog Options", skin);
 
@@ -70,20 +74,20 @@ public class DialogButtons implements InputProcessor{
         switch(num) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.add(dialog.get(3));
-                option4.addListener(option4.getClickListener());
+                option4.addListener(choice4);
                 root.add(option4);
             case 3:
                 option3.add(dialog.get(2));
-                option3.addListener(option3.getClickListener());
+                option3.addListener(choice3);
                 root.row();
                 root.add(option3);
             case 2:
                 option2.add(dialog.get(1));
-                option2.addListener(option2.getClickListener());
+                option2.addListener(choice2);
                 root.row();
                 root.add(option2);
             case 1: option1.add(dialog.get(0));
-                option1.addListener(option1.getClickListener());
+                option1.addListener(choice1);
                 root.row();
                 root.add(option1);
                 break;
@@ -102,6 +106,11 @@ public class DialogButtons implements InputProcessor{
 
     public boolean isHidden() {
         return hidden;
+    }
+    
+    public int getChoice()
+    {
+        return choice;
     }
 
     /**
@@ -124,6 +133,37 @@ public class DialogButtons implements InputProcessor{
         return window;
     }
 
+    private final InputListener choice1 = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            choice = 1;
+            System.out.println("choice: " + choice);
+        }
+    };
+
+    private final InputListener choice2 = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            choice = 2;
+            System.out.println("choice: " + choice);
+        }
+    };
+
+    private final InputListener choice3 = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            choice = 3;
+            System.out.println("choice: " + choice);
+        }
+    };
+
+    private final InputListener choice4 = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            choice = 4;
+            System.out.println("choice: " + choice);
+        }
+    };
 
     /*
     * stage.act() calls the act method on all widgets of the stage
@@ -150,12 +190,12 @@ public class DialogButtons implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return stage.touchUp(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return stage.touchUp(screenX, screenY, pointer, button);
     }
 
     @Override
