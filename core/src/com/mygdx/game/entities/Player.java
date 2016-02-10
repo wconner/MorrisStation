@@ -30,16 +30,17 @@ public class Player extends AbstractDynamicObject {
      */
     private static final int COLS = 3;
     private static final int ROWS = 1;
-    Animation walk_Down;
-    Animation walk_Right;
-    Animation walk_Left;
-    Animation walk_Up;
-    Animation stand_Up;
-    Animation stand_Down;
-    Animation stand_Left;
-    Animation stand_Right;
-    float stateTime;
-    TextureRegion currentFrame;
+    private Animation walk_Down;
+    private Animation walk_Right;
+    private Animation walk_Left;
+    private Animation walk_Up;
+    private Animation stand_Up;
+    private Animation stand_Down;
+    private Animation stand_Left;
+    private Animation stand_Right;
+    private Animation[] animations;
+    private float stateTime;
+    private TextureRegion currentFrame;
 
     /**
      * Basic dialog tree proof, will cycle text
@@ -80,9 +81,9 @@ public class Player extends AbstractDynamicObject {
     /**
      * Initialize animations for dude
      */
-    public void initAnim(TextureRegion region) {
+    public void initAnim() {
 
-        Texture dude = new Texture(Gdx.files.internal("android/assets/sprites/cTest.png"));
+        //Texture dude = new Texture(Gdx.files.internal("android/assets/sprites/cTest.png"));
 
         //try to figure out a way to not have to use a separate object for each animation
         TextureRegion[] walkLeft = new TextureRegion[COLS * ROWS];
@@ -98,30 +99,29 @@ public class Player extends AbstractDynamicObject {
         for (int i = 9; i < 9 + COLS; i++) {
             walkDown[index++] = tmp[4][i];
         }
-        walk_Down = new Animation(.2f, walkDown);
-        walk_Down.setPlayMode(Animation.PlayMode.LOOP);
+        walk_Down = new Animation(.15f, walkDown);
+        walk_Down.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
         for (int i = 9; i < 9 + COLS; i++) {
             walkUp[index++] = tmp[7][i];
         }
-        walk_Up = new Animation(.2f, walkUp);
-        walk_Up.setPlayMode(Animation.PlayMode.LOOP);
+        walk_Up = new Animation(.15f, walkUp);
+        walk_Up.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
         for (int i = 9; i < 9 + COLS; i++) {
             walkLeft[index++] = tmp[5][i];
         }
-        walk_Left = new Animation(.2f, walkLeft);
-        walk_Left.setPlayMode(Animation.PlayMode.LOOP);
+        walk_Left = new Animation(.15f, walkLeft);
+        walk_Left.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
         for (int i = 9; i < 9 + COLS; i++) {
             walkRight[index++] = tmp[6][i];
         }
-        walk_Right = new Animation(.2f, walkRight);
-        walk_Right.setPlayMode(Animation.PlayMode.LOOP);
-
+        walk_Right = new Animation(.15f, walkRight);
+        walk_Right.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
         stand_Down = new Animation(1f, tmp[4][10]);
@@ -129,13 +129,8 @@ public class Player extends AbstractDynamicObject {
         stand_Left = new Animation(1f, tmp[5][10]);
         stand_Right = new Animation(1f, tmp[6][10]);
 
+        animations = new Animation[8];
 
-        stateTime = 0f;
-    }
-
-
-    public Animation[] getAnimations() {
-        Animation[] animations = new Animation[8];
         animations[0] = walk_Down;
         animations[1] = walk_Up;
         animations[2] = walk_Left;
@@ -145,13 +140,18 @@ public class Player extends AbstractDynamicObject {
         animations[5] = stand_Up;
         animations[6] = stand_Left;
         animations[7] = stand_Right;
+
+        stateTime = 0f;
+    }
+
+
+    public Animation[] getAnimations() {
         return animations;
     }
 
     public void setRegion(TextureRegion region) {
-
         dudeTexture = region;
-        initAnim(region);
+        initAnim();
     }
 
     public float getWidth() {
@@ -172,7 +172,7 @@ public class Player extends AbstractDynamicObject {
         stateTime += Gdx.graphics.getDeltaTime();
 
         //this checks if the player is moving or not
-        if (((this.body.getLinearVelocity().x + this.body.getLinearVelocity().y) < .1) && (this.body.getLinearVelocity().x + this.body.getLinearVelocity().y) > -.1) {
+        if ((Math.abs(this.body.getLinearVelocity().x) + Math.abs(this.body.getLinearVelocity().y)) < .1) {
             //sets animation to standing still version
             currentFrame = getAnimations()[animState + 4].getKeyFrame(stateTime, true);
 

@@ -169,7 +169,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta){
-        delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
+        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
         Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

@@ -36,7 +36,7 @@ public class WorldController implements InputProcessor {
     public MapBodyManager bodyManager;
 
     /**
-    * Creates the camera helper, a utililty class for camera manipulation
+    * Creates the camera helper, a utility class for camera manipulation
     */
     public CameraHelper cameraHelper;
 

@@ -44,7 +44,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         super(stage, game);
         this.game = game;
         initLevels();
-        setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
+        setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
