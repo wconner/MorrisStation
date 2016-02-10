@@ -86,7 +86,7 @@ public abstract class AbstractDynamicObject {
         body.setLinearDamping(10f);
 
         shape = new CircleShape();
-        shape.setRadius(.5f);
+        shape.setRadius(.65f);
 
         fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -101,9 +101,9 @@ public abstract class AbstractDynamicObject {
         shape.dispose();
 
         position = new Vector2();
-        dimension = new Vector2(1, 1);
+        dimension = new Vector2(1.3f, 1.3f);
         origin = new Vector2();
-        scale = new Vector2(1, 1);
+        scale = new Vector2(1f, 1f);
         rotation = 0;
 
         //from actor creation shit
@@ -114,14 +114,12 @@ public abstract class AbstractDynamicObject {
         bounds = new Rectangle();
 
         currentVector = body.getLinearVelocity();
-
     }
 
     public void facing(int facing) {
         switch (facing) {
             case 1:
         }
-
     }
 
     public int getID() {
@@ -242,7 +240,7 @@ public abstract class AbstractDynamicObject {
     public abstract void render(SpriteBatch batch);
 
 
-    public Vector2 getPosition() {
+    public Vector2 getPosition(){
         return position;
     }
 

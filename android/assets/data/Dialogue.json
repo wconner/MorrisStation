@@ -1,0 +1,27 @@
+{
+  "robot":
+  [{
+    "bedroom":[{
+      "id": 0,
+      "phrase": "Welcome to MorrisTown, do you want me to repeat this introduction?",
+      "options":[
+        {"selection": "a", "phrase": "No I heard you fine the first time chief.", "nextDialogue": 1},
+        {"selection": "b", "phrase": "Yeah, I didn't quite catch that.", "nextDialogue": 0},
+        {"selection": "c", "phrase": "YOLO", "nextDialogue": 2}
+      ]
+    },
+      {"id": 2,
+        "phrase": "Please call me Sir-Chief.",
+        "options":[
+          {"selection": "a", "phrase": "Alright there sparky.", "nextDialogue": 3},
+          {"selection": "b", "phrase": "Haha, very funny.", "nextDialogue": 3},
+          {"selection": "c", "phrase": "YES CHEF!", "nextDialogue": 3}
+        ]
+      }],
+    "base":[]
+  }],
+  "sally":
+  [{
+    "base":[]
+  }]
+}

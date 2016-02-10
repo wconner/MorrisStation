@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
@@ -138,36 +139,12 @@ public class WorldController implements InputProcessor {
     */
     public void update (float deltaTime) {
 
-        //updateTestObjects(deltaTime);
-
-        // Create an array to be filled with the bodies
-        // (better don't create a new one every time though)
-        Array<Body> bodies = new Array<Body>();
-        // Now fill the array with all bodies
-        GameInstance.getInstance().world.getBodies(bodies);
-
-        for (Body b : bodies) {
-            // Get the body's user data - in this example, our user
-            // data is an instance of the Entity class
-            //Entity e = (Entity) b.getUserData();
-
-            if (player != null) {
-                // Update the entities/sprites position and angle
-                player.setPosition(b.getPosition().x, b.getPosition().y);
-                // We need to convert our angle from radians to degrees
-                //dude.setRotation(MathUtils.radiansToDegrees * b.getAngle());
-            }
-        }
-
         handleDebugInput(deltaTime);
-        //dude.getBody().setTransform(dude.position.x + dude.getWidth(), dude.position.y + dude.getHeight(), 0);
-        cameraHelper.update(deltaTime);
-        //Gdx.app.debug(TAG, dude.getVelocity().toString());
-        stage.getActors().get(0).setVisible(visible);
 
+        cameraHelper.update(deltaTime);
+        
         display.setText(cameraHelper.getPosition().toString());
-        //display.update();
-        //dialogWindow.update(stage);
+
         //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
             dudes.behavior(dudes.getID(), deltaTime);
@@ -334,9 +311,8 @@ public class WorldController implements InputProcessor {
 
                     for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
                         if (fixtureB.getBody() == a.getBody()) {
-                            dialogWindow.setText("I'm talking to an actor.");
+                            ((NPC) a).generateDialog();
                             eventFound = true;
-
                             gameScreen.pauseSwap();
                             stage.addActor(DB.makeWindow(DC.getArray(101)));
                         }
@@ -389,9 +365,6 @@ public class WorldController implements InputProcessor {
             changeLevels(Integer.parseInt(c.substring(2)));
     }
 
-    /**
-     * First attempt at changing levels
-     */
     private void changeLevels(int levelToChangeTo){
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
         while (actors.size != 0) {      /** Destroys the physics for the actors */

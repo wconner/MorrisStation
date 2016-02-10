@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
+import com.mygdx.game.util.JsonTest;
 
 
 /**
@@ -34,24 +35,24 @@ public class NPC extends AbstractDynamicObject {
      * To hold a texture
      */
     private TextureRegion npcTexture;
-    int index = 0;
-
-    /**
-     * set dude spawn point and make dude
-     */
-    public NPC(int id) {
-        super(id, "NPC");
-        super.getBody().setUserData(this);
-        this.position.set(20, 15);
-    }
+    private int levelID, dialogID;
+    private String name;
+    private static JsonTest jsonTest = new JsonTest();
 
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y) {
+    public NPC(int id, float x, float y, int levelID, String name) {
         super(id, "NPC");
         super.getBody().setUserData(this);
         this.position.set(x, y);
+        this.levelID = levelID;
+        this.name = name;
+        dialogID = 0;
+    }
+
+    public void generateDialog(){
+        jsonTest.generateDialogue(name,levelID,dialogID);
     }
 
     public void initAnim() {

@@ -22,10 +22,9 @@ public abstract class Level {
 
     public Level() {
         actors = new Array<>();
-        atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
     }
 
-    abstract void addActors();
+    protected abstract void addActors();
     public abstract String sensorEvent(String sensor);
 
     public Array<AbstractDynamicObject> getActors(){ return actors;}
