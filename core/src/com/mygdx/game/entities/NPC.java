@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonTest;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Ian on 2/26/2015.
@@ -34,9 +36,12 @@ public class NPC extends AbstractDynamicObject {
         dialogID = 0;
     }
 
-    public void generateDialog(){
-        jsonTest.generateDialogue(name,levelID,dialogID);
+    public void setDialog(){
+         jsonTest.setDialog(name, levelID, dialogID);
     }
+    public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelID, dialogID);}
+
+    public JsonTest getJsonTest(){ return jsonTest;}
 
     public void setRegion (TextureRegion region) {
         npcTexture = region;

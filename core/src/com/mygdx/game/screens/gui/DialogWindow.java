@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
-import javax.swing.*;
 
 /**
  * Created by Ian on 1/21/2015.
@@ -28,7 +27,6 @@ public class DialogWindow {
     */
     private Label label;
     private Label contentLabel;
-    private JSeparator separator;
 
     private boolean hidden;
 
@@ -43,7 +41,6 @@ public class DialogWindow {
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
-        separator = new JSeparator();
     }
 
     /**

@@ -4,7 +4,9 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
@@ -17,6 +19,7 @@ import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.DialogController;
+import com.mygdx.game.util.JsonTest;
 import com.mygdx.game.util.MapBodyManager;
 
 import java.io.IOException;
@@ -50,6 +53,7 @@ public class WorldController implements InputProcessor {
     private DialogController DC;
     private DialogButtons DB;
     private Stage stage;
+    private JsonTest jsonTest;
 
     /**
     * Actor initialization
@@ -57,6 +61,7 @@ public class WorldController implements InputProcessor {
     */
     public Array<AbstractDynamicObject> actors;
     public Player player;
+    private NPC target;
     /** For collisions */
     private Fixture fixtureA;
     private Fixture fixtureB;
@@ -86,6 +91,9 @@ public class WorldController implements InputProcessor {
         cameraHelper = new CameraHelper();
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD / 2);
 
+        if (actors.size > 1)
+            jsonTest = ((NPC) actors.get(1)).getJsonTest();
+
         /**Initiate everything*/
         initActors();
         initUI(stage);
@@ -102,7 +110,7 @@ public class WorldController implements InputProcessor {
         //dialog = new Display();
         dialogWindow = new DialogWindow();
         DC = new DialogController();
-        DB = new DialogButtons(stage);
+        DB = new DialogButtons(stage, this);
         try {
             DC.makeScene(1);
         } catch (IOException e) {
@@ -153,7 +161,7 @@ public class WorldController implements InputProcessor {
         stage.act();
         stage.draw();
 
-        GameInstance.getInstance().world.step(1/45f, 2, 6);
+        GameInstance.getInstance().world.step(1 / 45f, 2, 6);
     }
 
     private void createCollisionListener() {
@@ -176,6 +184,7 @@ public class WorldController implements InputProcessor {
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
             }
+
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
             }
@@ -311,10 +320,9 @@ public class WorldController implements InputProcessor {
 
                     for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
                         if (fixtureB.getBody() == a.getBody()) {
-                            ((NPC) a).generateDialog();
                             eventFound = true;
-                            gameScreen.pauseSwap();
-                            stage.addActor(DB.makeWindow(DC.getArray(101)));
+                            target = (NPC) a;
+                            dialogueStart();
                         }
                         if (!eventFound) {
                             if (fixtureB.isSensor()){
@@ -357,6 +365,29 @@ public class WorldController implements InputProcessor {
 
         }
         return false;
+    }
+
+    private void dialogueStart(){
+        gameScreen.pause();
+
+        target.setDialog();
+        for (Actor a : stage.getActors())
+            if (a.getName() != null)
+                if (a.getName().equals("DB")) {
+                    a.clear();
+                    a.remove();
+                }
+        stage.addActor(DB.makeWindow(jsonTest.getDialogOptions()));
+        dialogWindow.setText(jsonTest.getDialog());
+    }
+
+    public void updateDialog(int optionSelected){
+        if (optionSelected != 4) {
+            target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
+            dialogueStart();
+        }
+        else
+            gameScreen.pauseSwap();
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.

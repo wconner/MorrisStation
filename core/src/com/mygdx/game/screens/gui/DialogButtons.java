@@ -3,9 +3,11 @@ package com.mygdx.game.screens.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.model.WorldController;
 import com.mygdx.game.util.DialogController;
 
 import java.util.ArrayList;
@@ -15,51 +17,44 @@ import java.util.ArrayList;
  */
 public class DialogButtons implements InputProcessor{
 
-    /*
+    /**
     * For building a window and assigning it a skin
-    * */
+    */
     private Window window;
     private Skin skin;
     private TextureAtlas atlas;
-    private DialogController dialogController;
     private Stage stage;
+    private WorldController worldController;
 
-    /*
+    /**
     * Text labels
-    * */
-    private Button option1;
-    private Button option2;
-    private Button option3;
-    private Button option4;
+    */
+    private Button option1; private Button option2; private Button option3; private Button option4;
 
     private boolean hidden;
 
     Table root;
 
-    private final ClickListener buttonListener;
-
-    /*
+    /**
     * Default constructor
-    * */
-    public DialogButtons(Stage stage) {
+    */
+    public DialogButtons(Stage stage, WorldController worldController) {
+        this.worldController = worldController;
         atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
         this.stage = stage;
-        option1 = new Button(skin);
-        option2 = new Button(skin);
-        option3 = new Button(skin);
-        option4 = new Button(skin);
-        buttonListener = new ClickListener();
+        option1 = new Button(skin); option2 = new Button(skin); option3 = new Button(skin); option4 = new Button(skin);
+        option1.addListener(new OptionListener(1)); option2.addListener(new OptionListener(2));
+        option3.addListener(new OptionListener(3)); option4.addListener(new OptionListener(4));
     }
 
-    /*
+    /**
     * Build a basic window
     * dialog is temp param
-    * */
+    */
     public Window makeWindow(ArrayList<String> dialog) {
-        int num = dialog.size();
 
         Gdx.input.setInputProcessor(stage);
         window = new Window("Dialog Options", skin);
@@ -67,7 +62,7 @@ public class DialogButtons implements InputProcessor{
         //window.row().prefWidth(Gdx.graphics.getWidth() * 0.5f);
         //window.row().prefHeight(Gdx.graphics.getHeight() * 0.5f);
         root = new Table(skin);
-        switch(num) { /**variable number of options based on on the amount of answers */
+        switch(dialog.size()) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.add(dialog.get(3));
                 option4.addListener(option4.getClickListener());
@@ -94,9 +89,10 @@ public class DialogButtons implements InputProcessor{
         root.pad(5,0,5,5);
         window.add(root);
         window.pack();
-        window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() *.34f),90, Gdx.graphics.getWidth()/3, 140);
+        window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() * .34f), 90, Gdx.graphics.getWidth() / 3, 140);
         window.left();
         window.setVisible(true);
+        window.setName("DB");
         return window;
     }
 
@@ -116,18 +112,16 @@ public class DialogButtons implements InputProcessor{
         window.setVisible(hidden);
     }
 
-    /*
+    /**
     * Getter for window
-    * */
-
+    */
     public Window getWindow() {
         return window;
     }
 
-
-    /*
+    /**
     * stage.act() calls the act method on all widgets of the stage
-    * */
+    */
     public void update(Stage stage) {
         stage.act();
         stage.draw();
@@ -171,6 +165,19 @@ public class DialogButtons implements InputProcessor{
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    class OptionListener extends InputListener{
+        int optionNum;
+
+        public OptionListener(int optionNum){ this.optionNum = optionNum;}
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            worldController.updateDialog(optionNum);
+            Gdx.app.debug("DialogButton : OptionListener", "Button number " + optionNum + " hit.");
+            return super.touchDown(event, x, y, pointer, button);
+        }
     }
 }
 

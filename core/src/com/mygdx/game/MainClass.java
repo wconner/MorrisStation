@@ -27,7 +27,6 @@ public class MainClass extends Game {
     }
 
     public void dispose() {
-
         super.dispose();
         Gdx.app.exit();
     }
