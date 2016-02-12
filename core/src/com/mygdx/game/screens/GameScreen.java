@@ -203,6 +203,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         game.setScreen(new OverlayScreen(stage,game,this));
     }
 
+    //move all phone stuff to another class maybe
     private void toggle() {
         MoveToAction moveToAction = new MoveToAction();
         ParallelAction parallelAction = new ParallelAction();

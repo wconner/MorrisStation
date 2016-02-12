@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.model.WorldController;
-import com.mygdx.game.util.DialogController;
 
 import java.util.ArrayList;
 
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 public class DialogButtons implements InputProcessor{
 
     /**
-    * For building a window and assigning it a skin
-    */
+     * For building a window and assigning it a skin
+     */
     private Window window;
     private Skin skin;
     private TextureAtlas atlas;
@@ -27,8 +26,8 @@ public class DialogButtons implements InputProcessor{
     private WorldController worldController;
 
     /**
-    * Text labels
-    */
+     * Text labels
+     */
     private Button option1; private Button option2; private Button option3; private Button option4;
 
     private boolean hidden;
@@ -36,8 +35,8 @@ public class DialogButtons implements InputProcessor{
     Table root;
 
     /**
-    * Default constructor
-    */
+     * Default constructor
+     */
     public DialogButtons(Stage stage, WorldController worldController) {
         this.worldController = worldController;
         atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
@@ -51,9 +50,9 @@ public class DialogButtons implements InputProcessor{
     }
 
     /**
-    * Build a basic window
-    * dialog is temp param
-    */
+     * Build a basic window
+     * dialog is temp param
+     */
     public Window makeWindow(ArrayList<String> dialog) {
 
         Gdx.input.setInputProcessor(stage);
@@ -113,15 +112,15 @@ public class DialogButtons implements InputProcessor{
     }
 
     /**
-    * Getter for window
-    */
+     * Getter for window
+     */
     public Window getWindow() {
         return window;
     }
 
     /**
-    * stage.act() calls the act method on all widgets of the stage
-    */
+     * stage.act() calls the act method on all widgets of the stage
+     */
     public void update(Stage stage) {
         stage.act();
         stage.draw();
@@ -180,5 +179,3 @@ public class DialogButtons implements InputProcessor{
         }
     }
 }
-
-

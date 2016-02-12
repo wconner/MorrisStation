@@ -13,9 +13,11 @@ public class MainClass extends Game {
     public MainClass() {
         game = this;
     }
+
     public MainClass(Game game) {
         this.game = game;
     }
+
     @Override
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);

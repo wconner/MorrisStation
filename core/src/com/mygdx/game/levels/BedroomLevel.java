@@ -28,7 +28,6 @@ public class BedroomLevel extends Level {
         Player player;
         NPC npc;
 
-
         player = new Player(0, 5, 5);
         player.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 11, 0, 32, 32));
         actors.add(player);

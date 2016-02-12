@@ -1,6 +1,7 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,7 +17,7 @@ import com.mygdx.game.GameInstance;
 public abstract class AbstractDynamicObject {
 
     private static final String TAG = AbstractDynamicObject.class.getName();
-
+    protected TextureAtlas atlas;
     public final int id;
     boolean ableToMove = true;
 
@@ -65,6 +66,8 @@ public abstract class AbstractDynamicObject {
         this.id = id;
         facing = "d";
         bodyDef = new BodyDef();
+
+        atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
 
         if (objType.equals("player")) {         /** For player ADO */
             bodyDef.type = BodyDef.BodyType.DynamicBody;
