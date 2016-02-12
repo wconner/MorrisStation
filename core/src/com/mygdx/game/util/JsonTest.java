@@ -11,14 +11,13 @@ import java.util.ArrayList;
  */
 public class JsonTest {
     private JsonValue jsonValue;
-    private JsonReader jsonReader;
 
     ArrayList<String> dialogOptions;
     String actor;
     int level, dialogID;
 
     public JsonTest() {
-        jsonReader = new JsonReader();
+        JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(Gdx.files.internal("android/assets/data/Dialogue.json"));
         dialogOptions = new ArrayList<>();
     }
