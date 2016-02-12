@@ -86,7 +86,8 @@ public class DialogButtons implements InputProcessor{
                 option2.addListener(choice2);
                 root.row();
                 root.add(option2);
-            case 1: option1.add(dialog.get(0));
+            case 1:
+                option1.add(dialog.get(0));
                 option1.addListener(choice1);
                 root.row();
                 root.add(option1);
