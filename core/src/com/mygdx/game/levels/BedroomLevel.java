@@ -33,7 +33,7 @@ public class BedroomLevel extends Level {
         actors.add(player);
 
         npc = new NPC(2, 7, 5, levelID, "robot"); /** Robot */
-        npc.setRegion(new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32));
+        npc.setRegion("EBRobotedit3crMatsuoKaito", new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32),0);
         actors.add(npc);
     }
 

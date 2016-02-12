@@ -18,18 +18,8 @@ public class NPC extends AbstractDynamicObject {
 
     private static final int COLS = 3;
     private static final int ROWS = 1;
-    private Animation walk_Down;
-    private Animation walk_Right;
-    private Animation walk_Left;
-    private Animation walk_Up;
-    private Animation stand_Up;
-    private Animation stand_Down;
-    private Animation stand_Left;
-    private Animation stand_Right;
     private Animation[] animations;
     private float stateTime;
-    private TextureRegion currentFrame;
-    private int selector;
 
     private static final String TAG = NPC.class.getName();
 
@@ -60,52 +50,57 @@ public class NPC extends AbstractDynamicObject {
 
     public JsonTest getJsonTest(){ return jsonTest;}
 
-    public void initAnim() {
+    /**
+     * intializes the animations for the indicated texture region
+     * @param s selects the column to begin reading the animations from
+     * @param region selects the region of the texture to use as sprites
+     */
+    public void initAnim(int s, String region) {
         stateTime = 0f;
 
-        //change this with params later
-        selector = 6;
+        /* initialize a 2d array of 32 * 32 pixel texture images from the texture region */
+        TextureRegion[][] tmp = new TextureRegion(atlas.findRegion(region)).split(32, 32);
 
-        TextureRegion[][] tmp = new TextureRegion(atlas.findRegion("Spacece")).split(32, 32);
         TextureRegion[] walkLeft = new TextureRegion[COLS * ROWS];
         TextureRegion[] walkDown = new TextureRegion[COLS * ROWS];
         TextureRegion[] walkRight = new TextureRegion[COLS * ROWS];
         TextureRegion[] walkUp = new TextureRegion[COLS * ROWS];
 
 
+        /* assign the textures to a texture region array to be used for animation */
         int index = 0;
-        for (int i = selector; i < selector + COLS; i++) {
+        for (int i = s; i < s + COLS; i++) {
             walkDown[index++] = tmp[4][i];
         }
-        walk_Down = new Animation(.15f, walkDown);
+        Animation walk_Down = new Animation(.15f, walkDown);
         walk_Down.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
-        for (int i = selector; i < selector + COLS; i++) {
+        for (int i = s; i < s + COLS; i++) {
             walkUp[index++] = tmp[7][i];
         }
-        walk_Up = new Animation(.15f, walkUp);
+        Animation walk_Up = new Animation(.15f, walkUp);
         walk_Up.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
-        for (int i = selector; i < selector + COLS; i++) {
+        for (int i = s; i < s + COLS; i++) {
             walkLeft[index++] = tmp[5][i];
         }
-        walk_Left = new Animation(.15f, walkLeft);
+        Animation walk_Left = new Animation(.15f, walkLeft);
         walk_Left.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         index = 0;
-        for (int i = selector; i < selector + COLS; i++) {
+        for (int i = s; i < s + COLS; i++) {
             walkRight[index++] = tmp[6][i];
         }
-        walk_Right = new Animation(.15f, walkRight);
+        Animation walk_Right = new Animation(.15f, walkRight);
         walk_Right.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
-        stand_Down = new Animation(1f, tmp[4][selector + 1]);
-        stand_Up = new Animation(1f, tmp[7][selector + 1]);
-        stand_Left = new Animation(1f, tmp[5][selector + 1]);
-        stand_Right = new Animation(1f, tmp[6][selector + 1]);
+        Animation stand_Down = new Animation(1f, tmp[4][s + 1]);
+        Animation stand_Up = new Animation(1f, tmp[7][s + 1]);
+        Animation stand_Left = new Animation(1f, tmp[5][s + 1]);
+        Animation stand_Right = new Animation(1f, tmp[6][s + 1]);
 
         animations = new Animation[8];
         animations[0] = walk_Down;
@@ -125,9 +120,15 @@ public class NPC extends AbstractDynamicObject {
         return animations;
     }
 
-    public void setRegion(TextureRegion region) {
+    /**
+     * set the texture for the npc, used to create the sprite
+     * @param r A string to identify the texture region
+     * @param region A static texture to be used as the initial sprite before animations
+     * @param s the selector used in initAnim() method
+     */
+    public void setRegion(String r, TextureRegion region, int s) {
         npcTexture = region;
-        initAnim();
+        initAnim(s, r);
     }
 
     public float getWidth() {
@@ -159,6 +160,7 @@ public class NPC extends AbstractDynamicObject {
             animState = 0;
 
         //this checks if the player is moving or not
+        TextureRegion currentFrame;
         if ((Math.abs(this.body.getLinearVelocity().x) + Math.abs(this.body.getLinearVelocity().y)) < .1) {
             //sets animation to standing still version
             currentFrame = getAnimations()[animState + 4].getKeyFrame(stateTime, true);

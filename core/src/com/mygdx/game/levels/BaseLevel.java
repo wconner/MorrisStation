@@ -28,15 +28,15 @@ public class BaseLevel extends Level {
         actors.add(player);
 
         npc = new NPC(1, 15, 27, levelID, "friend");   /** Red hat girl */
-        npc.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 7, 0, 32, 32));
+        npc.setRegion("Spacece", new TextureRegion(atlas.findRegion("Spacece"), 32 * 7, 0, 32, 32),6);
         actors.add(npc);
 
         npc = new NPC(2, 15, 23, levelID, "robot");   /** Robot */
-        npc.setRegion(new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32));
+        npc.setRegion("EBRobotedit3crMatsuoKaito", new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32),0);
         actors.add(npc);
 
         npc = new NPC(3, 17, 25, levelID, "boss");   /** Boss man */
-        npc.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 1, 0, 32, 32));
+        npc.setRegion("Spacece" , new TextureRegion(atlas.findRegion("Spacece"), 32 * 1, 0, 32, 32),3);
         actors.add(npc);
     }
 
