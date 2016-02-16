@@ -21,14 +21,13 @@ public class DialogButtons implements InputProcessor{
      */
     private Window window;
     private Skin skin;
-    private TextureAtlas atlas;
     private Stage stage;
     private WorldController worldController;
 
     /**
      * Text labels
      */
-    private Button option1; private Button option2; private Button option3; private Button option4;
+    private TextButton option1; private TextButton option2; private TextButton option3; private TextButton option4;
 
     private boolean hidden;
 
@@ -39,19 +38,18 @@ public class DialogButtons implements InputProcessor{
      */
     public DialogButtons(Stage stage, WorldController worldController) {
         this.worldController = worldController;
-        atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
+        TextureAtlas atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
         skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
         this.stage = stage;
-        option1 = new Button(skin); option2 = new Button(skin); option3 = new Button(skin); option4 = new Button(skin);
+        option1 = new TextButton("",skin); option2 = new TextButton("",skin); option3 = new TextButton("",skin); option4 = new TextButton("",skin);
         option1.addListener(new OptionListener(1)); option2.addListener(new OptionListener(2));
         option3.addListener(new OptionListener(3)); option4.addListener(new OptionListener(4));
     }
 
     /**
      * Build a basic window
-     * dialog is temp param
      */
     public Window makeWindow(ArrayList<String> dialog) {
 
@@ -63,20 +61,21 @@ public class DialogButtons implements InputProcessor{
         root = new Table(skin);
         switch(dialog.size()) { /**variable number of options based on on the amount of answers */
             case 4:
-                option4.add(dialog.get(3));
+                option4.setText(dialog.get(3));
                 option4.addListener(option4.getClickListener());
                 root.add(option4);
             case 3:
-                option3.add(dialog.get(2));
+                option3.setText(dialog.get(2));
                 option3.addListener(option3.getClickListener());
                 root.row();
                 root.add(option3);
             case 2:
-                option2.add(dialog.get(1));
+                option2.setText(dialog.get(1));
                 option2.addListener(option2.getClickListener());
                 root.row();
                 root.add(option2);
-            case 1: option1.add(dialog.get(0));
+            case 1:
+                option1.setText(dialog.get(0));
                 option1.addListener(option1.getClickListener());
                 root.row();
                 root.add(option1);
@@ -103,11 +102,7 @@ public class DialogButtons implements InputProcessor{
      * flips the boolean for hidden
      */
     public void hide() {
-        if (!hidden)
-            hidden = true;
-        else {
-            hidden = false;
-        }
+        hidden = !hidden;
         window.setVisible(hidden);
     }
 
