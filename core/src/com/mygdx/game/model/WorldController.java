@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
@@ -356,6 +357,8 @@ public class WorldController implements InputProcessor {
         return false;
     }
 
+    private Window window;
+
     private void dialogueStart(){
         gameScreen.pause();
 
@@ -366,7 +369,8 @@ public class WorldController implements InputProcessor {
                     a.clear();
                     a.remove();
                 }
-        stage.addActor(DB.makeWindow(jsonTest.getDialogOptions()));
+        window = DB.makeWindow(jsonTest.getDialogOptions());
+        stage.addActor(window);
         dialogWindow.setText(jsonTest.getDialog());
     }
 
@@ -378,7 +382,9 @@ public class WorldController implements InputProcessor {
         else {
             DB.hide();
             dialogWindow.hide();
+            window.remove();
             gameScreen.pauseSwap();
+            initInput();
         }
     }
 

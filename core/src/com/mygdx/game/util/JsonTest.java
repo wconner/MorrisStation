@@ -13,8 +13,8 @@ public class JsonTest {
     private JsonValue jsonValue;
 
     ArrayList<String> dialogOptions;
-    String actor;
-    int level, dialogID;
+    String actor, level;
+    int dialogID;
 
     public JsonTest() {
         JsonReader jsonReader = new JsonReader();
@@ -22,7 +22,7 @@ public class JsonTest {
         dialogOptions = new ArrayList<>();
     }
 
-    public void setDialog(String actor, int level, int dialogID){
+    public void setDialog(String actor, String level, int dialogID){
         this.actor = actor; this.level = level; this.dialogID = dialogID;
     }
 

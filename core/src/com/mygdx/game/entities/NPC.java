@@ -27,26 +27,26 @@ public class NPC extends AbstractDynamicObject {
      * To hold a texture
      */
     private TextureRegion npcTexture;
-    private int levelID, dialogID;
-    private String name;
+    private int dialogID;
+    private String name, levelName;
     private static JsonTest jsonTest = new JsonTest();
 
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y, int levelID, String name) {
+    public NPC(int id, float x, float y, String levelName, String name) {
         super(id, "NPC");
         super.getBody().setUserData(this);
         this.position.set(x, y);
-        this.levelID = levelID;
+        this.levelName = levelName;
         this.name = name;
         dialogID = 0;
     }
 
     public void setDialog(){
-         jsonTest.setDialog(name, levelID, dialogID);
+         jsonTest.setDialog(name, levelName, dialogID);
     }
-    public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelID, dialogID);}
+    public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
 
     public JsonTest getJsonTest(){ return jsonTest;}
 

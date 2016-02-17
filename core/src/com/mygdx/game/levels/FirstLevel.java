@@ -16,6 +16,7 @@ public class FirstLevel extends Level {
         super();
         atlas = new TextureAtlas("android/assets/atlas/test.pack");
         map = new TmxMapLoader().load("android/assets/tiles/base.tmx"); // Type Tiled map
+        levelName = "first";
         addActors();
     }
 
@@ -29,11 +30,11 @@ public class FirstLevel extends Level {
         player.setRegion(new TextureRegion(atlas.findRegion("dude")));
         actors.add(player);
 
-        npc = new NPC(1,20,15,1, "lisa");
+        npc = new NPC(1,20,15,"first", "lisa");
         npc.setRegion(new TextureRegion(atlas.findRegion("lisa")));
         actors.add(npc);
 
-        npc = new NPC(2,20,15,1, "dude");
+        npc = new NPC(2,20,15,"first", "dude");
         npc.setRegion(new TextureRegion(atlas.findRegion("dude")));
         actors.add(npc);
 
