@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
@@ -18,11 +17,8 @@ import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
-import com.mygdx.game.util.DialogController;
 import com.mygdx.game.util.JsonTest;
 import com.mygdx.game.util.MapBodyManager;
-
-import java.io.IOException;
 
 /**
  * Created by Ian on 12/21/2014.
@@ -50,7 +46,6 @@ public class WorldController implements InputProcessor {
     */
     public Display display;
     public DialogWindow dialogWindow;
-    private DialogController DC;
     private DialogButtons DB;
     private Stage stage;
     private JsonTest jsonTest;
@@ -109,13 +104,7 @@ public class WorldController implements InputProcessor {
         display = new Display(stage);
         //dialog = new Display();
         dialogWindow = new DialogWindow();
-        DC = new DialogController();
         DB = new DialogButtons(stage, this);
-        try {
-            DC.makeScene(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
     }
@@ -382,12 +371,15 @@ public class WorldController implements InputProcessor {
     }
 
     public void updateDialog(int optionSelected){
-        if (optionSelected != 4) {
+        if (jsonTest.getUpdatedDialogID(optionSelected) != -1) {
             target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
             dialogueStart();
         }
-        else
+        else {
+            DB.hide();
+            dialogWindow.hide();
             gameScreen.pauseSwap();
+        }
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.

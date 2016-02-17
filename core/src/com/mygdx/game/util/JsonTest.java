@@ -30,9 +30,8 @@ public class JsonTest {
 
     public ArrayList getDialogOptions(){
         dialogOptions.clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < jsonValue.get(actor).get(level).get(dialogID).get("options").size; i++)
             dialogOptions.add(jsonValue.get(actor).get(level).get(dialogID).get("options").get(i).getString("phrase"));
-
         return dialogOptions;
     }
 
