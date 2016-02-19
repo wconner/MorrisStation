@@ -18,11 +18,10 @@ public class BedroomLevel extends Level {
             atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
             map = new TmxMapLoader().load("android/assets/levels/FutureBedRoom.tmx"); // Type Tiled map
             levelName = "bedroom";
-            addActors();
         }
 
     @Override
-    protected void addActors() {
+    public void addActors() {
         Player player;
         NPC npc;
 
@@ -36,12 +35,15 @@ public class BedroomLevel extends Level {
     }
 
     @Override
-    public String sensorEvent(String sensor) {
-        switch (sensor){
-            case "door":
-                return "cl2";
-            default:
-                return "";
+    public String sensorEvent(String fixture) {
+        if (fixture != null) {
+        switch (fixture) {
+                case "door":
+                    return "cl2";
+                default:
+                    return "";
+            }
         }
+        return "";
     }
 }

@@ -16,10 +16,9 @@ public class BaseLevel extends Level {
         atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
         map = new TmxMapLoader().load("android/assets/levels/Base.tmx"); // Type Tiled map
         levelName = "base";
-        addActors();
     }
     @Override
-    protected void addActors() {
+    public void addActors() {
         Player player;
         NPC npc;
 
@@ -42,6 +41,14 @@ public class BaseLevel extends Level {
 
     @Override
     public String sensorEvent(String fixture) {
+        if (fixture != null) {
+            switch (fixture) {
+                case "BRD":
+                    return "cl1";
+                default:
+                    return "";
+            }
+        }
         return "";
     }
 }

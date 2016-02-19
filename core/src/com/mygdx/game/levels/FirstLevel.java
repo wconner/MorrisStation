@@ -17,11 +17,10 @@ public class FirstLevel extends Level {
         atlas = new TextureAtlas("android/assets/atlas/test.pack");
         map = new TmxMapLoader().load("android/assets/tiles/base.tmx"); // Type Tiled map
         levelName = "first";
-        addActors();
     }
 
     @Override
-    protected void addActors(){
+    public void addActors(){
         Player player;
         NPC npc;
         MSensor sensor;

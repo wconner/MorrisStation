@@ -25,7 +25,7 @@ public abstract class Level {
         actors = new Array<>();
     }
 
-    protected abstract void addActors();
+    public abstract void addActors();
     public abstract String sensorEvent(String sensor);
 
     public Array<AbstractDynamicObject> getActors(){ return actors;}
