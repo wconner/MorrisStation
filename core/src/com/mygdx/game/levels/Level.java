@@ -19,12 +19,13 @@ public abstract class Level {
     protected TiledMap map;
     protected Array<AbstractDynamicObject> actors;
     protected TextureAtlas atlas;
+    protected String levelName;
 
     public Level() {
         actors = new Array<>();
     }
 
-    protected abstract void addActors();
+    public abstract void addActors();
     public abstract String sensorEvent(String sensor);
 
     public Array<AbstractDynamicObject> getActors(){ return actors;}

@@ -48,7 +48,7 @@
  </layer>
  <layer name="Object" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl0tP1EAAx0c9bipsl+0mmiyodx6aaKKJD7ghaKI3TXzeFDTR76CCoN/CBwJ+A6U+4QKWgN58XFAuPm4KifrbrJOts9NuZ9vscug/+YVMp/vvb4eZBoRIkyaNaX5nhfgDwhZiE2yGLXbzetQU6WiHDtgBO2FXHb1J9ag5SMchOAxHoBf6NL03uHYTbsGIZj5qj2nO0HEWzsF5uAAXNb33uHYfHsBDzXzUnrh5VhTiOTyh+ynMgAuv4DXMwpxdPd+ozOI2B+955gf4CJ9gBdZgHVbt6vlGZR63haJ+bltOiO25xrnosoTbcoDfftwONNkvLKdwO72B/dJU5wRn72QDz59pruF2PSG//jYhjsIADMIxON4Wr3OA/T6Y0J6/hMtlGIJhuAJXY/oN4TackN8oLrdhDMbhDtyN6TeG23hCfhO4PIJJmIJpeBzTbxK3qfSdliZNU/ImL4QHtlMmB1sLQrRAK2QL0XrcDH87a4ib77j9gN1OmT3QiVMXdENPIfz5Km6mcu9iAo6t+GSdSqcb0OnJOYv/L+AFvLQijEP81HtlXN/37Matxyk/v/R95U818v4lepbhLbyzao91XTLqveqzTOL9c1+h5zN8gVWr9jjMT703jp/MT3p+wRqsW7XHJl1R/OY5Kwt5c2//ufCfj3o6dH4Oe7AAX3H7lq+Mgz6r+ri+vVvvuyXMby8u+0rvPmhxKmMZuf88jaPnc5N+pmtXy0+mE6cup/q6fL7fx1PWLMm1Mz0fcm28zP+/S/+6maxd0H6p168Udc0WAzw3UtT1a1b+ApjkBug=
+   eJztl0tP1EAAxwc9kgrbZbu39XXnoYneVPQmqIneBfWmoIl+B5+g30J8AH4DdVEQLkAJ6M3HBeXi4+YjUX/NOtk6O9t2pg3sof/kF3ba7n9+zHa6WSHy5Mljmt8FIf6AcIVog22w3d26HjUVOnbCLtgNe2CvRW9WPWoO0XEYjkA/HIVjmt7rHLsBN+GW5nzSHtOcpWMIhuEcnIcLmt77HJuAB/BQcz5pT9rMVIR4AU/pfgbPoQpz8ArmYcFtPL9ZmcdtAd4y5zt4Dx9gPfBor7HhNp63TdBnkkXclirNu0z7omLTtYrbWgv7xfXZdsr36miVtLJbEBu/0+y9M5v0fLD5fK/idi0jv+NdQgzAIJyAk3CqK945KoNFuorZ+F3E5RKMwChchisxfnEZwW00I7/buNyBMRiHu3Avpd8YbuMZ+T3C5TFMwhRMw5OUfpO4TWXklydPHrMsl4TwwfVqFGFHWYgO6IRCOVlP8Byf0ZA2X3H7Bvu8GvuhG6ce6IW+cvT8KvI7MXi9koFjJz4Fr95ZbdLpy3MOvy/gJcw6CcYRfuq1MuHv/l7c+rza/MH/K/+qkdev0rMGr+GNEz/Wdcmo16pzmcT/575Oz0f4BBtO/DjKT702jZ/Md3p+wE/45cSPTbqS+C2yV5ZK5t7hfRHeHzYdOj+Pe7AMn3H7UqqPm71X9amG7l3bZ0uU3wFcDgbPPujw6mMZef/5Gkc/5Cb9TNcuzk+mG6cer/G4nD/s4ytrluXame4PuTZ++/+fZXjdTNYu6ves7f5V12yliWcrRV2/rcpfdwMe4g==
   </data>
  </layer>
  <layer name="Object Detail" width="40" height="40">
@@ -63,7 +63,6 @@
  </layer>
  <objectgroup name="Obstacles" width="40" height="40">
   <object name="wall0" x="0" y="592" width="464" height="14"/>
-  <object name="wall1" x="0" y="512" width="272" height="16"/>
   <object name="wall2" x="0" y="528" width="16" height="64"/>
   <object name="wall3" x="304" y="512" width="160" height="16"/>
   <object name="wall4" x="464" y="592" width="16" height="32"/>
@@ -77,18 +76,54 @@
   <object name="wall11" x="80" y="352" width="192" height="16"/>
   <object name="wall12" x="304" y="352" width="192" height="16"/>
   <object name="Left Cabinets" x="96" y="80" width="96" height="64"/>
-  <object name="Main Computer" x="192" y="144" width="192" height="32"/>
+  <object name="Main Computers" x="192" y="144" width="192" height="32"/>
   <object name="Tesla Coil" x="160" y="144" width="32" height="64"/>
   <object name="Right Cabinets" x="384" y="80" width="96" height="64"/>
   <object name="Bottom Right Computer" x="406" y="335">
    <polygon points="-2,-1 28,0 28,-31 57,-31 57,1 86,0 85,-55 -3,-54"/>
   </object>
   <object name="Bottom Right Computer" x="96" y="256" width="32" height="96"/>
-  <object name="Big Chair" x="287" y="197"/>
   <object name="Kitchen Table" x="544" y="512" width="32" height="64"/>
   <object name="Left Kitchen Chair" x="527" y="551"/>
   <object name="Right Kitchen Chair" x="591" y="554"/>
   <object name="wall 13" x="80" y="16" width="16" height="352"/>
   <object name="wall 14" x="480" y="16" width="16" height="352"/>
+  <object name="wall 1" x="16" y="512" width="240" height="16"/>
+  <object name="BRD" x="38" y="528" width="48" height="8">
+   <properties>
+    <property name="name" value="BRD"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object name="Main Computer Int." x="280" y="176" width="16" height="8">
+   <properties>
+    <property name="name" value="mainComputer"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object name="Left Cabinet Int." x="96" y="144" width="64" height="8">
+   <properties>
+    <property name="name" value="leftCabinet"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object name="Right Cabinet Int." x="384" y="144" width="96" height="8">
+   <properties>
+    <property name="name" value="rightCabinet"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object name="Bottom Left Int." x="128" y="288" width="8" height="64">
+   <properties>
+    <property name="name" value="BLComputer"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object name="Bottom Right Int." x="440" y="312" width="16" height="16">
+   <properties>
+    <property name="name" value="BRComputer"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

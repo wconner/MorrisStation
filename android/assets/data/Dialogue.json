@@ -21,4 +21,10 @@
       "phrase": "Got it.",
       "nextDialogue": -1}
     ]}
-] }}
+] },
+  "boss":{
+    "base":[{"id": 0,
+      "phrase": "I'm your boss, and a dick.",
+      "options":[{
+        "selection": "a", "phrase": "Got it dick", "nextDialogue": -1
+      }]}]}}

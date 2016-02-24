@@ -115,7 +115,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     public void setLevel(int level) {
-//        Assets.instance.setMap(levels.get(level).getMap());
+        levels.get(level).addActors();
         worldController = new WorldController(stage, this, levels.get(level));
         if (worldRenderer == null){                             /** For first time you load a level when there is no worldcontroller */
             worldRenderer = new WorldRenderer(worldController);
