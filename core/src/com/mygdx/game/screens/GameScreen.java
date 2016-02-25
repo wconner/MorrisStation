@@ -58,10 +58,12 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         Window window = new Window("Phone", skin);
         TextButton play = new TextButton("Return to Morris Town", skin);
         TextButton email = new TextButton("E-Mail", skin);
+        TextButton pwGame = new TextButton("Password Game", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
         email.addListener(emailListener);
+        pwGame.addListener(pwGameListener);
         exit.addListener(exitListener);
 
         Table table = new Table(skin);
@@ -181,6 +183,14 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         }
     };
 
+    private final InputListener pwGameListener = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            pwGameSwap();
+        }
+    };
+
+
     private final InputListener exitListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -196,6 +206,13 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             pause();
     }
     public void screenSwap() {
+        pause();
+        //hide();
+        worldController.getDialog().hide();
+        phoneDisplay.setVisible(false);
+        game.setScreen(new OverlayScreen(stage,game,this));
+    }
+    public void pwGameSwap() {
         pause();
         //hide();
         worldController.getDialog().hide();

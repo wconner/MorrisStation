@@ -316,6 +316,8 @@ public class WorldController implements InputProcessor {
                         }
                         if (!eventFound) {
                             if (fixtureB.isSensor()){
+
+
                                 dialogWindow.setText("I'm at a sensor.");
                                 eventFound = true;
                                 commandWord(level.sensorEvent(((String) fixtureB.getBody().getUserData())));
