@@ -316,11 +316,9 @@ public class WorldController implements InputProcessor {
                         }
                         if (!eventFound) {
                             if (fixtureB.isSensor()){
-
-
                                 dialogWindow.setText("I'm at a sensor.");
                                 eventFound = true;
-                                commandWord(level.sensorEvent(((String) fixtureB.getBody().getUserData())));
+                                commandWord((String) fixtureB.getBody().getUserData());
                             }
                             else /** For hitting space with a non contact entity */
                                 dialogWindow.setText("Nothing to do there :(");
@@ -392,8 +390,17 @@ public class WorldController implements InputProcessor {
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
     private void commandWord(String c){
-        if (c.startsWith("cl"))
-            changeLevels(Integer.parseInt(c.substring(2)));
+        switch(c){
+            case "BRD":
+                changeLevels(1);
+                break;
+            case "door":
+                changeLevels(2);
+                break;
+            case "BLComputer":
+                gameScreen.pwGameSwap();
+                break;
+        }
     }
 
     private void changeLevels(int levelToChangeTo){

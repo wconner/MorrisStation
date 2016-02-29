@@ -205,6 +205,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         else
             pause();
     }
+    public void unPause() {
+        resume();
+    }
     public void screenSwap() {
         pause();
         //hide();

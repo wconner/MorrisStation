@@ -84,18 +84,18 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
     public boolean checkPassword() {
         pwLog = "";
         if(password.length() > 8){
-            pwLog = pwLog + "-Password is proper length";
-            if(password.contains("[0-9]+")){  //logic needs to be changed, Regular expression needed
-                pwLog = pwLog + "-Password contains a number";
+            pwLog = pwLog + "-Password is proper length \n";
+            if(password.matches(".*\\d+.*")){  //logic needs to be changed, Regular expression needed
+                pwLog = pwLog + "-Password contains a number \n";
                 return true;
             }
             else {
-                pwLog = pwLog + "-Password does not contain a number";
+                pwLog = pwLog + "-Password does not contain a number \n";
             }
             return false;
         }
         else {
-            pwLog = pwLog + "-Password is not proper length";
+            pwLog = pwLog + "-Password is not proper length \n";
         }
         return false;
     }

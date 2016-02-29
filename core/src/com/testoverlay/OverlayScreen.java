@@ -25,9 +25,8 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
             //game.setScreen(new GameScreen(stage,game));
             //gameScreen.resume();
             gameScreen.getWorldController().getDialog().hide();
-            Gdx.input.setInputProcessor(stage);
-            //gameScreen.getWorldController().initInput();
-            //stage.getRoot().addAction(fadeOut(1f));
+            gameScreen.getWorldController().initInput();
+            gameScreen.resume();
             game.setScreen(gameScreen);
             table.setVisible(false);
 
