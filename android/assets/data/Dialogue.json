@@ -1,30 +1,146 @@
-{"robot":
-{"bedroom":[
-  {"id": 0,
-    "phrase":"Welcome to MorrisTown, do you want me to repeat this introduction?",
-    "options":[
-      {"selection": "a", "phrase": "No I heard you fine the first time chief.", "nextDialogue": 1},
-      {"selection": "b", "phrase": "Yeah, I didn't quite catch that.", "nextDialogue": 0},
-      {"selection": "c", "phrase": "YOLO", "nextDialogue": 2}
-    ]
-  },{
-    "id": 1,
-    "phrase": "Please call me Sir-Chief.",
-    "options":[
-      {"selection": "a", "phrase": "Alright there sparky.", "nextDialogue": 2},
-      {"selection": "b", "phrase": "Haha, very funny.", "nextDialogue": 2},
-      {"selection": "c", "phrase": "YES CHEF!", "nextDialogue": 2}
+{
+  "robot": {
+    "bedroom": [
+      {
+        "id": 0,
+        "phrase": "Welcome to MorrisTown, do you want me to repeat this introduction?",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "No I heard you fine the first time chief.",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "b",
+            "phrase": "Yeah, I didn't quite catch that.",
+            "nextDialogue": 0
+          },
+          {
+            "selection": "c",
+            "phrase": "YOLO",
+            "nextDialogue": 2
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "phrase": "Please call me Sir-Chief.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Alright there sparky.",
+            "nextDialogue": 2
+          },
+          {
+            "selection": "b",
+            "phrase": "Haha, very funny.",
+            "nextDialogue": 2
+          },
+          {
+            "selection": "c",
+            "phrase": "YES CHEF!",
+            "nextDialogue": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "phrase": "Ok, take your phone, you can press 'P' to access it, and head through the door by pressing space.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Got it.",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Test success",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "id": 0,
+        "phrase": "Oh hi MC, your boss is a dick.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Test success",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      }
     ]
   },
-  {"id": 2, "phrase": "Ok, take your phone, you can press 'P' to access it, and head through the door by pressing space.",
-    "options": [{"selection": "a",
-      "phrase": "Got it.",
-      "nextDialogue": -1}
-    ]}
-] },
-  "boss":{
-    "base":[{"id": 0,
-      "phrase": "I'm your boss, and a dick.",
-      "options":[{
-        "selection": "a", "phrase": "Got it dick", "nextDialogue": -1
-      }]}]}}
+  "boss": {
+    "base": [
+      {
+        "id": 0,
+        "phrase": "I'm your boss, and a dick.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Got it, dick.",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Test success",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      }
+    ]
+  },
+  "friend": {
+    "base": [
+      {
+        "id": 0,
+        "phrase": "Oh hi MC, your boss is a dick.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Test success",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "He sure is.",
+            "nextDialogue": -1
+          }
+        ]
+      }
+    ]
+  }
+}

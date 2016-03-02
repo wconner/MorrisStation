@@ -21,6 +21,8 @@ import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonTest;
 import com.mygdx.game.util.MapBodyManager;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ian on 12/21/2014.
  *
@@ -362,6 +364,7 @@ public class WorldController implements InputProcessor {
     private void dialogueStart(){
         gameScreen.pause();
 
+        //target.setDialogID(addUpFlags());
         target.setDialog();
         for (Actor a : stage.getActors())
             if (a.getName() != null)
@@ -373,7 +376,19 @@ public class WorldController implements InputProcessor {
         stage.addActor(window);
         dialogWindow.setText(jsonTest.getDialog());
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    /**
+     * this is a test to change dialog according to flags
+     * ~Connor (2/29/16)
+     * @return
+     *
+     */
+    private int addUpFlags(){
+        return 3;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void updateDialog(int optionSelected){
         if (jsonTest.getUpdatedDialogID(optionSelected) != -1) {
             target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
