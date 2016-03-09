@@ -1,1 +1,2 @@
-sdk.dir=/home/bill/Android
+## Rename this file to local.properties and remove this line
+sdk.dir='path to your android sdk'
