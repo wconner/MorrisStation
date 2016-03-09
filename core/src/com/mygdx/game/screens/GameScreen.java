@@ -23,7 +23,9 @@ import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.JsonTest;
+import com.testoverlay.MastermindGame;
 import com.testoverlay.OverlayScreen;
+import com.testoverlay.PasswordGame;
 
 import java.util.ArrayList;
 
@@ -49,9 +51,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
-        phoneDisplay.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        phoneDisplay.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // Game world is active on start
-        phoneDisplay.setPosition(Gdx.graphics.getWidth()/2,0);
+        phoneDisplay.setPosition(Gdx.graphics.getWidth() / 2, 0);
 
         //createPhoneButtons
         Skin skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
@@ -80,14 +82,14 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         window.pad(20, 20, 100, 20);
         window.pack();
         window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("android/assets/phonebackground.png")))));
-                phoneDisplay.addActor(window);
+        phoneDisplay.addActor(window);
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);
         paused = false;
         pauseEnabled = true;
     }
 
-    private void initLevels(){
+    private void initLevels() {
         levels = new ArrayList<>();
         levels.add(new FirstLevel());
         levels.add(new BedroomLevel());
@@ -95,8 +97,8 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     /**
-    * Clear the screen, last method draws the new updated world
-    */
+     * Clear the screen, last method draws the new updated world
+     */
     @Override
     public void render(float delta) {
 
@@ -119,11 +121,10 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     public void setLevel(int level) {
         levels.get(level).addActors();
         worldController = new WorldController(stage, this, levels.get(level));
-        if (worldRenderer == null){                             /** For first time you load a level when there is no worldcontroller */
+        if (worldRenderer == null) {                             /** For first time you load a level when there is no worldcontroller */
             worldRenderer = new WorldRenderer(worldController);
             worldRenderer.setLevel(worldController);
-        }
-        else
+        } else
             worldRenderer.setLevel(worldController);
     }
 
@@ -131,13 +132,16 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         return worldController;
     }
 
-    public Group getPhoneDisplay() { return phoneDisplay; }
+    public Group getPhoneDisplay() {
+        return phoneDisplay;
+    }
+
     public Game getGame() {
         return game;
     }
 
     @Override
-    public void resize (int width, int height) {
+    public void resize(int width, int height) {
         worldRenderer.resize(width, height);
     }
 
@@ -156,19 +160,21 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
 
     @Override
-    public void pause () {
+    public void pause() {
         paused = true;
     }
 
     //android requires assets be reloaded on resume
     @Override
-    public void resume () {
+    public void resume() {
         paused = false;
     }
+
     @Override
-    public void dispose () {
+    public void dispose() {
         worldRenderer.dispose();
     }
+
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -179,14 +185,14 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            screenSwap();
+            screenSwap("default");
         }
     };
 
     private final InputListener pwGameListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            pwGameSwap();
+            screenSwap("Password");
         }
     };
 
@@ -200,27 +206,28 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
 
     public void pauseSwap() {
-        if(paused)
+        if (paused)
             resume();
         else
             pause();
     }
-    public void unPause() {
-        resume();
-    }
-    public void screenSwap() {
+
+    public void screenSwap(String type) {
         pause();
         //hide();
         worldController.getDialog().hide();
         phoneDisplay.setVisible(false);
-        game.setScreen(new OverlayScreen(stage,game,this));
-    }
-    public void pwGameSwap() {
-        pause();
-        //hide();
-        worldController.getDialog().hide();
-        phoneDisplay.setVisible(false);
-        game.setScreen(new OverlayScreen(stage,game,this));
+        switch (type) {
+            case "Password":
+                game.setScreen(new PasswordGame(stage, game, this));
+                break;
+            case "Mastermind":
+                game.setScreen(new MastermindGame(stage,game,this,"1234"));
+                break;
+            default:
+                game.setScreen(new OverlayScreen(stage, game, this));
+
+        }
     }
 
     //move all phone stuff to another class maybe
@@ -253,12 +260,11 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             worldController.initInput();
             pauseEnabled = true;
 
-        }
-        else {
+        } else {
             Actions a = new Actions();
             a.alpha(0f);
             phoneDisplay.addAction(a.alpha(0f));
-            phoneDisplay.setPosition(0,-(Gdx.graphics.getHeight()));
+            phoneDisplay.setPosition(0, -(Gdx.graphics.getHeight()));
             AlphaAction fadeIn = new AlphaAction();
             fadeIn.setAlpha(1f);
             fadeIn.setDuration(.5f);
@@ -277,15 +283,15 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     private void handleDebugInput() {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            screenSwap();
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            screenSwap("default");
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            if(pauseEnabled)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            if (pauseEnabled)
                 pauseSwap();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            if(pauseEnabled)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            if (pauseEnabled)
                 toggle();
         }
 
@@ -297,7 +303,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) { return false; }
+    public boolean keyUp(int keycode) {
+        return false;
+    }
 
     @Override
     public boolean keyTyped(char character) {

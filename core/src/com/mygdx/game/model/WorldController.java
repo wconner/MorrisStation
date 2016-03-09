@@ -398,7 +398,7 @@ public class WorldController implements InputProcessor {
                 changeLevels(2);
                 break;
             case "BLComputer":
-                gameScreen.pwGameSwap();
+                gameScreen.screenSwap("Mastermind");
                 break;
         }
     }

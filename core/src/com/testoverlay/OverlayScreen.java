@@ -107,9 +107,6 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
 
     }
 
-  /*  public void addGameScreen(GameScreen screen) {
-        gameScreen = screen;
-    }*/
 
     @Override
     public boolean keyDown(int keycode) {
