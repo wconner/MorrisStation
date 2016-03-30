@@ -39,14 +39,14 @@ public class WorldController implements InputProcessor {
     public MapBodyManager bodyManager;
 
     /**
-    * Creates the camera helper, a utility class for camera manipulation
-    */
+     * Creates the camera helper, a utility class for camera manipulation
+     */
     public CameraHelper cameraHelper;
 
     /**
-    * The class for displaying the UI
-    * Is placed in controller so input has access
-    */
+     * The class for displaying the UI
+     * Is placed in controller so input has access
+     */
     public Display display;
     public DialogWindow dialogWindow;
     private DialogButtons DB;
@@ -54,9 +54,9 @@ public class WorldController implements InputProcessor {
     private JsonTest jsonTest;
 
     /**
-    * Actor initialization
-    * Dude is only active sprite 3/4/2015
-    */
+     * Actor initialization
+     * Dude is only active sprite 3/4/2015
+     */
     public Array<AbstractDynamicObject> actors;
     public Player player;
     private NPC target;
@@ -68,8 +68,8 @@ public class WorldController implements InputProcessor {
     private GameScreen gameScreen;
 
     /**
-    * Default constructor
-    */
+     * Default constructor
+     */
     public WorldController (Stage stage, GameScreen gameScreen, Level level) {
         this.stage = stage;
         this.gameScreen = gameScreen;
@@ -78,8 +78,8 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Build class
-    */
+     * Build class
+     */
     private void init(Stage stage) {
         Gdx.input.setInputProcessor(this);
 
@@ -113,8 +113,8 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Create actors
-    */
+     * Create actors
+     */
     private void initActors(){
         for (AbstractDynamicObject a : actors){
             if (a.getID() == 0)                                             /** If it is player */
@@ -129,20 +129,20 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * This method is called constantly and updates the model and view
-    *
-    * Important note about handleDebugInput()
-    * this class is called with a helper class to ensure all
-    * input has been processed before rendering this class needs to be
-    * called first to ensure user input is handled BEFORE logic is executed
-    * ORDER IS IMPORTANT
-    */
+     * This method is called constantly and updates the model and view
+     *
+     * Important note about handleDebugInput()
+     * this class is called with a helper class to ensure all
+     * input has been processed before rendering this class needs to be
+     * called first to ensure user input is handled BEFORE logic is executed
+     * ORDER IS IMPORTANT
+     */
     public void update (float deltaTime) {
 
         handleDebugInput(deltaTime);
 
         cameraHelper.update(deltaTime);
-        
+
         display.setText(cameraHelper.getPosition().toString());
 
         //array added here to facilitate more actors
@@ -184,9 +184,9 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Enables all kinds of awesome things that we can control when
-    * used in conjunction with the CameraHelper class
-    */
+     * Enables all kinds of awesome things that we can control when
+     * used in conjunction with the CameraHelper class
+     */
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
@@ -215,7 +215,6 @@ public class WorldController implements InputProcessor {
 
      /*
     * Test method for changing screens
-
         if(Gdx.input.isKeyPressed(Keys.N)) {
             initPhone(new Stage());
         }
@@ -251,8 +250,8 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Uses CameraHelper to control the camera position
-    */
+     * Uses CameraHelper to control the camera position
+     */
     public void moveCamera (float x, float y) {
         x += cameraHelper.getPosition().x;
         y += cameraHelper.getPosition().y;
@@ -261,8 +260,8 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * InputProcessor Inputs
-    */
+     * InputProcessor Inputs
+     */
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -316,15 +315,15 @@ public class WorldController implements InputProcessor {
                             target = (NPC) a;
                             dialogueStart();
                         }
-                        if (!eventFound) {
-                            if (fixtureB.isSensor()){
-                                dialogWindow.setText("I'm at a sensor.");
-                                eventFound = true;
-                                commandWord((String) fixtureB.getBody().getUserData());
-                            }
-                            else /** For hitting space with a non contact entity */
-                                dialogWindow.setText("Nothing to do there :(");
+                    if (!eventFound) {
+                        if (fixtureB.isSensor()){
+                            dialogWindow.setText("I'm at a sensor.");
+                            eventFound = true;
+                            commandWord((String) fixtureB.getBody().getUserData());
                         }
+                        else /** For hitting space with a non contact entity */
+                            dialogWindow.setText("Nothing to do there :(");
+                    }
 
 //                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
 //                        dialogWindow.setText("I'm talking to npc!");
@@ -376,19 +375,7 @@ public class WorldController implements InputProcessor {
         stage.addActor(window);
         dialogWindow.setText(jsonTest.getDialog());
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    /**
-     * this is a test to change dialog according to flags
-     * ~Connor (2/29/16)
-     * @return
-     *
-     */
-    private int addUpFlags(){
-        return 3;
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void updateDialog(int optionSelected){
         if (jsonTest.getUpdatedDialogID(optionSelected) != -1) {
             target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
@@ -407,10 +394,10 @@ public class WorldController implements InputProcessor {
     private void commandWord(String c){
         switch(c){
             case "BRD":
-                changeLevels(1);
+                changeLevels(0);
                 break;
             case "door":
-                changeLevels(2);
+                changeLevels(1);
                 break;
             case "BLComputer":
                 gameScreen.screenSwap("Mastermind");
@@ -420,6 +407,12 @@ public class WorldController implements InputProcessor {
 
     private void changeLevels(int levelToChangeTo){
         bodyManager.destroyPhysics();   /** Destroys all physics for structures */
+        Array<Integer> n = new Array<Integer>();
+        for (int i = 0; i < 16; i++)
+            n.insert(i, 0);
+        for (int i = 1; i < actors.size; i++)
+            n.insert(( actors.get(i)).getID(), ((NPC) actors.get(i)).getDialogID());
+        level.returnDialogIDs(n);
         while (actors.size != 0) {      /** Destroys the physics for the actors */
             actors.pop().remove();
         }

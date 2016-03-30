@@ -20,6 +20,7 @@ public abstract class Level {
     protected Array<AbstractDynamicObject> actors;
     protected TextureAtlas atlas;
     protected String levelName;
+    protected Array<Integer> dialogIDs = null;
 
     public Level() {
         actors = new Array<>();
@@ -27,6 +28,7 @@ public abstract class Level {
 
     public abstract void addActors();
     public abstract String sensorEvent(String sensor);
+    public void returnDialogIDs(Array<Integer> dialogIDs){ this.dialogIDs = dialogIDs;}
 
     public Array<AbstractDynamicObject> getActors(){ return actors;}
     public TiledMap getMap() {
