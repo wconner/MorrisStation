@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Justin Shen on 2/22/2016.
+ * Contains the mastermind game, which is a hacking minigame
  */
 public class MastermindGame extends DefaultScreen implements InputProcessor {
     private static final String TAG = MastermindGame.class.getName();
@@ -32,8 +35,10 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
                         inputs.get(i).setColor(Color.RED);
                     }
 
-                    if (password.equals(pw))
-                        label.setText("Nice job! You hacked the password! \n The password is: " + password);
+                    if (password.equals(pw)) {
+                        label.setText("Nice job! You cracked the password! \n The password is: " + password);
+                        status = true;
+                    }
                     else {
                         label.setText("The correct numbers have been locked in, please fix the remaining numbers");
                     }
@@ -49,7 +54,10 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            gameScreen.getWorldController().getDialog().hide();
+            if(status){
+               ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(1);
+            }
+            //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
             for(Actor a: stage.getActors()) {
                 a.setVisible(false);
@@ -58,7 +66,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
             gameScreen.resume();
         }
     };
-
+    private boolean status;
     private GameScreen gameScreen;
     private final MainClass game;
     private final Skin skin;
@@ -73,9 +81,12 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         this.game = game;
         gameScreen = screen;
+        status = false;
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
-        label = new Label("", skin);
+        label = new Label("                                -(Brute Force Hacking)-" +
+                "\n                =================================" +
+                "\n Enter numbers until all the numbers have been locked in", skin);
         table = new Table(skin);
         buttonTable = new Table(skin);
 
@@ -86,17 +97,14 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
 
         TextButton back = new TextButton("Return to MorrisTown", skin);
         back.addListener(backListener);
-        table.row();
         table.add(label);
         table.row();
         for (int i = 0; i< 4; i++){
             inputs.add(new TextField("",skin));
             inputs.get(i).setMaxLength(1);
-            inputs.get(i).setWidth(.5f);
-            inputs.get(i).setScaleX(.5f);
-            inputs.get(i).setSize(.1f,1f);
+            inputs.get(i).setAlignment(1);
             inputs.get(i).pack();
-            buttonTable.add(inputs.get(i));
+            buttonTable.add(inputs.get(i)).padRight(5f).padLeft(5f).width(50f);
         }
         table.add(buttonTable);
         table.row();
@@ -165,7 +173,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
     @Override
     public void render(float delta) {
         //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
+        Gdx.gl.glClearColor(.1f, .1f, .1f, .3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         /*time += delta;

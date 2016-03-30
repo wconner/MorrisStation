@@ -116,7 +116,6 @@ public class NPC extends AbstractDynamicObject {
 
     }
 
-
     public Animation[] getAnimations() {
         return animations;
     }

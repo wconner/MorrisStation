@@ -2,6 +2,7 @@ package com.testoverlay;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,9 +28,13 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
             System.out.println("The password is currently: " + password);
             if(checkPassword()){
                 label.setText("Good Password!\n" + pwLog);
+                inputBox.setDisabled(true);
+                inputBox.setColor(Color.CHARTREUSE);
             }
             else {
                 label.setText("Bad Password\n" + pwLog);
+                inputBox.setDisabled(false);
+                inputBox.setColor(Color.RED);
 
             }
 
@@ -61,7 +66,7 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         inputBox = new TextField("",skin);
-        label = new Label("", skin);
+        label = new Label("Enter a password that is more than 8 characters long and contains at least one number", skin);
 
         table = new Table(skin);
         TextButton play = new TextButton("Check Password!", skin);
@@ -155,7 +160,7 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
     @Override
     public void render(float delta) {
         //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
+        Gdx.gl.glClearColor(.1f, .1f, .1f, .3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         /*time += delta;

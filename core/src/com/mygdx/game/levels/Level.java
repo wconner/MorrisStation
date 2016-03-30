@@ -34,5 +34,4 @@ public abstract class Level {
     public TiledMap getMap() {
         return map;
     }
-
 }

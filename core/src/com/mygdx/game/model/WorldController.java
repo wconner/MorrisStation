@@ -74,13 +74,13 @@ public class WorldController implements InputProcessor {
         this.stage = stage;
         this.gameScreen = gameScreen;
         this.level = level;
-        init(stage);
+        init();
     }
 
     /**
-     * Build class
-     */
-    private void init(Stage stage) {
+    * Build class
+    */
+    private void init() {
         Gdx.input.setInputProcessor(this);
 
         bodyManager = new MapBodyManager(GameInstance.getInstance().world,16, null, Application.LOG_DEBUG);
@@ -94,7 +94,7 @@ public class WorldController implements InputProcessor {
 
         /**Initiate everything*/
         initActors();
-        initUI(stage);
+        initUI();
 
         bodyManager.createPhysics(level.getMap(), "Obstacles");
         createCollisionListener();
@@ -102,7 +102,7 @@ public class WorldController implements InputProcessor {
 
     public void initInput() {  Gdx.input.setInputProcessor(this); }
 
-    public void initUI(Stage stage){
+    public void initUI(){
         visible = false;
         display = new Display(stage);
         //dialog = new Display();
@@ -271,7 +271,7 @@ public class WorldController implements InputProcessor {
     public boolean keyUp (int keycode) {
         // Reset game world
         if (keycode == Keys.R) {
-            init(stage);
+            init();
             Gdx.app.debug(TAG, "Game world reset");
             return true;
         }
@@ -401,6 +401,9 @@ public class WorldController implements InputProcessor {
                 break;
             case "BLComputer":
                 gameScreen.screenSwap("Mastermind");
+                break;
+            case "leftCabinet":
+                gameScreen.screenSwap("Password");
                 break;
         }
     }
