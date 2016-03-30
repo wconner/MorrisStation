@@ -25,10 +25,8 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
             //game.setScreen(new GameScreen(stage,game));
             //gameScreen.resume();
             gameScreen.getWorldController().getDialog().hide();
-            gameScreen.getPhoneDisplay().setVisible(true);
-            Gdx.input.setInputProcessor(stage);
-            //gameScreen.getWorldController().initInput();
-            //stage.getRoot().addAction(fadeOut(1f));
+            gameScreen.getWorldController().initInput();
+            gameScreen.resume();
             game.setScreen(gameScreen);
             table.setVisible(false);
 
@@ -38,7 +36,8 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
     private final InputListener menuListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-           hide();
+            game.setScreen(new EmailGame(stage,game,gameScreen));
+            table.setVisible(false);
         }
     };
 
@@ -62,18 +61,18 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         gameScreen = screen;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         TextButton play = new TextButton("Return to Morris Town", skin);
-        TextButton menu = new TextButton("test hide function", skin);
+        TextButton em = new TextButton("test egame", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
-        menu.addListener(menuListener);
+        em.addListener(menuListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
-        table.add(menu).size(320, 64).space(8);
+        table.add(em).size(320, 64).space(8);
         table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -87,11 +86,11 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         this.game = game;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         TextButton play = new TextButton("Return to Morris Town", skin);
-        TextButton menu = new TextButton("test hide function", skin);
+        TextButton eGame = new TextButton("Email Game", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
-        menu.addListener(menuListener);
+        eGame.addListener(menuListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
@@ -99,7 +98,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
-        table.add(menu).size(320, 64).space(8);
+        table.add(eGame).size(320, 64).space(8);
         table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -108,9 +107,6 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
 
     }
 
-  /*  public void addGameScreen(GameScreen screen) {
-        gameScreen = screen;
-    }*/
 
     @Override
     public boolean keyDown(int keycode) {
