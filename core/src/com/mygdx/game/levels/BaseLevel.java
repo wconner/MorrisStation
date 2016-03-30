@@ -3,6 +3,7 @@ package com.mygdx.game.levels;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
 
@@ -22,23 +23,28 @@ public class BaseLevel extends Level {
         Player player;
         NPC npc;
 
+        if (dialogIDs == null) {
+            dialogIDs = new Array<Integer>();
+            for (int i = 0; i < 16; i++)
+                dialogIDs.insert(i,0);
+        }
+
+
         player = new Player(0, 5, 5);
         player.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 11, 0, 32, 32));
         actors.add(player);
 
-        npc = new NPC(1, 15, 27, levelName, "friend");   /** Red hat girl */
+        npc = new NPC(1, 15, 27, levelName, "friend", dialogIDs.get(1));   /** Red hat girl */
         npc.setRegion("Spacece", new TextureRegion(atlas.findRegion("Spacece"), 32 * 7, 0, 32, 32),6);
         actors.add(npc);
 
-        npc = new NPC(2, 15, 23, levelName, "robot");   /** Robot */
+        npc = new NPC(2, 15, 23, levelName, "robot", dialogIDs.get(2));   /** Robot */
         npc.setRegion("EBRobotedit3crMatsuoKaito", new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32),0);
         actors.add(npc);
 
-        npc = new NPC(3, 17, 25, levelName, "boss");   /** Boss man */
+        npc = new NPC(3, 17, 25, levelName, "boss", dialogIDs.get(3));   /** Boss man */
         npc.setRegion("Spacece" , new TextureRegion(atlas.findRegion("Spacece"), 32 * 1, 0, 32, 32),3);
         actors.add(npc);
-
-        dialogIDs = new int[actors.size-1];
     }
 
     @Override
@@ -52,10 +58,5 @@ public class BaseLevel extends Level {
             }
         }
         return "";
-    }
-    public void saveID() {
-        for(int i = 1; i < actors.size; i++){
-            dialogIDs[i-1] = ((NPC) actors.get(i)).getDialogID();
-        }
     }
 }

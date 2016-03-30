@@ -18,7 +18,6 @@ import com.mygdx.game.MainClass;
 import com.mygdx.game.WorldRenderer;
 import com.mygdx.game.levels.BaseLevel;
 import com.mygdx.game.levels.BedroomLevel;
-import com.mygdx.game.levels.FirstLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
@@ -48,7 +47,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         new JsonTest();     /** Testing remove this line later */
         this.game = game;
         initLevels();
-        setLevel(1);                                        /** setLevel now initializes worldController and worldRenderer */
+        setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
 
         phoneDisplay = new Group();
         phoneDisplay.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -91,7 +90,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     private void initLevels() {
         levels = new ArrayList<>();
-        levels.add(new FirstLevel());
         levels.add(new BedroomLevel());
         levels.add(new BaseLevel());
     }

@@ -34,19 +34,20 @@ public class NPC extends AbstractDynamicObject {
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y, String levelName, String name) {
+    public NPC(int id, float x, float y, String levelName, String name, int dialogID) {
         super(id, "NPC");
         super.getBody().setUserData(this);
         this.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
-        dialogID = 0;
+        this.dialogID = dialogID;
     }
 
     public void setDialog(){
          jsonTest.setDialog(name, levelName, dialogID);
     }
     public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
+    public int getDialogID(){ return dialogID;}
 
     public JsonTest getJsonTest(){ return jsonTest;}
 
@@ -114,10 +115,6 @@ public class NPC extends AbstractDynamicObject {
         animations[7] = stand_Right;
 
     }
-    public int getDialogID(){
-        return dialogID;
-    }
-
 
     public Animation[] getAnimations() {
         return animations;
