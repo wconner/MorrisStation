@@ -36,6 +36,16 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
         }
     };
+
+    private final InputListener checkListen = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            checkEmails();
+
+
+        }
+    };
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -66,8 +76,14 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         instructions = new Label("You've got new emails!", skin);
 
         table = new Table(skin);
+        Table subTA = new Table(skin);
+        Table subTB = new Table(skin);
+        Table subTC = new Table(skin);
         TextButton goodEmail = new TextButton("gmail", skin);
         TextButton badEmail = new TextButton("bmail", skin);
+        TextButton checkEmail = new TextButton("Check Selected Emails", skin);
+        CheckBox gCheck = new CheckBox("", skin);
+        CheckBox bCheck = new CheckBox("", skin);
         goodEmail.addListener(goodListener);
         badEmail.addListener(badListener);
 
@@ -75,45 +91,33 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         back.addListener(backListener);
         table.row();
         table.add(label);
-        //table.row();
-        //table.add(inputBox);
         table.row();
-        table.add(goodEmail).size(320, 64).space(8);
+        table.add(instructions);
         table.row();
-        table.add(badEmail).size(320, 64).space(8);
+        subTA.add(gCheck);
+        subTA.add(goodEmail).size(320, 30).space(8);
+        table.add(subTA);
+        table.row();
+        subTB.add(bCheck);
+        subTB.add(badEmail).size(320, 30).space(8);
+        table.add(subTB);
+        table.row();
+        table.add(checkEmail).size(320, 30).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
         back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
         stage.addActor(back);
     }
-/*
-    public boolean checkEmail() {
-        pwLog = "";
-        if(password.length() > 8){
-            pwLog = pwLog + "-Password is proper length \n";
-            if(password.matches(".*\\d+.*")){  //logic needs to be changed, Regular expression needed
-                pwLog = pwLog + "-Password contains a number \n";
-                return true;
-            }
-            else {
-                pwLog = pwLog + "-Password does not contain a number \n";
-            }
-            return false;
-        }
-        else {
-            pwLog = pwLog + "-Password is not proper length \n";
-        }
+
+    public boolean checkEmails() {
+
         return false;
 
-
-
-
-        return true;
     }
 
     public String getPassword() {
         return password;
-    }*/
+    }
 
     @Override
     public boolean keyDown(int keycode) {
