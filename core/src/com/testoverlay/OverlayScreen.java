@@ -36,7 +36,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
     private final InputListener menuListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new PasswordGame(stage,game,gameScreen));
+            game.setScreen(new EmailGame(stage,game,gameScreen));
             table.setVisible(false);
         }
     };
@@ -61,18 +61,18 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         gameScreen = screen;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         TextButton play = new TextButton("Return to Morris Town", skin);
-        TextButton pwGame = new TextButton("test PWgame", skin);
+        TextButton em = new TextButton("test egame", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
-        pwGame.addListener(menuListener);
+        em.addListener(menuListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
-        table.add(pwGame).size(320, 64).space(8);
+        table.add(em).size(320, 64).space(8);
         table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -86,11 +86,11 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         this.game = game;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         TextButton play = new TextButton("Return to Morris Town", skin);
-        TextButton pwGame = new TextButton("Password Game", skin);
+        TextButton eGame = new TextButton("Email Game", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
-        pwGame.addListener(menuListener);
+        eGame.addListener(menuListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
@@ -98,7 +98,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         table.row();
         table.add(play).size(320, 64).space(8);
         table.row();
-        table.add(pwGame).size(320, 64).space(8);
+        table.add(eGame).size(320, 64).space(8);
         table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
