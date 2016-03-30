@@ -38,17 +38,17 @@
  </tileset>
  <layer name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="Ground Detail" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlrtOwzAUhr02mblMfQsur0DLBBSYuIykZaQtI5clkJXCisQC7YrEmooXoBISK5dXgDLyR7XF0SFNY5xAQDnSp9qKffz5NHYrxN+Lk4IQLXAqabF+EpwVvu93jbljlhDjYAJMWsn3bwz9ppBjGsyAWSv5/oOB3z3mVpBjGayAVSv5vmn9dpCjDhqgaSXfN/VLO3I/s8j9zCL3M4us+S0UhVgES6BSzJ7fGpzWwQbYzKCfA6cqqIHtDPrV4dQATbCbQT8euZ9ZZN3P9P9p2mHi94q5b6AvP8PoE1T0R8yh895/oAZB1OzP9pY9fNxvhUec3H/it4fvdl9yEMEh8JGzy0jb7zzmu3dB/HoE7hvlHfipHHH9fE2/sBp2Y3p7pO3GrH/c+t1i3BzylUBZEzVnXroHe6S5SqxdJuN1/II74UhyrIEDqvbgfgnc7uxBLodQZW01XsfPlW6OBnQ/HvFzyTP1nO/d0/S7xPgr0NZEzelIt+A7VrnCaJPxcc+Hql+XrKF7x/hkbtKh3r8eWYOeVX6uqZNP9pW2H1+vx9yi7hda9zT8XOLn21/vQ+XG68ud06off6d1zwk/M6PoaJ7fsJoo1LsfhaqhTv10zm+PrTVs/bDfO07ceMS6T5LnCF7AB5pWWpU=
+   eJztlrtOwzAUhr02nrm8CJdXoGXl8gotrFxWLksgK4UViQXaFYk1ES9AJCRWLq8AYeSvsJUjk6Y+2IGAcqRPiRtfPp/GjoX4e3HSEqIPThV9o+yDs9b3/a7RdioQYhrMgNnAf/nG0W8OfcyDBbAY+C8/OPjdo+0K+lgFa2A98F92zd8W+tgGO2A38F929as6Gj+3aPzcovFzi7r5xVKIRObXuvndwSmV+bVufk3+/Ebj5xZ193M9n1YdLn6vaPsGMnUtIiPoyCa0oe3efyAHo9iU+X1Xjq/3WxERp/Cf+O3hv91XHJRw2Mq/N5Sq/c4t370L4pcSTN8y74h8U239YqZfUQ4TS++I3IeW+bfN3y3qLaG/Nugw0W2WlftojrSvtnHfIfU5fqM94UhxzKAHNuTn/hKrc0lX/d4jz+m9rs/xC5VbjwGdT0T8QvJMPzfnHjH9LlH/CgyY6DZDmZ/pdF9FDEh92/Wh85eQMbh7TEza+g79/tFzLV2r5rqmTjGZV9V+5nip4Va2v9C8V+EXEr9Yft0PtZuZX9O5qvyZ7zR3nZhrZhJD5votyolGv/tl6Bxy8sdZv6kx1rjxi753JrbxiHGfFM8lvIAPkIdfpQ==
   </data>
  </layer>
  <layer name="Object" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl0tP1EAAxwc9kgrbZbu39XXnoYneVPQmqIneBfWmoIl+B5+g30J8AH4DdVEQLkAJ6M3HBeXi4+YjUX/NOtk6O9t2pg3sof/kF3ba7n9+zHa6WSHy5Mljmt8FIf6AcIVog22w3d26HjUVOnbCLtgNe2CvRW9WPWoO0XEYjkA/HIVjmt7rHLsBN+GW5nzSHtOcpWMIhuEcnIcLmt77HJuAB/BQcz5pT9rMVIR4AU/pfgbPoQpz8ArmYcFtPL9ZmcdtAd4y5zt4Dx9gPfBor7HhNp63TdBnkkXclirNu0z7omLTtYrbWgv7xfXZdsr36miVtLJbEBu/0+y9M5v0fLD5fK/idi0jv+NdQgzAIJyAk3CqK945KoNFuorZ+F3E5RKMwChchisxfnEZwW00I7/buNyBMRiHu3Avpd8YbuMZ+T3C5TFMwhRMw5OUfpO4TWXklydPHrMsl4TwwfVqFGFHWYgO6IRCOVlP8Byf0ZA2X3H7Bvu8GvuhG6ce6IW+cvT8KvI7MXi9koFjJz4Fr95ZbdLpy3MOvy/gJcw6CcYRfuq1MuHv/l7c+rza/MH/K/+qkdev0rMGr+GNEz/Wdcmo16pzmcT/575Oz0f4BBtO/DjKT702jZ/Md3p+wE/45cSPTbqS+C2yV5ZK5t7hfRHeHzYdOj+Pe7AMn3H7UqqPm71X9amG7l3bZ0uU3wFcDgbPPujw6mMZef/5Gkc/5Cb9TNcuzk+mG6cer/G4nD/s4ytrluXame4PuTZ++/+fZXjdTNYu6ves7f5V12yliWcrRV2/rcpfdwMe4g==
+   eJztlzlvE0EARgcorSXetbzuzNUndiJBx9lCAz1nCw30HA2HBH+Bo+GQ4C9wmCtpkqxJoONoAmkggYZDAp5lRp6Mx7s7syvsYj/pKVrv7rdPE8/sWIgiRYrY5rcvxB8QgRDrYD1sCIbXo6dOxybYDFtgK2xz6M2rR89OOnbBbtgDe2Gfofcin12Cy3DFcD5tj20O03EEjsIxOA4nDL23+ewO3IV7hvNpe7KmVRfiKTyk+xE8hifwAl7CNMwE/ef/V6Zxm4G3PPMdvIcPsNTxKHVZDvrPu6bTZ5NZ3Obqg7ts++Li0rWA2+II+yX1uXbKe02MSobhdpa5cQ7OwwWY5x0SQRte+fF+rRR+B+k8lGH+XefeG3ATbsEKTqvwFb7F+EXQTjGGp+k8k8FPXwfL4EMAlSB5jJL89leEOFBx99PXwQY0YRKmUvgl5SRupzL4qTF9v7L6XcXtWk5+UWkt7X9kyX3cHuTkV6RIEbvMV5nLEIRdKrCxJsQYlMGvpetR16tWTmtXJyu4rcJk2GUKxnGagAY0a/HP11HX1nYOjmV8/LDXOWhfEMlzHr8v4Bk891Icx/jp18qo75AGbs2wt17Lv3rk9Qv0LMJreOMlH8et//q1+rNsIt85S/R8hE+w7CUfx/np12bxk/lOzw/4Cb+85GObrjR+s8yVuaq9tzov1Pnh0mHyC/kO1uAzbl+qveNB9+o+6p7WdW2J89uOy47O2gdjYe9YRt336D36fshl7JL8ZMZxmgj7P1f3+6Z9mrre5TF2tvNDjk1UWvu/VMfNZuzifs+6zl/T3tbkOUrRx29Y+QuCyjJO
   </data>
  </layer>
  <layer name="Object Detail" width="40" height="40">
@@ -79,9 +79,6 @@
   <object name="Main Computers" x="192" y="144" width="192" height="32"/>
   <object name="Tesla Coil" x="160" y="144" width="32" height="64"/>
   <object name="Right Cabinets" x="384" y="80" width="96" height="64"/>
-  <object name="Bottom Right Computer" x="406" y="335">
-   <polygon points="-2,-1 28,0 28,-31 57,-31 57,1 86,0 85,-55 -3,-54"/>
-  </object>
   <object name="Bottom Right Computer" x="96" y="256" width="32" height="96"/>
   <object name="Kitchen Table" x="544" y="512" width="32" height="64"/>
   <object name="Left Kitchen Chair" x="527" y="551"/>
@@ -89,6 +86,7 @@
   <object name="wall 13" x="80" y="16" width="16" height="352"/>
   <object name="wall 14" x="480" y="16" width="16" height="352"/>
   <object name="wall 1" x="16" y="512" width="240" height="16"/>
+  <object name="Bottom Right Tables" x="352" y="240" width="128" height="64"/>
   <object name="BRD" x="38" y="528" width="48" height="8">
    <properties>
     <property name="name" value="BRD"/>
@@ -119,11 +117,6 @@
     <property name="sensor" value="true"/>
    </properties>
   </object>
-  <object name="Bottom Right Int." x="440" y="312" width="16" height="16">
-   <properties>
-    <property name="name" value="BRComputer"/>
-    <property name="sensor" value="true"/>
-   </properties>
-  </object>
+  <object name="Bottom Right Tables Int." x="352" y="304" width="64" height="8"/>
  </objectgroup>
 </map>

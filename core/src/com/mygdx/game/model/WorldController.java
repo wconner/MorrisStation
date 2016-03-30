@@ -213,13 +213,6 @@ public class WorldController implements InputProcessor {
             System.out.println("SPEED: " + player.body.getLinearVelocity().x + player.body.getLinearVelocity().y);
         }
 
-     /*
-    * Test method for changing screens
-        if(Gdx.input.isKeyPressed(Keys.N)) {
-            initPhone(new Stage());
-        }
-*/
-
         // Camera Controls (move)
 
         float camMoveSpeed = 5 * deltaTime;
@@ -324,20 +317,6 @@ public class WorldController implements InputProcessor {
                         else /** For hitting space with a non contact entity */
                             dialogWindow.setText("Nothing to do there :(");
                     }
-
-//                    if (fixtureB.getBody() == actors.get(1).getBody()) {           /** Talking to NPC */
-//                        dialogWindow.setText("I'm talking to npc!");
-//                        eventFound = true;
-//                        gameScreen.pauseSwap();
-//                        stage.addActor(DB.makeWindow(DC.getArray(101)));
-//                    } else if (fixtureB.getBody() == actors.get(2).getBody()) {      /** Talking to NPC2 */
-//                        dialogWindow.setText("I'm talking to npc2!!");
-//                        eventFound = true;
-//                    } else if (fixtureB.getBody() == actors.get(3).getBody()) {  /** At blueHouseSensor */
-//                        dialogWindow.setText("I'm entering the blue house ! !");
-//                        eventFound = true;
-//                        changeLevels("blueHouse");
-//                }
                 }
                 i++;
             }
