@@ -12,7 +12,7 @@ import com.mygdx.game.util.JsonTest;
 /**
  * Created by Ian on 2/26/2015.
  */
-public class Player extends AbstractDynamicObject {
+public class    Player extends AbstractDynamicObject {
 
     private static final String TAG = Player.class.getName();
 
