@@ -45,4 +45,13 @@ public class FirstLevel extends Level {
     public String sensorEvent(String fixture) {
         return "";
     }
+    public void saveID() {
+        for(int i = 1; i < actors.size; i++){
+            saveID(i -1,((NPC) actors.get(i)).getDialogID());
+        }
+    }
+
+    private void saveID(int i, int j){
+        dialogIDs[i] = j;
+    }
 }

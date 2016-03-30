@@ -20,6 +20,8 @@ public abstract class Level {
     protected Array<AbstractDynamicObject> actors;
     protected TextureAtlas atlas;
     protected String levelName;
+    protected int[] dialogIDs;
+
 
     public Level() {
         actors = new Array<>();
@@ -32,5 +34,10 @@ public abstract class Level {
     public TiledMap getMap() {
         return map;
     }
+    public int[] getDialogID() {
+        return dialogIDs;
+    }
+    public void saveID() {
+    } /** too be overridden */
+    }
 
-}

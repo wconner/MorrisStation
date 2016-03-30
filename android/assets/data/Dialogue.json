@@ -105,12 +105,12 @@
         ]
       },
       {
-        "id": 3,
-        "phrase": "Test success",
+        "id": 1,
+        "phrase": "Good job on cracking the password!",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "You know me",
             "nextDialogue": -1
           }
         ]

@@ -114,6 +114,9 @@ public class NPC extends AbstractDynamicObject {
         animations[7] = stand_Right;
 
     }
+    public int getDialogID(){
+        return dialogID;
+    }
 
 
     public Animation[] getAnimations() {

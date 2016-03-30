@@ -95,6 +95,9 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         levels.add(new BedroomLevel());
         levels.add(new BaseLevel());
     }
+    public ArrayList<Level> getLevels(){
+        return levels;
+    }
 
     /**
      * Clear the screen, last method draws the new updated world

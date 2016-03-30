@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
+import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
 
@@ -12,7 +13,6 @@ import com.mygdx.game.entities.Player;
  * Created by bill on 12/5/15.
  */
 public class BedroomLevel extends Level {
-
         public BedroomLevel() {
             super();
             atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
@@ -32,6 +32,7 @@ public class BedroomLevel extends Level {
         npc = new NPC(2, 7, 5, levelName, "robot"); /** Robot */
         npc.setRegion("EBRobotedit3crMatsuoKaito", new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32),0);
         actors.add(npc);
+        dialogIDs = new int[actors.size-1];
     }
 
     @Override
@@ -46,4 +47,11 @@ public class BedroomLevel extends Level {
         }
         return "";
     }
+    public void saveID() {
+        for(int i = 1; i < actors.size; i++){
+            dialogIDs[i-1] = ((NPC) actors.get(i)).getDialogID();
+        }
+    }
+
+
 }
