@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * Created by bill on 11/22/15. //TODO Make this part of NPC maybe?? Reusing a lot of code here.
+ * Created by bill on 11/22/15. TODO Make this part of NPC maybe?? Reusing a lot of code here.
  * MSensor's ID should be > 100
  */
 public class MSensor extends AbstractDynamicObject {

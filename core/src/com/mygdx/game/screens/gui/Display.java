@@ -39,12 +39,14 @@ public class Display {
 
 
     Table root;
+    /*
     Slider ambientColorR, ambientColorG, ambientColorB;
     Slider lightColorR, lightColorG, lightColorB, lightZ;
     Slider attenuationX, attenuationY, attenuationZ;
     Slider ambientIntensity;
     Slider strength;
     Label text;
+    */
     CheckBox useShadow, useNormals, yInvert;
 
     /**

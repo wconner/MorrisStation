@@ -37,6 +37,8 @@ public class BaseLevel extends Level {
         npc = new NPC(3, 17, 25, levelName, "boss");   /** Boss man */
         npc.setRegion("Spacece" , new TextureRegion(atlas.findRegion("Spacece"), 32 * 1, 0, 32, 32),3);
         actors.add(npc);
+
+        dialogIDs = new int[actors.size-1];
     }
 
     @Override
@@ -50,5 +52,10 @@ public class BaseLevel extends Level {
             }
         }
         return "";
+    }
+    public void saveID() {
+        for(int i = 1; i < actors.size; i++){
+            dialogIDs[i-1] = ((NPC) actors.get(i)).getDialogID();
+        }
     }
 }
