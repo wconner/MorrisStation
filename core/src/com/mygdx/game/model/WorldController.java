@@ -351,7 +351,7 @@ public class WorldController implements InputProcessor {
                 }
         window = DB.makeWindow(jsonTest.getDialogOptions());
         stage.addActor(window);
-        dialogWindow.setWindowLabel(target.getName());
+        dialogWindow.getWindow().getTitleLabel().setText(target.getName());
         dialogWindow.setText(jsonTest.getDialog());
     }
 
