@@ -16,7 +16,6 @@ import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
-import com.mygdx.game.screens.gui.Display;
 import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonTest;
 import com.mygdx.game.util.MapBodyManager;
@@ -46,7 +45,6 @@ public class WorldController implements InputProcessor {
      * The class for displaying the UI
      * Is placed in controller so input has access
      */
-    public Display display;
     public DialogWindow dialogWindow;
     private DialogButtons DB;
     private Stage stage;
@@ -103,11 +101,8 @@ public class WorldController implements InputProcessor {
 
     public void initUI(){
         visible = false;
-        display = new Display(stage);
-        //dialog = new Display();
         dialogWindow = new DialogWindow();
         DB = new DialogButtons(stage, this);
-        stage.addActor(display.makeWindow());
         stage.addActor(dialogWindow.makeWindow());
     }
 
@@ -142,9 +137,6 @@ public class WorldController implements InputProcessor {
 
         cameraHelper.update(deltaTime);
 
-        display.setText(cameraHelper.getPosition().toString());
-
-        //array added here to facilitate more actors
         for(AbstractDynamicObject dudes : actors){
             dudes.behavior(dudes.getID(), deltaTime);
             dudes.update(deltaTime);
@@ -415,9 +407,6 @@ public class WorldController implements InputProcessor {
 
     public DialogWindow getDialog() {
         return dialogWindow;
-    }
-    public Display getDisplay() {
-        return display;
     }
     public Stage getStage(){
         return stage;
