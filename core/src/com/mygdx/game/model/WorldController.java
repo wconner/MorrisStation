@@ -28,7 +28,6 @@ import java.util.ArrayList;
  *
  * This class is designed to hold the logic of the game elements and provide access
  * to the other modules as well as control input
- *
  */
 @SuppressWarnings("NonJREEmulationClassesInClientCode")
 public class WorldController implements InputProcessor {
@@ -78,8 +77,8 @@ public class WorldController implements InputProcessor {
     }
 
     /**
-    * Build class
-    */
+     * Build class
+     */
     private void init() {
         Gdx.input.setInputProcessor(this);
 
@@ -277,6 +276,7 @@ public class WorldController implements InputProcessor {
         }
 
         else if (keycode == Keys.V){
+            initInput();
             dialogWindow.hide();
             return true;
 
@@ -342,7 +342,6 @@ public class WorldController implements InputProcessor {
     private void dialogueStart(){
         gameScreen.pause();
 
-        //target.setDialogID(addUpFlags());
         target.setDialog();
         for (Actor a : stage.getActors())
             if (a.getName() != null)
@@ -352,6 +351,7 @@ public class WorldController implements InputProcessor {
                 }
         window = DB.makeWindow(jsonTest.getDialogOptions());
         stage.addActor(window);
+        dialogWindow.setWindowLabel(target.getName());
         dialogWindow.setText(jsonTest.getDialog());
     }
 
@@ -371,20 +371,23 @@ public class WorldController implements InputProcessor {
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
     private void commandWord(String c){
-        switch(c){
-            case "BRD":
-                changeLevels(0);
-                break;
-            case "door":
-                changeLevels(1);
-                break;
-            case "BLComputer":
-                gameScreen.screenSwap("Mastermind");
-                break;
-            case "leftCabinet":
-                gameScreen.screenSwap("Password");
-                break;
-        }
+        if (c != null)
+            switch(c){
+                case "BRD":
+                    changeLevels(0);
+                    break;
+                case "door":
+                    changeLevels(1);
+                    break;
+                case "BLComputer":
+                    gameScreen.screenSwap("Mastermind");
+                    break;
+                case "leftCabinet":
+                    gameScreen.screenSwap("Password");
+                    break;
+                default:
+                    return;
+            }
     }
 
     private void changeLevels(int levelToChangeTo){
@@ -398,6 +401,7 @@ public class WorldController implements InputProcessor {
         while (actors.size != 0) {      /** Destroys the physics for the actors */
             actors.pop().remove();
         }
+        dialogWindow.getWindow().remove();            /** Destroys the dialog window (which may be hidden) */
         gameScreen.setLevel(levelToChangeTo);
     }
     /**

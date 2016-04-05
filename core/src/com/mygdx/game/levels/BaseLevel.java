@@ -23,13 +23,6 @@ public class BaseLevel extends Level {
         Player player;
         NPC npc;
 
-        if (dialogIDs == null) {
-            dialogIDs = new Array<Integer>();
-            for (int i = 0; i < 16; i++)
-                dialogIDs.insert(i,0);
-        }
-
-
         player = new Player(0, 5, 5);
         player.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 11, 0, 32, 32));
         actors.add(player);

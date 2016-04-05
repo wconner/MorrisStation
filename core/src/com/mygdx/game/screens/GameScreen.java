@@ -54,6 +54,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         // Game world is active on start
         phoneDisplay.setPosition(Gdx.graphics.getWidth() / 2, 0);
 
+        //@TODO Move phone to its own separate class
         //createPhoneButtons
         Skin skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         Window window = new Window("Phone", skin);
@@ -159,7 +160,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     public void hide() {
     }
 
-
     @Override
     public void pause() {
         paused = true;
@@ -204,7 +204,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             Gdx.app.exit();
         }
     };
-
 
     public void pauseSwap() {
         if (paused)

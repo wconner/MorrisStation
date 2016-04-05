@@ -24,12 +24,15 @@ public abstract class Level {
 
     public Level() {
         actors = new Array<>();
+
+        dialogIDs = new Array<Integer>();
+        for (int i = 0; i < 16; i++)
+            dialogIDs.insert(i,0);
     }
 
     public abstract void addActors();
     public abstract String sensorEvent(String sensor);
     public void returnDialogIDs(Array<Integer> dialogIDs){ this.dialogIDs = dialogIDs;}
-
     public Array<AbstractDynamicObject> getActors(){ return actors;}
     public TiledMap getMap() {
         return map;
