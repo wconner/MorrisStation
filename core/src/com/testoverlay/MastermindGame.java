@@ -37,6 +37,8 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
 
                     if (password.equals(pw)) {
                         label.setText("Nice job! You cracked the password! \n The password is: " + password);
+                        play.setText("Return to MorrisTown");
+                        play.addListener(backListener);
                         status = true;
                     }
                     else {
@@ -73,6 +75,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
     private final Table table;
     private final Table buttonTable;
     private final String pw;
+    private TextButton play;
     private String password;
     private ArrayList<TextField> inputs;
 
@@ -92,7 +95,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
 
         inputs = new ArrayList<>();
 
-        TextButton play = new TextButton("Test Password!", skin);
+        play = new TextButton("Test Password!", skin);
         play.addListener(playListener);
 
         TextButton back = new TextButton("Return to MorrisTown", skin);
