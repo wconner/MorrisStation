@@ -30,13 +30,16 @@ public class NPC extends AbstractDynamicObject {
     private int dialogID;
     private String name, levelName;
     private static JsonTest jsonTest = new JsonTest();
+    private float initialX, initialY, movementX, movementY;
 
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y, String levelName, String name, int dialogID) {
+    public NPC(int id, float x, float y, String levelName, String name, int dialogID, float movementX, float movementY) {
         super(id, "NPC");
         super.getBody().setUserData(this);
+        initialX = x; initialY = y;
+        this.movementX = movementX; this.movementY = movementY;
         this.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
@@ -44,7 +47,7 @@ public class NPC extends AbstractDynamicObject {
     }
 
     public void setDialog(){
-         jsonTest.setDialog(name, levelName, dialogID);
+        jsonTest.setDialog(name, levelName, dialogID);
     }
     public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
     public int getDialogID(){ return dialogID;}
@@ -52,6 +55,66 @@ public class NPC extends AbstractDynamicObject {
         return name;
     }
     public JsonTest getJsonTest(){ return jsonTest;}
+
+    private int state = 1; //data field for behavior
+    private int prevState = 1;
+    private float sleep = 0;
+    public void behavior(float deltaTime) {
+        int VX = 0, VY = 0;
+
+        sleep -= deltaTime;
+
+        if (movementX > 0)
+            VX = 1;
+        if (movementY > 0)
+            VY = 1;
+
+        if (sleep <= 0) {
+            if (state == 1)
+                setLinearV(VX, VY);
+            if ((super.position.x <= initialX) || (super.position.y <= initialY)) {
+                setLinearV(VX, VY);
+            } else if ((this.position.x >= (super.position.x + movementX)) || (this.position.y >= (super.position.y + movementY))) {
+                setLinearV(VX * -1, VY * -1);
+                state = 2;
+            }
+        }
+
+//            switch (id) {
+//                case 1:     /** npc #1 - lisa. Has north and south motion. */
+//                    if (state == 1) {            /** Initial Start */
+//                        setLinearV(0, 1);
+//                    }
+//                    if (this.position.y <= 14) {
+//                        setLinearV(0, 1);
+//                        state = 1;
+//                    } else if (this.position.y >= 21) {
+//                        setLinearV(0, -1);
+//                        state = 2;
+//                    }
+//                    break;
+//
+//                case 2:  /** npc #2 - other dude. Has east and west motion. */
+//                    if (state == 1) {
+//                        setLinearV(1, 0);
+//                    }
+//                    if (this.position.x < 18) {
+//                        setLinearV(1, 0);
+//                        state = 1;
+//                    } else if (this.position.x > 25) {
+//                        setLinearV(-1, 0);
+//                        state = 2;
+//                    }
+//                    break;
+//            }
+        if (state != prevState) {       /** Sleep when state changed */
+            sleep = 7;
+            setLinearV(0, 0);
+        }
+        prevState = state;
+    }
+
+
 
     /**
      * intializes the animations for the indicated texture region
@@ -141,6 +204,13 @@ public class NPC extends AbstractDynamicObject {
         return npcTexture.getRegionHeight() * Constants.UNIT_SCALE / 2;
     }
 
+    public void setMovementX(float movementX) {
+        this.movementX = movementX;
+    }
+
+    public void setMovementY(float movementY) {
+        this.movementY = movementY;
+    }
 
     /**
      * note, the render has its own texture which is grabbed all the time

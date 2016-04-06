@@ -193,50 +193,6 @@ public abstract class AbstractDynamicObject {
         animState = state;
     }
 
-    private int state = 1; //data field for behavior
-    private int prevState = 1;
-    private float sleep = 0;
-
-    public void behavior(int id, float deltaTime) {
-        sleep -= deltaTime;
-
-        if (sleep <= 0) {
-            switch (id) {
-                case 1:     /** npc #1 - lisa. Has north and south motion. */
-                    if (state == 1) {            /** Initial Start */
-                        setLinearV(0, 1);
-                    }
-                    if (this.position.y <= 14) {
-                        setLinearV(0, 1);
-                        state = 1;
-                    } else if (this.position.y >= 21) {
-                        setLinearV(0, -1);
-                        state = 2;
-                    }
-                    break;
-
-                case 2:  /** npc #2 - other dude. Has east and west motion. */
-                    if (state == 1) {
-                        setLinearV(1, 0);
-                    }
-                    if (this.position.x < 18) {
-                        setLinearV(1, 0);
-                        state = 1;
-                    } else if (this.position.x > 25) {
-                        setLinearV(-1, 0);
-                        state = 2;
-                    }
-                    break;
-            }
-            if (state != prevState) {       /** Sleep when state changed */
-                sleep = 10;
-                setLinearV(0, 0);
-            }
-            prevState = state;
-        }
-    }
-
-
     public abstract void render(SpriteBatch batch);
 
 
