@@ -22,11 +22,15 @@
 
 package com.mygdx.game.screens.gui;
 
-/*
+/**
  * Created with IntelliJ IDEA.
  * Author: matheusdev
  * Date: 4/29/13
  * Time: 7:58 PM
+ *
+ * I've finally figured out what this class does.  The way Touchup works you need to have TouchDown set to true in order
+ * for it to activate.  This will return true allowing the button to give the 'depressed' look, and allows TouchUp to active
+ * Note: Even though this class is called TouchUpListener, it overrides touchDOWN  -Bill
  */
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

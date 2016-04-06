@@ -48,7 +48,7 @@ public class DialogWindow {
     */
     public Window makeWindow(){
 
-        window = new Window("I'm not here", skin);
+        window = new Window("Player", skin);
         window.row().fill().expandX();
 
         label = new Label("Welcome to MY Town", skin);
