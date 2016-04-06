@@ -11,6 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
+import com.mygdx.game.util.EmailTable;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EmailGame extends DefaultScreen implements InputProcessor {
     private static final String TAG = PasswordGame.class.getName();
@@ -18,24 +22,6 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private Label label;
     private Label instructions;
     private String password;
-    private final InputListener goodListener = new TouchUpListener() {
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-                label.setText("No Viruses!\n");
-
-
-        }
-    };
-    private final InputListener badListener = new TouchUpListener() {
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-            label.setText("Bad Email!\n");
-
-
-        }
-    };
 
     private final InputListener checkListen = new TouchUpListener() {
         @Override
@@ -62,6 +48,8 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final MainClass game;
     private final Skin skin;
     private final Table table;
+    private TextArea emWindow;
+    private ArrayList<EmailTable> emailTableList;
     //private String pwLog;
 
     public EmailGame(Stage stage, MainClass game,GameScreen screen) {
@@ -75,7 +63,9 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         label = new Label("", skin);
         instructions = new Label("You've got new emails!", skin);
 
+        Table innerTab = new Table(skin);
         table = new Table(skin);
+        /*
         Table subTA = new Table(skin);
         Table subTB = new Table(skin);
         Table subTC = new Table(skin);
@@ -84,8 +74,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         TextButton checkEmail = new TextButton("Check Selected Emails", skin);
         CheckBox gCheck = new CheckBox("", skin);
         CheckBox bCheck = new CheckBox("", skin);
-        goodEmail.addListener(goodListener);
-        badEmail.addListener(badListener);
+        goodEmail.addListener(eListener);
 
         TextButton back = new TextButton("Return to MorrisTown", skin);
         back.addListener(backListener);
@@ -107,11 +96,52 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         stage.addActor(table);
         back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
         stage.addActor(back);
+        */
+
+        TextButton checkEmail = new TextButton("Check Selected \nEmails", skin);
+        emWindow = new TextArea("",skin);
+
+        TextButton back = new TextButton("Return to MorrisTown", skin);
+
+        back.addListener(backListener);
+        innerTab.row();
+        innerTab.add(label);
+        emailTableList = new ArrayList<>();
+        for(int i =0; i<5; i++){
+            String emailName = "Test Email "+ (i+1);
+            TextButton emailButton = new TextButton(emailName,skin);
+
+
+
+            CheckBox check = new CheckBox("",skin);
+            EmailTable et = new EmailTable(emailButton,check);
+            emailTableList.add(et);
+            et.getEmailButton().addListener(new ButtListener(i));
+
+            et.seteMessage("This is Email #"+(i+1));
+
+            innerTab.row();
+            innerTab.add(et).size(420, 30).space(8);
+        }
+
+        table.add(checkEmail).size(175, 40).space(8);
+        table.add(innerTab);
+        table.add(emWindow).size(450,500).space(8);
+        setupEmails();
+
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        stage.addActor(table);
+        back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
+        stage.addActor(back);
     }
 
     public boolean checkEmails() {
 
         return false;
+
+    }
+
+    private void setupEmails(){
 
     }
 
@@ -186,6 +216,19 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     @Override
     public void hide() {
 
+    }
+
+    class ButtListener extends InputListener{
+        int optionNum;
+
+        public ButtListener(int optionNum){ this.optionNum = optionNum;}
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+           EmailTable tab = emailTableList.get(optionNum);
+            emWindow.setText(tab.geteMessage());
+            return super.touchDown(event, x, y, pointer, button);
+        }
     }
 }
 
