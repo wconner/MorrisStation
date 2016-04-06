@@ -46,6 +46,9 @@
   <object name="Floor Lamp 1" x="111" y="110"/>
   <object name="Floor Lamp 2" x="207" y="111"/>
   <object name="Window" x="0" y="80" width="320" height="16"/>
+  <object name="West Wall" x="0" y="96" width="8" height="144"/>
+  <object name="East Wall" x="312" y="96" width="8" height="144"/>
+  <object name="South Wall" x="0" y="231" width="320" height="8"/>
   <object name="Door" x="260" y="180" width="52" height="52">
    <properties>
     <property name="name" value="door"/>

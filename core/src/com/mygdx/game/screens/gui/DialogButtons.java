@@ -62,21 +62,17 @@ public class DialogButtons implements InputProcessor{
         switch(dialog.size()) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.setText(dialog.get(3));
-                option4.addListener(option4.getClickListener());
                 root.add(option4);
             case 3:
                 option3.setText(dialog.get(2));
-                option3.addListener(option3.getClickListener());
                 root.row();
                 root.add(option3);
             case 2:
                 option2.setText(dialog.get(1));
-                option2.addListener(option2.getClickListener());
                 root.row();
                 root.add(option2);
             case 1:
                 option1.setText(dialog.get(0));
-                option1.addListener(option1.getClickListener());
                 root.row();
                 root.add(option1);
                 break;

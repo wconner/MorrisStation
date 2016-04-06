@@ -50,7 +50,6 @@ public class JsonTest {
         return dialogOptions;
     }
 
-
     /**
      * Gets the next dialogID based on which option was chosen by the player, this value is then updated in the NPC.
      * @param optionSelected which option was selected.

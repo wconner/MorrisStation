@@ -48,7 +48,9 @@ public class NPC extends AbstractDynamicObject {
     }
     public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
     public int getDialogID(){ return dialogID;}
-
+    public String getName() {
+        return name;
+    }
     public JsonTest getJsonTest(){ return jsonTest;}
 
     /**
