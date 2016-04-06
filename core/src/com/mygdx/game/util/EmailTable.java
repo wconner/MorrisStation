@@ -16,8 +16,44 @@ import com.mygdx.game.screens.gui.TouchUpListener;
 /**
  * Created by The Evening Star on 3/30/2016.
  */
-public class EmailTable {
+public class EmailTable extends Table {
+
+    private TextButton emailButton;
+    private CheckBox checkBox;
+    private String eMessage;
+    private String sender;
+    private String type;
+
+    public EmailTable(TextButton eb, CheckBox cb){
+        emailButton = eb;
+        checkBox = cb;
+        this.add(checkBox);
+        this.add(emailButton).size(400, 30).space(8);
+
+    }
+
+    public void seteMessage(String m){
+        eMessage = m;
+    }
 
 
+    public TextButton getEmailButton(){
+        return emailButton;
+    }
 
+    public CheckBox getCheckBox() {
+        return checkBox;
+    }
+
+    public String geteMessage(){
+        return eMessage;
+    }
+
+    public String getSender(){
+        return sender;
+    }
+
+    public String getType(){
+        return type;
+    }
 }
