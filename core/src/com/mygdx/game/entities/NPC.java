@@ -40,7 +40,7 @@ public class NPC extends AbstractDynamicObject {
         super.getBody().setUserData(this);
         initialX = x; initialY = y;
         this.movementX = movementX; this.movementY = movementY;
-        this.position.set(x, y);
+        super.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
         this.dialogID = dialogID;
@@ -59,6 +59,7 @@ public class NPC extends AbstractDynamicObject {
     private int state = 1; //data field for behavior
     private int prevState = 1;
     private float sleep = 0;
+
     public void behavior(float deltaTime) {
         int VX = 0, VY = 0;
 
@@ -66,15 +67,21 @@ public class NPC extends AbstractDynamicObject {
 
         if (movementX > 0)
             VX = 1;
+        else if (movementX < 0)
+            VX = -1;
         if (movementY > 0)
             VY = 1;
+        else if (movementY < 0)
+            VY = -1;
 
         if (sleep <= 0) {
             if (state == 1)
                 setLinearV(VX, VY);
-            if ((super.position.x <= initialX) || (super.position.y <= initialY)) {
+            if ((super.position.x < initialX) || (super.position.y < initialY)) {
                 setLinearV(VX, VY);
-            } else if ((this.position.x >= (super.position.x + movementX)) || (this.position.y >= (super.position.y + movementY))) {
+                state = 1;
+            }
+            else if ((super.position.x > (initialX + movementX)) || (super.position.y > (initialY + movementY))) {
                 setLinearV(VX * -1, VY * -1);
                 state = 2;
             }
