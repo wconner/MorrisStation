@@ -8,6 +8,7 @@ import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonTest;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  * NPC's ID should be: 0 < ID < 100
  */
 public class NPC extends AbstractDynamicObject {
+
+    private static Random random = new Random();
 
     private static final int COLS = 3;
     private static final int ROWS = 1;
@@ -31,6 +34,7 @@ public class NPC extends AbstractDynamicObject {
     private String name, levelName;
     private static JsonTest jsonTest = new JsonTest();
     private float initialX, initialY, movementX, movementY;
+    private int state;
 
     /**
      * create NPC with specific location
@@ -38,12 +42,22 @@ public class NPC extends AbstractDynamicObject {
     public NPC(int id, float x, float y, String levelName, String name, int dialogID, float movementX, float movementY) {
         super(id, "NPC");
         super.getBody().setUserData(this);
-        initialX = x; initialY = y;
+
+        initialX = x + 1; initialY = y + 1;
+        /** If you're asking yourself, "why + 1?", that's a good question, I'm not sure why but for some reason
+         * when update gets called the first time in ADO, the position values are 1 + the initial values.  I could not
+         * find where or why this happens, so I just change it here so that the behavior method works*/
+
         this.movementX = movementX; this.movementY = movementY;
         super.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
         this.dialogID = dialogID;
+
+        if (movementX >= 0 || movementY >= 0)
+            state = 1;
+        if (movementX < 0 || movementY < 0)
+            state = 2;
     }
 
     public void setDialog(){
@@ -56,23 +70,19 @@ public class NPC extends AbstractDynamicObject {
     }
     public JsonTest getJsonTest(){ return jsonTest;}
 
-    private int state = 1; //data field for behavior
     private int prevState = 1;
     private float sleep = 0;
 
+    //@TODO Right now the NPC's must start moving in a positive direction (+x or +y)
     public void behavior(float deltaTime) {
         int VX = 0, VY = 0;
 
         sleep -= deltaTime;
 
-        if (movementX > 0)
+        if (movementX != 0)
             VX = 1;
-        else if (movementX < 0)
-            VX = -1;
-        if (movementY > 0)
+        if (movementY != 0)
             VY = 1;
-        else if (movementY < 0)
-            VY = -1;
 
         if (sleep <= 0) {
             if (state == 1)
@@ -86,36 +96,8 @@ public class NPC extends AbstractDynamicObject {
                 state = 2;
             }
         }
-
-//            switch (id) {
-//                case 1:     /** npc #1 - lisa. Has north and south motion. */
-//                    if (state == 1) {            /** Initial Start */
-//                        setLinearV(0, 1);
-//                    }
-//                    if (this.position.y <= 14) {
-//                        setLinearV(0, 1);
-//                        state = 1;
-//                    } else if (this.position.y >= 21) {
-//                        setLinearV(0, -1);
-//                        state = 2;
-//                    }
-//                    break;
-//
-//                case 2:  /** npc #2 - other dude. Has east and west motion. */
-//                    if (state == 1) {
-//                        setLinearV(1, 0);
-//                    }
-//                    if (this.position.x < 18) {
-//                        setLinearV(1, 0);
-//                        state = 1;
-//                    } else if (this.position.x > 25) {
-//                        setLinearV(-1, 0);
-//                        state = 2;
-//                    }
-//                    break;
-//            }
         if (state != prevState) {       /** Sleep when state changed */
-            sleep = 7;
+            sleep = random.nextInt(5) + 3;
             setLinearV(0, 0);
         }
         prevState = state;

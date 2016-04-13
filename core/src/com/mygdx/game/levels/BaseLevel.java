@@ -27,7 +27,7 @@ public class BaseLevel extends Level {
         player.setRegion(new TextureRegion(atlas.findRegion("Spacece"), 32 * 11, 0, 32, 32));
         actors.add(player);
 
-        npc = new NPC(1, 15, 27, levelName, "friend", dialogIDs.get(1), 0, -4);   /** Red hat girl */
+        npc = new NPC(1, 13, 23, levelName, "friend", dialogIDs.get(1), 0, 4);   /** Red hat girl */
         npc.setRegion("Spacece", new TextureRegion(atlas.findRegion("Spacece"), 32 * 7, 0, 32, 32),6);
         actors.add(npc);
 
