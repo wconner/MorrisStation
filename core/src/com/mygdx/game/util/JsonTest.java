@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class JsonTest {
     private JsonValue jsonValue;
 
-    ArrayList<String> dialogOptions;
+    ArrayList<String> dialogOptions, otherOptions;
     String actor, level;
     int dialogID;
 
@@ -20,6 +20,12 @@ public class JsonTest {
         JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(Gdx.files.internal("android/assets/data/Dialogue.json"));
         dialogOptions = new ArrayList<>();
+    }
+
+    public JsonTest(String path) {
+        JsonReader jsonReader = new JsonReader();
+        jsonValue = jsonReader.parse(Gdx.files.internal(path));
+        otherOptions = new ArrayList<>();
     }
 
     //@TODO just pass in the NPC being talked to and then get the name/level/dialogID from that NPC.
@@ -56,4 +62,6 @@ public class JsonTest {
      * @return the updated dialogID for the NPC.
      */
     public int getUpdatedDialogID(int optionSelected){ return jsonValue.get(actor).get(level).get(dialogID).get("options").get(optionSelected - 1).getInt("nextDialogue");}
+
+    
 }
