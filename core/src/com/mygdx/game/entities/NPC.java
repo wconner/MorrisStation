@@ -8,6 +8,7 @@ import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonTest;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  * NPC's ID should be: 0 < ID < 100
  */
 public class NPC extends AbstractDynamicObject {
+
+    private static Random random = new Random();
 
     private static final int COLS = 3;
     private static final int ROWS = 1;
@@ -30,21 +33,35 @@ public class NPC extends AbstractDynamicObject {
     private int dialogID;
     private String name, levelName;
     private static JsonTest jsonTest = new JsonTest();
+    private float initialX, initialY, movementX, movementY;
+    private int state;
 
     /**
      * create NPC with specific location
      */
-    public NPC(int id, float x, float y, String levelName, String name, int dialogID) {
+    public NPC(int id, float x, float y, String levelName, String name, int dialogID, float movementX, float movementY) {
         super(id, "NPC");
         super.getBody().setUserData(this);
-        this.position.set(x, y);
+
+        initialX = x + 1; initialY = y + 1;
+        /** If you're asking yourself, "why + 1?", that's a good question, I'm not sure why but for some reason
+         * when update gets called the first time in ADO, the position values are 1 + the initial values.  I could not
+         * find where or why this happens, so I just change it here so that the behavior method works*/
+
+        this.movementX = movementX; this.movementY = movementY;
+        super.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
         this.dialogID = dialogID;
+
+        if (movementX >= 0 || movementY >= 0)
+            state = 1;
+        if (movementX < 0 || movementY < 0)
+            state = 2;
     }
 
     public void setDialog(){
-         jsonTest.setDialog(name, levelName, dialogID);
+        jsonTest.setDialog(name, levelName, dialogID);
     }
     public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
     public int getDialogID(){ return dialogID;}
@@ -52,6 +69,41 @@ public class NPC extends AbstractDynamicObject {
         return name;
     }
     public JsonTest getJsonTest(){ return jsonTest;}
+
+    private int prevState = 1;
+    private float sleep = 0;
+
+    //@TODO Right now the NPC's must start moving in a positive direction (+x or +y)
+    public void behavior(float deltaTime) {
+        int VX = 0, VY = 0;
+
+        sleep -= deltaTime;
+
+        if (movementX != 0)
+            VX = 1;
+        if (movementY != 0)
+            VY = 1;
+
+        if (sleep <= 0) {
+            if (state == 1)
+                setLinearV(VX, VY);
+            if ((super.position.x < initialX) || (super.position.y < initialY)) {
+                setLinearV(VX, VY);
+                state = 1;
+            }
+            else if ((super.position.x > (initialX + movementX)) || (super.position.y > (initialY + movementY))) {
+                setLinearV(VX * -1, VY * -1);
+                state = 2;
+            }
+        }
+        if (state != prevState) {       /** Sleep when state changed */
+            sleep = random.nextInt(5) + 3;
+            setLinearV(0, 0);
+        }
+        prevState = state;
+    }
+
+
 
     /**
      * intializes the animations for the indicated texture region
@@ -141,6 +193,13 @@ public class NPC extends AbstractDynamicObject {
         return npcTexture.getRegionHeight() * Constants.UNIT_SCALE / 2;
     }
 
+    public void setMovementX(float movementX) {
+        this.movementX = movementX;
+    }
+
+    public void setMovementY(float movementY) {
+        this.movementY = movementY;
+    }
 
     /**
      * note, the render has its own texture which is grabbed all the time

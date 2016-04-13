@@ -124,7 +124,7 @@ public class MapBodyManager {
                 fixtureDef = materials.get("default");
             }
 
-            if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+                if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
                 fixtureDef.isSensor = true;
 
 

@@ -137,9 +137,9 @@ public class WorldController implements InputProcessor {
 
         cameraHelper.update(deltaTime);
 
-        for(AbstractDynamicObject dudes : actors){
-            dudes.behavior(dudes.getID(), deltaTime);
-            dudes.update(deltaTime);
+        for (int i = 1; i < actors.size; i++){
+            ((NPC) actors.get(i)).behavior(deltaTime);
+            actors.get(i).update(deltaTime);
         }
         stage.act();
         stage.draw();
