@@ -56,4 +56,8 @@ public class EmailTable extends Table {
     public String getType(){
         return type;
     }
+
+    public void setType(String s){
+        type = s;
+    }
 }

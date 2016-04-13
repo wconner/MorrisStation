@@ -22,16 +22,68 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private Label label;
     private Label instructions;
     private String password;
+    private boolean downloadGood, deleteGood, spamGood;
 
     private final InputListener checkListen = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-            checkEmails();
+            downloadGood = checkEmails("good");
+            if(downloadGood){
+                label.setText("Nothing bad happened!");
+            }else{
+                label.setText("uh-oh");
+            }
 
+            for(EmailTable emailTable : emailTableList){
+                if(emailTable.getCheckBox().isChecked()){
+                    emailTable.getCheckBox().toggle();
+                }
+            }
 
         }
     };
+
+    private final InputListener deleteListen = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            deleteGood = checkEmails("delete");
+            if(deleteGood){
+                label.setText("Nothing bad happened!");
+            }else{
+                label.setText("uh-oh");
+            }
+
+            for(EmailTable emailTable : emailTableList){
+                if(emailTable.getCheckBox().isChecked()){
+                    emailTable.getCheckBox().toggle();
+                }
+            }
+
+        }
+    };
+
+    private final InputListener spamListen = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            spamGood = checkEmails("spam");
+            if(spamGood){
+                label.setText("Nothing bad happened!");
+            }else{
+                label.setText("uh-oh");
+            }
+
+            for(EmailTable emailTable : emailTableList){
+                if(emailTable.getCheckBox().isChecked()){
+                    emailTable.getCheckBox().toggle();
+                }
+            }
+
+        }
+    };
+
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -64,6 +116,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         instructions = new Label("You've got new emails!", skin);
 
         Table innerTab = new Table(skin);
+        Table checkingButtonsTable = new Table(skin);
         table = new Table(skin);
         /*
         Table subTA = new Table(skin);
@@ -98,7 +151,12 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         stage.addActor(back);
         */
 
-        TextButton checkEmail = new TextButton("Check Selected \nEmails", skin);
+        TextButton checkEmail = new TextButton("Download Selected \nEmail Contents", skin);
+        checkEmail.addListener(checkListen);
+        TextButton spamCheck = new TextButton("Report Spam\nand Delete Selected", skin);
+        spamCheck.addListener(spamListen);
+        TextButton deleteEmail = new TextButton("Delete Selected \nEmail Contents", skin);
+        deleteEmail.addListener(deleteListen);
         emWindow = new TextArea("",skin);
 
         TextButton back = new TextButton("Return to MorrisTown", skin);
@@ -113,8 +171,20 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
 
 
+
             CheckBox check = new CheckBox("",skin);
             EmailTable et = new EmailTable(emailButton,check);
+
+            if(i == 0 || i == 2){
+                et.setType("good");
+            }else if(i == 1 || i == 3){
+                et.setType("spam");
+            }
+            else{
+                et.setType("delete");
+            }
+
+
             emailTableList.add(et);
             et.getEmailButton().addListener(new ButtListener(i));
 
@@ -123,8 +193,13 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
             innerTab.row();
             innerTab.add(et).size(420, 30).space(8);
         }
-
-        table.add(checkEmail).size(175, 40).space(8);
+        checkingButtonsTable.row();
+        checkingButtonsTable.add(checkEmail).size(175, 40).space(8);
+        checkingButtonsTable.row();
+        checkingButtonsTable.add(deleteEmail).size(175, 40).space(8);
+        checkingButtonsTable.row();
+        checkingButtonsTable.add(spamCheck).size(175, 40).space(8);
+        table.add(checkingButtonsTable).space(8);
         table.add(innerTab);
         table.add(emWindow).size(450,500).space(8);
         setupEmails();
@@ -135,9 +210,21 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         stage.addActor(back);
     }
 
-    public boolean checkEmails() {
+    public boolean checkEmails(String type) {
+//        ArrayList<EmailTable> tickedEmails = new ArrayList();
+//        ArrayList<EmailTable> untickedEmails = emailTableList ;
+//        boolean selectedCheck, unselectedCheck;
+        for(EmailTable emailTable : emailTableList){
+            if(emailTable.getCheckBox().isChecked()){
+                if(!emailTable.getType().equals(type)){
+                    return false;
+                }
+            }
+        }
 
-        return false;
+
+
+        return true;
 
     }
 
