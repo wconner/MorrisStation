@@ -120,6 +120,8 @@ public class WorldController implements InputProcessor {
         }
 
         player = ((Player) actors.get(0));
+        cameraHelper.setTargetAbstract(player);
+
     }
 
     /**
@@ -131,10 +133,9 @@ public class WorldController implements InputProcessor {
      * called first to ensure user input is handled BEFORE logic is executed
      * ORDER IS IMPORTANT
      */
-    public void update (float deltaTime) {
+    public void update(float deltaTime) {
 
         handleDebugInput(deltaTime);
-
         cameraHelper.update(deltaTime);
 
         for (int i = 1; i < actors.size; i++){
