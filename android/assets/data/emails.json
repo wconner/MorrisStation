@@ -1,0 +1,14 @@
+[
+  {
+    "sender": "robot@Morris.com",
+    "subject": "Download protocol for barracks door",
+    "body": "Good job getting to your email! Here is the download protocol your going to need to unlock the door.",
+    "scam": false
+  },
+  {
+    "sender": "rubot@Moorriss.com",
+    "subject": "DOWNLOAD THIS",
+    "body": "You need to download this now!",
+    "scam": true
+  }
+]v
