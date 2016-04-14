@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.util.Constants;
 
 /**
  * Created by Jshen94 on 11/9/2015.
@@ -36,7 +37,7 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
     private final InputListener menuListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new EmailGame(stage,game,gameScreen));
+            game.setScreen(new EmailGame(stage,game,gameScreen, Constants.EMAILSTATUS));
             table.setVisible(false);
         }
     };

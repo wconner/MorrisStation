@@ -50,13 +50,15 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final Table table;
     private TextArea emWindow;
     private ArrayList<EmailTable> emailTableList;
+    private int status;
     //private String pwLog;
 
-    public EmailGame(Stage stage, MainClass game,GameScreen screen) {
+    public EmailGame(Stage stage, MainClass game,GameScreen screen, int status) {
         super(stage, game);
         Gdx.input.setInputProcessor(this);
         this.game = game;
         gameScreen = screen;
+        this.status = status;
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         //inputBox = new TextField("",skin);

@@ -12,6 +12,7 @@ import com.mygdx.game.*;
 import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.entities.Player;
+import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
@@ -363,14 +364,17 @@ public class WorldController implements InputProcessor {
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
-    private void commandWord(String c){
+    public void commandWord(String c){
         if (c != null)
             switch(c){
                 case "BRD":
-                    changeLevels(0);
+                        changeLevels(0);
                     break;
                 case "door":
-                    changeLevels(1);
+                    if (((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive())
+                        changeLevels(1);
+                    else
+                        dialogWindow.setText("The security protocols have been reset and the door is locked.");
                     break;
                 case "BLComputer":
                     gameScreen.screenSwap("Mastermind");
@@ -378,6 +382,8 @@ public class WorldController implements InputProcessor {
                 case "leftCabinet":
                     gameScreen.screenSwap("Password");
                     break;
+                case "Email":
+                    ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
                 default:
                     return;
             }

@@ -16,6 +16,9 @@ public class Constants {
 
     public static final float UNIT_SCALE = 1 / 16f;
 
+    //email game state
+    public static int EMAILSTATUS = 0;
+
     //world dimensions
     public static final float WORLD_WIDTH= 100f;
     public static final float WORLD_HEIGHT = 100f;
