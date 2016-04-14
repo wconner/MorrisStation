@@ -364,7 +364,7 @@ public class WorldController implements InputProcessor {
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
-    public void commandWord(String c){
+    private void commandWord(String c){
         if (c != null)
             switch(c){
                 case "BRD":
@@ -382,8 +382,6 @@ public class WorldController implements InputProcessor {
                 case "leftCabinet":
                     gameScreen.screenSwap("Password");
                     break;
-                case "Email":
-                    ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
                 default:
                     return;
             }
