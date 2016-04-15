@@ -38,7 +38,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                     if (checkEmails("good")) {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone"));
                         isGameOver = true;
-                        ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
+                        //((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
                     } else if (checkEmails("spam")) {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "spamEmails"));
                     } else if (checkEmails("bad")) {
