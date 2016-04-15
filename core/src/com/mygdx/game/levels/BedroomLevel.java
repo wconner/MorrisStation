@@ -11,6 +11,8 @@ import com.mygdx.game.entities.Player;
  * Created by bill on 12/5/15.
  */
 public class BedroomLevel extends Level {
+    private boolean doorActive = false;
+
         public BedroomLevel() {
             super();
             atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
@@ -43,5 +45,12 @@ public class BedroomLevel extends Level {
             }
         }
         return "";
+    }
+
+    public boolean isDoorActive() {
+        return doorActive;
+    }
+    public void setDoorActive(boolean doorActive) {
+        this.doorActive = doorActive;
     }
 }
