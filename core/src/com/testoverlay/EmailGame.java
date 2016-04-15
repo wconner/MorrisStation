@@ -28,7 +28,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if(!isGameOver) {
                 int goodNum;
-                if(stageLevel<9){
+                if(stageLevel<=9){
                     goodNum = 2;
                 }
                 else{
@@ -36,12 +36,12 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                 }
                 if(!notEnoughChecked(goodNum)) {
                     if (checkEmails("good")) {
-                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone"));
+                        if(stageLevel<=9) {
+                            helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone1"));
+                        }
                         isGameOver = true;
-                        //((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
-                    } else if (checkEmails("spam")) {
-                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "spamEmails"));
-                    } else if (checkEmails("bad")) {
+                        ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
+                    } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
                 }else{
@@ -151,12 +151,12 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         stage.addActor(back);
         */
 
-        TextButton checkEmail = new TextButton("Download Selected \nEmail Contents", skin);
+        TextButton checkEmail = new TextButton("Save Selected Emails", skin);
         checkEmail.addListener(checkListen);
         TextButton instructionsButton = new TextButton("Instructions", skin);
-        instructionsButton.addListener(helpListen);
-        TextButton helpButton = new TextButton("Need Help?", skin);
-        helpButton.addListener(instructListen);
+        instructionsButton.addListener(instructListen);
+        TextButton helpButton = new TextButton("Hints", skin);
+        helpButton.addListener(helpListen);
         emWindow = new TextArea("",skin);
         helpWindow = new TextArea("",skin);
 
@@ -199,19 +199,23 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         helpScroll.setForceScroll(false, true);
         helpScroll.setFlickScroll(false);
         helpScroll.setOverscroll(false, true);*/
+        Table helpTable = new Table(skin);
+        Table helpTableButtons =new Table(skin);
         checkingButtonsTable.row();
         checkingButtonsTable.add(checkEmail).size(175, 40).space(8);
         checkingButtonsTable.row();
-        checkingButtonsTable.add(instructionsButton).size(175, 40).space(8);
-        checkingButtonsTable.row();
-        checkingButtonsTable.add(helpButton).size(175, 40).space(8);
+        helpTableButtons.add(instructionsButton).size(120, 25).space(8);
+        helpTableButtons.row();
+        helpTableButtons.add(helpButton).size(120, 25).space(8);
         Table emailContainer = new Table(skin);
         emailContainer.add(checkingButtonsTable).space(8);
         emailContainer.add(innerTab);
         emailContainer.add(emWindow).size(450,500).space(8);
         table.add(emailContainer);
         table.row();
-        table.add(helpWindow).size(800, 175).space(8);
+        helpTable.add(helpTableButtons);
+        helpTable.add(helpWindow).size(800, 175).space(8);
+        table.add(helpTable).space(8);
 
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
