@@ -1,0 +1,16 @@
+{
+
+  "systemMessages": {
+    "instructions1": "                                                              Hello and welcome to your Email Screen!\n\n      Here, We have picked up emails from your inbox and need you to select which emails you want to save.\n                                            =To view an email, click on the email from the Email List.=\n                                               =To select emails, tick the checkbox next to the email.=\n                            For security reasons, we are going to delete all other emails after you're done.\n\n                                 Please choose carefully and thank you for choosing Morris Systems Inc.",
+    "badEmails":"Error, the antivirus picked up one or more bad emails among chosen emails. \n\n Please consider your selection of emails.",
+    "spamEmails":"Error, the anti spam program has detected one or more possible spam emails among chosen emails. \n\n Please consider your selection of emails",
+    "wellDone":"well done",
+    "notEnough": "I remember there being more emails that I needed to download...."
+  },
+  "hints":{
+    "scams": "[Message from Robo Butler]: Watch out for scams",
+    "viruses":"[Message from Robo Butler]: Watch out for viruses",
+    "spam":"[Message from Robo Butler]: Watch out for spam"
+  }
+
+}

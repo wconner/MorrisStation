@@ -63,5 +63,11 @@ public class JsonTest {
      */
     public int getUpdatedDialogID(int optionSelected){ return jsonValue.get(actor).get(level).get(dialogID).get("options").get(optionSelected - 1).getInt("nextDialogue");}
 
-    
+    public String getItemField(int itemID, String field){
+        return  jsonValue.get(itemID).getString(field);
+    }
+
+    public String getItemField(String itemID, String field){
+        return  jsonValue.get(itemID).getString(field);
+    }
 }

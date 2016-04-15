@@ -21,6 +21,7 @@ public class EmailTable extends Table {
     private TextButton emailButton;
     private CheckBox checkBox;
     private String eMessage;
+    private String subject;
     private String sender;
     private String type;
 
@@ -35,6 +36,9 @@ public class EmailTable extends Table {
     public void seteMessage(String m){
         eMessage = m;
     }
+
+    public void setSubject(String s){ subject = s;}
+    public void setSender(String s){ sender =s;}
 
 
     public TextButton getEmailButton(){
@@ -56,6 +60,8 @@ public class EmailTable extends Table {
     public String getType(){
         return type;
     }
+
+    public String getSubject(){return subject;}
 
     public void setType(String s){
         type = s;
