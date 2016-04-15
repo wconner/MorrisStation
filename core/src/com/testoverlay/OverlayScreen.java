@@ -150,19 +150,10 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         return false;
     }
 
-
     @Override
     public void show(){
 
     }
-/*
-    public MoveByAction slideUp() {
-        MoveByAction mAction = new MoveByAction(0,500);
-        return mAction;
-    }*/
-
-
-
 
     @Override
     public void render(float delta){

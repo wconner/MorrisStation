@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
+import com.testoverlay.IntroScreen;
 import com.testoverlay.OverlayScreen;
 
 /**
@@ -29,19 +30,14 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            switchScreen(new GameScreen(new Stage(),game));
+            game.setScreen(new IntroScreen(new Stage(), game));
+//            switchScreen(new GameScreen(new Stage(),game));
         }
     };
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             game.setScreen(new OverlayScreen(new Stage(), game));
-        }
-    };
-    private final InputListener shooterListener = new TouchUpListener() {
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            //game.setScreen(new ShooterScreen(new Stage(), game));
         }
     };
     private final InputListener exitListener = new TouchUpListener() {
@@ -65,12 +61,10 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
         TextButton play = new TextButton("Morris Town", skin);
         TextButton email = new TextButton("Test", skin);
-        //TextButton shooter = new TextButton("Shooter", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
         email.addListener(emailListener);
-        //shooter.addListener(shooterListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
