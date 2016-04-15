@@ -25,11 +25,24 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if(!isGameOver) {
-                if (checkEmails("good")) {
-                    helpWindow.setText("Nothing bad happened!");
-                    isGameOver = true;
-                } else {
-                    helpWindow.setText("uh-oh");
+                int goodNum;
+                if(stageLevel<9){
+                    goodNum = 2;
+                }
+                else{
+                    goodNum = 4;
+                }
+                if(!notEnoughChecked(goodNum)) {
+                    if (checkEmails("good")) {
+                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone"));
+                        isGameOver = true;
+                    } else if (checkEmails("spam")) {
+                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "spamEmails"));
+                    } else if (checkEmails("bad")) {
+                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
+                    }
+                }else{
+                    helpWindow.setText(systemMessageReader.getItemField("systemMessages", "notEnough"));
                 }
 
                 for (EmailTable emailTable : emailTableList) {
@@ -91,6 +104,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         this.game = game;
         gameScreen = screen;
+
 
         emailReader = new JsonTest("android/assets/data/emails.json");
         systemMessageReader = new JsonTest("android/assets/data/emailInstructions.json");
@@ -160,13 +174,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                 CheckBox check = new CheckBox("", skin);
                 EmailTable et = new EmailTable(emailButton, check);
 
-                if (i == 0 || i == 2) {
-                    et.setType("good");
-                } else if (i == 1 || i == 3) {
-                    et.setType("spam");
-                } else {
-                    et.setType("bad");
-                }
+                et.setType(emailReader.getItemField(i,"type"));
 
 
                 emailTableList.add(et);
@@ -202,7 +210,6 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         table.add(emailContainer);
         table.row();
         table.add(helpWindow).size(800, 175).space(8);
-        setupEmails();
 
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
@@ -228,8 +235,18 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
     }
 
-    private void setupEmails(){
-
+    private boolean notEnoughChecked( int a)
+    {
+        int count = 0;
+        for(EmailTable emailTable : emailTableList){
+            if(emailTable.getCheckBox().isChecked()){
+                count++;
+            }
+        }
+        if(count<a){
+            return true;
+        }
+        return false;
     }
 
 
