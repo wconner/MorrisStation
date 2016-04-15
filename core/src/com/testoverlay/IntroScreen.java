@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -24,6 +25,7 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
     private final MainClass game;
     private final Skin skin;
     private final Table table;
+    private final Label introText;
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
@@ -38,14 +40,22 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         this.game = game;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         TextButton play = new TextButton("I'm ready!", skin);
+        introText = new Label(generateIntroText(), skin);
 
         play.addListener(playListener);
 
         table = new Table(skin);
         table.row();
+        table.add(introText);
+        table.row();
         table.add(play).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
+    }
+
+    private String generateIntroText(){
+        return "You've recently been assigned to be one of a few astronauts manning the Morris Station, a station critical" +
+                "to intergalactic communications between the Milky Way and Andromeda galaxies";
     }
 
     @Override
@@ -65,22 +75,22 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return stage.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return stage.touchUp(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        return stage.touchDragged(screenX, screenY, pointer);
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        return false;
+        return stage.mouseMoved(screenX, screenY);
     }
 
     @Override

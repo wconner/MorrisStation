@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.util.Constants;
 
 /**
  * Created by Jshen94 on 11/9/2015.
@@ -149,19 +150,10 @@ public class OverlayScreen extends DefaultScreen implements InputProcessor {
         return false;
     }
 
-
     @Override
     public void show(){
 
     }
-/*
-    public MoveByAction slideUp() {
-        MoveByAction mAction = new MoveByAction(0,500);
-        return mAction;
-    }*/
-
-
-
 
     @Override
     public void render(float delta){

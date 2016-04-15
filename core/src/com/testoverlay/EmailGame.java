@@ -108,7 +108,6 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         this.game = game;
         gameScreen = screen;
 
-
         emailReader = new JsonTest("android/assets/data/emails.json");
         systemMessageReader = new JsonTest("android/assets/data/emailInstructions.json");
 

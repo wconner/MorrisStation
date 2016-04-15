@@ -22,6 +22,7 @@ import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.JsonTest;
+import com.testoverlay.EmailGame;
 import com.testoverlay.MastermindGame;
 import com.testoverlay.OverlayScreen;
 import com.testoverlay.PasswordGame;
@@ -226,7 +227,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
                 game.setScreen(new MastermindGame(stage,game,this,"1234"));
                 break;
             default:
-                game.setScreen(new OverlayScreen(stage, game, this));
+                game.setScreen(new EmailGame(stage, game, this));
 
         }
     }
