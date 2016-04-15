@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.levels.BedroomLevel;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.EmailTable;
@@ -36,6 +38,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                     if (checkEmails("good")) {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone"));
                         isGameOver = true;
+                        ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
                     } else if (checkEmails("spam")) {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "spamEmails"));
                     } else if (checkEmails("bad")) {
