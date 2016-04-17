@@ -183,19 +183,19 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        if(Gdx.input.isKeyPressed(Keys.W)) {
+        if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) {
             player.moveCharacter(1);
             //player.setAnimState(2);
         }
-        if(Gdx.input.isKeyPressed(Keys.A)) {
+        if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)) {
             player.moveCharacter(2);
             //player.setAnimState(0);
         }
-        if(Gdx.input.isKeyPressed(Keys.S)) {
+        if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)) {
             player.moveCharacter(0);
             //player.setAnimState(1);
         }
-        if(Gdx.input.isKeyPressed(Keys.D)) {
+        if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)) {
             player.moveCharacter(3);
             //player.setAnimState(3);
         }
@@ -268,6 +268,9 @@ public class WorldController implements InputProcessor {
             return true;
 
         }
+
+        else if (keycode == Keys.P)
+            gameScreen.toggle();
 
         else if (keycode == Keys.V){
             initInput();

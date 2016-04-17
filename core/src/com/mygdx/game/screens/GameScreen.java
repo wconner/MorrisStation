@@ -105,9 +105,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     @Override
     public void render(float delta) {
 
-        // Update game world by the time that has passed
-        // since last rendered frame.
-        handleDebugInput();
         if (!paused) {
             // Update game
             worldController.update(Gdx.graphics.getDeltaTime());
@@ -233,7 +230,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     }
 
     //move all phone stuff to another class maybe
-    private void toggle() {
+    public void toggle() {
         MoveToAction moveToAction = new MoveToAction();
         ParallelAction parallelAction = new ParallelAction();
         if (phoneDisplay.isVisible()) {
@@ -281,22 +278,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
         }
         pauseSwap();
-    }
-
-    private void handleDebugInput() {
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            screenSwap("default");
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            if (pauseEnabled)
-                pauseSwap();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            if (pauseEnabled)
-                toggle();
-        }
-
     }
 
     @Override
