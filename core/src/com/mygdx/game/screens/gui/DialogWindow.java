@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
-
 /**
  * Created by Ian on 1/21/2015.
  */
@@ -55,9 +54,7 @@ public class DialogWindow {
         label.setWrap(true);
 
         window.row().prefWidth(Gdx.graphics.getWidth() * 0.98f);
-        contentLabel = new Label("Morristown is a narrative game to help learn how to be safe online"
-                + "Players will experience scenarios which challenge them to create strong passwords"
-                + ", learn about concepts like viruses and phishing and more.", skin);
+        contentLabel = new Label("", skin);
         contentLabel.setWrap(true);
         contentLabel.setScale(5f);
         window.add(contentLabel).padLeft(5).padRight(5).padBottom(20).expandX();
@@ -74,13 +71,9 @@ public class DialogWindow {
      * flips the boolean for hidden
      */
     public void hide() {
-        if (hidden == false)
-            hidden = true;
-        else {
-            hidden = false;
-        }
-        window.setVisible(hidden);
+        window.setVisible(false);
     }
+    public void show(){ window.setVisible(true);}
 
     /**
     * Getter for window

@@ -104,7 +104,14 @@ public class WorldController implements InputProcessor {
         visible = false;
         dialogWindow = new DialogWindow();
         DB = new DialogButtons(stage, this);
-        stage.addActor(dialogWindow.makeWindow());
+        if (!((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive()) { /** Set Dialog box for first time entering game */
+            stage.addActor(dialogWindow.makeWindow());
+            dialogWindow.setText("Something's gone wrong.  I should go talk to Bit Daemon the robot over there.");
+        }
+        else {
+            stage.addActor(dialogWindow.makeWindow());
+            dialogWindow.hide();
+        }
     }
 
     /**
@@ -183,22 +190,18 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) {
+        if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
             player.moveCharacter(1);
-            //player.setAnimState(2);
-        }
-        if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)) {
+
+        if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
             player.moveCharacter(2);
-            //player.setAnimState(0);
-        }
-        if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)) {
+
+        if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
             player.moveCharacter(0);
-            //player.setAnimState(1);
-        }
-        if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)) {
+
+        if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
             player.moveCharacter(3);
-            //player.setAnimState(3);
-        }
+
 
         if(Gdx.input.isKeyPressed(Keys.F)){
             float angle = 1 * 90 * MathUtils.degRad;
@@ -266,17 +269,15 @@ public class WorldController implements InputProcessor {
         else if (keycode == Keys.B){
             dialogWindow.setText(player.randomText());
             return true;
-
         }
 
-        else if (keycode == Keys.P)
+        else if (keycode == Keys.P || keycode == Keys.ESCAPE)
             gameScreen.toggle();
 
         else if (keycode == Keys.V){
             initInput();
             dialogWindow.hide();
             return true;
-
         }
 
         //@TODO Make this a hash?
@@ -285,6 +286,7 @@ public class WorldController implements InputProcessor {
             Contact contact;
             boolean eventFound = false;
             int i = 0;
+            dialogWindow.show();
 
             dialogWindow.setText("What a pretty day in MorrisTown :)");     /** For hitting space with no contacts */
 
@@ -296,8 +298,6 @@ public class WorldController implements InputProcessor {
                 if (fixtureB.getBody() == player.getBody())
                     swapFixtures();
                 if (fixtureA.getBody() == player.getBody()) {
-                    if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
-                        dialogWindow.hide();
 
                     for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
                         if (fixtureB.getBody() == a.getBody()) {

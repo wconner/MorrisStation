@@ -78,7 +78,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            gameScreen.getWorldController().getDialog().hide();
+            //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
             for(Actor a: stage.getActors()) {
                 a.setVisible(false);

@@ -3,6 +3,8 @@ package com.testoverlay;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,11 +28,23 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
     private final Skin skin;
     private final Table table;
     private final Label introText;
+    private final TextButton play;
+    private int state = 0;
+    private SpriteBatch background;
+    private Texture backgroundImage;
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            switchScreen(new GameScreen(new Stage(), game));
+            if (state == 0){
+                introText.setText("To move around use the arrow keys or ASWD\n" +
+                        "to interact with players and objects use the space key\n" +
+                        "Good luck!");
+                play.setText("I'm ready!");
+                state = 1;
+            }
+            else
+                switchScreen(new GameScreen(new Stage(), game));
         }
     };
 
@@ -39,8 +53,12 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         this.game = game;
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
-        TextButton play = new TextButton("I'm ready!", skin);
+        play = new TextButton("Got it.", skin);
         introText = new Label(generateIntroText(), skin);
+        introText.setFontScale(2);
+
+        background = new SpriteBatch();
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/background/planets.png"));
 
         play.addListener(playListener);
 
@@ -54,8 +72,14 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
     }
 
     private String generateIntroText(){
-        return "You've recently been assigned to be one of a few astronauts manning the Morris Station, a station critical" +
-                "to intergalactic communications between the Milky Way and Andromeda galaxies";
+        return "You've recently been assigned to be one of a few\n" +
+                " astronauts manning the Morris Station,\n" +
+                " a station critical to intergalactic communications\n" +
+                " between the Milky Way and Andromeda galaxies.\n" +
+                "Morris Station was just attacked by hackers, bringing\n" +
+                " down all network and communication protocols.\n" +
+                "It's up to you to bring Morris Station back online\n" +
+                " and restore all network functionality.";
     }
 
     @Override
@@ -105,9 +129,9 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        background.begin();
+        background.draw(backgroundImage, 0, -200, 1200, 1200);
+        background.end();
         stage.draw();
     }
 

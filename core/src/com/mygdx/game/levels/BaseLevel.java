@@ -31,7 +31,7 @@ public class BaseLevel extends Level {
         npc.setRegion("Spacece", new TextureRegion(atlas.findRegion("Spacece"), 32 * 7, 0, 32, 32),6);
         actors.add(npc);
 
-        npc = new NPC(2, 15, 23, levelName, "robot", dialogIDs.get(2), 4, 0);   /** Robot */
+        npc = new NPC(2, 15, 23, levelName, "Bit Daemon", dialogIDs.get(2), 4, 0);   /** Robot */
         npc.setRegion("EBRobotedit3crMatsuoKaito", new TextureRegion(atlas.findRegion("EBRobotedit3crMatsuoKaito"), 32 * 3, 32 * 4, 32, 32),0);
         actors.add(npc);
 

@@ -1,51 +1,46 @@
 {
-  "robot": {
+  "Bit Daemon": {
     "bedroom": [
       {
         "id": 0,
-        "phrase": "Welcome to MorrisTown, do you want me to repeat this introduction?",
+        "phrase": "Hard Reset... Error Code: 254... On emergency protocols...",
         "options": [
           {
             "selection": "a",
-            "phrase": "No I heard you fine the first time chief.",
+            "phrase": "Do you always talk like that?.",
             "nextDialogue": 1
           },
           {
             "selection": "b",
-            "phrase": "Yeah, I didn't quite catch that.",
-            "nextDialogue": 0
-          },
-          {
-            "selection": "c",
-            "phrase": "YOLO",
-            "nextDialogue": 2
+            "phrase": "What's going on here?",
+            "nextDialogue": 1
           }
         ]
       },
       {
         "id": 1,
-        "phrase": "Please call me Sir-Chief.",
+        "phrase": "Attack from external threats. Network taken offline, security measures reinitialized.",
         "options": [
           {
             "selection": "a",
-            "phrase": "Alright there sparky.",
+            "phrase": "Guess so..",
             "nextDialogue": 2
           },
           {
             "selection": "b",
-            "phrase": "Haha, very funny.",
+            "phrase": "What does that mean?",
             "nextDialogue": 2
           },
           {
             "selection": "c",
-            "phrase": "YES CHEF!",
+            "phrase": "Alright there sparky.",
             "nextDialogue": 2
           }
         ]
       },
       {
         "id": 2,
-        "phrase": "Ok, take your phone, you can press 'P' to access it, and head through the door by pressing space.",
+        "phrase": "The door has been locked and the passkey has been reset, you must re-download the password from your emails.  Press 'P' to access your emails."
         "options": [
           {
             "selection": "a",

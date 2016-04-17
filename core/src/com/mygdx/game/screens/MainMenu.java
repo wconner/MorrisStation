@@ -10,14 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
 //import com.testoverlay.IntroScreen;
-import com.testoverlay.OverlayScreen;
+import com.testoverlay.IntroScreen;
 
 /**
  * @author matheusdev
@@ -30,14 +29,7 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            //game.setScreen(new IntroScreen(new Stage(), game));
-            switchScreen(new GameScreen(new Stage(),game));
-        }
-    };
-    private final InputListener emailListener = new TouchUpListener() {
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new OverlayScreen(new Stage(), game));
+            game.setScreen(new IntroScreen(new Stage(), game));
         }
     };
     private final InputListener exitListener = new TouchUpListener() {
@@ -60,18 +52,14 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
 
         TextButton play = new TextButton("Morris Town", skin);
-        TextButton email = new TextButton("Test", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
-        email.addListener(emailListener);
         exit.addListener(exitListener);
 
         table = new Table(skin);
         table.row();
         table.add(play).size(320, 64).space(8);
-        table.row();
-        table.add(email).size(320, 64).space(8);
         table.row();
         table.add(exit).size(320, 64).space(8);
         table.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
@@ -87,26 +75,6 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
         stage.draw();
     }
-    public void switchScreen(final DefaultScreen newScreen){
-        stage.getRoot().getColor().a = 1f;
-        RunnableAction runnableAction = new RunnableAction();
-        runnableAction.setRunnable(new Runnable() {
-            @Override
-            public void run() {
-                game.setScreen(newScreen);
-            }
-        });
-        fadeOut(.5f);
-        runnableAction.run();
-        /*SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(fadeOut(0.5f));
-        sequenceAction.addAction(runnableAction);
-        stage.getRoot().addAction(sequenceAction);*/
-    }
-
-
-
-
 
     @Override
     public void resize(int width, int height) {
@@ -116,7 +84,6 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -176,10 +143,4 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
-
-    /*@Override
-    public boolean isParentVisible() {
-        return false;
-    }*/
-
 }

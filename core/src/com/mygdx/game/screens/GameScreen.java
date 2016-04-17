@@ -2,7 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,7 +23,6 @@ import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.JsonTest;
 import com.testoverlay.EmailGame;
 import com.testoverlay.MastermindGame;
-import com.testoverlay.OverlayScreen;
 import com.testoverlay.PasswordGame;
 
 import java.util.ArrayList;
