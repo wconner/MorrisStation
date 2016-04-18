@@ -40,7 +40,7 @@
       },
       {
         "id": 2,
-        "phrase": "The door has been locked and the passkey has been reset, you must re-download the password from your emails.  Press 'P' to access your emails."
+        "phrase": "The door has been locked and the passkey has been reset, you must re-download the password from your emails.  Press 'P' to access your emails.",
         "options": [
           {
             "selection": "a",
@@ -51,12 +51,60 @@
       },
       {
         "id": 3,
-        "phrase": "Test success",
+        "phrase": "Good job downloading the correct attachments from your email, ever since the attack we've been getting a lot of phishy emails",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "Is that even a real word?",
+            "nextDialogue": 6
+          },
+          {
+            "selection": "b",
+            "phrase": "Wow your speech got a lot better.",
+            "nextDialogue": 5
+          },
+          {
+            "selection": "c",
+            "phrase": "Whats the next step chief?",
+            "nextDialogue": 4
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "phrase": "Report to Jack, he is in charge of this station, he'll tell you what to do next, he should be in the control room.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "On it.",
             "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "phrase": "My AI is equipped with self learning through autonomous self-exploration and social exploration.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Wow, that's amazing",
+            "nextDialogue": 4
+          },
+          {
+            "selection": "b",
+            "phrase": "That is slightly terrifying",
+            "nextDialogue": 4
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "phrase": "A phishing email is an email sent from an illegitimate source that will try to extract personal information through such as your password\n or email address.",
+        "options":[
+          {
+            "selection": "a",
+            "phrase": "Ahh, I saw a bunch of those",
+            "nextDialogue": 4
           }
         ]
       }

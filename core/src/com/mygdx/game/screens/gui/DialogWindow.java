@@ -49,6 +49,9 @@ public class DialogWindow {
 
         window = new Window("Player", skin);
         window.row().fill().expandX();
+        window.setMovable(false);
+        window.setHeight(100);
+        window.setWidth(1200);
 
         label = new Label("Welcome to MY Town", skin);
         label.setWrap(true);
@@ -60,7 +63,7 @@ public class DialogWindow {
         window.add(contentLabel).padLeft(5).padRight(5).padBottom(20).expandX();
 //Remember to add the content to the window.
 
-        window.pack();
+        //window.pack();
 
 
         return window;

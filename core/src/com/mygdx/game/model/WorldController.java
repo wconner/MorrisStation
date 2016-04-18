@@ -18,10 +18,8 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.util.Constants;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 import com.mygdx.game.util.MapBodyManager;
-
-import java.util.ArrayList;
 
 /**
  * Created by Ian on 12/21/2014.
@@ -49,7 +47,7 @@ public class WorldController implements InputProcessor {
     public DialogWindow dialogWindow;
     private DialogButtons DB;
     private Stage stage;
-    private JsonTest jsonTest;
+    private JsonParser jsonParser;
 
     /**
      * Actor initialization
@@ -88,7 +86,7 @@ public class WorldController implements InputProcessor {
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD / 2);
 
         if (actors.size > 1)
-            jsonTest = ((NPC) actors.get(1)).getJsonTest();
+            jsonParser = ((NPC) actors.get(1)).getJsonTest();
 
         /**Initiate everything*/
         initActors();
@@ -279,15 +277,14 @@ public class WorldController implements InputProcessor {
             dialogWindow.hide();
             return true;
         }
-
-        //@TODO Make this a hash?
+        
         /** This is now the action key */
         else if (keycode == Keys.SPACE) {
             Contact contact;
             boolean eventFound = false;
             int i = 0;
             dialogWindow.show();
-
+            dialogWindow.getWindow().getTitleLabel().setText("Player");
             dialogWindow.setText("What a pretty day in MorrisTown :)");     /** For hitting space with no contacts */
 
             while (!eventFound && i < GameInstance.instance.world.getContactCount()) {      /** This is a while loop and not for so we stop looking for contacts */
@@ -346,15 +343,15 @@ public class WorldController implements InputProcessor {
                     a.clear();
                     a.remove();
                 }
-        window = DB.makeWindow(jsonTest.getDialogOptions());
+        window = DB.makeWindow(jsonParser.getDialogOptions());
         stage.addActor(window);
         dialogWindow.getWindow().getTitleLabel().setText(target.getName());
-        dialogWindow.setText(jsonTest.getDialog());
+        dialogWindow.setText(jsonParser.getDialog());
     }
 
     public void updateDialog(int optionSelected){
-        if (jsonTest.getUpdatedDialogID(optionSelected) != -1) {
-            target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
+        if (jsonParser.getUpdatedDialogID(optionSelected) != -1) {
+            target.setDialogID(jsonParser.getUpdatedDialogID(optionSelected));
             dialogueStart();
         }
         else {

@@ -20,7 +20,7 @@ import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 import com.testoverlay.EmailGame;
 import com.testoverlay.MastermindGame;
 import com.testoverlay.PasswordGame;
@@ -43,7 +43,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
-        new JsonTest();     /** Testing remove this line later */
+        new JsonParser();     /** Testing remove this line later */
         this.game = game;
         initLevels();
         setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
@@ -227,7 +227,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         }
     }
 
-    //move all phone stuff to another class maybe
+    //@TODO move all phone stuff to another class
     public void toggle() {
         MoveToAction moveToAction = new MoveToAction();
         ParallelAction parallelAction = new ParallelAction();

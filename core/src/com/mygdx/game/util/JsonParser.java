@@ -9,20 +9,20 @@ import java.util.ArrayList;
 /**
  * Created by bill on 1/27/16.
  */
-public class JsonTest {
+public class JsonParser {
     private JsonValue jsonValue;
 
     ArrayList<String> dialogOptions, otherOptions;
     String actor, level;
     int dialogID;
 
-    public JsonTest() {
+    public JsonParser() {
         JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(Gdx.files.internal("android/assets/data/Dialogue.json"));
         dialogOptions = new ArrayList<>();
     }
 
-    public JsonTest(String path) {
+    public JsonParser(String path) {
         JsonReader jsonReader = new JsonReader();
         jsonValue = jsonReader.parse(Gdx.files.internal(path));
         otherOptions = new ArrayList<>();
@@ -30,7 +30,7 @@ public class JsonTest {
 
     //@TODO just pass in the NPC being talked to and then get the name/level/dialogID from that NPC.
     /**
-     * This is called before entering dialog to tell JsonTest where it should be looking for the dialog.
+     * This is called before entering dialog to tell JsonParser where it should be looking for the dialog.
      * @param actor The name of the NPC being talked to.
      * @param level The level (scene) where the NPC is being talked to.
      * @param dialogID The dialogID (where in the conversation) of the NPC.

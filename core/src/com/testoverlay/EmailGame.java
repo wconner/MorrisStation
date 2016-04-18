@@ -9,12 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
-import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.EmailTable;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                         }
                         isGameOver = true;
                         ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
+                        ((NPC) gameScreen.getLevels().get(0).getActors().get(1)).setDialogID(3);
                     } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
@@ -97,7 +99,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private TextArea helpWindow;
     private ScrollPane helpScroll;
     private ArrayList<EmailTable> emailTableList;
-    private JsonTest emailReader,systemMessageReader;
+    private JsonParser emailReader,systemMessageReader;
     private int stageLevel;
 
     //private String pwLog;
@@ -108,8 +110,8 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         this.game = game;
         gameScreen = screen;
 
-        emailReader = new JsonTest("android/assets/data/emails.json");
-        systemMessageReader = new JsonTest("android/assets/data/emailInstructions.json");
+        emailReader = new JsonParser("android/assets/data/emails.json");
+        systemMessageReader = new JsonParser("android/assets/data/emailInstructions.json");
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         //inputBox = new TextField("",skin);
