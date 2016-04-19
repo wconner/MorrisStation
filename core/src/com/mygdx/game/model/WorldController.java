@@ -306,7 +306,7 @@ public class WorldController implements InputProcessor {
                         if (fixtureB.isSensor()){
                             dialogWindow.setText("I'm at a sensor.");
                             eventFound = true;
-                            commandWord((String) fixtureB.getBody().getUserData(), fixtureB);
+                            commandWord((String) fixtureB.getBody().getUserData());
                         }
                         else /** For hitting space with a non contact entity */
                             dialogWindow.setText("Nothing to do there :(");
@@ -317,7 +317,6 @@ public class WorldController implements InputProcessor {
             dialogWindow.update(stage);
             DB.update(stage);
         }
-
         // Toggle camera follow
         else if (keycode == Keys.ENTER) {
             //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
@@ -362,7 +361,7 @@ public class WorldController implements InputProcessor {
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
-    private void commandWord(String c,Fixture fixtureB){
+    private void commandWord(String c){
         if (c != null)
             switch(c){
                 case "BRD":

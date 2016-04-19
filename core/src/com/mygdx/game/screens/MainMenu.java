@@ -104,10 +104,6 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
         stage.getRoot().addAction(sequenceAction);*/
     }
 
-
-
-
-
     @Override
     public void resize(int width, int height) {
         //stage.setViewport(width, height, true);
@@ -116,7 +112,6 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -169,17 +164,10 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         return stage.mouseMoved(screenX, screenY);
-
     }
 
     @Override
     public boolean scrolled(int amount) {
         return false;
     }
-
-    /*@Override
-    public boolean isParentVisible() {
-        return false;
-    }*/
-
 }
