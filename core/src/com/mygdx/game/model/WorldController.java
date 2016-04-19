@@ -306,7 +306,7 @@ public class WorldController implements InputProcessor {
                         if (fixtureB.isSensor()){
                             dialogWindow.setText("I'm at a sensor.");
                             eventFound = true;
-                            commandWord((String) fixtureB.getBody().getUserData());
+                            commandWord((String) fixtureB.getBody().getUserData(), fixtureB);
                         }
                         else /** For hitting space with a non contact entity */
                             dialogWindow.setText("Nothing to do there :(");
@@ -362,7 +362,7 @@ public class WorldController implements InputProcessor {
     }
 
     //@TODO explain what the fuck you're doing here, and maybe change it to something less cryptic.
-    private void commandWord(String c){
+    private void commandWord(String c,Fixture fixtureB){
         if (c != null)
             switch(c){
                 case "BRD":
