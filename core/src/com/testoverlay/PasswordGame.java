@@ -29,6 +29,8 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
             if(checkPassword()){
                 label.setText("Good Password!\n" + pwLog);
                 inputBox.setDisabled(true);
+                play.setText("Return to MorrisTown");
+                play.addListener(backListener);
                 inputBox.setColor(Color.CHARTREUSE);
             }
             else {
@@ -56,6 +58,7 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
     private final MainClass game;
     private final Skin skin;
     private final Table table;
+    private TextButton play;
     private String pwLog;
 
     public PasswordGame(Stage stage, MainClass game,GameScreen screen) {
@@ -69,7 +72,7 @@ public class PasswordGame extends DefaultScreen implements InputProcessor {
         label = new Label("Enter a password that is more than 8 characters long and contains at least one number", skin);
 
         table = new Table(skin);
-        TextButton play = new TextButton("Check Password!", skin);
+        play = new TextButton("Check Password!", skin);
         play.addListener(playListener);
 
         TextButton back = new TextButton("Return to MorrisTown", skin);

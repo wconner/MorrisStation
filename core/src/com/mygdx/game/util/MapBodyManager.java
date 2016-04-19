@@ -111,7 +111,7 @@ public class MapBodyManager {
                 shape = getEllipse((EllipseMapObject)object);
             }
             else {
-                logger.error("non suported shape " + object);
+                logger.error("non supported shape " + object);
                 continue;
             }
 

@@ -1,35 +1,316 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="Futuristic_A5" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="21">
+ <tileset firstgid="1" name="Futuristic_A5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
+  <properties>
+   <property name="Close" value="2"/>
+   <property name="Default" value="0"/>
+   <property name="Open" value="1"/>
+  </properties>
   <image source="../tiles/futuristic/Tilesets/Futuristic_A5.png" width="256" height="512"/>
  </tileset>
- <tileset firstgid="513" name="Futuristic_A4" tilewidth="16" tileheight="16">
+ <tileset firstgid="513" name="Futuristic_A4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
   <image source="../tiles/futuristic/Tilesets/Futuristic_A4.png" width="512" height="480"/>
  </tileset>
- <tileset firstgid="1473" name="Futuristic_TileB" tilewidth="16" tileheight="16">
+ <tileset firstgid="1473" name="Futuristic_TileB" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../tiles/futuristic/Tilesets/Futuristic_TileB.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="2497" name="!$doors3" tilewidth="16" tileheight="16">
+ <tileset firstgid="2497" name="!$doors3" tilewidth="16" tileheight="16" tilecount="288" columns="18">
   <image source="../tiles/futuristic/Characters/!$doors3.png" width="288" height="256"/>
+  <tile id="1">
+   <animation>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="73" duration="100"/>
+    <frame tileid="145" duration="100"/>
+    <frame tileid="217" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="2">
+   <animation>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="74" duration="100"/>
+    <frame tileid="146" duration="100"/>
+    <frame tileid="218" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="3">
+   <animation>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="75" duration="100"/>
+    <frame tileid="147" duration="100"/>
+    <frame tileid="219" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="4">
+   <animation>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="76" duration="100"/>
+    <frame tileid="148" duration="100"/>
+    <frame tileid="220" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="19">
+   <animation>
+    <frame tileid="19" duration="100"/>
+    <frame tileid="91" duration="100"/>
+    <frame tileid="163" duration="100"/>
+    <frame tileid="235" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="20">
+   <animation>
+    <frame tileid="20" duration="100"/>
+    <frame tileid="92" duration="100"/>
+    <frame tileid="164" duration="100"/>
+    <frame tileid="236" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="21">
+   <animation>
+    <frame tileid="21" duration="100"/>
+    <frame tileid="93" duration="100"/>
+    <frame tileid="165" duration="100"/>
+    <frame tileid="237" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="22">
+   <animation>
+    <frame tileid="22" duration="100"/>
+    <frame tileid="94" duration="100"/>
+    <frame tileid="166" duration="100"/>
+    <frame tileid="238" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="37">
+   <animation>
+    <frame tileid="37" duration="100"/>
+    <frame tileid="109" duration="100"/>
+    <frame tileid="181" duration="100"/>
+    <frame tileid="253" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="38">
+   <animation>
+    <frame tileid="38" duration="100"/>
+    <frame tileid="110" duration="100"/>
+    <frame tileid="182" duration="100"/>
+    <frame tileid="254" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="39">
+   <animation>
+    <frame tileid="39" duration="100"/>
+    <frame tileid="111" duration="100"/>
+    <frame tileid="183" duration="100"/>
+    <frame tileid="255" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="40">
+   <animation>
+    <frame tileid="40" duration="100"/>
+    <frame tileid="112" duration="100"/>
+    <frame tileid="184" duration="100"/>
+    <frame tileid="256" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="55">
+   <animation>
+    <frame tileid="55" duration="100"/>
+    <frame tileid="127" duration="100"/>
+    <frame tileid="199" duration="100"/>
+    <frame tileid="271" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="56">
+   <animation>
+    <frame tileid="56" duration="100"/>
+    <frame tileid="128" duration="100"/>
+    <frame tileid="200" duration="100"/>
+    <frame tileid="272" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="57">
+   <animation>
+    <frame tileid="57" duration="100"/>
+    <frame tileid="129" duration="100"/>
+    <frame tileid="201" duration="100"/>
+    <frame tileid="273" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="2785" name="Futuristic_TileE" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileE.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3809" name="!$siren" tilewidth="16" tileheight="16" tilecount="414" columns="18">
+  <image source="../tiles/futuristic/Characters/!$siren.png" width="297" height="376"/>
+ </tileset>
+ <tileset firstgid="4223" name="!$teleporter" tilewidth="16" tileheight="16" tilecount="192" columns="12">
+  <image source="../tiles/futuristic/Characters/!$teleporter.png" width="192" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="62" duration="100"/>
+    <frame tileid="110" duration="100"/>
+    <frame tileid="158" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="4415" name="!doors1" tilewidth="16" tileheight="16" tilecount="2304" columns="72">
+  <image source="../tiles/futuristic/Characters/!doors1.png" width="1152" height="512"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="73" duration="100"/>
+    <frame tileid="361" duration="100"/>
+    <frame tileid="649" duration="100"/>
+    <frame tileid="937" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="37">
+   <animation>
+    <frame tileid="37" duration="100"/>
+    <frame tileid="325" duration="100"/>
+    <frame tileid="613" duration="100"/>
+    <frame tileid="901" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="38">
+   <animation>
+    <frame tileid="38" duration="100"/>
+    <frame tileid="326" duration="100"/>
+    <frame tileid="614" duration="100"/>
+    <frame tileid="902" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="39">
+   <animation>
+    <frame tileid="39" duration="100"/>
+    <frame tileid="327" duration="100"/>
+    <frame tileid="615" duration="100"/>
+    <frame tileid="903" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="40">
+   <animation>
+    <frame tileid="40" duration="100"/>
+    <frame tileid="328" duration="100"/>
+    <frame tileid="616" duration="100"/>
+    <frame tileid="904" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="109">
+   <animation>
+    <frame tileid="109" duration="100"/>
+    <frame tileid="397" duration="100"/>
+    <frame tileid="685" duration="100"/>
+    <frame tileid="973" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="110">
+   <animation>
+    <frame tileid="110" duration="100"/>
+    <frame tileid="398" duration="100"/>
+    <frame tileid="686" duration="100"/>
+    <frame tileid="974" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="111">
+   <animation>
+    <frame tileid="111" duration="100"/>
+    <frame tileid="399" duration="100"/>
+    <frame tileid="687" duration="100"/>
+    <frame tileid="975" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="112">
+   <animation>
+    <frame tileid="112" duration="100"/>
+    <frame tileid="400" duration="100"/>
+    <frame tileid="688" duration="100"/>
+    <frame tileid="976" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="181">
+   <animation>
+    <frame tileid="181" duration="100"/>
+    <frame tileid="469" duration="100"/>
+    <frame tileid="757" duration="100"/>
+    <frame tileid="1045" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="182">
+   <animation>
+    <frame tileid="182" duration="100"/>
+    <frame tileid="470" duration="100"/>
+    <frame tileid="758" duration="100"/>
+    <frame tileid="1046" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="183">
+   <animation>
+    <frame tileid="183" duration="100"/>
+    <frame tileid="471" duration="100"/>
+    <frame tileid="759" duration="100"/>
+    <frame tileid="1047" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="184">
+   <animation>
+    <frame tileid="184" duration="100"/>
+    <frame tileid="472" duration="100"/>
+    <frame tileid="760" duration="100"/>
+    <frame tileid="1048" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="253">
+   <animation>
+    <frame tileid="253" duration="100"/>
+    <frame tileid="541" duration="100"/>
+    <frame tileid="829" duration="100"/>
+    <frame tileid="1117" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="254">
+   <animation>
+    <frame tileid="254" duration="100"/>
+    <frame tileid="542" duration="100"/>
+    <frame tileid="830" duration="100"/>
+    <frame tileid="1118" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="255">
+   <animation>
+    <frame tileid="255" duration="100"/>
+    <frame tileid="543" duration="100"/>
+    <frame tileid="831" duration="100"/>
+    <frame tileid="1119" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="256">
+   <animation>
+    <frame tileid="256" duration="100"/>
+    <frame tileid="544" duration="100"/>
+    <frame tileid="832" duration="100"/>
+    <frame tileid="1120" duration="100"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjZWBg4ANiXirRskAsR0WaWu4aqe7zZGVg8AJibyzYCwsbnUZm+wBxJiv13JcDNKuTlXrh10MD92VS2X2dI8h9IPNWAvEqIF5NBXoNEAMAiO0wIg==
+   eJyt0EsOgjAQBuDZ9Bh6m+IjboteQIgJW8UTiCbsPYHG19bE4/kT2jgOQwzExRfoMP3p1BqiUQ9jcBDD3FvAEpKOUtjDGjZeDluft2NCv1ynYs3zcpGXiH2aQqyrvKOC5xUdtOWd4NzDBZ4wIKIh1c8X1hOY9mSpFnkz1FbmuxYLlpr7rFKvejNkHcxnzfeEfc6zSlb4FvtvpXI+fkbe70TNslqQsTxtBtnP74D/O7yXfl5HTTLfUfsd8vvj55PzOVHT5uAz/DpfJPZofTLvCje4/+H5gDfaEHnQ
   </data>
  </layer>
  <layer name="Ground Detail" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxFwczIw8HASL04IaAP16GDRh0t8FJAHfnMyHPgFxD+B+AcQU2reS6AZL4D4ORA/o4J514FmXAPiq0B8hQrmHQWacQSIDwPxISAGAIrIG50=
+   eJztzDkOgmAUReFb/gQb2IYuwaFmWIZiUDbisBFkcHMCLceC0KFBYsVNvuYl70jzvt3ekQ6IcHR+7+U0CpR4TtB70ahQo/nQsy1pAc9IPgKEpr+/t3alDbbYucO9JT8rxDROOCMx/X3sLjSuuOFuxne6pTQeyJBP0Jv337XKWhN5
   </data>
  </layer>
  <layer name="Object" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJzVz9kKgUEYxvGhjCOKm7AUd8H3UdzFh7LchaU4tdyApTi13IjlRiyH/mqEqK+m98TUr6femZ7eyYWUysMRSBceKqgKZA1tdNAVyN4f7DfFDHOBXCASVioKm+PpT4+ToSvr09fn7UB/zxPMkkghbe5LdJV9+pa8Xf3oc5i5KKBo7pt0tSz/W6ejoV8peeLGkN1GGGNisWcAwbdc07HBFjuLvpjZ65l7Og444iSw35mOC664Cex3B4v/UYk=
+   eJxjYBgFgw04cjAwOAGxMxC7cFBmVh8z+RgXaAS6qQmIm4G4Bc19IH38nAwMApzEu3Eh0IxFQLwYiJdg8a8+0CwDEswbjEAIiqeyMzBMA+LpQDyDnXRzGIGYCYneCjRjGxBvB+IdZJgnCHUXjL4KNOMaEF8H4htUcN9XoBnfgPg7EP+ggvsArgcdRQ==
   </data>
  </layer>
  <layer name="Object Detail" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxmcZGNgOAXEp4H4DBvl5r0EmvEKiF8D8RsqmDcKRgEyAACJXwcF
+   eJxjYBgFgw04cjAwOAGxMxC7cFBuXiLQjCQgTgbiFKh53JwMDDxAfJKNgeEUEJ8G4jNsCHFSgTZQjw4QvwSa8QqIXwPxGzaE+CgYBdQAAIasCv0=
   </data>
  </layer>
  <layer name="High" width="20" height="15">
@@ -37,23 +318,24 @@
    eJxjYBgFo2AUjIKhAQAEsAAB
   </data>
  </layer>
- <objectgroup name="Obstacles" width="20" height="15">
-  <object name="Lamp" x="17" y="147"/>
-  <object name="Dresser" x="240" y="96" width="64" height="64"/>
-  <object name="Chair" x="152" y="112" width="16" height="24"/>
-  <object name="Bed" x="0" y="192" width="64" height="40"/>
-  <object name="Table" x="128" y="96" width="64" height="32"/>
-  <object name="Floor Lamp 1" x="111" y="110"/>
-  <object name="Floor Lamp 2" x="207" y="111"/>
-  <object name="Window" x="0" y="80" width="320" height="16"/>
-  <object name="West Wall" x="0" y="96" width="8" height="144"/>
-  <object name="East Wall" x="312" y="96" width="8" height="144"/>
-  <object name="South Wall" x="0" y="231" width="320" height="8"/>
-  <object name="Door" x="260" y="180" width="52" height="52">
+ <objectgroup name="Obstacles" offsetx="4.66667" offsety="4.66667">
+  <object id="2" name="Dresser" x="11.3333" y="74.6667" width="64" height="57.3333"/>
+  <object id="3" name="Chair" x="147.333" y="110" width="16" height="24"/>
+  <object id="4" name="Bed" x="-4.66667" y="189.333" width="64" height="40"/>
+  <object id="5" name="Table" x="123.333" y="88.6667" width="64" height="32"/>
+  <object id="6" name="Floor Lamp 1" x="107.667" y="106"/>
+  <object id="7" name="Floor Lamp 2" x="203" y="107"/>
+  <object id="8" name="Window" x="0" y="80" width="237.333" height="28"/>
+  <object id="9" name="West Wall" x="0.666667" y="92.6667" width="8" height="144"/>
+  <object id="10" name="East Wall" x="302" y="88" width="8" height="144"/>
+  <object id="11" name="South Wall" x="-6" y="222.333" width="320" height="8"/>
+  <object id="12" name="Door" x="241.333" y="51.333" width="52.6667" height="54.6667">
    <properties>
+    <property name="anim" type="bool" value="true"/>
     <property name="name" value="door"/>
     <property name="sensor" value="true"/>
    </properties>
   </object>
+  <object id="18" name="Top Wall" x="235.333" y="82" width="79.3333" height="10"/>
  </objectgroup>
 </map>

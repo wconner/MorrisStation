@@ -219,7 +219,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
                 game.setScreen(new PasswordGame(stage, game, this));
                 break;
             case "Mastermind":
-                game.setScreen(new MastermindGame(stage,game,this,"1234"));
+                game.setScreen(new MastermindGame(stage,game,this,"int"));
                 break;
             default:
                 game.setScreen(new EmailGame(stage, game, this));
