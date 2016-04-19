@@ -134,33 +134,64 @@
       }
     ]
   },
-  "boss": {
+  "Jack": {
     "base": [
       {
         "id": 0,
-        "phrase": "I'm your boss, and a dick.",
+        "phrase": "PRIVATE! Where in the galaxy have you been! The communications have been down for the past hour now\n and I haven't seen you out here at all!",
         "options": [
           {
             "selection": "a",
-            "phrase": "Got it, dick.",
-            "nextDialogue": -1
+            "phrase": "I was locked inside my room sir.",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "b",
+            "phrase": "What's going on?",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "c",
+            "phrase": "Do you what autonomous self-exploration is?",
+            "nextDialogue": 1
           }
         ]
       },
       {
         "id": 1,
-        "phrase": "Good job on cracking the password!",
+        "phrase": "That's not important.  wWat is important is you getting this station back up and operational IMMEDIATELY!",
         "options": [
           {
             "selection": "a",
-            "phrase": "You know me",
+            "phrase": "There is something wrong with the security.",
+            "nextDialogue": 2
+          },
+          {
+            "selection": "b",
+            "phrase": "How do I do that?",
+            "nextDialogue": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight\n out of the airlocks Go talk to Melanie she'll get you started.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Ok I'm going",
+            "nextDialogue": -1
+          },
+          {
+            "selection": "b",
+            "phrase": "Sir Yes Sir!",
             "nextDialogue": -1
           }
         ]
       }
     ]
   },
-  "friend": {
+  "Melanie": {
     "base": [
       {
         "id": 0,

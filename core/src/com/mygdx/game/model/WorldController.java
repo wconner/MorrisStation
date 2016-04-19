@@ -104,7 +104,7 @@ public class WorldController implements InputProcessor {
         DB = new DialogButtons(stage, this);
         if (!((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive()) { /** Set Dialog box for first time entering game */
             stage.addActor(dialogWindow.makeWindow());
-            dialogWindow.setText("Something's gone wrong.  I should go talk to Bit Daemon the robot over there.");
+            dialogWindow.setText("Something has gone wrong.  I should go talk to Bit Daemon the robot over there.");
         }
         else {
             stage.addActor(dialogWindow.makeWindow());
@@ -277,7 +277,7 @@ public class WorldController implements InputProcessor {
             dialogWindow.hide();
             return true;
         }
-        
+
         /** This is now the action key */
         else if (keycode == Keys.SPACE) {
             Contact contact;
@@ -318,7 +318,6 @@ public class WorldController implements InputProcessor {
             DB.update(stage);
         }
 
-
         // Toggle camera follow
         else if (keycode == Keys.ENTER) {
             //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
@@ -326,7 +325,6 @@ public class WorldController implements InputProcessor {
             Gdx.app.debug(TAG, "Camera follow enabled: " +
                     cameraHelper.hasTargetAbstract());
             return true;
-
         }
         return false;
     }
