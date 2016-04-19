@@ -16,8 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
-//import com.testoverlay.IntroScreen;
-import com.testoverlay.OverlayScreen;
+import com.testoverlay.IntroScreen;
 
 /**
  * @author matheusdev

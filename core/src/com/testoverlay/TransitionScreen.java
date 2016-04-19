@@ -25,7 +25,7 @@ public class TransitionScreen extends DefaultScreen {
                 game.setScreen(new MastermindGame(stage,game,screen,def));
                 break;
             default:
-                game.setScreen(new OverlayScreen(stage, game, screen));
+                game.setScreen(new IntroScreen(stage, game));
 
         }
 
