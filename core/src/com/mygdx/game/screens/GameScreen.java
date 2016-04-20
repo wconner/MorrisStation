@@ -57,7 +57,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         //createPhoneButtons
         Skin skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         Window window = new Window("Phone", skin);
-        TextButton play = new TextButton("Return to Morris Town", skin);
+        TextButton play = new TextButton("Return to Morris Station", skin);
         TextButton email = new TextButton("E-Mail", skin);
         TextButton pwGame = new TextButton("Password Game", skin);
         TextButton exit = new TextButton("Exit", skin);
