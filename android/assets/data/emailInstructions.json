@@ -3,16 +3,16 @@
   "systemMessages": {
     "instructions1": "                                                              Hello and welcome to your Email Screen!\n\n                                Select the correct Emails to save by reading through the list of emails.\n                                            =To view an email, click on the email from the Email List.=\n                                      =To select an email to save, tick the checkbox next to the email.=\n                            For security reasons, we are going to delete all other emails after you're done.\n\n                                 Please choose carefully and thank you for choosing Morris Systems Inc.",
     "badEmails":"Error, the system's security system picked up one or more bad emails among chosen emails. \n\n Please reconsider your selection of emails.\nIf you get stuck, please click on the \"Hints\" Button.",
-    "wellDone1":"Well done, all the good emails have been saved.\n\nYou have gotten the door's passcode!\nIt is now saved to your device.",
+    "wellDone1":"Well done, all the good emails have been saved.\n\nYou have gotten the door's passcode!\nIt is now saved to your device. \nPlease hit the \"Return to Morris Station\" button to return.",
     "notEnough": "I am pretty sure there are more emails I need to save...."
   },
   "hints":{
-    "scams": "[Message from Robo Butler]: Emails from offcial sources will never ask for personal information.\nIf they do be very weary of trusting such emails.",
-    "bad":"[Message from Robo Butler]: Unless you are expecting an email with an attachment, never download\n any emails asking you to download any sort of file.",
-    "spam":"[Message from Robo Butler]: If something seems too good to be true, it probably is.\n This is especially true for email messages.",
-    "hint1":"[Message from Robo Butler]: It's usually a good idea to suspect all emails that ask you \nto click on links unless you were expecting such an email to be sent yo you.",
-    "hint2":"[Message from Robo Butler]: If there are discrepancies in an email from an official company,\n take caution in trusting the email. Official companies will almost always make sure that emails\nare resolved of errors before sending them.",
-    "hint3":""
+    "scams": "[Message from Bit Daemon]: Emails from offcial sources will never ask for personal information.\nIf they do be very weary of trusting such emails.",
+    "bad":"[Message from Bit Daemon]: Unless you are expecting an email with an attachment, never download\n any emails asking you to download any sort of file.",
+    "spam":"[Message from Bit Daemon]: If something seems too good to be true, it probably is.\n This is especially true for email messages.",
+    "hint1":"[Message from Bit Daemon]: It's usually a good idea to suspect all emails that ask you \nto click on links unless you were expecting such an email to be sent yo you.",
+    "hint2":"[Message from Bit Daemon]: If there are discrepancies in an email from an official company,\n take caution in trusting the email. Official companies will almost always make sure that emails\nare resolved of errors before sending them.",
+    "hint3":"[Message from Bit Daemon]: If emails describe actions that you have not initiated, such as applying for something you never signed up yourself, then use caution in trusting such emails."
   }
 
 }
