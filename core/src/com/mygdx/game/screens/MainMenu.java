@@ -6,6 +6,8 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,6 +27,9 @@ import com.testoverlay.IntroScreen;
 public class MainMenu extends DefaultScreen implements InputProcessor {
 
     private static final String TAG = MainMenu.class.getName();
+    private SpriteBatch background;
+    private Texture backgroundImage;
+
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
@@ -52,11 +57,14 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
 
-        TextButton play = new TextButton("Morris Town", skin);
+        TextButton play = new TextButton("Play", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         play.addListener(playListener);
         exit.addListener(exitListener);
+
+        background = new SpriteBatch();
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/background/planetsWithTitle.jpg"));
 
         table = new Table(skin);
         table.row();
@@ -73,7 +81,9 @@ public class MainMenu extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
+        background.begin();
+        background.draw(backgroundImage, 0, -200, 1200, 1200);
+        background.end();
         stage.draw();
     }
     public void switchScreen(final DefaultScreen newScreen){

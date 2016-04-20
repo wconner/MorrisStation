@@ -62,17 +62,21 @@ public class DialogButtons implements InputProcessor{
         switch(dialog.size()) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.setText(dialog.get(3));
+                option4.getLabel().setFontScale(1.5f);
                 root.add(option4);
             case 3:
                 option3.setText(dialog.get(2));
+                option3.getLabel().setFontScale(1.5f);
                 root.row();
                 root.add(option3);
             case 2:
                 option2.setText(dialog.get(1));
+                option2.getLabel().setFontScale(1.5f);
                 root.row();
                 root.add(option2);
             case 1:
                 option1.setText(dialog.get(0));
+                option1.getLabel().setFontScale(1.5f);
                 root.row();
                 root.add(option1);
                 break;
@@ -82,8 +86,9 @@ public class DialogButtons implements InputProcessor{
         root.left();
         root.pad(5,0,5,5);
         window.add(root);
-        window.pack();
-        window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() * .34f), 100, Gdx.graphics.getWidth() / 3, 140);
+        window.setPosition(800,150);
+        window.setHeight(175);
+        window.setWidth(600);
         window.left();
         window.setVisible(true);
         window.setName("DB");

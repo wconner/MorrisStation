@@ -99,7 +99,7 @@
       },
       {
         "id": 6,
-        "phrase": "A phishing email is an email sent from an illegitimate source that will try to extract personal information through such as your password\n or email address.",
+        "phrase": "A phishing email is an email sent from an illegitimate source that will try to extract personal information through such as your password or email address.",
         "options":[
           {
             "selection": "a",
@@ -127,7 +127,7 @@
     "base": [
       {
         "id": 0,
-        "phrase": "PRIVATE! Where in the galaxy have you been! The communications have been down for the past hour now\n and I haven't seen you out here at all!",
+        "phrase": "PRIVATE! Where in the galaxy have you been! The communications have been down for the past hour now and I haven't seen you out here at all!",
         "options": [
           {
             "selection": "a",
@@ -164,7 +164,7 @@
       },
       {
         "id": 2,
-        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight\n out of the airlocks! Go talk to Melanie she'll get you started.",
+        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight out of the airlocks! Go talk to Melanie she'll get you started.",
         "options": [
           {
             "selection": "a",

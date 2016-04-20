@@ -150,7 +150,12 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
     public void switchScreen(final com.mygdx.game.screens.DefaultScreen newScreen){
         stage.getRoot().getColor().a = 1f;
         RunnableAction runnableAction = new RunnableAction();
-        runnableAction.setRunnable(() -> game.setScreen(newScreen));
+        runnableAction.setRunnable(new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(newScreen);
+            }
+        });
         fadeOut(.5f);
         runnableAction.run();
     }
