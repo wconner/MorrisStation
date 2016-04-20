@@ -83,10 +83,11 @@ public class DialogButtons implements InputProcessor{
         root.pad(5,0,5,5);
         window.add(root);
         window.pack();
-        window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() * .34f), 90, Gdx.graphics.getWidth() / 3, 140);
+        window.setBounds(Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() * .34f), 100, Gdx.graphics.getWidth() / 3, 140);
         window.left();
         window.setVisible(true);
         window.setName("DB");
+        window.setMovable(false);
         return window;
     }
 

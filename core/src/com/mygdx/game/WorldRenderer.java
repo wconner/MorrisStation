@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -39,6 +41,7 @@ public class WorldRenderer implements Disposable {
     private Stage stage;
     private Box2DDebugRenderer debugRenderer;
     private Texture background;
+    private TiledMapTileLayer layer2;
 
     /**
      * Default constructor
@@ -78,12 +81,10 @@ public class WorldRenderer implements Disposable {
          * Sets the main camera
          */
         viewportCamera = new OrthographicCamera();
-        viewportCamera.setToOrtho(false,Constants.VIEWPORT_WIDTH,
+        viewportCamera.setToOrtho(false, Constants.VIEWPORT_WIDTH,
                 Constants.VIEWPORT_HEIGHT);
         viewportCamera.position.set(0, 0, 0);
         viewportCamera.update();
-
-
     }
 
 
@@ -94,6 +95,10 @@ public class WorldRenderer implements Disposable {
     public void render (){
         renderWorld(batch);
         renderDisplay();
+    }
+
+    public void updateDoorAnimation(){
+        ((TiledMapTileLayer) worldController.getLevel().getMap().getLayers().get(1)).getCell(17, 5);
     }
 
 

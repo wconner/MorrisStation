@@ -5,9 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.util.Constants;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -32,7 +31,7 @@ public class NPC extends AbstractDynamicObject {
     private TextureRegion npcTexture;
     private int dialogID;
     private String name, levelName;
-    private static JsonTest jsonTest = new JsonTest();
+    private static JsonParser jsonParser = new JsonParser();
     private float initialX, initialY, movementX, movementY;
     private int state;
 
@@ -61,14 +60,14 @@ public class NPC extends AbstractDynamicObject {
     }
 
     public void setDialog(){
-        jsonTest.setDialog(name, levelName, dialogID);
+        jsonParser.setDialog(name, levelName, dialogID);
     }
-    public void setDialogID(int id) { dialogID = id; jsonTest.setDialog(name, levelName, dialogID);}
+    public void setDialogID(int id) { dialogID = id; jsonParser.setDialog(name, levelName, dialogID);}
     public int getDialogID(){ return dialogID;}
     public String getName() {
         return name;
     }
-    public JsonTest getJsonTest(){ return jsonTest;}
+    public JsonParser getJsonTest(){ return jsonParser;}
 
     private int prevState = 1;
     private float sleep = 0;

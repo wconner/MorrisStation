@@ -18,10 +18,8 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
 import com.mygdx.game.util.Constants;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 import com.mygdx.game.util.MapBodyManager;
-
-import java.util.ArrayList;
 
 /**
  * Created by Ian on 12/21/2014.
@@ -49,7 +47,7 @@ public class WorldController implements InputProcessor {
     public DialogWindow dialogWindow;
     private DialogButtons DB;
     private Stage stage;
-    private JsonTest jsonTest;
+    private JsonParser jsonParser;
 
     /**
      * Actor initialization
@@ -88,7 +86,7 @@ public class WorldController implements InputProcessor {
         cameraHelper.setPosition(Constants.GAME_WORLD / 2, Constants.GAME_WORLD / 2);
 
         if (actors.size > 1)
-            jsonTest = ((NPC) actors.get(1)).getJsonTest();
+            jsonParser = ((NPC) actors.get(1)).getJsonTest();
 
         /**Initiate everything*/
         initActors();
@@ -104,7 +102,14 @@ public class WorldController implements InputProcessor {
         visible = false;
         dialogWindow = new DialogWindow();
         DB = new DialogButtons(stage, this);
-        stage.addActor(dialogWindow.makeWindow());
+        if (!((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive()) { /** Set Dialog box for first time entering game */
+            stage.addActor(dialogWindow.makeWindow());
+            dialogWindow.setText("Something has gone wrong.  I should go talk to Bit Daemon the robot over there.");
+        }
+        else {
+            stage.addActor(dialogWindow.makeWindow());
+            dialogWindow.hide();
+        }
     }
 
     /**
@@ -183,22 +188,18 @@ public class WorldController implements InputProcessor {
     private void handleDebugInput (float deltaTime) {
         if (Gdx.app.getType() != Application.ApplicationType.Desktop) return;
 
-        if(Gdx.input.isKeyPressed(Keys.W)) {
+        if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
             player.moveCharacter(1);
-            //player.setAnimState(2);
-        }
-        if(Gdx.input.isKeyPressed(Keys.A)) {
+
+        if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
             player.moveCharacter(2);
-            //player.setAnimState(0);
-        }
-        if(Gdx.input.isKeyPressed(Keys.S)) {
+
+        if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
             player.moveCharacter(0);
-            //player.setAnimState(1);
-        }
-        if(Gdx.input.isKeyPressed(Keys.D)) {
+
+        if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
             player.moveCharacter(3);
-            //player.setAnimState(3);
-        }
+
 
         if(Gdx.input.isKeyPressed(Keys.F)){
             float angle = 1 * 90 * MathUtils.degRad;
@@ -266,23 +267,24 @@ public class WorldController implements InputProcessor {
         else if (keycode == Keys.B){
             dialogWindow.setText(player.randomText());
             return true;
-
         }
+
+        else if (keycode == Keys.P || keycode == Keys.ESCAPE)
+            gameScreen.toggle();
 
         else if (keycode == Keys.V){
             initInput();
             dialogWindow.hide();
             return true;
-
         }
 
-        //@TODO Make this a hash?
         /** This is now the action key */
         else if (keycode == Keys.SPACE) {
             Contact contact;
             boolean eventFound = false;
             int i = 0;
-
+            dialogWindow.show();
+            dialogWindow.getWindow().getTitleLabel().setText("Player");
             dialogWindow.setText("What a pretty day in MorrisTown :)");     /** For hitting space with no contacts */
 
             while (!eventFound && i < GameInstance.instance.world.getContactCount()) {      /** This is a while loop and not for so we stop looking for contacts */
@@ -293,8 +295,6 @@ public class WorldController implements InputProcessor {
                 if (fixtureB.getBody() == player.getBody())
                     swapFixtures();
                 if (fixtureA.getBody() == player.getBody()) {
-                    if (!dialogWindow.isHidden())                /** Displaying the dialog window. */
-                        dialogWindow.hide();
 
                     for (AbstractDynamicObject a : actors)              /** Checking to see if talking to an actor. */
                         if (fixtureB.getBody() == a.getBody()) {
@@ -304,7 +304,6 @@ public class WorldController implements InputProcessor {
                         }
                     if (!eventFound) {
                         if (fixtureB.isSensor()){
-                            dialogWindow.setText("I'm at a sensor.");
                             eventFound = true;
                             commandWord((String) fixtureB.getBody().getUserData());
                         }
@@ -317,8 +316,6 @@ public class WorldController implements InputProcessor {
             dialogWindow.update(stage);
             DB.update(stage);
         }
-
-
         // Toggle camera follow
         else if (keycode == Keys.ENTER) {
             //cameraHelper.setTargetAbstract(cameraHelper.hasTarget() ? null : dude);
@@ -326,7 +323,6 @@ public class WorldController implements InputProcessor {
             Gdx.app.debug(TAG, "Camera follow enabled: " +
                     cameraHelper.hasTargetAbstract());
             return true;
-
         }
         return false;
     }
@@ -343,15 +339,15 @@ public class WorldController implements InputProcessor {
                     a.clear();
                     a.remove();
                 }
-        window = DB.makeWindow(jsonTest.getDialogOptions());
+        window = DB.makeWindow(jsonParser.getDialogOptions());
         stage.addActor(window);
         dialogWindow.getWindow().getTitleLabel().setText(target.getName());
-        dialogWindow.setText(jsonTest.getDialog());
+        dialogWindow.setText(jsonParser.getDialog());
     }
 
     public void updateDialog(int optionSelected){
-        if (jsonTest.getUpdatedDialogID(optionSelected) != -1) {
-            target.setDialogID(jsonTest.getUpdatedDialogID(optionSelected));
+        if (jsonParser.getUpdatedDialogID(optionSelected) != -1) {
+            target.setDialogID(jsonParser.getUpdatedDialogID(optionSelected));
             dialogueStart();
         }
         else {
@@ -371,6 +367,7 @@ public class WorldController implements InputProcessor {
                         changeLevels(0);
                     break;
                 case "door":
+                    gameScreen.doorAnimTest();
                     if (((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive())
                         changeLevels(1);
                     else

@@ -1,4 +1,4 @@
-// Connor Tested asdsda
+
 package com.mygdx.game;
 
 import com.badlogic.gdx.Application;

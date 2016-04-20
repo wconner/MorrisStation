@@ -2,7 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,10 +20,9 @@ import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 import com.testoverlay.EmailGame;
 import com.testoverlay.MastermindGame;
-import com.testoverlay.OverlayScreen;
 import com.testoverlay.PasswordGame;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
-        new JsonTest();     /** Testing remove this line later */
+        new JsonParser();     /** Testing remove this line later */
         this.game = game;
         initLevels();
         setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
@@ -105,9 +103,6 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     @Override
     public void render(float delta) {
 
-        // Update game world by the time that has passed
-        // since last rendered frame.
-        handleDebugInput();
         if (!paused) {
             // Update game
             worldController.update(Gdx.graphics.getDeltaTime());
@@ -224,7 +219,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
                 game.setScreen(new PasswordGame(stage, game, this));
                 break;
             case "Mastermind":
-                game.setScreen(new MastermindGame(stage,game,this,"1234"));
+                game.setScreen(new MastermindGame(stage,game,this,"int"));
                 break;
             default:
                 game.setScreen(new EmailGame(stage, game, this));
@@ -232,8 +227,8 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         }
     }
 
-    //move all phone stuff to another class maybe
-    private void toggle() {
+    //@TODO move all phone stuff to another class
+    public void toggle() {
         MoveToAction moveToAction = new MoveToAction();
         ParallelAction parallelAction = new ParallelAction();
         if (phoneDisplay.isVisible()) {
@@ -278,26 +273,11 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             phoneDisplay.setVisible(true);
             Gdx.input.setInputProcessor(stage);
             pauseEnabled = false;
-
         }
         pauseSwap();
     }
 
-    private void handleDebugInput() {
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            screenSwap("default");
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            if (pauseEnabled)
-                pauseSwap();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            if (pauseEnabled)
-                toggle();
-        }
-
-    }
+    public void doorAnimTest(){ worldRenderer.updateDoorAnimation();}
 
     @Override
     public boolean keyDown(int keycode) {

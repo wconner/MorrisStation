@@ -3,18 +3,21 @@ package com.testoverlay;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
-import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.EmailTable;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,6 +45,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                         }
                         isGameOver = true;
                         ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
+                        ((NPC) gameScreen.getLevels().get(0).getActors().get(1)).setDialogID(3);
                     } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
@@ -108,7 +112,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            gameScreen.getWorldController().getDialog().hide();
+            //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
             for(Actor a: stage.getActors()) {
                 a.setVisible(false);
@@ -127,8 +131,11 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private TextArea helpWindow;
     private ScrollPane helpScroll;
     private ArrayList<EmailTable> emailTableList;
-    private JsonTest emailReader,systemMessageReader;
+    private JsonParser emailReader,systemMessageReader;
     private int stageLevel;
+    private int NUMEMAILS = 5;
+    private SpriteBatch background;
+    private Texture backgroundImage;
 
     public EmailGame(Stage stage, MainClass game,GameScreen screen) {
         super(stage, game);
@@ -136,8 +143,11 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         this.game = game;
         gameScreen = screen;
 
-        emailReader = new JsonTest("android/assets/data/emails.json");
-        systemMessageReader = new JsonTest("android/assets/data/emailInstructions.json");
+        emailReader = new JsonParser("android/assets/data/emails.json");
+        systemMessageReader = new JsonParser("android/assets/data/emailInstructions.json");
+
+        background = new SpriteBatch();
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/phonebackground.png"));
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
 
@@ -315,18 +325,10 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
+        background.begin();
+        background.draw(backgroundImage, 0, 0, 800, 800);
+        background.end();
         stage.draw();
-
-
     }
 
     @Override

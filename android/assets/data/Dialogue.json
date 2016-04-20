@@ -1,51 +1,46 @@
 {
-  "robot": {
+  "Bit Daemon": {
     "bedroom": [
       {
         "id": 0,
-        "phrase": "Welcome to MorrisTown, do you want me to repeat this introduction?",
+        "phrase": "Hard Reset... Error Code: 254... On emergency protocols...",
         "options": [
           {
             "selection": "a",
-            "phrase": "No I heard you fine the first time chief.",
+            "phrase": "Do you always talk like that?.",
             "nextDialogue": 1
           },
           {
             "selection": "b",
-            "phrase": "Yeah, I didn't quite catch that.",
-            "nextDialogue": 0
-          },
-          {
-            "selection": "c",
-            "phrase": "YOLO",
-            "nextDialogue": 2
+            "phrase": "What's going on here?",
+            "nextDialogue": 1
           }
         ]
       },
       {
         "id": 1,
-        "phrase": "Please call me Sir-Chief.",
+        "phrase": "Attack from external threats. Network taken offline, security measures reinitialized.",
         "options": [
           {
             "selection": "a",
-            "phrase": "Alright there sparky.",
+            "phrase": "Guess so..",
             "nextDialogue": 2
           },
           {
             "selection": "b",
-            "phrase": "Haha, very funny.",
+            "phrase": "What does that mean?",
             "nextDialogue": 2
           },
           {
             "selection": "c",
-            "phrase": "YES CHEF!",
+            "phrase": "Alright there sparky.",
             "nextDialogue": 2
           }
         ]
       },
       {
         "id": 2,
-        "phrase": "Ok, take your phone, you can press 'P' to access it, and head through the door by pressing space.",
+        "phrase": "The door has been locked and the passkey has been reset, you must re-download the password from your emails.  Press 'P' to access your emails.",
         "options": [
           {
             "selection": "a",
@@ -56,12 +51,60 @@
       },
       {
         "id": 3,
-        "phrase": "Test success",
+        "phrase": "Good job downloading the correct attachments from your email, ever since the attack we've been getting a lot of phishy emails",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "Is that even a real word?",
+            "nextDialogue": 6
+          },
+          {
+            "selection": "b",
+            "phrase": "Wow your speech got a lot better.",
+            "nextDialogue": 5
+          },
+          {
+            "selection": "c",
+            "phrase": "Whats the next step chief?",
+            "nextDialogue": 4
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "phrase": "Report to Jack, he is in charge of this station, he'll tell you what to do next, he should be in the control room.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "On it.",
             "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "phrase": "My AI is equipped with self learning through autonomous self-exploration and social exploration.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Wow, that's amazing",
+            "nextDialogue": 4
+          },
+          {
+            "selection": "b",
+            "phrase": "That is slightly terrifying",
+            "nextDialogue": 4
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "phrase": "A phishing email is an email sent from an illegitimate source that will try to extract personal information through such as your password\n or email address.",
+        "options":[
+          {
+            "selection": "a",
+            "phrase": "Ahh, I saw a bunch of those",
+            "nextDialogue": 4
           }
         ]
       }
@@ -77,39 +120,75 @@
             "nextDialogue": -1
           }
         ]
-      },
-      {
-        "id": 3,
-        "phrase": "Test success",
-        "options": [
-          {
-            "selection": "a",
-            "phrase": "He sure is.",
-            "nextDialogue": -1
-          }
-        ]
       }
     ]
   },
-  "boss": {
+  "Jack": {
     "base": [
       {
         "id": 0,
-        "phrase": "I'm your boss, and a dick.",
+        "phrase": "PRIVATE! Where in the galaxy have you been! The communications have been down for the past hour now\n and I haven't seen you out here at all!",
         "options": [
           {
             "selection": "a",
-            "phrase": "Got it, dick.",
-            "nextDialogue": -1
+            "phrase": "I was locked inside my room sir.",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "b",
+            "phrase": "What's going on?",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "c",
+            "phrase": "Do you what autonomous self-exploration is?",
+            "nextDialogue": 1
           }
         ]
       },
       {
         "id": 1,
-        "phrase": "Good job on cracking the password!",
+        "phrase": "That's not important.  What is important is you getting this station back up and operational IMMEDIATELY!",
         "options": [
           {
             "selection": "a",
+            "phrase": "There is something wrong with the security.",
+            "nextDialogue": 2
+          },
+          {
+            "selection": "b",
+            "phrase": "How do I do that?",
+            "nextDialogue": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight\n out of the airlocks! Go talk to Melanie she'll get you started.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "Ok I'm going",
+            "nextDialogue": -1
+          },
+          {
+            "selection": "b",
+            "phrase": "Sir Yes Sir!",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Good job cracking that password kid.",
+        "options":[
+          {
+            "selection": "a",
+            "phrase": "Thanks",
+            "nextDialogue": -1
+          },
+          {
+            "selection": "b",
             "phrase": "You know me",
             "nextDialogue": -1
           }
@@ -117,7 +196,7 @@
       }
     ]
   },
-  "friend": {
+  "Melanie": {
     "base": [
       {
         "id": 0,

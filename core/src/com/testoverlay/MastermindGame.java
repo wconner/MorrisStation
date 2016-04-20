@@ -13,6 +13,7 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Justin Shen on 2/22/2016.
@@ -20,12 +21,13 @@ import java.util.ArrayList;
  */
 public class MastermindGame extends DefaultScreen implements InputProcessor {
     private static final String TAG = MastermindGame.class.getName();
+    private static int NUM_OF_DIGITS = 5;
     private Label label;
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             password = "";
-            for(int i = 0; i < pw.length(); i++) {
+            for (int i = 0; i < pw.length(); i++) {
                 if (!inputs.get(i).getText().equals("")) {
                     password += inputs.get(i).getText();
                     if (pw.charAt(i) == password.charAt(i)) {
@@ -40,12 +42,10 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
                         play.setText("Return to MorrisTown");
                         play.addListener(backListener);
                         status = true;
-                    }
-                    else {
+                    } else {
                         label.setText("The correct numbers have been locked in, please fix the remaining numbers");
                     }
-                }
-                else {
+                } else {
                     inputs.get(i).setColor(Color.GOLDENROD);
                     label.setText("Please fill in every entry");
                 }
@@ -56,12 +56,12 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            if(status){
-               ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(1);
+            if (status) {
+                ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(3);
             }
             //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
-            for(Actor a: stage.getActors()) {
+            for (Actor a : stage.getActors()) {
                 a.setVisible(false);
             }
             gameScreen.getWorldController().initInput();
@@ -102,8 +102,8 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         back.addListener(backListener);
         table.add(label);
         table.row();
-        for (int i = 0; i< 4; i++){
-            inputs.add(new TextField("",skin));
+        for (int i = 0; i < NUM_OF_DIGITS; i++) {
+            inputs.add(new TextField("", skin));
             inputs.get(i).setMaxLength(1);
             inputs.get(i).setAlignment(1);
             inputs.get(i).pack();
@@ -117,12 +117,46 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
         stage.addActor(back);
 
-        pw = pass;
+        pw = pwGen(pass, NUM_OF_DIGITS);
     }
 
 
+    private static String pwGen(String s, int len) {
+        String pw = "";
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        Random rand = new Random();
+
+        for (int i = 0; i < len; i++) {
+            switch (s) {
+                case "int":
+                    pw += rand.nextInt(10);
+                    break;
+                case "str":
+                    pw += alphabet[rand.nextInt(26)];
+                    break;
+                case "both":
+                    if (rand.nextBoolean()) {
+                        pw += pw += rand.nextInt(10);
+                    } else {
+                        pw += alphabet[rand.nextInt(26)];
+                    }
+                default:
+                    pw += 0;
+            }
+        }
+        return pw;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public int getNumOfDigits() {
+        return NUM_OF_DIGITS;
+    }
+
+    public void setNumOfDigits(int i) {
+        NUM_OF_DIGITS = i;
     }
 
     @Override
