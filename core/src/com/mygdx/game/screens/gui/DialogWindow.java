@@ -50,7 +50,7 @@ public class DialogWindow {
         window = new Window("Player", skin);
         window.row().fill().expandX();
         window.setMovable(false);
-        window.setHeight(100);
+        window.setHeight(150);
         window.setWidth(1200);
 
         label = new Label("Welcome to MY Town", skin);
@@ -59,8 +59,9 @@ public class DialogWindow {
         window.row().prefWidth(Gdx.graphics.getWidth() * 0.98f);
         contentLabel = new Label("", skin);
         contentLabel.setWrap(true);
-        contentLabel.setScale(5f);
-        window.add(contentLabel).padLeft(5).padRight(5).padBottom(20).expandX();
+        contentLabel.setFontScale(1.5f);
+        //contentLabel.setScale(5f);
+        window.add(contentLabel).padLeft(-50).padRight(50).padBottom(20).expandX();
 //Remember to add the content to the window.
 
         //window.pack();
@@ -104,14 +105,11 @@ public class DialogWindow {
 
     private Label label(String text){
         final Label label = new Label("", skin);
-        //label.setAlignment(Align.left);
         label.setText(text);
 
         Table table = new Table();
         table.add(label).width(35).space(12);
-        //table.add(slider);
 
-        //root.add(text);
         root.add(table).fill().row();
         return label;
     }
