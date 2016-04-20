@@ -1,30 +1,30 @@
 [
   {
-    "sender": "robot@Morris.com",
+    "sender": "BitDaemon@Morris.com",
     "subject": "Download protocol for barracks door",
-    "body": "Good job getting to your email! Here is the download protocol your going to need to unlock the door.",
+    "body": "Good job getting to your email! Here is the download protocol your going to need to unlock the door.\n\nprotocolKey.exe_(35.2MB)",
     "type": "good"
   },
   {
-    "sender": "rubot@Moorriss.com",
-    "subject": "DOWNLOAD THIS",
-    "body": "You need to download this now!\n\n\nTotallyNotAVirusDownloadNow.exe_(1.5GB)",
+    "sender": "SecurityTeam@MorrisSecurity.hyde.gov",
+    "subject": "Security Breach in Email system",
+    "body": "Attention all Security staff,\n\nThis is the Information Board Of Human Resources.\nToday at 12:35PM there was a security breach in the our mailing system, causing many emails to \nbe sent to our employees, impersonating Morris Station Staff. \nYou must download the following file from the servers within 3 days of reciving this email.\nFailirue to do so, will result in your account being suspended.\n\nSETUP.EXE_(800.MB)\n\nFrom,\nMorris Station Security",
     "type": "bad"
   },
   {
-  "sender": "offers@gameripoffs.com",
+  "sender": "SurveyBureau@MorrisFacultyOffers.net",
   "subject": "Extra 50% trade in credit",
-  "body": "If you come in this weekend you will be able to take advantage of some great offers!\nCheck out the offers! \nhttps://www.partycitydiscounts.com/specialsale",
+  "body": "Earlier this week, you have agreed to take part in our survey about the conditions of your position as an employee of Morris Station.\nThis following survey will take about 12 to 15 minutes to complete and you will recive a code for a $300 gift card\n for your trouble. This code will arrive via email within two weeks of the completed survey.\n HawkPartners, an independent market research firm, along with SSI, a global provider of data solutions and technology,\n is conducting this survey on behalf of a major, U.S. based financial services company.\n\n All responses provided in this survey will be anonymous and confidential.\n\nPlease click on the below link to start the online survey:\n Click here: https://survey.Sab.golpicksLabs.md.cor.net/mell",
   "type": "spam"
   },
   {
-    "sender": "prince@totallyreal.com",
-    "subject": "Please Help Me!",
-    "body": "I am a prince from a real place, I need your help. Please give your bank account information so I Can transfer money to your account!\nPlease enter your information in this link: \nhttps://www.quickscammoney.com",
+    "sender": "cutomerservice@Notifications.g.com",
+    "subject": "Morris Station Alert",
+    "body": "Dear Employee, The following alert has been posted to your net ID in our systems,regarding an unauthorized access to your account:\n\n*Confidential Alert*\n\nWe implore you to follow our site\n (https://alerts.morris.n.frok.net) \nto confirm your personal details to avoid account suspended from our system.\n\nThank you,\n\nMorris Town Service",
     "type": "scams"
   },
   {
-    "sender": "faculty@maintenance.org",
+    "sender": "Faculty@Maintenance.org",
     "subject": "Latest Equipment Check",
     "body": "Just a heads up everyone, there is going to be an equipment check at the end of the week.",
     "type": "good"
@@ -32,7 +32,7 @@
   {
     "sender": "faculty@matainence.com",
     "subject": "Message from staff portal",
-    "body": "You have new important message from the Staff portal\nClick here to read\n\nThank you\nMorris Station\nAll rights reserved.",
+    "body": "You have new important message from the Staff portal\nClick here to read\nhttps://forums.g.dmr.showcin.formato.mp\n\nThank you\nMorris Station\nAll rights reserved.",
     "type": "bad"
   },
   {
@@ -42,15 +42,15 @@
   "type": "bad"
   },
   {
-    "sender": "[placeholder for good email]",
-    "subject": "[placeholder for good email]",
-    "body": "[placeholder for good email]",
+    "sender": "SecurityTeam@MorrisSecurity.gov",
+    "subject": "Security Breach in Email system",
+    "body": "Attention all Security staff,\n\nToday at 12:35PM there was a security breach in the our mailing system, causing many emails to \nbe sent to our employees, impersonating Morris Station Staff. Please take care in reading your emails.\n\nFrom,\nMorris Station Security",
     "type": "good"
   },
   {
     "sender": "boardOfMorrisStation@morris.com",
     "subject": "IT Service Help-Desk",
-    "body": "We are shutting down your present  Account to create space for Morris Station mail with a high visual definition and Space.\n This service creates more space and easy access to email. Please update your account by clicking on the link below and fill information for activation.\nCLICKHERE\nFollow the procedure and complete information by clicking SUBMIT. A new space will be created within 48 hours.\nThank you for understanding.\nMorris Station Finacial Service Desk",
+    "body": "We are shutting down your present  Account to create space for Morris Station mail with a high visual definition and Space.\n This service creates more space and easy access to email. Please update your account by clicking on the link below and fill information for activation.\n\nCLICKHERE\n\nFollow the procedure and complete information by clicking SUBMIT. A new space will be created within 48 hours.\n\nThank you for understanding.\n\nMorris Station Finacial Service Desk",
     "type": "bad"
   },
 

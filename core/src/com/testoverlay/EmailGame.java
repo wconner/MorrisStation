@@ -33,7 +33,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
             if(!isGameOver) {
                 int goodNum;
                 if(stageLevel<=9){
-                    goodNum = 2;
+                    goodNum = 3;
                 }
                 else{
                     goodNum = 1;
@@ -112,16 +112,19 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            //gameScreen.getWorldController().getDialog().hide();
-            game.setScreen(gameScreen);
-            for(Actor a: stage.getActors()) {
-                a.setVisible(false);
-            }
-            gameScreen.getWorldController().initInput();
-            gameScreen.resume();
+            returnToGame();
+
         }
     };
 
+    private void returnToGame(){
+        game.setScreen(gameScreen);
+        for(Actor a: stage.getActors()) {
+            a.setVisible(false);
+        }
+        gameScreen.getWorldController().initInput();
+        gameScreen.resume();
+    }
 
     private GameScreen gameScreen;
     private final MainClass game;
@@ -166,7 +169,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         emWindow = new TextArea("",skin);
         helpWindow = new TextArea("",skin);
 
-        TextButton back = new TextButton("Return to MorrisTown", skin);
+        TextButton back = new TextButton("Return to Morris Station", skin);
 
         back.addListener(backListener);
         emailTableList = new ArrayList<>();
@@ -223,19 +226,19 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         Table helpTable = new Table(skin);
         Table helpTableButtons =new Table(skin);
         checkingButtonsTable.row();
-        checkingButtonsTable.add(checkEmail).size(175, 40).space(8);
-        checkingButtonsTable.row();
+        helpTableButtons.add(checkEmail).size(175, 40).space(8);
+        helpTableButtons.row();
         helpTableButtons.add(instructionsButton).size(120, 25).space(8);
         helpTableButtons.row();
         helpTableButtons.add(helpButton).size(120, 25).space(8);
         Table emailContainer = new Table(skin);
         emailContainer.add(checkingButtonsTable).space(8);
         emailContainer.add(innerTab);
-        emailContainer.add(emWindow).size(450,500).space(8);
+        emailContainer.add(emWindow).size(425,500).space(8);
         table.add(emailContainer);
         table.row();
         helpTable.add(helpTableButtons);
-        helpTable.add(helpWindow).size(800, 175).space(8);
+        helpTable.add(helpWindow).size(750, 175).space(8);
         table.add(helpTable).space(8);
 
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -326,7 +329,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     @Override
     public void render(float delta) {
         background.begin();
-        background.draw(backgroundImage, 0, 0, 800, 800);
+        background.draw(backgroundImage, 0, 0, 1100, 800);
         background.end();
         stage.draw();
     }
