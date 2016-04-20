@@ -21,37 +21,12 @@
     "sender": "prince@totallyreal.com",
     "subject": "Please Help Me!",
     "body": "I am a prince from a real place, I need your help. Please give your bank account information so I Can transfer money to your account!\nPlease enter your information in this link: \nhttps://www.quickscammoney.com",
-    "type": "scams"
+    "type": "spam"
   },
   {
     "sender": "faculty@maitainence.org",
     "subject": "Latest Equipment Check",
     "body": "Just a heads up everyone, there is going to be an equipment check at the end of the week.",
     "type": "good"
-  },
-  {
-    "sender": "faculty@matainence.com",
-    "subject": "Message from staff portal",
-    "body": "You have new important message from the Staff portal\nClick here to read\n\nThank you\nMorris Station\nAll rights reserved.",
-    "type": "bad"
-  },
-  {
-  "sender": "facultyAid@yawho.com",
-  "subject": "Morris Station Mailing News",
-  "body": "Dear faculty member,\n\nThis is the Board of Security.\nSystem maintenance is scheduled for 09h15 today, you are required to update your access below to \nenable accessibility to the Morris Station System.\n\nUPDATE YOUR ACCESS HERE:\nhttps://MorrisStation.juppersHoxer.com\n\nBest Regaurds,\nMorris Station Committee",
-  "type": "bad"
-  },
-  {
-    "sender": "[placeholder for good email]",
-    "subject": "[placeholder for good email]",
-    "body": "[placeholder for good email]",
-    "type": "good"
-  },
-  {
-    "sender": "boardOfMorrisStation@morris.com",
-    "subject": "IT Service Help-Desk",
-    "body": "We are shutting down your present  Account to create space for Morris Station mail with a high visual definition and Space.\n This service creates more space and easy access to email. Please update your account by clicking on the link below and fill information for activation.\nCLICKHERE\nFollow the procedure and complete information by clicking SUBMIT. A new space will be created within 48 hours.\nThank you for understanding.\nMorris Station Finacial Service Desk",
-    "type": "bad"
-  },
-
+  }
 ]
