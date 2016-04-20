@@ -58,6 +58,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if (status) {
                 ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(3);
+                ((NPC) gameScreen.getLevels().get(1).getActors().get(1)).setDialogID(3);
             }
             //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
@@ -98,7 +99,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         play = new TextButton("Test Password!", skin);
         play.addListener(playListener);
 
-        TextButton back = new TextButton("Return to MorrisTown", skin);
+        TextButton back = new TextButton("Return to Morris Station", skin);
         back.addListener(backListener);
         table.add(label);
         table.row();
