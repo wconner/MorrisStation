@@ -7,9 +7,12 @@
     "notEnough": "I am pretty sure there are more emails I need to save...."
   },
   "hints":{
-    "scams": "[Message from Robo Butler]: Watch out for scams",
-    "viruses":"[Message from Robo Butler]: Watch out for viruses",
-    "spam":"[Message from Robo Butler]: Watch out for spam"
+    "scams": "[Message from Robo Butler]: Emails from offcial sources will never ask for personal information.\nIf they do be very weary of trusting such emails.",
+    "bad":"[Message from Robo Butler]: Unless you are expecting an email with an attachment, never download\n any emails asking you to download any sort of file.",
+    "spam":"[Message from Robo Butler]: If something seems too good to be true, it probably is.\n This is especially true for email messages.",
+    "hint1":"[Message from Robo Butler]: It's usually a good idea to suspect all emails that ask you \nto click on links unless you were expecting such an email to be sent yo you.",
+    "hint2":"[Message from Robo Butler]: If there are discrepancies in an email from an official company,\n take caution in trusting the email. Official companies will almost always make sure that emails\nare resolved of errors before sending them.",
+    "hint3":""
   }
 
 }
