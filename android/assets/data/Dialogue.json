@@ -112,11 +112,27 @@
     "base": [
       {
         "id": 0,
-        "phrase": "Oh hi MC, your boss is a dick.",
+        "phrase": "I came across an extra phishy email, wanna here about it?",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "Sure",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "b",
+            "phrase": "Not now, got to save the base.",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "phrase": "My SpaceBook account had a link that went to 'SpaceBook.com', but when I hovered over the link, it said it went to 'goldscammers.eft'",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "I'll keep an eye out for that.",
             "nextDialogue": -1
           }
         ]
@@ -200,22 +216,54 @@
     "base": [
       {
         "id": 0,
-        "phrase": "Oh hi MC, your boss is a dick.",
+        "phrase": "Where have you been? I've been trying to keep this place floating all by my self for the past hour!",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "My door was locked.",
+            "nextDialogue": 1
+          },
+          {
+            "selection": "a",
+            "phrase": "The robot was holding me hostage.",
+            "nextDialogue": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "phrase": "I've got to assess the damage and see how much of our data those hackers stole, but first I need you to break the password they've put on our servers.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "That's what I'm here for.",
+            "nextDialogue": 2
+          },
+          {
+            "selection": "b",
+            "phrase": "How do I do that?",
+            "nextDialogue": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "phrase": "Go to the console in the south west side of the room, the white one.  You'll have to break the code from there.",
+        "options": [
+          {
+            "selection": "a",
+            "phrase": "I'm on it.",
             "nextDialogue": -1
           }
         ]
       },
       {
         "id": 3,
-        "phrase": "Test success",
+        "phrase": "Nice job cracking that password, that's all we got for this demo version.  Thanks for playing!",
         "options": [
           {
             "selection": "a",
-            "phrase": "He sure is.",
+            "phrase": "Thank you.",
             "nextDialogue": -1
           }
         ]
