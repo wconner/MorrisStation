@@ -3,25 +3,29 @@ package com.testoverlay;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
-import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.EmailTable;
-import com.mygdx.game.util.JsonTest;
+import com.mygdx.game.util.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EmailGame extends DefaultScreen implements InputProcessor {
-   // private TextField inputBox;
-   // private Label label;
     private boolean isGameOver;
+    private String helpPlayer;
+    private int helpCounter;
 
     private final InputListener checkListen = new TouchUpListener() {
         @Override
@@ -32,7 +36,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                     goodNum = 2;
                 }
                 else{
-                    goodNum = 4;
+                    goodNum = 1;
                 }
                 if(!notEnoughChecked(goodNum)) {
                     if (checkEmails("good")) {
@@ -41,6 +45,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                         }
                         isGameOver = true;
                         ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
+                        ((NPC) gameScreen.getLevels().get(0).getActors().get(1)).setDialogID(3);
                     } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
@@ -70,15 +75,44 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if(!isGameOver) {
-                helpWindow.setText(systemMessageReader.getItemField("hints", "scams"));
+                setHelpWindow();
             }
         }
     };
 
+    private void setHelpWindow(){
+        if(helpPlayer.equals("")) {
+            Random rand = new Random();
+            int hintNum = rand.nextInt(3);
+            if(hintNum==0){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "scams"));
+            }else if(hintNum==1){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "bad"));
+            }
+            else if(hintNum==2){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "spam"));
+            }
+        }else if(helpCounter<=2){
+            helpWindow.setText(systemMessageReader.getItemField("hints", helpPlayer));
+        }else if(helpCounter>2){
+            Random rand = new Random();
+            int hintNum = rand.nextInt(3);
+            if(hintNum==0){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "hint1"));
+            }else if(hintNum==1){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "hint2"));
+            }
+            else if(hintNum==2){
+                helpWindow.setText(systemMessageReader.getItemField("hints", "hint3"));
+            }
+        }
+
+    }
+
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            gameScreen.getWorldController().getDialog().hide();
+            //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
             for(Actor a: stage.getActors()) {
                 a.setVisible(false);
@@ -97,10 +131,11 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private TextArea helpWindow;
     private ScrollPane helpScroll;
     private ArrayList<EmailTable> emailTableList;
-    private JsonTest emailReader,systemMessageReader;
+    private JsonParser emailReader,systemMessageReader;
     private int stageLevel;
-
-    //private String pwLog;
+    private int NUMEMAILS = 5;
+    private SpriteBatch background;
+    private Texture backgroundImage;
 
     public EmailGame(Stage stage, MainClass game,GameScreen screen) {
         super(stage, game);
@@ -108,48 +143,19 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         this.game = game;
         gameScreen = screen;
 
-        emailReader = new JsonTest("android/assets/data/emails.json");
-        systemMessageReader = new JsonTest("android/assets/data/emailInstructions.json");
+        emailReader = new JsonParser("android/assets/data/emails.json");
+        systemMessageReader = new JsonParser("android/assets/data/emailInstructions.json");
+
+        background = new SpriteBatch();
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/phonebackground.png"));
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
-        //inputBox = new TextField("",skin);
-        //label = new Label("", skin);
 
+        helpPlayer = "";
+        helpCounter =0;
         Table innerTab = new Table(skin);
         Table checkingButtonsTable = new Table(skin);
         table = new Table(skin);
-        /*
-        Table subTA = new Table(skin);
-        Table subTB = new Table(skin);
-        Table subTC = new Table(skin);
-        TextButton goodEmail = new TextButton("gmail", skin);
-        TextButton badEmail = new TextButton("bmail", skin);
-        TextButton checkEmail = new TextButton("Check Selected Emails", skin);
-        CheckBox gCheck = new CheckBox("", skin);
-        CheckBox bCheck = new CheckBox("", skin);
-        goodEmail.addListener(eListener);
-
-        TextButton back = new TextButton("Return to MorrisTown", skin);
-        back.addListener(backListener);
-        table.row();
-        table.add(label);
-        table.row();
-        table.add(instructionsButton);
-        table.row();
-        subTA.add(gCheck);
-        subTA.add(goodEmail).size(320, 30).space(8);
-        table.add(subTA);
-        table.row();
-        subTB.add(bCheck);
-        subTB.add(badEmail).size(320, 30).space(8);
-        table.add(subTB);
-        table.row();
-        table.add(checkEmail).size(320, 30).space(8);
-        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        stage.addActor(table);
-        back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
-        stage.addActor(back);
-        */
 
         TextButton checkEmail = new TextButton("Save Selected Emails", skin);
         checkEmail.addListener(checkListen);
@@ -163,11 +169,32 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         TextButton back = new TextButton("Return to MorrisTown", skin);
 
         back.addListener(backListener);
-//        innerTab.row();
-//        innerTab.add(label);
         emailTableList = new ArrayList<>();
         if(stageLevel<=9) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 9; i++) {
+
+                String emailName = emailReader.getItemField(i,"sender") ;
+                TextButton emailButton = new TextButton(emailName, skin);
+
+
+                CheckBox check = new CheckBox("", skin);
+                EmailTable et = new EmailTable(emailButton, check);
+
+                et.setType(emailReader.getItemField(i,"type"));
+
+
+                emailTableList.add(et);
+                et.getEmailButton().addListener(new ButtListener(i));
+
+                et.setSender(emailReader.getItemField(i,"sender"));
+                et.setSubject(emailReader.getItemField(i,"subject"));
+                et.seteMessage(emailReader.getItemField(i,"body"));
+
+                innerTab.row();
+                innerTab.add(et).size(420, 30).space(8);
+            }
+        }else if(stageLevel>9) {
+            for (int i = 0; i < 9; i++) {
 
                 String emailName = emailReader.getItemField(i,"sender") ;
                 TextButton emailButton = new TextButton(emailName, skin);
@@ -193,12 +220,6 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         helpWindow.setText(systemMessageReader.getItemField("systemMessages","instructions1"));
         String windText = "From: \nSubject: \n\nMessage:\n";
         emWindow.setText(windText);
-       /*
-        helpWindow.setPrefRows(8);
-        helpScroll = new ScrollPane(helpWindow,skin);
-        helpScroll.setForceScroll(false, true);
-        helpScroll.setFlickScroll(false);
-        helpScroll.setOverscroll(false, true);*/
         Table helpTable = new Table(skin);
         Table helpTableButtons =new Table(skin);
         checkingButtonsTable.row();
@@ -224,12 +245,10 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     }
 
     public boolean checkEmails(String type) {
-//        ArrayList<EmailTable> tickedEmails = new ArrayList();
-//        ArrayList<EmailTable> untickedEmails = emailTableList ;
-//        boolean selectedCheck, unselectedCheck;
         for(EmailTable emailTable : emailTableList){
             if(emailTable.getCheckBox().isChecked()){
                 if(!emailTable.getType().equals(type)){
+                    helpPlayer = emailTable.getType();
                     return false;
                 }
             }
@@ -306,18 +325,10 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
+        background.begin();
+        background.draw(backgroundImage, 0, 0, 800, 800);
+        background.end();
         stage.draw();
-
-
     }
 
     @Override
