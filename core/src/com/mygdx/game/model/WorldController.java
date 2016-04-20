@@ -304,7 +304,6 @@ public class WorldController implements InputProcessor {
                         }
                     if (!eventFound) {
                         if (fixtureB.isSensor()){
-                            dialogWindow.setText("I'm at a sensor.");
                             eventFound = true;
                             commandWord((String) fixtureB.getBody().getUserData());
                         }
@@ -368,6 +367,7 @@ public class WorldController implements InputProcessor {
                         changeLevels(0);
                     break;
                 case "door":
+                    gameScreen.doorAnimTest();
                     if (((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive())
                         changeLevels(1);
                     else

@@ -3,6 +3,8 @@ package com.testoverlay;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -101,6 +103,9 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private ArrayList<EmailTable> emailTableList;
     private JsonParser emailReader,systemMessageReader;
     private int stageLevel;
+    private int NUMEMAILS = 5;
+    private SpriteBatch background;
+    private Texture backgroundImage;
 
     //private String pwLog;
 
@@ -112,6 +117,9 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
         emailReader = new JsonParser("android/assets/data/emails.json");
         systemMessageReader = new JsonParser("android/assets/data/emailInstructions.json");
+
+        background = new SpriteBatch();
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/phonebackground.png"));
 
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         //inputBox = new TextField("",skin);
@@ -169,7 +177,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 //        innerTab.add(label);
         emailTableList = new ArrayList<>();
         if(stageLevel<=9) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < NUMEMAILS; i++) {
 
                 String emailName = emailReader.getItemField(i,"sender") ;
                 TextButton emailButton = new TextButton(emailName, skin);
@@ -308,18 +316,10 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(.5f, .7f, .5f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
+        background.begin();
+        background.draw(backgroundImage, 0, 0, 800, 800);
+        background.end();
         stage.draw();
-
-
     }
 
     @Override

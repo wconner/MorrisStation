@@ -120,17 +120,6 @@
             "nextDialogue": -1
           }
         ]
-      },
-      {
-        "id": 3,
-        "phrase": "Test success",
-        "options": [
-          {
-            "selection": "a",
-            "phrase": "He sure is.",
-            "nextDialogue": -1
-          }
-        ]
       }
     ]
   },
@@ -159,7 +148,7 @@
       },
       {
         "id": 1,
-        "phrase": "That's not important.  wWat is important is you getting this station back up and operational IMMEDIATELY!",
+        "phrase": "That's not important.  What is important is you getting this station back up and operational IMMEDIATELY!",
         "options": [
           {
             "selection": "a",
@@ -175,7 +164,7 @@
       },
       {
         "id": 2,
-        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight\n out of the airlocks Go talk to Melanie she'll get you started.",
+        "phrase": "Those blasted hackers have locked us out of our own systems!  If I had them here I'd launch them straight\n out of the airlocks! Go talk to Melanie she'll get you started.",
         "options": [
           {
             "selection": "a",
@@ -185,6 +174,22 @@
           {
             "selection": "b",
             "phrase": "Sir Yes Sir!",
+            "nextDialogue": -1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "phrase": "Good job cracking that password kid.",
+        "options":[
+          {
+            "selection": "a",
+            "phrase": "Thanks",
+            "nextDialogue": -1
+          },
+          {
+            "selection": "b",
+            "phrase": "You know me",
             "nextDialogue": -1
           }
         ]

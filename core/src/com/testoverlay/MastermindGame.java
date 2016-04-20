@@ -57,7 +57,7 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if (status) {
-                ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(1);
+                ((NPC) gameScreen.getLevels().get(1).getActors().get(3)).setDialogID(3);
             }
             //gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);

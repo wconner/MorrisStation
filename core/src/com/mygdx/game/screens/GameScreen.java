@@ -273,10 +273,11 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
             phoneDisplay.setVisible(true);
             Gdx.input.setInputProcessor(stage);
             pauseEnabled = false;
-
         }
         pauseSwap();
     }
+
+    public void doorAnimTest(){ worldRenderer.updateDoorAnimation();}
 
     @Override
     public boolean keyDown(int keycode) {
