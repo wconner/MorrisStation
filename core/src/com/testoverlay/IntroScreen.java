@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.screens.DefaultScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 
@@ -36,7 +37,7 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             if (state == 0){
-                introText.setText("To move around use the arrow keys or ASWD\n" +
+                introText.setText("To move around use the arrow keys or WASD\n" +
                         "to interact with players and objects use the space key\n" +
                         "Good luck!");
                 play.setText("I'm ready!");

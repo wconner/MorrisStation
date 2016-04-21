@@ -121,14 +121,14 @@ public class WorldRenderer implements Disposable {
 
         /**
          * As of right now (1/15/16), each 'level' or map should have 5 layers + the obstacle layer
-         * 2 Background layers (Ground and Ground Detail)
-         * 3 Foreground layers (Object, Object Detail, and High)
+         * 2 Background layers (Ground and Ground Detail, Object)
+         * 3 Foreground layers (Object Detail, and High)
          * Obstacle layer must be named 'Obstacles'
          * If you don't need all 5 layers, just make the layers empty.
          */
 
-        int[] bgLayers = {0,1};
-        int[] fgLayers = {2,3,4,5};
+        int[] bgLayers = {0,1,2};
+        int[] fgLayers = {3,4,5};
 
         batch.begin();
         batch.draw(background, -12, -12, 70, 70);

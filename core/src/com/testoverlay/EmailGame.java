@@ -14,6 +14,7 @@ import com.mygdx.game.MainClass;
 import com.mygdx.game.entities.AbstractDynamicObject;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
+import com.mygdx.game.screens.DefaultScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.EmailTable;

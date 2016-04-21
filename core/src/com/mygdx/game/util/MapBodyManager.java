@@ -143,9 +143,7 @@ public class MapBodyManager {
         }
     }
 
-    public void getSensor(Fixture fixture){
-        return;
-    }
+
 
     /**
      * Destroys every static body that has been created using the manager.

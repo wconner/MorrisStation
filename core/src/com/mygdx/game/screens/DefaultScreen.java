@@ -1,16 +1,16 @@
 package com.mygdx.game.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.MainClass;
 
 public abstract class DefaultScreen implements Screen {
-    protected Game game;
+    protected MainClass game;
     protected Stage stage;
 
-    public DefaultScreen(Stage stage,Game game) {
+    public DefaultScreen(Stage stage,MainClass game) {
         this.game = game;
         this.stage = stage;
     }

@@ -407,6 +407,9 @@ public class WorldController implements InputProcessor {
         fixtureB = temp;
     }
 
+    public GameScreen getGameScreen(){
+        return gameScreen;
+    }
     public DialogWindow getDialog() {
         return dialogWindow;
     }

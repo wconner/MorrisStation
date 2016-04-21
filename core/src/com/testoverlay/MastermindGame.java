@@ -17,9 +17,9 @@ import java.util.Random;
 
 /**
  * Created by Justin Shen on 2/22/2016.
- * Contains the mastermind game, which is a hacking minigame
+ * Contains the mastermind game, which is a hacking minigame showcasing brute force hacking in particular
  */
-public class MastermindGame extends DefaultScreen implements InputProcessor {
+public class MastermindGame extends com.mygdx.game.screens.DefaultScreen implements InputProcessor {
     private static final String TAG = MastermindGame.class.getName();
     private static int NUM_OF_DIGITS = 5;
     private Label label;
@@ -103,7 +103,10 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         back.addListener(backListener);
         table.add(label);
         table.row();
-        for (int i = 0; i < NUM_OF_DIGITS; i++) {
+
+        pw = pwGen(pass); /** Sets the number of digits and generates a random password based on the difficulty */
+
+        for (int i = 0; i < NUM_OF_DIGITS; i++) { /**Generate all the input text fields and place them into the subtable */
             inputs.add(new TextField("", skin));
             inputs.get(i).setMaxLength(1);
             inputs.get(i).setAlignment(1);
@@ -118,32 +121,41 @@ public class MastermindGame extends DefaultScreen implements InputProcessor {
         back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
         stage.addActor(back);
 
-        pw = pwGen(pass, NUM_OF_DIGITS);
+
     }
 
 
-    private static String pwGen(String s, int len) {
+    private static String pwGen(String s) {
         String pw = "";
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         Random rand = new Random();
 
-        for (int i = 0; i < len; i++) {
+
             switch (s) {
-                case "int":
-                    pw += rand.nextInt(10);
+                case "easy":
+                    NUM_OF_DIGITS = 3;
+                    for (int i = 0; i < NUM_OF_DIGITS; i++) {
+                        pw += rand.nextInt(10);
+                    }
                     break;
-                case "str":
-                    pw += alphabet[rand.nextInt(26)];
-                    break;
-                case "both":
-                    if (rand.nextBoolean()) {
-                        pw += pw += rand.nextInt(10);
-                    } else {
+                case "med":
+                    NUM_OF_DIGITS = 3;
+                    for (int i = 0; i < NUM_OF_DIGITS; i++) {
                         pw += alphabet[rand.nextInt(26)];
+                    }
+                    break;
+                case "hard":
+                    NUM_OF_DIGITS = 5;
+                    for (int i = 0; i < NUM_OF_DIGITS; i++) {
+                        if (rand.nextBoolean()) {
+                            pw += pw += rand.nextInt(10);
+                        } else {
+                            pw += alphabet[rand.nextInt(26)];
+                        }
                     }
                 default:
                     pw += 0;
-            }
+
         }
         return pw;
     }

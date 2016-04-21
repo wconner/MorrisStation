@@ -16,7 +16,7 @@ import com.mygdx.game.screens.gui.TouchUpListener;
 /**
  * Created by Justin Shen on 2/22/2016.
  */
-public class PasswordGame extends DefaultScreen implements InputProcessor {
+public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implements InputProcessor {
     private static final String TAG = PasswordGame.class.getName();
     private TextField inputBox;
     private Label label;
