@@ -24,11 +24,12 @@ import com.mygdx.game.util.JsonParser;
 import com.testoverlay.EmailGame;
 import com.testoverlay.MastermindGame;
 import com.testoverlay.PasswordGame;
+import com.testoverlay.TransitionScreen;
 
 import java.util.ArrayList;
 
 
-public class GameScreen extends DefaultScreen implements InputProcessor {
+public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements InputProcessor {
 
     private WorldController worldController;
     private WorldRenderer worldRenderer;
@@ -183,7 +184,10 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
     private final InputListener emailListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            screenSwap("default");
+            pause();
+            worldController.getDialog().hide();
+            phoneDisplay.setVisible(false);
+            game.setScreen(new EmailGame(stage,game,worldController.getGameScreen() ));
         }
     };
 
@@ -214,17 +218,7 @@ public class GameScreen extends DefaultScreen implements InputProcessor {
         //hide();
         worldController.getDialog().hide();
         phoneDisplay.setVisible(false);
-        switch (type) {
-            case "Password":
-                game.setScreen(new PasswordGame(stage, game, this));
-                break;
-            case "Mastermind":
-                game.setScreen(new MastermindGame(stage,game,this,"int"));
-                break;
-            default:
-                game.setScreen(new EmailGame(stage, game, this));
-
-        }
+        game.setScreen(new TransitionScreen(stage, game, this, type));
     }
 
     //@TODO move all phone stuff to another class
