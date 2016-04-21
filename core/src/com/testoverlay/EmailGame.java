@@ -227,11 +227,13 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         Table helpTable = new Table(skin);
         Table helpTableButtons =new Table(skin);
         checkingButtonsTable.row();
-        helpTableButtons.add(checkEmail).size(175, 40).space(8);
+        innerTab.row();
+        innerTab.add(checkEmail).size(225,60).space(8);
+        //helpTableButtons.add(checkEmail).size(175, 40).space(8);
+        //helpTableButtons.row();
+        helpTableButtons.add(instructionsButton).size(120, 40).space(8);
         helpTableButtons.row();
-        helpTableButtons.add(instructionsButton).size(120, 25).space(8);
-        helpTableButtons.row();
-        helpTableButtons.add(helpButton).size(120, 25).space(8);
+        helpTableButtons.add(helpButton).size(120, 40).space(8);
         Table emailContainer = new Table(skin);
         emailContainer.add(checkingButtonsTable).space(8);
         emailContainer.add(innerTab);
