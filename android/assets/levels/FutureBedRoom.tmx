@@ -311,7 +311,7 @@
  </layer>
  <layer name="Ground Detail" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztzrkRglAYReEbPkcTaEOrAA1cGmErBLURl0ikOZYZjxEBxPCC/8x8yY2uZFnTpYGUIUcRLP1m3IdPFb6oPfzX8KlFh37mf+uVtMHRSSeccXHD/i8KpRh7HMJ5/235sEPCpxQZcjfsvlTy6Yob7m7pN+MefHrihbeH/yzLsixrqh//QxPZ
+   eJzt0jEOgkAQRuEpKFa0Wa4hpxA8jIAHEbwIYoVyOYGER0EMgRq2mJd8zVR/MSKatl5iRVJkuNu91yyr2fTBF42D+35satGh33jf8SBygu/NTfexSyASIcY12HbfmQ0hboY/Q4rM/O+u9GBTjgJPs/eaZSWbXqjwdnCfpmmapq01AMoMEsc=
   </data>
  </layer>
  <layer name="Object" width="40" height="20">
@@ -329,9 +329,9 @@
    eJztwTEBAAAAwqD1T20LL6AAAAA+BgyAAAE=
   </data>
  </layer>
- <objectgroup name="Obstacles" offsetx="4.66667" offsety="4.66667">
+ <objectgroup name="Obstacles" visible="0" offsetx="4.66667" offsety="4.66667">
   <object id="2" name="TV" x="11.3333" y="81.3333" width="64" height="44.6667"/>
-  <object id="3" name="Chair" x="147.333" y="110" width="16" height="19.3333"/>
+  <object id="3" name="Chair" x="146.666" y="110" width="20.667" height="19.3333"/>
   <object id="4" name="Bed" x="-4.66667" y="195.333" width="61.3333" height="33.9997"/>
   <object id="5" name="Table" x="123.333" y="88.6667" width="64" height="26.6666"/>
   <object id="8" name="Window" x="0" y="80" width="308.667" height="19.3333"/>

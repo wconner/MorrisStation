@@ -64,8 +64,8 @@
  <objectgroup name="Obstacles">
   <object id="1" name="wall0" x="0" y="592" width="464" height="14"/>
   <object id="2" name="wall2" x="0" y="500" width="16" height="92"/>
-  <object id="3" name="wall3" x="307" y="502.5" width="157" height="16"/>
-  <object id="4" name="wall4" x="406" y="515" width="74" height="109"/>
+  <object id="3" name="wall3" x="305" y="502.5" width="159" height="16"/>
+  <object id="4" name="wall4" x="421" y="515" width="59" height="109"/>
   <object id="5" name="wall5" x="464" y="624" width="176" height="16"/>
   <object id="6" name="wall6" x="464" y="400" width="16" height="119"/>
   <object id="7" name="wall7" x="624" y="400" width="16" height="224"/>
@@ -79,7 +79,7 @@
   <object id="15" name="Main Computers" x="192" y="144" width="192" height="26"/>
   <object id="16" name="Tesla Coil" x="161.5" y="165" width="27.5" height="20.5"/>
   <object id="17" name="Right Cabinets" x="384" y="80" width="96" height="56"/>
-  <object id="18" name="Bottom Right Computer" x="96" y="274.5" width="27.5" height="77.5"/>
+  <object id="18" name="Bottom Right Computer" x="96" y="273" width="27.5" height="79"/>
   <object id="19" name="Kitchen Table" x="544" y="518" width="32" height="53"/>
   <object id="20" name="Left Kitchen Chair" x="523.5" y="550" width="7.5" height="7"/>
   <object id="21" name="Right Kitchen Chair" x="587.5" y="548.5" width="7" height="7"/>
