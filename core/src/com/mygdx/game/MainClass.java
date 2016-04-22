@@ -5,7 +5,9 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.screens.MainMenu;
+import com.testoverlay.IntroScreen;
 
 public class MainClass extends Game {
     private Game game;
@@ -21,7 +23,7 @@ public class MainClass extends Game {
     @Override
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        setScreen(new MainMenu(this));
+        setScreen(new IntroScreen(new Stage(), this));
     }
 
     public void render() {

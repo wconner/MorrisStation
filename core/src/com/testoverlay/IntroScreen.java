@@ -58,7 +58,7 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         introText.setFontScale(2);
 
         background = new SpriteBatch();
-        backgroundImage = new Texture(Gdx.files.internal("android/assets/background/planets.png"));
+        backgroundImage = new Texture(Gdx.files.internal("android/assets/background/planetsWithTitle.jpg"));
 
         play.addListener(playListener);
 
