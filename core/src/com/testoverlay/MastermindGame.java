@@ -28,7 +28,7 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             password = "";
             for (int i = 0; i < pw.length(); i++) {
-                if (!inputs.get(i).getText().equals("") || (!inputs.get(i).getText().equals(" "))) {
+                if (!(inputs.get(i).getText().equals("")) && (!(inputs.get(i).getText().equals(" ")))) {
                     password += inputs.get(i).getText();
                     if (pw.charAt(i) == password.charAt(i)) {
                         inputs.get(i).setDisabled(true);
