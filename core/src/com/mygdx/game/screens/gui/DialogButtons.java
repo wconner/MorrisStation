@@ -86,9 +86,9 @@ public class DialogButtons implements InputProcessor{
         root.left();
         root.pad(5,0,5,5);
         window.add(root);
-        window.setPosition(800,150);
+        window.setPosition(800,125);
         window.setHeight(175);
-        window.setWidth(600);
+        window.setWidth(500);
         window.left();
         window.setVisible(true);
         window.setName("DB");
