@@ -3,7 +3,6 @@ package com.testoverlay;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -28,6 +27,7 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
     private final Skin skin;
     private final Table table;
     private Label infoLabel;
+    private Label diffLabel;
     private TextButton play;
 
 
@@ -53,13 +53,14 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             dif = "easy";
-
+            diffLabel.setText("Difficulty: Easy \nYou will only have to enter numbers");
         }
     };
     private final InputListener medListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             dif = "med";
+            diffLabel.setText("Difficulty: Medium \nYou will only have to enter lowercase letters");
 
         }
     };
@@ -67,6 +68,7 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             dif = "hard";
+            diffLabel.setText("Difficulty: Hard \nYou will have to enter both numbers and lowercase letters");
 
         }
     };
@@ -78,6 +80,7 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
         skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
         table = new Table(skin);
         infoLabel = new Label(type,skin);
+        diffLabel = new Label("",skin);
         dif = "easy";
 
         initUI(type);
@@ -85,47 +88,58 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
 
 
     private void initUI(String type){
-        if(type == "Mastermind") {
-            infoLabel.setText("In this game you must continuously guess different numbers \nuntill they are all locked in");
+        play = new TextButton("Play", skin);
+        play.addListener(playListener);
+        if(type.equals("Mastermind")) {
+            infoLabel.setText("In this game you must continuously guess different numbers \nuntil they are all locked in");
+            infoLabel.setFontScale(1.1f);
+            diffLabel.setText("Difficulty: Easy \nYou will only have to enter numbers");
             Table diffTable = new Table(skin);
             Table buttonTable = new Table(skin);
             TextButton easy = new TextButton("Easy", skin);
             TextButton med = new TextButton("Medium", skin);
             TextButton hard = new TextButton("Hard", skin);
-            play = new TextButton("Play", skin);
-            play.addListener(playListener);
+
 
             easy.addListener(easyListener);
             med.addListener(medListener);
             hard.addListener(hardListener);
 
             table.add(diffTable);
-            table.pad(0f, 15f, 0f, 15f);
-            diffTable.pad(15f, 15f, 15f, 15f);
-            diffTable.add(new Label("Crack the Password!", skin));
+            diffTable.add(new Label("Crack the Password!", skin)).padBottom(10f);
             diffTable.row();
-            diffTable.add(infoLabel);
-            diffTable.row();
+            diffTable.add(infoLabel).padBottom(20f);
             diffTable.row();
             diffTable.center();
-            diffTable.add(play);
+            diffTable.add(play).size(360,50).space(8f).padTop(30f);
 
 
             table.add(buttonTable);
-            buttonTable.pad(10f, 10f, 10f, 10f);
+            buttonTable.add(diffLabel);
             buttonTable.row();
-            buttonTable.add(easy);
+            buttonTable.add(easy).size(70,40).space(8f).padTop(10f).padLeft(15f);
             buttonTable.row();
-            buttonTable.add(med);
+            buttonTable.add(med).size(70,40).space(8f).padLeft(15f);
             buttonTable.row();
-            buttonTable.add(hard);
+            buttonTable.add(hard).size(70,40).space(8f).padLeft(15f);
 
-            table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-            stage.addActor(table);
+
         }
+        else if(type.equals("Password")) {
+            infoLabel = new Label("In this game you will have to create a password that is secure\nSecure passwords are hard to crack and " +
+                    "are a crucial part of keeping your information safe", skin);
+            infoLabel.setFontScale(1.1f);
+            table.add(infoLabel).padBottom(20f);
+            table.row();
+            table.add(play).size(360,50).space(8f).padTop(30f);
 
-
+        }
+        table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        stage.addActor(table);
     }
+
+
+
 
     @Override
     public void show() {

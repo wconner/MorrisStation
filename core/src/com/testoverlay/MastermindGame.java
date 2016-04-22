@@ -28,7 +28,7 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             password = "";
             for (int i = 0; i < pw.length(); i++) {
-                if (!inputs.get(i).getText().equals("")) {
+                if (!inputs.get(i).getText().equals("") || (!inputs.get(i).getText().equals(" "))) {
                     password += inputs.get(i).getText();
                     if (pw.charAt(i) == password.charAt(i)) {
                         inputs.get(i).setDisabled(true);
@@ -38,12 +38,12 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
                     }
 
                     if (password.equals(pw)) {
-                        label.setText("Nice job! You cracked the password! \n The password is: " + password);
+                        label.setText("Nice job! You cracked the password! \nThe password is: " + password);
                         play.setText("Return to MorrisTown");
                         play.addListener(backListener);
                         status = true;
                     } else {
-                        label.setText("The correct numbers have been locked in, please fix the remaining numbers");
+                        label.setText("The correct entries have been locked in, please fix the remaining entries");
                     }
                 } else {
                     inputs.get(i).setColor(Color.GOLDENROD);
@@ -148,15 +148,16 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
                     NUM_OF_DIGITS = 5;
                     for (int i = 0; i < NUM_OF_DIGITS; i++) {
                         if (rand.nextBoolean()) {
-                            pw += pw += rand.nextInt(10);
+                            pw += rand.nextInt(10);
                         } else {
                             pw += alphabet[rand.nextInt(26)];
                         }
                     }
                 default:
-                    pw += 0;
+                    pw += "";
 
         }
+        System.out.println(pw);
         return pw;
     }
 
