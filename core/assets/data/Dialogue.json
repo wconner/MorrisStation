@@ -7,7 +7,7 @@
         "options": [
           {
             "selection": "a",
-            "phrase": "Do you always talk like that?.",
+            "phrase": "Do you always talk like that?",
             "nextDialogue": 1
           },
           {
@@ -51,7 +51,7 @@
       },
       {
         "id": 3,
-        "phrase": "Good job downloading the correct attachments from your email, ever since the attack we've been getting a lot of phishy emails",
+        "phrase": "Good job downloading the correct attachments from your email, ever since the attack we've been getting a lot of phishy emails.",
         "options": [
           {
             "selection": "a",
@@ -87,12 +87,12 @@
         "options": [
           {
             "selection": "a",
-            "phrase": "Wow, that's amazing",
+            "phrase": "Wow, that's amazing!",
             "nextDialogue": 4
           },
           {
             "selection": "b",
-            "phrase": "That is slightly terrifying",
+            "phrase": "That is slightly terrifying.",
             "nextDialogue": 4
           }
         ]
@@ -103,7 +103,7 @@
         "options":[
           {
             "selection": "a",
-            "phrase": "Ahh, I saw a bunch of those",
+            "phrase": "Ahh, I saw a bunch of those.",
             "nextDialogue": 4
           }
         ]
@@ -116,7 +116,7 @@
         "options": [
           {
             "selection": "a",
-            "phrase": "Sure",
+            "phrase": "Sure.",
             "nextDialogue": 1
           },
           {
@@ -128,7 +128,7 @@
       },
       {
         "id": 1,
-        "phrase": "My SpaceBook account had a link that went to 'SpaceBook.com', but when I hovered over the link, it said it went to 'goldscammers.eft'",
+        "phrase": "My SpaceBook account had a link that went to 'SpaceBook.com', but when I hovered over the link, it said it went to 'goldscammers.eft'.",
         "options": [
           {
             "selection": "a",
@@ -184,7 +184,7 @@
         "options": [
           {
             "selection": "a",
-            "phrase": "Ok I'm going",
+            "phrase": "Ok I'm going.",
             "nextDialogue": -1
           },
           {
@@ -200,12 +200,12 @@
         "options":[
           {
             "selection": "a",
-            "phrase": "Thanks",
+            "phrase": "Thanks.",
             "nextDialogue": -1
           },
           {
             "selection": "b",
-            "phrase": "You know me",
+            "phrase": "You know me.",
             "nextDialogue": -1
           }
         ]

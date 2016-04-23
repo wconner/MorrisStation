@@ -30,16 +30,21 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             password = "";
             for (int i = 0; i < pw.length(); i++) {
+                 int c = 0;
                 if (!(inputs.get(i).getText().equals("")) && (!(inputs.get(i).getText().equals(" ")))) {
-                    password += inputs.get(i).getText();
-                    if (pw.charAt(i) == password.charAt(i)) {
+                    if (inputs.get(i).getText().charAt(0) == pw.charAt(i)) {
                         inputs.get(i).setDisabled(true);
                         inputs.get(i).setColor(Color.CHARTREUSE);
                     } else {
                         inputs.get(i).setColor(Color.RED);
                     }
 
-                    if (password.equals(pw)) {
+                    for (int j = 0; j < inputs.size(); j++)
+                        if (!(inputs.get(j).getText().equals("")) && (!(inputs.get(j).getText().equals(" "))))
+                            if (inputs.get(j).getText().charAt(0) == pw.charAt(j))
+                                c++;
+
+                    if (c == pw.length()) {
                         label.setText("Nice job! You cracked the password! \nThe password is: " + password);
                         play.setText("Return to MorrisTown");
                         play.addListener(backListener);
