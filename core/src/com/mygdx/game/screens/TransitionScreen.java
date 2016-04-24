@@ -1,20 +1,19 @@
 package com.mygdx.game.screens;
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.InputProcessor;
-        import com.badlogic.gdx.graphics.GL20;
-        import com.badlogic.gdx.scenes.scene2d.InputEvent;
-        import com.badlogic.gdx.scenes.scene2d.InputListener;
-        import com.badlogic.gdx.scenes.scene2d.Stage;
-        import com.badlogic.gdx.scenes.scene2d.ui.Label;
-        import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-        import com.badlogic.gdx.scenes.scene2d.ui.Table;
-        import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-        import com.mygdx.game.MainClass;
-        import com.mygdx.game.screens.GameScreen;
-        import com.mygdx.game.screens.gui.TouchUpListener;
-        import com.mygdx.game.screens.miniGames.MastermindGame;
-        import com.mygdx.game.screens.miniGames.PasswordGame;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.mygdx.game.MainClass;
+import com.mygdx.game.screens.gui.TouchUpListener;
+import com.mygdx.game.screens.miniGames.MastermindGame;
+import com.mygdx.game.screens.miniGames.PasswordGame;
 
 /**
  * Created by Justin Shen on 4/14/2016.
@@ -27,10 +26,8 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
 
     private final Skin skin;
     private final Table table;
-    private Label infoLabel;
-    private Label diffLabel;
+    private Label infoLabel, diffLabel;
     private TextButton play;
-
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
@@ -48,7 +45,6 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
             }
         }
     };
-
 
     private final InputListener easyListener = new TouchUpListener() {
         @Override
@@ -73,25 +69,25 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
 
         }
     };
-    public TransitionScreen(Stage stage, MainClass game, GameScreen screen, String type){
+
+    public TransitionScreen(Stage stage, MainClass game, GameScreen screen, String type) {
         super(stage, game);
         Gdx.input.setInputProcessor(this);
         gameScreen = screen;
         this.type = type;
         skin = new Skin(Gdx.files.internal("ui_skin/uiskin.json"));
         table = new Table(skin);
-        infoLabel = new Label(type,skin);
-        diffLabel = new Label("",skin);
+        infoLabel = new Label(type, skin);
+        diffLabel = new Label("", skin);
         dif = "easy";
 
         initUI(type);
     }
 
-
-    private void initUI(String type){
+    private void initUI(String type) {
         play = new TextButton("Play", skin);
         play.addListener(playListener);
-        if(type.equals("Mastermind")) {
+        if (type.equals("Mastermind")) {
             infoLabel.setText("In this game you must continuously guess different numbers \nuntil they are all locked in");
             infoLabel.setFontScale(1.1f);
             diffLabel.setText("Difficulty: Easy \nYou will only have to enter numbers");
@@ -100,7 +96,6 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
             TextButton easy = new TextButton("Easy", skin);
             TextButton med = new TextButton("Medium", skin);
             TextButton hard = new TextButton("Hard", skin);
-
 
             easy.addListener(easyListener);
             med.addListener(medListener);
@@ -112,39 +107,32 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
             diffTable.add(infoLabel).padBottom(20f);
             diffTable.row();
             diffTable.center();
-            diffTable.add(play).size(360,50).space(8f).padTop(30f);
-
+            diffTable.add(play).size(360, 50).space(8f).padTop(30f);
 
             table.add(buttonTable);
             buttonTable.add(diffLabel);
             buttonTable.row();
-            buttonTable.add(easy).size(70,40).space(8f).padTop(10f).padLeft(15f);
+            buttonTable.add(easy).size(70, 40).space(8f).padTop(10f).padLeft(15f);
             buttonTable.row();
-            buttonTable.add(med).size(70,40).space(8f).padLeft(15f);
+            buttonTable.add(med).size(70, 40).space(8f).padLeft(15f);
             buttonTable.row();
-            buttonTable.add(hard).size(70,40).space(8f).padLeft(15f);
+            buttonTable.add(hard).size(70, 40).space(8f).padLeft(15f);
 
-
-        }
-        else if(type.equals("Password")) {
+        } else if (type.equals("Password")) {
             infoLabel = new Label("In this game you will have to create a password that is secure\nSecure passwords are hard to crack and " +
                     "are a crucial part of keeping your information safe", skin);
             infoLabel.setFontScale(1.1f);
             table.add(infoLabel).padBottom(20f);
             table.row();
-            table.add(play).size(360,50).space(8f).padTop(30f);
+            table.add(play).size(360, 50).space(8f).padTop(30f);
 
         }
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
     }
 
-
-
-
     @Override
     public void show() {
-
     }
 
     @Override
@@ -157,7 +145,6 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
 
     @Override
     public void hide() {
-
     }
 
     @Override
@@ -193,7 +180,6 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         return stage.mouseMoved(screenX, screenY);
-
     }
 
     @Override

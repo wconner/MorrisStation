@@ -1,25 +1,24 @@
 package com.mygdx.game;
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.graphics.Color;
-        import com.badlogic.gdx.graphics.OrthographicCamera;
-        import com.badlogic.gdx.graphics.Texture;
-        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-        import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-        import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-        import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-        import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-        import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-        import com.badlogic.gdx.scenes.scene2d.Stage;
-        import com.badlogic.gdx.utils.Disposable;
-        import com.mygdx.game.entities.AbstractDynamicObject;
-        import com.mygdx.game.util.Constants;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Disposable;
+import com.mygdx.game.entities.AbstractDynamicObject;
+import com.mygdx.game.util.Constants;
 
 /**
  * Created by Ian on 12/22/2014.
  */
 public class WorldRenderer implements Disposable {
-
 
     public static final String TAG = WorldRenderer.class.getName();
 
@@ -43,12 +42,12 @@ public class WorldRenderer implements Disposable {
     /**
      * Default constructor
      */
-    public WorldRenderer(WorldController worldController){
+    public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
         init();
     }
 
-    public void setLevel(WorldController worldController){
+    public void setLevel(WorldController worldController) {
         this.worldController = worldController;
         init();
     }
@@ -56,8 +55,7 @@ public class WorldRenderer implements Disposable {
     /**
      * Initiate all needed rendering utilities
      */
-    private void init (){
-
+    private void init() {
         //set stage from controller
         stage = worldController.getStage();
         debugRenderer = new Box2DDebugRenderer();
@@ -84,26 +82,20 @@ public class WorldRenderer implements Disposable {
         viewportCamera.update();
     }
 
-
     /**
      * render() is basically a helper method of renderWorld
      * renderDisplay() is on tip to ensure it is drawn "on top"
      */
-    public void render (){
+    public void render() {
         renderWorld(batch);
         renderDisplay();
     }
-
-    public void updateDoorAnimation(){
-        ((TiledMapTileLayer) worldController.getLevel().getMap().getLayers().get(1)).getCell(17, 5);
-    }
-
 
     /**
      * This is the big baby, all the rendering processing goes through
      * here first, mucho importante
      */
-    private void renderWorld (SpriteBatch batch){
+    private void renderWorld(SpriteBatch batch) {
         /**
          * I'm still not totally sure how applyTo() operates
          */
@@ -124,8 +116,8 @@ public class WorldRenderer implements Disposable {
          * If you don't need all 5 layers, just make the layers empty.
          */
 
-        int[] bgLayers = {0,1,2};
-        int[] fgLayers = {3,4,5};
+        int[] bgLayers = {0, 1, 2};
+        int[] fgLayers = {3, 4, 5};
 
         batch.begin();
         batch.draw(background, -12, -12, 70, 70);
@@ -135,7 +127,7 @@ public class WorldRenderer implements Disposable {
 
         batch.begin();
 
-        for(AbstractDynamicObject dudes : worldController.actors)
+        for (AbstractDynamicObject dudes : worldController.actors)
             dudes.render(batch);
 
         batch.end();
@@ -157,7 +149,7 @@ public class WorldRenderer implements Disposable {
      * dimensions of the GAME_WORLD constants.
      * TODO Constrain camera to the size of the game world --> maybe by using clamp in applyTo()
      */
-    private void renderGrid(int divisions){
+    private void renderGrid(int divisions) {
 
         shaper.setProjectionMatrix(viewportCamera.combined);
         shaper.begin(ShapeRenderer.ShapeType.Line);
@@ -166,21 +158,21 @@ public class WorldRenderer implements Disposable {
         float deltaX = Constants.UNIT_SCALE;
 
         //draw horizontal grid
-        for(int i = 0; i < divisions + 1; i++){
+        for (int i = 0; i < divisions + 1; i++) {
             shaper.line(i, 0, i, Constants.GAME_WORLD);
             i += deltaX;
             //Gdx.app.debug(TAG, Integer.toString(i));
         }
 
         //draw vertical grid for use in rendering
-        for(int i = 0; i < divisions + 1; i++){
+        for (int i = 0; i < divisions + 1; i++) {
             shaper.line(0, i, Constants.GAME_WORLD, i);
             i += deltaX;
         }
         shaper.end();
     }
 
-    private void renderWorldBounds(){
+    private void renderWorldBounds() {
 
         shaper.setProjectionMatrix(viewportCamera.combined);
         shaper.begin(ShapeRenderer.ShapeType.Line);
@@ -189,24 +181,21 @@ public class WorldRenderer implements Disposable {
         shaper.end();
     }
 
-    public OrthographicCamera getViewportCamera(){return viewportCamera;
-    }
-
     /**
      * Call the act() method for the stage
      */
-    public void renderDisplay(){
+    public void renderDisplay() {
         stage.act();
         stage.draw();
     }
 
-    public void resize (int width, int height){
+    public void resize(int width, int height) {
         viewportCamera.viewportHeight = (Constants.VIEWPORT_WIDTH / width) * height;
         viewportCamera.update();
     }
 
     @Override
-    public void dispose (){
+    public void dispose() {
         batch.dispose();
     }
 }

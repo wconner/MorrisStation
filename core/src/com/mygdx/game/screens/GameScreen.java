@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -33,11 +36,10 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
     private MainClass game;
     private Group phoneDisplay;
     private ArrayList<Level> levels;
-    public static final World world = new World(new Vector2(0,0), false);
+
+    public static final World world = new World(new Vector2(0, 0), false);
 
     private boolean paused;
-    // field to disable manual pausing
-    private boolean pauseEnabled;
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
@@ -82,7 +84,6 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);
         paused = false;
-        pauseEnabled = true;
     }
 
     private void initLevels() {
@@ -91,7 +92,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         levels.add(new BaseLevel());
     }
 
-    public ArrayList<Level> getLevels(){
+    public ArrayList<Level> getLevels() {
         return levels;
     }
 
@@ -129,10 +130,6 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         return worldController;
     }
 
-    public Group getPhoneDisplay() {
-        return phoneDisplay;
-    }
-
     public Game getGame() {
         return game;
     }
@@ -160,6 +157,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         paused = true;
     }
 
+    public void unPause() { paused = false;}
+
     //android requires assets be reloaded on resume
     @Override
     public void resume() {
@@ -184,7 +183,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             pause();
             worldController.getDialog().hide();
             phoneDisplay.setVisible(false);
-            game.setScreen(new EmailGame(stage,game,worldController.getGameScreen() ));
+            game.setScreen(new EmailGame(stage, game, worldController.getGameScreen()));
         }
     };
 
@@ -203,16 +202,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         }
     };
 
-    public void pauseSwap() {
-        if (paused)
-            resume();
-        else
-            pause();
-    }
-
     public void screenSwap(String type) {
         pause();
-        //hide();
         worldController.getDialog().hide();
         phoneDisplay.setVisible(false);
         game.setScreen(new TransitionScreen(stage, game, this, type));
@@ -246,8 +237,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             sequenceAction.addAction(runnableAction);
             phoneDisplay.addAction(sequenceAction);
             worldController.initInput();
-            pauseEnabled = true;
-
+            unPause();
         } else {
             Actions a = new Actions();
             a.alpha(0f);
@@ -263,12 +253,9 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             phoneDisplay.addAction(parallelAction);
             phoneDisplay.setVisible(true);
             Gdx.input.setInputProcessor(stage);
-            pauseEnabled = false;
+            pause();
         }
-        pauseSwap();
     }
-
-    public void doorAnimTest(){ worldRenderer.updateDoorAnimation();}
 
     @Override
     public boolean keyDown(int keycode) {

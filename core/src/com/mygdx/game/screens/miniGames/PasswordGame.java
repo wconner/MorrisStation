@@ -1,17 +1,17 @@
 package com.mygdx.game.screens.miniGames;
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.InputProcessor;
-        import com.badlogic.gdx.graphics.Color;
-        import com.badlogic.gdx.graphics.GL20;
-        import com.badlogic.gdx.scenes.scene2d.Actor;
-        import com.badlogic.gdx.scenes.scene2d.InputEvent;
-        import com.badlogic.gdx.scenes.scene2d.InputListener;
-        import com.badlogic.gdx.scenes.scene2d.Stage;
-        import com.badlogic.gdx.scenes.scene2d.ui.*;
-        import com.mygdx.game.MainClass;
-        import com.mygdx.game.screens.GameScreen;
-        import com.mygdx.game.screens.gui.TouchUpListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.mygdx.game.MainClass;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.gui.TouchUpListener;
 
 /**
  * Created by Justin Shen on 2/22/2016.
@@ -21,39 +21,39 @@ public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implement
     private TextField inputBox;
     private Label label;
     private String password;
+
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             password = inputBox.getText();
             System.out.println("The password is currently: " + password);
-            if(checkPassword()){
+            if (checkPassword()) {
                 label.setText("Good Password!\n" + pwLog);
                 inputBox.setDisabled(true);
                 play.setText("Return to MorrisTown");
                 play.addListener(backListener);
                 inputBox.setColor(Color.CHARTREUSE);
-            }
-            else {
+            } else {
                 label.setText("Bad Password\n" + pwLog);
                 inputBox.setDisabled(false);
                 inputBox.setColor(Color.RED);
-
             }
-
         }
     };
+
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             gameScreen.getWorldController().getDialog().hide();
             game.setScreen(gameScreen);
-            for(Actor a: stage.getActors()) {
+            for (Actor a : stage.getActors()) {
                 a.setVisible(false);
             }
             gameScreen.getWorldController().initInput();
             gameScreen.resume();
         }
     };
+
     private GameScreen gameScreen;
     private final MainClass game;
     private final Skin skin;
@@ -61,14 +61,14 @@ public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implement
     private TextButton play;
     private String pwLog;
 
-    public PasswordGame(Stage stage, MainClass game,GameScreen screen) {
+    public PasswordGame(Stage stage, MainClass game, GameScreen screen) {
         super(stage, game);
         Gdx.input.setInputProcessor(this);
         this.game = game;
         gameScreen = screen;
 
         skin = new Skin(Gdx.files.internal("ui_skin/uiskin.json"));
-        inputBox = new TextField("",skin);
+        inputBox = new TextField("", skin);
         label = new Label("Enter a password that is more than 8 characters long and contains at least one number", skin);
 
         table = new Table(skin);
@@ -91,25 +91,19 @@ public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implement
 
     public boolean checkPassword() {
         pwLog = "";
-        if(password.length() > 8){
+        if (password.length() > 8) {
             pwLog = pwLog + "-Password is proper length \n";
-            if(password.matches(".*\\d+.*")){  //logic needs to be changed, Regular expression needed
+            if (password.matches(".*\\d+.*")) {  //logic needs to be changed, Regular expression needed
                 pwLog = pwLog + "-Password contains a number \n";
                 return true;
-            }
-            else {
+            } else {
                 pwLog = pwLog + "-Password does not contain a number \n";
             }
             return false;
-        }
-        else {
+        } else {
             pwLog = pwLog + "-Password is not proper length \n";
         }
         return false;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -145,7 +139,6 @@ public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implement
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         return stage.mouseMoved(screenX, screenY);
-
     }
 
     @Override
@@ -153,32 +146,19 @@ public class PasswordGame extends com.mygdx.game.screens.DefaultScreen implement
         return false;
     }
 
-
     @Override
     public void show() {
-
     }
-
 
     @Override
     public void render(float delta) {
-        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
         Gdx.gl.glClearColor(.1f, .1f, .1f, .3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
         stage.draw();
-
-
     }
 
     @Override
     public void hide() {
-
     }
 }
-

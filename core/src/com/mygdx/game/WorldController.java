@@ -1,8 +1,11 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,10 +19,10 @@ import com.mygdx.game.levels.Level;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.DialogButtons;
 import com.mygdx.game.screens.gui.DialogWindow;
+import com.mygdx.game.util.CameraHelper;
 import com.mygdx.game.util.Constants;
 import com.mygdx.game.util.JsonParser;
 import com.mygdx.game.util.MapBodyManager;
-import com.mygdx.game.util.CameraHelper;
 
 /**
  * Created by Ian on 12/21/2014.
@@ -237,15 +240,8 @@ public class WorldController implements InputProcessor {
             init();
             Gdx.app.debug(TAG, "Game world reset");
             return true;
-        }
-
-        //change text
-        else if (keycode == Keys.B) {
-            dialogWindow.setText(player.randomText());
-            return true;
         } else if (keycode == Keys.P || keycode == Keys.ESCAPE)
             gameScreen.toggle();
-
         else if (keycode == Keys.V) {
             initInput();
             dialogWindow.hide();
@@ -305,7 +301,7 @@ public class WorldController implements InputProcessor {
     private void dialogueStart() {
         gameScreen.pause();
 
-        target.setDialog();
+        target.initializeDialog();
         for (Actor a : stage.getActors())
             if (a.getName() != null)
                 if (a.getName().equals("DB")) {
@@ -326,7 +322,7 @@ public class WorldController implements InputProcessor {
             DB.hide();
             dialogWindow.hide();
             window.remove();
-            gameScreen.pauseSwap();
+            gameScreen.unPause();
             initInput();
         }
     }
@@ -339,7 +335,6 @@ public class WorldController implements InputProcessor {
                     changeLevels(0);
                     break;
                 case "door":
-                    gameScreen.doorAnimTest();
                     if (((BedroomLevel) gameScreen.getLevels().get(0)).isDoorActive())
                         changeLevels(1);
                     else

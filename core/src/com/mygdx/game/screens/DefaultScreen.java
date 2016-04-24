@@ -10,12 +10,12 @@ public abstract class DefaultScreen implements Screen {
     protected MainClass game;
     protected Stage stage;
 
-    public DefaultScreen(Stage stage,MainClass game) {
+    public DefaultScreen(Stage stage, MainClass game) {
         this.game = game;
         this.stage = stage;
     }
 
-    public Stage getStage(){
+    public Stage getStage() {
         return stage;
     }
 
@@ -37,7 +37,7 @@ public abstract class DefaultScreen implements Screen {
         game.dispose();
     }
 
-    public void render(){
+    public void render() {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }

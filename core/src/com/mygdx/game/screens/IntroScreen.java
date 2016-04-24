@@ -16,10 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
 
-
 /**
  * Created by Bill on 4/13/16.
- * Intro screen which shows the beginning dialogs.
+ * Intro screen shows the beginning dialogs.
  */
 public class IntroScreen extends DefaultScreen implements InputProcessor {
 
@@ -35,19 +34,18 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
     private final InputListener playListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            if (state == 0){
+            if (state == 0) {
                 introText.setText("To move around use the arrow keys or WASD\n" +
                         "to interact with players and objects use the space key\n" +
                         "Good luck!");
                 play.setText("I'm ready!");
                 state = 1;
-            }
-            else
+            } else
                 switchScreen(new GameScreen(new Stage(), game));
         }
     };
 
-    public IntroScreen (Stage stage, MainClass game){
+    public IntroScreen(Stage stage, MainClass game) {
         super(stage, game);
         Gdx.input.setInputProcessor(this);
         this.game = game;
@@ -55,8 +53,6 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         play = new TextButton("Got it.", skin);
         introText = new Label(generateIntroText(), skin);
         introText.setFontScale(2);
-
-
 
         background = new SpriteBatch();
         backgroundImage = new Texture(Gdx.files.internal("backgrounds/planetsWithTitle.jpg"));
@@ -72,7 +68,7 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         stage.addActor(table);
     }
 
-    private String generateIntroText(){
+    private String generateIntroText() {
         return "You've recently been assigned to be one of a few\n" +
                 " astronauts manning the Morris Station,\n" +
                 " a station critical to intergalactic communications\n" +
@@ -125,7 +121,6 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -138,7 +133,6 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
 
     @Override
     public void hide() {
-
     }
 
     public AlphaAction fadeOut(float duration) {
@@ -149,7 +143,7 @@ public class IntroScreen extends DefaultScreen implements InputProcessor {
         return fadeOut;
     }
 
-    public void switchScreen(final com.mygdx.game.screens.DefaultScreen newScreen){
+    public void switchScreen(final com.mygdx.game.screens.DefaultScreen newScreen) {
         stage.getRoot().getColor().a = 1f;
         RunnableAction runnableAction = new RunnableAction();
         runnableAction.setRunnable(new Runnable() {

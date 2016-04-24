@@ -1,18 +1,21 @@
 package com.mygdx.game.screens.miniGames;
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.InputProcessor;
-        import com.badlogic.gdx.graphics.Color;
-        import com.badlogic.gdx.graphics.GL20;
-        import com.badlogic.gdx.scenes.scene2d.*;
-        import com.badlogic.gdx.scenes.scene2d.ui.*;
-        import com.mygdx.game.MainClass;
-        import com.mygdx.game.entities.NPC;
-        import com.mygdx.game.screens.GameScreen;
-        import com.mygdx.game.screens.gui.TouchUpListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.mygdx.game.MainClass;
+import com.mygdx.game.entities.NPC;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.gui.TouchUpListener;
 
-        import java.util.ArrayList;
-        import java.util.Random;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Justin Shen on 2/22/2016.
@@ -48,10 +51,10 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
                     inputs.get(i).setColor(Color.GOLDENROD);
                     label.setText("Please fill in every entry");
                 }
-
             }
         }
     };
+
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -68,12 +71,12 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
             gameScreen.resume();
         }
     };
+
     private boolean status;
     private GameScreen gameScreen;
     private final MainClass game;
     private final Skin skin;
-    private final Table table;
-    private final Table buttonTable;
+    private final Table table, buttonTable;
     private final String pw;
     private TextButton play;
     private String password;
@@ -119,16 +122,12 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
         stage.addActor(table);
         back.setPosition(Gdx.graphics.getWidth() - back.getWidth(), Gdx.graphics.getHeight() - back.getHeight());
         stage.addActor(back);
-
-
     }
-
 
     private static String pwGen(String s) {
         String pw = "";
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         Random rand = new Random();
-
 
         switch (s) {
             case "easy":
@@ -154,22 +153,9 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
                 }
             default:
                 pw += "";
-
         }
         System.out.println(pw);
         return pw;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getNumOfDigits() {
-        return NUM_OF_DIGITS;
-    }
-
-    public void setNumOfDigits(int i) {
-        NUM_OF_DIGITS = i;
     }
 
     @Override
@@ -205,7 +191,6 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         return stage.mouseMoved(screenX, screenY);
-
     }
 
     @Override
@@ -213,32 +198,19 @@ public class MastermindGame extends com.mygdx.game.screens.DefaultScreen impleme
         return false;
     }
 
-
     @Override
     public void show() {
-
     }
-
 
     @Override
     public void render(float delta) {
-        //delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
         Gdx.gl.glClearColor(.1f, .1f, .1f, .3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*time += delta;
-
-        if (time < 1f)
-            return;*/
-
         stage.draw();
-
-
     }
 
     @Override
     public void hide() {
-
     }
 }
-

@@ -1,11 +1,10 @@
 package com.mygdx.game.levels;
 
-        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-        import com.badlogic.gdx.graphics.g2d.TextureRegion;
-        import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-        import com.badlogic.gdx.utils.Array;
-        import com.mygdx.game.entities.NPC;
-        import com.mygdx.game.entities.Player;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.mygdx.game.entities.NPC;
+import com.mygdx.game.entities.Player;
 
 /**
  * Created by bill on 12/5/15.
@@ -34,22 +33,10 @@ public class BedroomLevel extends Level {
         actors.add(npc);
     }
 
-    @Override
-    public String sensorEvent(String fixture) {
-        if (fixture != null) {
-            switch (fixture) {
-                case "door":
-                    return "cl2";
-                default:
-                    return "";
-            }
-        }
-        return "";
-    }
-
     public boolean isDoorActive() {
         return doorActive;
     }
+
     public void setDoorActive(boolean doorActive) {
         this.doorActive = doorActive;
     }

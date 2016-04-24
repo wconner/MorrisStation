@@ -1,20 +1,23 @@
 package com.mygdx.game.screens.gui;
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.InputProcessor;
-        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-        import com.badlogic.gdx.scenes.scene2d.InputEvent;
-        import com.badlogic.gdx.scenes.scene2d.InputListener;
-        import com.badlogic.gdx.scenes.scene2d.Stage;
-        import com.badlogic.gdx.scenes.scene2d.ui.*;
-        import com.mygdx.game.WorldController;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.mygdx.game.WorldController;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  * Created by Jshen94 on 12/7/2015.
  */
-public class DialogButtons implements InputProcessor{
+public class DialogButtons implements InputProcessor {
 
     /**
      * For building a window and assigning it a skin
@@ -27,11 +30,11 @@ public class DialogButtons implements InputProcessor{
     /**
      * Text labels
      */
-    private TextButton option1; private TextButton option2; private TextButton option3; private TextButton option4;
+    private TextButton option1, option2, option3, option4;
 
     private boolean hidden;
 
-    Table root;
+    private Table root;
 
     /**
      * Default constructor
@@ -43,9 +46,14 @@ public class DialogButtons implements InputProcessor{
         skin.addRegions(atlas);
         hidden = true;
         this.stage = stage;
-        option1 = new TextButton("",skin); option2 = new TextButton("",skin); option3 = new TextButton("",skin); option4 = new TextButton("",skin);
-        option1.addListener(new OptionListener(1)); option2.addListener(new OptionListener(2));
-        option3.addListener(new OptionListener(3)); option4.addListener(new OptionListener(4));
+        option1 = new TextButton("", skin);
+        option2 = new TextButton("", skin);
+        option3 = new TextButton("", skin);
+        option4 = new TextButton("", skin);
+        option1.addListener(new OptionListener(1));
+        option2.addListener(new OptionListener(2));
+        option3.addListener(new OptionListener(3));
+        option4.addListener(new OptionListener(4));
     }
 
     /**
@@ -55,11 +63,8 @@ public class DialogButtons implements InputProcessor{
 
         Gdx.input.setInputProcessor(stage);
         window = new Window("Dialog Options", skin);
-
-        //window.row().prefWidth(Gdx.graphics.getWidth() * 0.5f);
-        //window.row().prefHeight(Gdx.graphics.getHeight() * 0.5f);
         root = new Table(skin);
-        switch(dialog.size()) { /**variable number of options based on on the amount of answers */
+        switch (dialog.size()) { /**variable number of options based on on the amount of answers */
             case 4:
                 option4.setText(dialog.get(3));
                 option4.getLabel().setFontScale(1.5f);
@@ -81,12 +86,13 @@ public class DialogButtons implements InputProcessor{
                 root.add(option1);
                 break;
 
-            default: break;
+            default:
+                break;
         }
         root.left();
-        root.pad(5,0,5,5);
+        root.pad(5, 0, 5, 5);
         window.add(root);
-        window.setPosition(800,125);
+        window.setPosition(800, 125);
         window.setHeight(175);
         window.setWidth(500);
         window.left();
@@ -96,23 +102,12 @@ public class DialogButtons implements InputProcessor{
         return window;
     }
 
-    public boolean isHidden() {
-        return hidden;
-    }
-
     /**
      * flips the boolean for hidden
      */
     public void hide() {
         hidden = !hidden;
         window.setVisible(hidden);
-    }
-
-    /**
-     * Getter for window
-     */
-    public Window getWindow() {
-        return window;
     }
 
     /**
@@ -163,10 +158,12 @@ public class DialogButtons implements InputProcessor{
         return false;
     }
 
-    class OptionListener extends InputListener{
+    class OptionListener extends InputListener {
         int optionNum;
 
-        public OptionListener(int optionNum){ this.optionNum = optionNum;}
+        public OptionListener(int optionNum) {
+            this.optionNum = optionNum;
+        }
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

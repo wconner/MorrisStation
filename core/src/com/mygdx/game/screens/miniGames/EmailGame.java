@@ -1,8 +1,5 @@
 package com.mygdx.game.screens.miniGames;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.MainClass;
-import com.mygdx.game.screens.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,10 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.mygdx.game.MainClass;
 import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.screens.DefaultScreen;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.JsonParser;
 
@@ -28,17 +28,16 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener checkListen = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            if(!isGameOver) {
+            if (!isGameOver) {
                 int goodNum;
-                if(stageLevel<=9){
+                if (stageLevel <= 9) {
                     goodNum = 3;
-                }
-                else{
+                } else {
                     goodNum = 1;
                 }
-                if(!notEnoughChecked(goodNum)) {
+                if (!notEnoughChecked(goodNum)) {
                     if (checkEmails("good")) {
-                        if(stageLevel<=9) {
+                        if (stageLevel <= 9) {
                             helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone1"));
                         }
                         isGameOver = true;
@@ -47,7 +46,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                     } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
-                }else{
+                } else {
                     helpWindow.setText(systemMessageReader.getItemField("systemMessages", "notEnough"));
                 }
 
@@ -63,7 +62,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener instructListen = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            if(!isGameOver) {
+            if (!isGameOver) {
                 helpWindow.setText(systemMessageReader.getItemField("systemMessages", "instructions1"));
             }
         }
@@ -72,52 +71,48 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final InputListener helpListen = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            if(!isGameOver) {
+            if (!isGameOver) {
                 setHelpWindow();
             }
         }
     };
 
-    private void setHelpWindow(){
-        if(helpPlayer.equals("")) {
+    private void setHelpWindow() {
+        if (helpPlayer.equals("")) {
             Random rand = new Random();
             int hintNum = rand.nextInt(3);
-            if(hintNum==0){
+            if (hintNum == 0) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "scams"));
-            }else if(hintNum==1){
+            } else if (hintNum == 1) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "bad"));
-            }
-            else if(hintNum==2){
+            } else if (hintNum == 2) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "spam"));
             }
-        }else if(helpCounter<=2){
+        } else if (helpCounter <= 2) {
             helpWindow.setText(systemMessageReader.getItemField("hints", helpPlayer));
-        }else if(helpCounter>2){
+        } else if (helpCounter > 2) {
             Random rand = new Random();
             int hintNum = rand.nextInt(3);
-            if(hintNum==0){
+            if (hintNum == 0) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "hint1"));
-            }else if(hintNum==1){
+            } else if (hintNum == 1) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "hint2"));
-            }
-            else if(hintNum==2){
+            } else if (hintNum == 2) {
                 helpWindow.setText(systemMessageReader.getItemField("hints", "hint3"));
             }
         }
-
     }
 
     private final InputListener backListener = new TouchUpListener() {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             returnToGame();
-
         }
     };
 
-    private void returnToGame(){
+    private void returnToGame() {
         game.setScreen(gameScreen);
-        for(Actor a: stage.getActors()) {
+        for (Actor a : stage.getActors()) {
             a.setVisible(false);
         }
         gameScreen.getWorldController().initInput();
@@ -128,17 +123,16 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private final MainClass game;
     private final Skin skin;
     private final Table table;
-    private TextArea emWindow;
-    private TextArea helpWindow;
+    private TextArea emWindow, helpWindow;
     private ScrollPane helpScroll;
     private ArrayList<EmailTable> emailTableList;
-    private JsonParser emailReader,systemMessageReader;
+    private JsonParser emailReader, systemMessageReader;
     private int stageLevel;
     private int NUMEMAILS = 5;
     private SpriteBatch background;
     private Texture backgroundImage;
 
-    public EmailGame(Stage stage, MainClass game,GameScreen screen) {
+    public EmailGame(Stage stage, MainClass game, GameScreen screen) {
         super(stage, game);
         Gdx.input.setInputProcessor(this);
         this.game = game;
@@ -153,7 +147,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         skin = new Skin(Gdx.files.internal("ui_skin/uiskin.json"));
 
         helpPlayer = "";
-        helpCounter =0;
+        helpCounter = 0;
         Table innerTab = new Table(skin);
         Table checkingButtonsTable = new Table(skin);
         table = new Table(skin);
@@ -164,68 +158,68 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         instructionsButton.addListener(instructListen);
         TextButton helpButton = new TextButton("Hints", skin);
         helpButton.addListener(helpListen);
-        emWindow = new TextArea("",skin);
-        helpWindow = new TextArea("",skin);
+        emWindow = new TextArea("", skin);
+        helpWindow = new TextArea("", skin);
 
         TextButton back = new TextButton("Return to Morris Station", skin);
 
         back.addListener(backListener);
         emailTableList = new ArrayList<>();
-        if(stageLevel<=9) {
+        if (stageLevel <= 9) {
             for (int i = 0; i < 9; i++) {
 
-                String emailName = emailReader.getItemField(i,"sender") ;
+                String emailName = emailReader.getItemField(i, "sender");
                 TextButton emailButton = new TextButton(emailName, skin);
 
 
                 CheckBox check = new CheckBox("", skin);
                 EmailTable et = new EmailTable(emailButton, check);
 
-                et.setType(emailReader.getItemField(i,"type"));
+                et.setType(emailReader.getItemField(i, "type"));
 
 
                 emailTableList.add(et);
                 et.getEmailButton().addListener(new ButtListener(i));
 
-                et.setSender(emailReader.getItemField(i,"sender"));
-                et.setSubject(emailReader.getItemField(i,"subject"));
-                et.seteMessage(emailReader.getItemField(i,"body"));
+                et.setSender(emailReader.getItemField(i, "sender"));
+                et.setSubject(emailReader.getItemField(i, "subject"));
+                et.seteMessage(emailReader.getItemField(i, "body"));
 
                 innerTab.row();
                 innerTab.add(et).size(420, 30).space(8);
             }
-        }else if(stageLevel>9) {
+        } else if (stageLevel > 9) {
             for (int i = 0; i < 9; i++) {
 
-                String emailName = emailReader.getItemField(i,"sender") ;
+                String emailName = emailReader.getItemField(i, "sender");
                 TextButton emailButton = new TextButton(emailName, skin);
 
 
                 CheckBox check = new CheckBox("", skin);
                 EmailTable et = new EmailTable(emailButton, check);
 
-                et.setType(emailReader.getItemField(i,"type"));
+                et.setType(emailReader.getItemField(i, "type"));
 
 
                 emailTableList.add(et);
                 et.getEmailButton().addListener(new ButtListener(i));
 
-                et.setSender(emailReader.getItemField(i,"sender"));
-                et.setSubject(emailReader.getItemField(i,"subject"));
-                et.seteMessage(emailReader.getItemField(i,"body"));
+                et.setSender(emailReader.getItemField(i, "sender"));
+                et.setSubject(emailReader.getItemField(i, "subject"));
+                et.seteMessage(emailReader.getItemField(i, "body"));
 
                 innerTab.row();
                 innerTab.add(et).size(420, 30).space(8);
             }
         }
-        helpWindow.setText(systemMessageReader.getItemField("systemMessages","instructions1"));
+        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "instructions1"));
         String windText = "From: \nSubject: \n\nMessage:\n";
         emWindow.setText(windText);
         Table helpTable = new Table(skin);
-        Table helpTableButtons =new Table(skin);
+        Table helpTableButtons = new Table(skin);
         checkingButtonsTable.row();
         innerTab.row();
-        innerTab.add(checkEmail).size(225,60).space(8);
+        innerTab.add(checkEmail).size(225, 60).space(8);
         //helpTableButtons.add(checkEmail).size(175, 40).space(8);
         //helpTableButtons.row();
         helpTableButtons.add(instructionsButton).size(120, 40).space(8);
@@ -234,7 +228,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         Table emailContainer = new Table(skin);
         emailContainer.add(checkingButtonsTable).space(8);
         emailContainer.add(innerTab);
-        emailContainer.add(emWindow).size(425,500).space(8);
+        emailContainer.add(emWindow).size(425, 500).space(8);
         table.add(emailContainer);
         table.row();
         helpTable.add(helpTableButtons);
@@ -248,35 +242,29 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     }
 
     public boolean checkEmails(String type) {
-        for(EmailTable emailTable : emailTableList){
-            if(emailTable.getCheckBox().isChecked()){
-                if(!emailTable.getType().equals(type)){
+        for (EmailTable emailTable : emailTableList) {
+            if (emailTable.getCheckBox().isChecked()) {
+                if (!emailTable.getType().equals(type)) {
                     helpPlayer = emailTable.getType();
                     return false;
                 }
             }
         }
-
-
-
         return true;
-
     }
 
-    private boolean notEnoughChecked( int a)
-    {
+    private boolean notEnoughChecked(int a) {
         int count = 0;
-        for(EmailTable emailTable : emailTableList){
-            if(emailTable.getCheckBox().isChecked()){
+        for (EmailTable emailTable : emailTableList) {
+            if (emailTable.getCheckBox().isChecked()) {
                 count++;
             }
         }
-        if(count<a){
+        if (count < a) {
             return true;
         }
         return false;
     }
-
 
     @Override
     public boolean keyDown(int keycode) {
@@ -311,7 +299,6 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         return stage.mouseMoved(screenX, screenY);
-
     }
 
     @Override
@@ -319,12 +306,9 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         return false;
     }
 
-
     @Override
     public void show() {
-
     }
-
 
     @Override
     public void render(float delta) {
@@ -336,25 +320,23 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
 
     @Override
     public void hide() {
-
     }
 
-    class ButtListener extends InputListener{
+    class ButtListener extends InputListener {
         int optionNum;
 
-        public ButtListener(int optionNum){ this.optionNum = optionNum;}
+        public ButtListener(int optionNum) {
+            this.optionNum = optionNum;
+        }
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if(!isGameOver) {
+            if (!isGameOver) {
                 EmailTable tab = emailTableList.get(optionNum);
-                String windText = "From: "+tab.getSender()+"\nSubject: "+tab.getSubject()+"\n\nMessage:\n"+tab.geteMessage();
+                String windText = "From: " + tab.getSender() + "\nSubject: " + tab.getSubject() + "\n\nMessage:\n" + tab.geteMessage();
                 emWindow.setText(windText);
             }
             return super.touchDown(event, x, y, pointer, button);
-
         }
     }
 }
-
-
