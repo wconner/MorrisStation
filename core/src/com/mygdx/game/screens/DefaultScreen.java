@@ -25,7 +25,6 @@ public abstract class DefaultScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
@@ -42,5 +41,4 @@ public abstract class DefaultScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
-
 }

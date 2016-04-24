@@ -1,26 +1,25 @@
 package com.mygdx.game.util;
 
-import java.util.Iterator;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.*;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Ellipse;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.utils.Logger;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.JsonValue.JsonIterator;
+        import java.util.Iterator;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.files.FileHandle;
+        import com.badlogic.gdx.maps.Map;
+        import com.badlogic.gdx.maps.MapLayer;
+        import com.badlogic.gdx.maps.MapObject;
+        import com.badlogic.gdx.maps.MapObjects;
+        import com.badlogic.gdx.maps.MapProperties;
+        import com.badlogic.gdx.maps.objects.*;
+        import com.badlogic.gdx.math.Circle;
+        import com.badlogic.gdx.math.Ellipse;
+        import com.badlogic.gdx.math.Rectangle;
+        import com.badlogic.gdx.math.Vector2;
+        import com.badlogic.gdx.physics.box2d.*;
+        import com.badlogic.gdx.utils.Array;
+        import com.badlogic.gdx.utils.JsonReader;
+        import com.badlogic.gdx.utils.JsonValue;
+        import com.badlogic.gdx.utils.Logger;
+        import com.badlogic.gdx.utils.ObjectMap;
+        import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 
 
 public class MapBodyManager {
@@ -124,7 +123,7 @@ public class MapBodyManager {
                 fixtureDef = materials.get("default");
             }
 
-                if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+            if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
                 fixtureDef.isSensor = true;
 
 

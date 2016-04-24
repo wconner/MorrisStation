@@ -1,11 +1,11 @@
 package com.mygdx.game.levels;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.entities.NPC;
-import com.mygdx.game.entities.Player;
+        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+        import com.badlogic.gdx.graphics.g2d.TextureRegion;
+        import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+        import com.badlogic.gdx.utils.Array;
+        import com.mygdx.game.entities.NPC;
+        import com.mygdx.game.entities.Player;
 
 /**
  * Created by bill on 1/15/16.
@@ -14,8 +14,8 @@ public class BaseLevel extends Level {
 
     public BaseLevel(){
         super();
-        atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
-        map = new TmxMapLoader().load("android/assets/levels/Base.tmx"); // Type Tiled map
+        atlas = new TextureAtlas("sprites/cTest.pack");
+        map = new TmxMapLoader().load("levels/Base.tmx"); // Type Tiled map
         levelName = "base";
     }
     @Override

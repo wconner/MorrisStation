@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013 matheusdev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,6 +22,8 @@
 
 package com.mygdx.game.screens.gui;
 
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+
 /**
  * Created with IntelliJ IDEA.
  * Author: matheusdev
@@ -37,8 +39,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public abstract class TouchUpListener extends InputListener {
-	@Override
-	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-		return true;
-	}
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        return true;
+    }
 }

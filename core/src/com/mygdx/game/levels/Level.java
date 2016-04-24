@@ -1,9 +1,9 @@
 package com.mygdx.game.levels;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.entities.AbstractDynamicObject;
+        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+        import com.badlogic.gdx.maps.tiled.TiledMap;
+        import com.badlogic.gdx.utils.Array;
+        import com.mygdx.game.entities.AbstractDynamicObject;
 
 /**
  * Things that need to be done in order to change lvl

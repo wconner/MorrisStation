@@ -1,21 +1,19 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Disposable;
-import com.mygdx.game.entities.AbstractDynamicObject;
-import com.mygdx.game.model.WorldController;
-import com.mygdx.game.util.Constants;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.graphics.Color;
+        import com.badlogic.gdx.graphics.OrthographicCamera;
+        import com.badlogic.gdx.graphics.Texture;
+        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+        import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+        import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+        import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+        import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+        import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+        import com.badlogic.gdx.scenes.scene2d.Stage;
+        import com.badlogic.gdx.utils.Disposable;
+        import com.mygdx.game.entities.AbstractDynamicObject;
+        import com.mygdx.game.util.Constants;
 
 /**
  * Created by Ian on 12/22/2014.
@@ -41,7 +39,6 @@ public class WorldRenderer implements Disposable {
     private Stage stage;
     private Box2DDebugRenderer debugRenderer;
     private Texture background;
-    private TiledMapTileLayer layer2;
 
     /**
      * Default constructor
@@ -75,7 +72,7 @@ public class WorldRenderer implements Disposable {
         batch = new SpriteBatch();
         shaper = new ShapeRenderer();
         tileRenderer = new OrthogonalTiledMapRenderer(worldController.level.getMap(), Constants.UNIT_SCALE);
-        background = new Texture(Gdx.files.internal("android/assets/background/nebula.png"));
+        background = new Texture(Gdx.files.internal("backgrounds/nebula.png"));
 
         /**
          * Sets the main camera

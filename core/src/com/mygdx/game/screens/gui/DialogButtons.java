@@ -1,15 +1,15 @@
 package com.mygdx.game.screens.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.mygdx.game.model.WorldController;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.InputProcessor;
+        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+        import com.badlogic.gdx.scenes.scene2d.InputEvent;
+        import com.badlogic.gdx.scenes.scene2d.InputListener;
+        import com.badlogic.gdx.scenes.scene2d.Stage;
+        import com.badlogic.gdx.scenes.scene2d.ui.*;
+        import com.mygdx.game.WorldController;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 /**
  * Created by Jshen94 on 12/7/2015.
@@ -38,8 +38,8 @@ public class DialogButtons implements InputProcessor{
      */
     public DialogButtons(Stage stage, WorldController worldController) {
         this.worldController = worldController;
-        TextureAtlas atlas = new TextureAtlas("android/assets/ui_skin/uiskin.atlas");
-        skin = new Skin(Gdx.files.local("android/assets/ui_skin/uiskin.json"), atlas);
+        TextureAtlas atlas = new TextureAtlas("ui_skin/uiskin.atlas");
+        skin = new Skin(Gdx.files.local("ui_skin/uiskin.json"), atlas);
         skin.addRegions(atlas);
         hidden = true;
         this.stage = stage;

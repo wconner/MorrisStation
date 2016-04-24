@@ -1,13 +1,13 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.util.Constants;
-import com.mygdx.game.util.JsonParser;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.graphics.g2d.Animation;
+        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+        import com.badlogic.gdx.graphics.g2d.TextureRegion;
+        import com.mygdx.game.util.Constants;
+        import com.mygdx.game.util.JsonParser;
 
-import java.util.Random;
+        import java.util.Random;
 
 
 /**

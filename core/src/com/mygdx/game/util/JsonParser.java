@@ -1,10 +1,10 @@
 package com.mygdx.game.util;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.utils.JsonReader;
+        import com.badlogic.gdx.utils.JsonValue;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 /**
  * Created by bill on 1/27/16.
@@ -18,7 +18,7 @@ public class JsonParser {
 
     public JsonParser() {
         JsonReader jsonReader = new JsonReader();
-        jsonValue = jsonReader.parse(Gdx.files.internal("android/assets/data/Dialogue.json"));
+        jsonValue = jsonReader.parse(Gdx.files.internal("data/Dialogue.json"));
         dialogOptions = new ArrayList<>();
     }
 
