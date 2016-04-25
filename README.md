@@ -16,8 +16,9 @@ To run from the command line:
  gradlew desktop:run
  
  To import into IntelliJ:
-  1. Import project from gradlew
-  2. Set run configuration
+  1. Import the build.gradle file inside MorrisStation folder
+  2. Use setting import project from gradlew
+  3. Set run configuration
     * Use classpath of module: desktop_main
     * Main class: com.mygdx.game.desktop.DesktopLauncher
     * Working directory: /MorrisStation/core/assets
