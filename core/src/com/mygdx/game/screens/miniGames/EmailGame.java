@@ -31,11 +31,11 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
             if (!isGameOver) {
                 int goodNum;
                 if (stageLevel <= 9) {
-                    goodNum = 3;
+                    goodNum = 1;
                 } else {
                     goodNum = 1;
                 }
-                if (!notEnoughChecked(goodNum)) {
+                if (notEnoughChecked(goodNum) == -1) {
                     if (checkEmails("good")) {
                         if (stageLevel <= 9) {
                             helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone1"));
@@ -46,15 +46,17 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                     } else {
                         helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
                     }
+                } else if(notEnoughChecked(goodNum) == 0){
+                    helpWindow.setText(systemMessageReader.getItemField("systemMessages", "noneChecked"));
                 } else {
                     helpWindow.setText(systemMessageReader.getItemField("systemMessages", "notEnough"));
                 }
 
-                for (EmailTable emailTable : emailTableList) {
-                    if (emailTable.getCheckBox().isChecked()) {
-                        emailTable.getCheckBox().toggle();
-                    }
-                }
+//                for (EmailTable emailTable : emailTableList) {
+//                    if (emailTable.getCheckBox().isChecked()) {
+//                        emailTable.getCheckBox().toggle();
+//                    }
+//                }
             }
         }
     };
@@ -159,17 +161,19 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         TextButton helpButton = new TextButton("Hints", skin);
         helpButton.addListener(helpListen);
         emWindow = new TextArea("", skin);
+        emWindow.setDisabled(true);
         helpWindow = new TextArea("", skin);
+        helpWindow.setDisabled(true);
 
         TextButton back = new TextButton("Return to Morris Station", skin);
 
         back.addListener(backListener);
         emailTableList = new ArrayList<>();
         if (stageLevel <= 9) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 3; i++) {
 
                 String emailName = emailReader.getItemField(i, "sender");
-                TextButton emailButton = new TextButton(emailName, skin);
+                TextButton emailButton = new TextButton(emailName,skin);
 
 
                 CheckBox check = new CheckBox("", skin);
@@ -253,17 +257,22 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         return true;
     }
 
-    private boolean notEnoughChecked(int a) {
+    private int notEnoughChecked(int a) {
         int count = 0;
         for (EmailTable emailTable : emailTableList) {
             if (emailTable.getCheckBox().isChecked()) {
                 count++;
             }
         }
-        if (count < a) {
-            return true;
+        if (count < a && count!= 0) {
+            return a-count;
         }
-        return false;
+        else if(count == 0){
+            return 0;
+        }
+        else{
+            return -1;
+        }
     }
 
     @Override
