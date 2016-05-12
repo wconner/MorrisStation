@@ -6,7 +6,12 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -14,20 +19,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.MainClass;
+import com.mygdx.game.WorldController;
 import com.mygdx.game.WorldRenderer;
 import com.mygdx.game.levels.BaseLevel;
 import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.levels.Level;
-import com.mygdx.game.model.WorldController;
 import com.mygdx.game.screens.gui.TouchUpListener;
-import com.mygdx.game.util.JsonParser;
-import com.testoverlay.EmailGame;
-import com.testoverlay.MastermindGame;
-import com.testoverlay.PasswordGame;
-import com.testoverlay.TransitionScreen;
+import com.mygdx.game.screens.miniGames.EmailGame;
 
 import java.util.ArrayList;
-
 
 public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements InputProcessor {
 
@@ -37,14 +37,12 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
     private Group phoneDisplay;
     private ArrayList<Level> levels;
 
+    public static final World world = new World(new Vector2(0, 0), false);
 
     private boolean paused;
-    // field to disable manual pausing
-    private boolean pauseEnabled;
 
     public GameScreen(Stage stage, MainClass game) {
         super(stage, game);
-        new JsonParser();     /** Testing remove this line later */
         this.game = game;
         initLevels();
         setLevel(0);                                        /** setLevel now initializes worldController and worldRenderer */
@@ -56,7 +54,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
 
         //@TODO Move phone to its own separate class
         //createPhoneButtons
-        Skin skin = new Skin(Gdx.files.internal("android/assets/ui_skin/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("ui_skin/uiskin.json"));
         Window window = new Window("Phone", skin);
         TextButton play = new TextButton("Return to Morris Station", skin);
         TextButton email = new TextButton("E-Mail", skin);
@@ -81,12 +79,11 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         window.setPosition((Gdx.graphics.getWidth() / 2) - window.getWidth(), (Gdx.graphics.getHeight() / 2) - window.getHeight());
         window.pad(20, 20, 100, 20);
         window.pack();
-        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("android/assets/phonebackground.png")))));
+        window.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/phonebackground.png")))));
         phoneDisplay.addActor(window);
         stage.addActor(phoneDisplay);
         phoneDisplay.setVisible(false);
         paused = false;
-        pauseEnabled = true;
     }
 
     private void initLevels() {
@@ -94,7 +91,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         levels.add(new BedroomLevel());
         levels.add(new BaseLevel());
     }
-    public ArrayList<Level> getLevels(){
+
+    public ArrayList<Level> getLevels() {
         return levels;
     }
 
@@ -132,10 +130,6 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         return worldController;
     }
 
-    public Group getPhoneDisplay() {
-        return phoneDisplay;
-    }
-
     public Game getGame() {
         return game;
     }
@@ -163,6 +157,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         paused = true;
     }
 
+    public void unPause() { paused = false;}
+
     //android requires assets be reloaded on resume
     @Override
     public void resume() {
@@ -187,7 +183,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             pause();
             worldController.getDialog().hide();
             phoneDisplay.setVisible(false);
-            game.setScreen(new EmailGame(stage,game,worldController.getGameScreen() ));
+            game.setScreen(new EmailGame(stage, game, worldController.getGameScreen()));
         }
     };
 
@@ -206,16 +202,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         }
     };
 
-    public void pauseSwap() {
-        if (paused)
-            resume();
-        else
-            pause();
-    }
-
     public void screenSwap(String type) {
         pause();
-        //hide();
         worldController.getDialog().hide();
         phoneDisplay.setVisible(false);
         game.setScreen(new TransitionScreen(stage, game, this, type));
@@ -249,8 +237,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             sequenceAction.addAction(runnableAction);
             phoneDisplay.addAction(sequenceAction);
             worldController.initInput();
-            pauseEnabled = true;
-
+            unPause();
         } else {
             Actions a = new Actions();
             a.alpha(0f);
@@ -266,12 +253,9 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             phoneDisplay.addAction(parallelAction);
             phoneDisplay.setVisible(true);
             Gdx.input.setInputProcessor(stage);
-            pauseEnabled = false;
+            pause();
         }
-        pauseSwap();
     }
-
-    public void doorAnimTest(){ worldRenderer.updateDoorAnimation();}
 
     @Override
     public boolean keyDown(int keycode) {

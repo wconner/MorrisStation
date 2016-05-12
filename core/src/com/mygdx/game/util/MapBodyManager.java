@@ -1,27 +1,18 @@
 package com.mygdx.game.util;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.utils.Logger;
-import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 
+import java.util.Iterator;
 
 public class MapBodyManager {
     private Logger logger;
@@ -32,10 +23,10 @@ public class MapBodyManager {
     private MapObjects objects;
 
     /**
-     * @param world box2D world to work with.
+     * @param world         box2D world to work with.
      * @param unitsPerPixel conversion ratio from pixel units to box2D metres.
      * @param materialsFile json file with specific physics properties to be assigned to newly created bodies.
-     * @param loggingLevel verbosity of the embedded logger.
+     * @param loggingLevel  verbosity of the embedded logger.
      */
     public MapBodyManager(World world, float unitsPerPixel, FileHandle materialsFile, int loggingLevel) {
         logger = new Logger("MapBodyManager", loggingLevel);
@@ -51,7 +42,6 @@ public class MapBodyManager {
 
         materials.put("default", defaultFixture);
 
-
         if (materialsFile != null) {
             loadMaterialsFile(materialsFile);
         }
@@ -65,7 +55,7 @@ public class MapBodyManager {
     }
 
     /**
-     * @param map map to be used to create the static bodies.
+     * @param map       map to be used to create the static bodies.
      * @param layerName name of the layer that contains the shapes.
      */
     public void createPhysics(Map map, String layerName) {
@@ -79,38 +69,31 @@ public class MapBodyManager {
         objects = layer.getObjects();
         Iterator<MapObject> objectIt = objects.iterator();
 
-        while(objectIt.hasNext()) {
+        while (objectIt.hasNext()) {
             Gdx.app.debug("MapBodyManager", "Adding Object ");
             MapObject object = objectIt.next();
             Gdx.app.debug("MapBodyManager", "Object name: " + object.getName());
 
-            if (object instanceof TextureMapObject){
+            if (object instanceof TextureMapObject) {
                 continue;
             }
-
 
             Shape shape;
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
 
-
             if (object instanceof RectangleMapObject) {
-                RectangleMapObject rectangle = (RectangleMapObject)object;
+                RectangleMapObject rectangle = (RectangleMapObject) object;
                 shape = getRectangle(rectangle);
-            }
-            else if (object instanceof PolygonMapObject) {
-                shape = getPolygon((PolygonMapObject)object);
-            }
-            else if (object instanceof PolylineMapObject) {
-                shape = getPolyline((PolylineMapObject)object);
-            }
-            else if (object instanceof CircleMapObject) {
-                shape = getCircle((CircleMapObject)object);
-            }
-            else if (object instanceof EllipseMapObject) {
-                shape = getEllipse((EllipseMapObject)object);
-            }
-            else {
+            } else if (object instanceof PolygonMapObject) {
+                shape = getPolygon((PolygonMapObject) object);
+            } else if (object instanceof PolylineMapObject) {
+                shape = getPolyline((PolylineMapObject) object);
+            } else if (object instanceof CircleMapObject) {
+                shape = getCircle((CircleMapObject) object);
+            } else if (object instanceof EllipseMapObject) {
+                shape = getEllipse((EllipseMapObject) object);
+            } else {
                 logger.error("non supported shape " + object);
                 continue;
             }
@@ -124,9 +107,8 @@ public class MapBodyManager {
                 fixtureDef = materials.get("default");
             }
 
-                if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+            if (object.getProperties().containsKey("sensor"))                 /** For Sensors */
                 fixtureDef.isSensor = true;
-
 
             fixtureDef.shape = shape;
 
@@ -135,14 +117,13 @@ public class MapBodyManager {
 
             bodies.add(body);
 
-            if(object.getProperties().containsKey("sensor"))                 /** For Sensors */
+            if (object.getProperties().containsKey("sensor"))                 /** For Sensors */
                 body.setUserData(object.getProperties().get("name"));
 
             fixtureDef.shape = null;
             shape.dispose();
         }
     }
-
 
 
     /**
@@ -152,7 +133,6 @@ public class MapBodyManager {
         for (Body body : bodies) {
             world.destroyBody(body);
         }
-
         bodies.clear();
     }
 
@@ -199,7 +179,7 @@ public class MapBodyManager {
         Rectangle rectangle = rectangleObject.getRectangle();
         PolygonShape polygon = new PolygonShape();
         Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / units,
-                (rectangle.y + rectangle.height * 0.5f ) / units);
+                (rectangle.y + rectangle.height * 0.5f) / units);
         polygon.setAsBox(rectangle.width * 0.5f / units,
                 rectangle.height * 0.5f / units,
                 size,
@@ -220,8 +200,8 @@ public class MapBodyManager {
 
         Ellipse ellipse = ellipseObject.getEllipse();
         CircleShape ellipseShape = new CircleShape();
-        ellipseShape.setRadius(ellipse.height/2/ units);
-        ellipseShape.setPosition(new Vector2(ellipse.x / units+.5f, ellipse.y / units+.5f));
+        ellipseShape.setRadius(ellipse.height / 2 / units);
+        ellipseShape.setPosition(new Vector2(ellipse.x / units + .5f, ellipse.y / units + .5f));
         return ellipseShape;
     }
 

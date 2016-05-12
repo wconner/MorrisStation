@@ -3,12 +3,11 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-
-import com.mygdx.game.GameInstance;
+import com.mygdx.game.screens.GameScreen;
 
 /**
  * Created by Ian on 1/21/2015.
@@ -17,17 +16,11 @@ import com.mygdx.game.GameInstance;
 public abstract class AbstractDynamicObject {
 
     private static final String TAG = AbstractDynamicObject.class.getName();
-    protected TextureAtlas atlas;
     public final int id;
-    boolean ableToMove = true;
-
     /**
      * For physics
      */
     public Body body;
-    Vector2 currentVector;
-    float inputForce = 35;
-
     /**
      * Fields for a basic 2d object on a flat plane
      */
@@ -36,7 +29,6 @@ public abstract class AbstractDynamicObject {
     public Vector2 origin;
     public Vector2 scale;
     public float rotation;
-
     /**
      * Fields for simulating a physical model on an object
      * info on page 168
@@ -50,13 +42,15 @@ public abstract class AbstractDynamicObject {
     public FixtureDef fixtureDef;
     public BodyDef bodyDef;
     public Fixture fixture;
-
     public String facing;
-
+    protected TextureAtlas atlas;
     /**
      * Animation variables
      */
     protected int animState;
+    boolean ableToMove = true;
+    Vector2 currentVector;
+    float inputForce = 35;
 
     /**
      * Default constructor
@@ -67,7 +61,7 @@ public abstract class AbstractDynamicObject {
         facing = "d";
         bodyDef = new BodyDef();
 
-        atlas = new TextureAtlas("android/assets/sprites/cTest.pack");
+        atlas = new TextureAtlas("sprites/cTest.pack");
 
         if (objType.equals("player")) {         /** For player ADO */
             bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -82,7 +76,7 @@ public abstract class AbstractDynamicObject {
             bodyDef.type = BodyDef.BodyType.StaticBody;
         }
 
-        body = GameInstance.getInstance().world.createBody(bodyDef);
+        body = GameScreen.world.createBody(bodyDef);
         body.setLinearDamping(10f);
 
         shape = new CircleShape();
@@ -179,24 +173,13 @@ public abstract class AbstractDynamicObject {
             this.body.applyForceToCenter(inputForce, 0, true);
             this.body.setTransform(this.body.getPosition(), angle);
             animState = 3;
-
         }
         position = currentPosition;
-
-    }
-
-    public int getAnimState() {
-        return animState;
-    }
-
-    public void setAnimState(int state) {
-        animState = state;
     }
 
     public abstract void render(SpriteBatch batch);
 
-
-    public Vector2 getPosition(){
+    public Vector2 getPosition() {
         return position;
     }
 
@@ -210,15 +193,6 @@ public abstract class AbstractDynamicObject {
      */
     public void remove() {
         body.destroyFixture(fixture);
-    }
-
-    public void rotateBody(float angle) {
-        this.body.setTransform(body.getPosition(), angle);
-    }
-
-
-    public Vector2 getVelocity() {
-        return currentVector;
     }
 
     public String toString() {

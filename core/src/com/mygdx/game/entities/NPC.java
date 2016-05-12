@@ -9,7 +9,6 @@ import com.mygdx.game.util.JsonParser;
 
 import java.util.Random;
 
-
 /**
  * Created by Ian on 2/26/2015.
  * NPC's ID should be: 0 < ID < 100
@@ -17,7 +16,6 @@ import java.util.Random;
 public class NPC extends AbstractDynamicObject {
 
     private static Random random = new Random();
-
     private static final int COLS = 3;
     private static final int ROWS = 1;
     private Animation[] animations;
@@ -42,12 +40,14 @@ public class NPC extends AbstractDynamicObject {
         super(id, "NPC");
         super.getBody().setUserData(this);
 
-        initialX = x + 1; initialY = y + 1;
+        initialX = x + 1;
+        initialY = y + 1;
         /** If you're asking yourself, "why + 1?", that's a good question, I'm not sure why but for some reason
          * when update gets called the first time in ADO, the position values are 1 + the initial values.  I could not
          * find where or why this happens, so I just change it here so that the behavior method works*/
 
-        this.movementX = movementX; this.movementY = movementY;
+        this.movementX = movementX;
+        this.movementY = movementY;
         super.position.set(x, y);
         this.levelName = levelName;
         this.name = name;
@@ -59,15 +59,26 @@ public class NPC extends AbstractDynamicObject {
             state = 2;
     }
 
-    public void setDialog(){
+    public void initializeDialog() {
         jsonParser.setDialog(name, levelName, dialogID);
     }
-    public void setDialogID(int id) { dialogID = id; jsonParser.setDialog(name, levelName, dialogID);}
-    public int getDialogID(){ return dialogID;}
+
+    public void setDialogID(int id) {
+        dialogID = id;
+        jsonParser.setDialog(name, levelName, dialogID);
+    }
+
+    public int getDialogID() {
+        return dialogID;
+    }
+
     public String getName() {
         return name;
     }
-    public JsonParser getJsonTest(){ return jsonParser;}
+
+    public JsonParser getJsonTest() {
+        return jsonParser;
+    }
 
     private int prevState = 1;
     private float sleep = 0;
@@ -89,8 +100,7 @@ public class NPC extends AbstractDynamicObject {
             if ((super.position.x < initialX) || (super.position.y < initialY)) {
                 setLinearV(VX, VY);
                 state = 1;
-            }
-            else if ((super.position.x > (initialX + movementX)) || (super.position.y > (initialY + movementY))) {
+            } else if ((super.position.x > (initialX + movementX)) || (super.position.y > (initialY + movementY))) {
                 setLinearV(VX * -1, VY * -1);
                 state = 2;
             }
@@ -102,11 +112,10 @@ public class NPC extends AbstractDynamicObject {
         prevState = state;
     }
 
-
-
     /**
      * intializes the animations for the indicated texture region
-     * @param s selects the column to begin reading the animations from
+     *
+     * @param s      selects the column to begin reading the animations from
      * @param region selects the region of the texture to use as sprites
      */
     public void initAnim(int s, String region) {
@@ -175,9 +184,10 @@ public class NPC extends AbstractDynamicObject {
 
     /**
      * set the texture for the npc, used to create the sprite
-     * @param r A string to identify the texture region
+     *
+     * @param r      A string to identify the texture region
      * @param region A static texture to be used as the initial sprite before animations
-     * @param s the selector used in initAnim() method
+     * @param s      the selector used in initAnim() method
      */
     public void setRegion(String r, TextureRegion region, int s) {
         npcTexture = region;
@@ -192,14 +202,6 @@ public class NPC extends AbstractDynamicObject {
         return npcTexture.getRegionHeight() * Constants.UNIT_SCALE / 2;
     }
 
-    public void setMovementX(float movementX) {
-        this.movementX = movementX;
-    }
-
-    public void setMovementY(float movementY) {
-        this.movementY = movementY;
-    }
-
     /**
      * note, the render has its own texture which is grabbed all the time
      * it comes from the spritebatch but it just checks the current texture all the time
@@ -207,7 +209,6 @@ public class NPC extends AbstractDynamicObject {
     @Override
     public void render(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
-
 
         //sets animation to walking version
         if (this.body.getLinearVelocity().x > this.body.getLinearVelocity().y && this.body.getLinearVelocity().x > 0)
@@ -224,10 +225,8 @@ public class NPC extends AbstractDynamicObject {
         if ((Math.abs(this.body.getLinearVelocity().x) + Math.abs(this.body.getLinearVelocity().y)) < .1) {
             //sets animation to standing still version
             currentFrame = getAnimations()[animState + 4].getKeyFrame(stateTime, true);
-
         } else {
             currentFrame = getAnimations()[animState].getKeyFrame(stateTime, true);
-
         }
         batch.draw(currentFrame,
                 super.getBody().getPosition().x - dimension.x / 2,
@@ -239,7 +238,5 @@ public class NPC extends AbstractDynamicObject {
 
         // Reset color to white
         batch.setColor(1, 1, 1, 1);
-
-
     }
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="32">
+ <tileset firstgid="1" name="Futuristic_A1" tilewidth="16" tileheight="16" tilecount="768" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A1.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="769" name="Futuristic_A2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A2.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="1537" name="Futuristic_A3" tilewidth="16" tileheight="16" tilecount="512" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A3.png" width="512" height="256"/>
+ </tileset>
+ <tileset firstgid="2049" name="Futuristic_A4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A4.png" width="512" height="480"/>
+ </tileset>
+ <tileset firstgid="3009" name="Futuristic_A5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_A5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="3521" name="!$doors3" tilewidth="16" tileheight="16" tilecount="288" columns="18">
+  <image source="../tiles/futuristic/Characters/!$doors3.png" width="288" height="256"/>
+ </tileset>
+ <tileset firstgid="3809" name="!doors2" tilewidth="16" tileheight="16" tilecount="729" columns="27">
+  <image source="../tiles/futuristic/Characters/!doors2.png" width="432" height="432"/>
+ </tileset>
+ <tileset firstgid="4538" name="Futuristic_TileC" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileC.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5562" name="Futuristic_TileB" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileB.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6586" name="Futuristic_TileE" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../tiles/futuristic/Tilesets/Futuristic_TileE.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7610" name="!$teleporter" tilewidth="16" tileheight="16" tilecount="192" columns="12">
+  <image source="../tiles/futuristic/Characters/!$teleporter.png" width="192" height="256"/>
+ </tileset>
+ <tileset firstgid="7802" name="!$teslacoils" tilewidth="16" tileheight="16" tilecount="96" columns="6">
+  <image source="../tiles/futuristic/Characters/!$teslacoils.png" width="96" height="256"/>
+ </tileset>
+ <layer name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy1mM1x2zAQhTkD5WeGbCMROxAbiJMWouSanxYsu5EoOdDugLrFzoXqQKwouyNh8vS0C4KOeXhDAQSJj7uPC1B9WRT7kwZRn6l4Te74nPvo8XCSxRIZN6EobkS3ouswX3vK82MMtyPXPkfMfoZjnPrSj19sY+xUD+HfuDmkczwm+HpixHPat5ZrV1VRNKKloZXTr6rhfH0S/o73/WTwoVJ8G+KL92Uh76q6fCZma2DMjcF3cPj2xLc1+Bqa0+KqE3wN8Vn+w9ziO8x8D+E8R02Ci5/DO66Ij/2HPPH3weFbh/P8cZ6Y1fIaXtsYfOw/5usTfJsEX0NsYx6oaaznP+Y7JPi2Dh/HzMptLh/7D3Nq+W8obf9xzUjxpd7hXP95R+S0/DfGh+0cPvRfX9r55X5cf7kGe3zM6sWPfYz+49wO5eW7jOsb+8+qxxZzrEOsMf95ufT42H9WHr1cs7x6+BjO47UvL/PIfF79Qz6MA8eE44a10fMf5pL3CnuHL/qP1wiLCftYyMrr203wawru9QaDbxvOPYfx4XeGmZcGc0330CPmjtfZwZC1/vL8TeXHFTmseHIf1709sR4SfOtwOQ/7yFNqf4DPwe8s+s16p73931xHnt/b61l86j+tT79EP8J4++WiKF4t8sfHtsXo7Zn5d65+yzxvhW0p+pP4ruK6kYoV53swzo8pzvUR4vfZ+K6yvnFz58A9qucDT3Gua4jfLeTM+m6N7bsqT/eVXR9zn0uP6qcrYXt/8l9qrY98XXVUZOgMId+UuFn++yps307+y/Gwzr8DhpSm+o5l+W/sGuZDzh1I28/xfwr6L2e8xxf7OuCbUq+8NvovZ3yKryM+9Y+ut7ofU/88pY3+yxmPfJxbZlf/6Hqr+zH1z1Pa6L+c8RbfzuFTP3xZFO070RvRC9HUdvRf7niLr3P4pCa1kp/26jhPK7GY3I7+yx2PDMzFfFKPWvFOK/dvJQat5GlyO/ovd/wdsKE8vu9yzQdRLXq9mL/dVfZ61hl8vE7+r3Lrn6dYV5jP+m96LkUOXCd4/bhP8M3Ny15Dcd9fWBvPvA==
+  </data>
+ </layer>
+ <layer name="Ground Detail" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlrlOw0AQQLeNt+ZQPgFqjl8goeX4hQRajpajMbgl0CLRQNIi0TriB7CERMvxCySUjMWOPBoceyfrgEEe6cm78R7Pk921lfp7cVZTqgOcGzqsXgQXtfH9bqHvlKfUNDADzHrF1+8c/RZgjEVgCVj2iq8/Ofg9Qt81GGMd2AA2veLrrvnbgTF2gT1g3yu+7uo36aj83KLyc4vKzy3K5hdqpfo6uZbN7wGcIp1cy+ZX5a/YqPzcoux+rt+nkw4Xv3foOwCG5prGkIAxzOlD+338QA7i2NZJuaVHt/utCIiT/0/8DuC/PTQcZXBcS943lEn7XVquvSviFxG4b5Z3QN6ptn6h0C8th31L74CUfcv82+bvHtqtwHgNoCkE+6wa9/gZ6VgNVm6S9hK/+Ew4MZwKaANb+ut8Cc13Scv83ib3aRnbS/x849YWQJ8nIH4+uYf3+bMHQr9raH8DdIVgn55OvulwrDS6pL3t/sD89ckc0jMmJH3zwqsrpev2Y+P6o9+1dK/yfU2dQvJctn5z4DY/hh+fL2JuWecLzXtWSHOHfj7xC/X38xDdeH65c17+pLlDP76mpfuE75k8esL9m5YTBNd+FphDm/WHIdm/EZtr1Pxp7zuObTzDvC+G1wzegE9aimFJ
+  </data>
+ </layer>
+ <layer name="Object" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlzlv1EAYhgcoF5O1V+uVUnC2kOwmEnThaqGDlrOFhqPlaDik8BeANBwS/AWO5W4gXq6OowmkgQQaDgl4rGW0k8lge+xRNkJ+pUer8XjfefWt5/OsEKVKlbLVL1+I3yACIZbAUlgW9M9H10o8VsFqWANrYV0OX1c+usbw2AxbYCtsg+0G3zNcOwvn4LxhPquPrfbgsRf2wX44AAcNvle4dhWuwXXDfFafotqF5264BbfhDtyFh/AIHsMTw/xC6RhrHYc38BbewXuYinNUukwb5vMq9nMlmc+ln0v9z/nkd00sFvUj2wn2xkk4BadhkndIBB147ifnay9AvotkugSXYQJmyDQLX+BrQr4IOhlqeATPowX6g94Hq+BDALUgvUZp+XbUhNhZy59P74NNaMEIjGbIl6ZDZDtcIJ8q0/NVNN842S44yhdV5tL5SxHdINtNR/lKlSplp8k6exmCsEsNVjSEGIAq+I1sPmq/ajvqXbFmyDYLI2GXURgi0zA0odVIXl9H7a0dBxmr5PHDnue/zgWRnPOEuAf34YGXYZyQT79XSn2HNMnWCnv9Wn7qkve/wOclvILXXvo4qf/r9+pr2Ui+c6bw+QAfYdpLHyfl0+8tkk/qGz7f4Qf89NLHNl5Z8j1lrzyr2+dW94W6P2w9lg8K4Q3OzxfyDDbgE9k+13tjfX3TGUg/0+btLbHHerJtMOTbSJZNce+DgbA3llLPPXpG/TyUp3ZqDWQNTRoi03A4/7p63jed09oOaieRNbSRrE1UmftbqnWzqV3S/9m8+9d0tjXlXEzS69cv/QFDJidn
+  </data>
+ </layer>
+ <layer name="Object Detail" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl0tOxDAMhrMmsEm3HIYT8OYaA0hwE7gJHKBd8lgkx2DgDnikieT+tWmpIyZI/SUrk0jxfHHsJHVu0V+q9c51ftcUfW2YsnVba41mXSP3FZnPtLU48t/aGmIBvuwnwv8lYIiC8XV0wjj3Z42bFhve5rUkYIuMEWNq4ZNigvHhXMeNcydkp2RnTZ+DM5bmS2CXwbmrMORdEdM12Q3ZbdNniwJjCT7OlX3dEdt96NdH8sOcT8AVBV/JwLdR64dxfCC2R8bHuTiftKfIaK1fqeaeiO05yHGT6hZ/d4X4sB6zcfax/dXaFnjnxk7aQ9w/3uLZnYAL+7m18PG9G8t/ngeYt60f5t9cNuTEc5fvDzLgmcfXIZ0JVp1TLVwE+d7AuOB9h9y4Nl431vhp95zGIbHgOcjNwod5yNnG8hPPZFxDqTrW+DC/tDfNWPxK1LFkP937U8wq5JPWLeW/FqNSefcb4Xu5tu8Sqb5rYpS+OWrkwzdKLcL9rSl2WfgmqE14/pTWC70BXkOZeW/Ufxd8aeNT9EHz1jPmSvM+qf8l+NLGp2iPvgl9U2bePvUPBF/a+H/T0eGuCXTVzLZo0aJ5+gbsFb87
+  </data>
+ </layer>
+ <layer name="High" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJACEMRcHc7b8gt4NY0SIYVraCHGbg4/VhIgAAuM0R8YzvrXUxf23rrIu8+lbDvu2+8Wx236268qzb/2XjNgAAgPICtuEaYQ==
+  </data>
+ </layer>
+ <objectgroup name="Obstacles">
+  <object id="1" name="wall0" x="0" y="592" width="464" height="14"/>
+  <object id="2" name="wall2" x="0" y="500" width="16" height="92"/>
+  <object id="3" name="wall3" x="305" y="502.5" width="159" height="16"/>
+  <object id="4" name="wall4" x="421" y="515" width="59" height="109"/>
+  <object id="5" name="wall5" x="464" y="624" width="176" height="16"/>
+  <object id="6" name="wall6" x="464" y="400" width="16" height="119"/>
+  <object id="7" name="wall7" x="624" y="400" width="16" height="224"/>
+  <object id="8" name="wall8" x="512" y="432" width="112" height="12"/>
+  <object id="9" name="Fridge" x="480" y="448" width="29" height="27.5"/>
+  <object id="10" name="wall9" x="256" y="352" width="13.5" height="167"/>
+  <object id="11" name="wall10" x="304.5" y="352" width="15.5" height="163"/>
+  <object id="12" name="wall11" x="80" y="352" width="188" height="16"/>
+  <object id="13" name="wall12" x="306.5" y="352" width="189.5" height="16"/>
+  <object id="14" name="Left Cabinets" x="96" y="80" width="96" height="57.5"/>
+  <object id="15" name="Main Computers" x="192" y="144" width="192" height="26"/>
+  <object id="16" name="Tesla Coil" x="161.5" y="165" width="27.5" height="20.5"/>
+  <object id="17" name="Right Cabinets" x="384" y="80" width="96" height="56"/>
+  <object id="18" name="Bottom Right Computer" x="96" y="273" width="27.5" height="79"/>
+  <object id="19" name="Kitchen Table" x="544" y="518" width="32" height="53"/>
+  <object id="20" name="Left Kitchen Chair" x="523.5" y="550" width="7.5" height="7"/>
+  <object id="21" name="Right Kitchen Chair" x="587.5" y="548.5" width="7" height="7"/>
+  <object id="22" name="wall 13" x="80" y="16" width="16" height="352"/>
+  <object id="23" name="wall 14" x="480" y="16" width="16" height="352"/>
+  <object id="24" name="wall 1" x="16.5" y="503" width="240" height="16"/>
+  <object id="25" name="Bottom Right Tables" x="352" y="248.5" width="125.5" height="55.5"/>
+  <object id="26" name="BRD" x="38" y="528" width="48" height="8">
+   <properties>
+    <property name="name" value="BRD"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object id="27" name="Main Computer Int." x="269" y="172.5" width="40" height="21.5">
+   <properties>
+    <property name="name" value="mainComputer"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object id="28" name="Left Cabinet Int." x="96" y="140" width="64" height="12">
+   <properties>
+    <property name="name" value="leftCabinet"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object id="29" name="Right Cabinet Int." x="384" y="137.5" width="96" height="14.5">
+   <properties>
+    <property name="name" value="rightCabinet"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object id="30" name="Bottom Left Int." x="126.5" y="288" width="13.5" height="64">
+   <properties>
+    <property name="name" value="BLComputer"/>
+    <property name="sensor" value="true"/>
+   </properties>
+  </object>
+  <object id="31" name="Bottom Right Tables Int." x="352" y="304" width="64" height="8"/>
+ </objectgroup>
+</map>

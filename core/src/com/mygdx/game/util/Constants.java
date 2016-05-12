@@ -1,15 +1,16 @@
 package com.mygdx.game.util;
+
 /**
  * Created by Ian on 12/22/2014.
  */
 public class Constants {
 
     /**
-    * The constants class represents a holding place for
-    * various pieces of config data we hold on to for various classes
-    * in particular it holds the scale of the tiled game world
-    * as well as directory information for various textures
-    */
+     * The constants class represents a holding place for
+     * various pieces of config data we hold on to for various classes
+     * in particular it holds the scale of the tiled game world
+     * as well as directory information for various textures
+     */
 
     //GAME_WORLD makes a square world
     public static float GAME_WORLD = 40f;
