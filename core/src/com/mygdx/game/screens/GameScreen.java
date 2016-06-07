@@ -183,7 +183,8 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
             pause();
             worldController.getDialog().hide();
             phoneDisplay.setVisible(false);
-            game.setScreen(new EmailGame(stage, game, worldController.getGameScreen()));
+            screenSwap("EmailGame");
+            //game.setScreen(new EmailGame(stage, game, worldController.getGameScreen()));
         }
     };
 

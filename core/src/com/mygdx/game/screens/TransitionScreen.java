@@ -12,8 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MainClass;
 import com.mygdx.game.screens.gui.TouchUpListener;
+import com.mygdx.game.screens.miniGames.EmailGame;
 import com.mygdx.game.screens.miniGames.MastermindGame;
 import com.mygdx.game.screens.miniGames.PasswordGame;
+import com.mygdx.game.util.JsonParser;
 
 /**
  * Created by Justin Shen on 4/14/2016.
@@ -39,6 +41,9 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
                     break;
                 case "Mastermind":
                     game.setScreen(new MastermindGame(stage, game, gameScreen, dif));
+                    break;
+                case "EmailGame":
+                    game.setScreen(new EmailGame(stage, game, gameScreen));
                     break;
                 default:
                     game.setScreen(new IntroScreen(stage, game));
@@ -121,6 +126,15 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
         } else if (type.equals("Password")) {
             infoLabel = new Label("In this game you will have to create a password that is secure\nSecure passwords are hard to crack and " +
                     "are a crucial part of keeping your information safe", skin);
+            infoLabel.setFontScale(1.1f);
+            table.add(infoLabel).padBottom(20f);
+            table.row();
+            table.add(play).size(360, 50).space(8f).padTop(30f);
+
+        }
+        else if (type.equals("EmailGame")) {
+            JsonParser instructReader = new JsonParser("data/emailInstructions.json");
+            infoLabel = new Label(instructReader.getItemField("systemMessages", "instructions1"), skin);
             infoLabel.setFontScale(1.1f);
             table.add(infoLabel).padBottom(20f);
             table.row();
