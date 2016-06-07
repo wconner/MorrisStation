@@ -17,6 +17,8 @@ import com.mygdx.game.screens.miniGames.MastermindGame;
 import com.mygdx.game.screens.miniGames.PasswordGame;
 import com.mygdx.game.util.JsonParser;
 
+import java.util.ArrayList;
+
 /**
  * Created by Justin Shen on 4/14/2016.
  */
@@ -30,6 +32,7 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
     private final Table table;
     private Label infoLabel, diffLabel;
     private TextButton play;
+    private EmailGame activeEGame;
 
     private final InputListener playListener = new TouchUpListener() {
         @Override
@@ -47,6 +50,19 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
                     break;
                 default:
                     game.setScreen(new IntroScreen(stage, game));
+            }
+        }
+    };
+
+    private final InputListener eGameMessageListener = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            if(activeEGame.getIsGameOver()){
+                activeEGame.returnToGameWrap();
+            }
+            else
+            {
+                game.setScreen(activeEGame);
             }
         }
     };
@@ -134,15 +150,47 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
         }
         else if (type.equals("EmailGame")) {
             JsonParser instructReader = new JsonParser("data/emailInstructions.json");
-            infoLabel = new Label(instructReader.getItemField("systemMessages", "instructions1"), skin);
+            infoLabel = new Label(instructReader.getItemField("systemMessages", "instructions2"), skin);
             infoLabel.setFontScale(1.1f);
             table.add(infoLabel).padBottom(20f);
             table.row();
             table.add(play).size(360, 50).space(8f).padTop(30f);
 
         }
+        else if (type.equals("EmailGameMessage")) {
+            ArrayList<String> labels = determineEGameMessage();
+            String labelMessage = labels.get(0);
+            infoLabel = new Label(labelMessage, skin);
+            infoLabel.setFontScale(1.1f);
+            table.add(infoLabel).padBottom(20f);
+            table.row();
+            String stuff = labels.get(1);
+            TextButton cont = new TextButton(stuff,skin);
+            cont.addListener(eGameMessageListener);
+            table.add(cont).size(360, 50).space(8f).padTop(30f);
+
+        }
         table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         stage.addActor(table);
+    }
+
+    private ArrayList<String> determineEGameMessage(){
+        ArrayList<String> labels = new ArrayList<String>();
+        if(activeEGame == null){
+            labels.add("");
+            labels.add("");
+            return labels;
+        }
+        labels.add(activeEGame.getDoneClickMessage());
+
+        if(activeEGame.getIsGameOver()){
+            labels.add("Return to MorrisTown");
+        }
+        else
+        {
+            labels.add("Return to Inbox");
+        }
+        return labels;
     }
 
     @Override
@@ -199,5 +247,10 @@ public class TransitionScreen extends com.mygdx.game.screens.DefaultScreen imple
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public void setActiveEGame(EmailGame g){
+        activeEGame = g;
+        initUI(type);
     }
 }

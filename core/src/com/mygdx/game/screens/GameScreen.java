@@ -59,7 +59,7 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         TextButton play = new TextButton("Return to Morris Station", skin);
         TextButton email = new TextButton("E-Mail", skin);
         TextButton pwGame = new TextButton("Password Game", skin);
-        TextButton exit = new TextButton("Exit", skin);
+        TextButton exit = new TextButton("Quit Game", skin);
 
         play.addListener(playListener);
         email.addListener(emailListener);
@@ -208,6 +208,17 @@ public class GameScreen extends com.mygdx.game.screens.DefaultScreen implements 
         worldController.getDialog().hide();
         phoneDisplay.setVisible(false);
         game.setScreen(new TransitionScreen(stage, game, this, type));
+    }
+
+    public void messageScreenSwap(String type, EmailGame g) {
+        g.returnToGameWrap();
+        pause();
+        worldController.getDialog().hide();
+        phoneDisplay.setVisible(false);
+        TransitionScreen t = new TransitionScreen(stage, game, this, type);
+        t.setActiveEGame(g);
+        game.setScreen(t);
+
     }
 
     //@TODO move all phone stuff to another class

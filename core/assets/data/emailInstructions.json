@@ -1,11 +1,13 @@
 {
 
   "systemMessages": {
-    "instructions1": "                                                           Hello and welcome to your Email Screen!\n\n                                Select the correct Emails to save by reading through the list of emails.\n                                            =To view an email, click on the email from the Email List.=\n                                      =To select an email to save, tick the checkbox next to the email.=\n                            For security reasons, we are going to delete all other emails after you're done.\n\n                                 Please choose carefully and thank you for choosing Morris Systems Inc.",
+    "instructions1": "                                                           Hello and welcome to your Inbox!\n\n                                Select the correct Emails to save by reading through the list of emails.\n                                            =To view an email, click on the email from the Email List.=\n=To save or delete an email message, click on the one of the buttons to the right of the email message=\n                                            =When finished, click on the \"Done Checking Emails\" button=\n\n                            For security reasons, we are going to delete all other emails after you're done.\n\n                                 Please choose carefully and thank you for choosing Morris Systems Inc.",
+    "instructions2": "                                                                                Instructions:\n\n                               Select the correct Emails to save by reading through the list of emails.\n\n                                     =To view an email, click on the email from the Email List.=\n   =To save or delete an email message, click on the one of the buttons to the right of the email message=\n                                   =When finished, click on the \"Done Checking Emails\" button=",
     "badEmails":"Error, the system's security system picked up one or more bad emails among chosen emails. \n\n Please reconsider your selection of emails.\nIf you get stuck, please click on the \"Hints\" Button.",
     "wellDone1":"Well done, all the good emails have been saved.\n\nYou have gotten the door's passcode!\nIt is now saved to your device. \nPlease hit the \"Return to Morris Station\" button to return.",
     "notEnough": "I am pretty sure there are more emails I need to save....",
-    "noneChecked":"Please check off emails to save in the check boxes to the left of the emails!\nIf you get stuck, please click on the \"Hints\" Button.\nFor instructions, please click on the \"Instructions\" Button."
+    "noneChecked":"Please check off emails to save in the check boxes to the left of the emails!\nIf you get stuck, please click on the \"Hints\" Button.\nFor instructions, please click on the \"Instructions\" Button.",
+    "noEmailSelected":"You haven't opened any emails!"
   },
   "hints":{
     "scams": "[Message from Bit Daemon]: Emails from offcial sources will never ask for personal information.\nIf they do be very weary of trusting such emails.",

@@ -14,6 +14,7 @@ import com.mygdx.game.entities.NPC;
 import com.mygdx.game.levels.BedroomLevel;
 import com.mygdx.game.screens.DefaultScreen;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.TransitionScreen;
 import com.mygdx.game.screens.gui.TouchUpListener;
 import com.mygdx.game.util.JsonParser;
 
@@ -24,6 +25,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private boolean isGameOver;
     private String helpPlayer;
     private int helpCounter;
+    private String doneClickMessage;
 
     private final InputListener checkListen = new TouchUpListener() {
         @Override
@@ -38,25 +40,52 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                 if (notEnoughChecked(goodNum) == -1) {
                     if (checkEmails("good")) {
                         if (stageLevel <= 9) {
-                            helpWindow.setText(systemMessageReader.getItemField("systemMessages", "wellDone1"));
+                           doneClickMessage = systemMessageReader.getItemField("systemMessages", "wellDone1");
                         }
                         isGameOver = true;
                         ((BedroomLevel) gameScreen.getLevels().get(0)).setDoorActive(true);
                         ((NPC) gameScreen.getLevels().get(0).getActors().get(1)).setDialogID(3);
                     } else {
-                        helpWindow.setText(systemMessageReader.getItemField("systemMessages", "badEmails"));
+                        doneClickMessage = systemMessageReader.getItemField("systemMessages", "badEmails");
                     }
                 } else if(notEnoughChecked(goodNum) == 0){
-                    helpWindow.setText(systemMessageReader.getItemField("systemMessages", "noneChecked"));
+                    doneClickMessage = systemMessageReader.getItemField("systemMessages", "noneChecked");
                 } else {
-                    helpWindow.setText(systemMessageReader.getItemField("systemMessages", "notEnough"));
+                    doneClickMessage = systemMessageReader.getItemField("systemMessages", "notEnough");
                 }
-
+                helpWindow.setText(doneClickMessage);
+                //gameScreen.messageScreenSwap("EmailGameMessage",getSelf());
 //                for (EmailTable emailTable : emailTableList) {
 //                    if (emailTable.getCheckBox().isChecked()) {
 //                        emailTable.getCheckBox().toggle();
 //                    }
 //                }
+            }
+        }
+    };
+
+    private final InputListener saveListen = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            if(activeWindow == null){
+                doneClickMessage = systemMessageReader.getItemField("systemMessages", "noEmailSelected");
+                //gameScreen.messageScreenSwap("EmailGameMessage",getSelf());
+                helpWindow.setText(doneClickMessage);
+            } else if(!activeWindow.getCheckBox().isChecked()){
+                activeWindow.getCheckBox().toggle();
+            }
+        }
+    };
+
+    private final InputListener deleteListen = new TouchUpListener() {
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            if(activeWindow == null){
+                doneClickMessage = systemMessageReader.getItemField("systemMessages", "noEmailSelected");
+                //gameScreen.messageScreenSwap("EmailGameMessage",getSelf());
+                helpWindow.setText(doneClickMessage);
+            } else if(activeWindow.getCheckBox().isChecked()){
+                activeWindow.getCheckBox().toggle();
             }
         }
     };
@@ -120,6 +149,9 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         gameScreen.getWorldController().initInput();
         gameScreen.resume();
     }
+    public void returnToGameWrap(){
+        returnToGame();
+    }
 
     private GameScreen gameScreen;
     private final MainClass game;
@@ -133,6 +165,7 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
     private int NUMEMAILS = 5;
     private SpriteBatch background;
     private Texture backgroundImage;
+    private EmailTable activeWindow;
 
     public EmailGame(Stage stage, MainClass game, GameScreen screen) {
         super(stage, game);
@@ -154,7 +187,11 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         Table checkingButtonsTable = new Table(skin);
         table = new Table(skin);
 
-        TextButton checkEmail = new TextButton("Save Selected Emails", skin);
+        TextButton checkEmail = new TextButton("Done Checking Emails", skin);
+        TextButton save = new TextButton("Save this Email", skin);
+        save.addListener(saveListen);
+        TextButton delete = new TextButton("Delete this Email", skin);
+        delete.addListener(deleteListen);
         checkEmail.addListener(checkListen);
         TextButton instructionsButton = new TextButton("Instructions", skin);
         instructionsButton.addListener(instructListen);
@@ -233,7 +270,12 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
         emailContainer.add(checkingButtonsTable).space(8);
         emailContainer.add(innerTab);
         emailContainer.add(emWindow).size(425, 500).space(8);
+        Table indEmailButtons = new Table(skin);
+        indEmailButtons.add(save);
+        indEmailButtons.row();
+        indEmailButtons.add(delete).space(8);
         table.add(emailContainer);
+        table.add(indEmailButtons);
         table.row();
         helpTable.add(helpTableButtons);
         helpTable.add(helpWindow).size(750, 175).space(8);
@@ -344,8 +386,22 @@ public class EmailGame extends DefaultScreen implements InputProcessor {
                 EmailTable tab = emailTableList.get(optionNum);
                 String windText = "From: " + tab.getSender() + "\nSubject: " + tab.getSubject() + "\n\nMessage:\n" + tab.geteMessage();
                 emWindow.setText(windText);
+                activeWindow = tab;
             }
             return super.touchDown(event, x, y, pointer, button);
         }
     }
+
+    public boolean getIsGameOver(){
+        return isGameOver;
+    }
+
+    public String getDoneClickMessage(){
+        return doneClickMessage;
+    }
+
+    public EmailGame getSelf(){
+        return this;
+    }
+
 }
